@@ -1,3 +1,5 @@
+[![ci](https://github.com/wrench1815/upasthiti/actions/workflows/ci.yml/badge.svg)](https://github.com/wrench1815/upasthiti/actions/workflows/ci.yml)
+
 # upasthiti
 
 ## Build Setup
