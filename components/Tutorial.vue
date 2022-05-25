@@ -24,7 +24,9 @@
               This is a Demo Card of <span class="text-info">MDB</span> in
               <span class="text-success">Nuxt</span>
             </p>
-            <button type="button" class="btn btn-primary">Nice</button>
+            <button type="button" class="btn btn-primary">
+              Nice <i class="ri-thumb-up-fill"></i>
+            </button>
           </div>
         </div>
       </div>
