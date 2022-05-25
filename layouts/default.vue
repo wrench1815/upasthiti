@@ -1,6 +1,7 @@
 <template>
   <div>
     <nuxt />
+    <Lazy-UtilsToTop />
   </div>
 </template>
 
