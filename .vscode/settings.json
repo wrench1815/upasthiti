@@ -1,0 +1,9 @@
+{
+  // set prettier as default formatter for vue
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // file extension patterns to allow css class completion
+  "html-css-class-completion.includeGlobPattern": "**/*.{css,html,vue}"
+}
