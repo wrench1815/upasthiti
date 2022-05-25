@@ -1,4 +1,6 @@
-[![ci](https://github.com/wrench1815/upasthiti/actions/workflows/ci.yml/badge.svg)](https://github.com/wrench1815/upasthiti/actions/workflows/ci.yml)
+|Service  |main|dev|
+|---------|----|---|
+|CI Status|[![ci](https://github.com/wrench1815/upasthiti/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/wrench1815/upasthiti/actions/workflows/ci.yml)|[![ci](https://github.com/wrench1815/upasthiti/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/wrench1815/upasthiti/actions/workflows/ci.yml)|
 
 # upasthiti
 
