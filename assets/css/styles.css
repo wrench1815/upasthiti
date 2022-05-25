@@ -310,3 +310,9 @@ auto: auto,
 .bg-pos-right {
   background-position: right;
 }
+
+/* change Font Family */
+* {
+  font-family: Raleway !important;
+  font-weight: 600 !important;
+}
