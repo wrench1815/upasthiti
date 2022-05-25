@@ -1,0 +1,312 @@
+/*
+25: 25%,
+50: 50%,
+75: 75%,
+100: 100%,
+auto: auto,
+*/
+
+/* vh */
+
+.vh-25 {
+  height: 25vh !important;
+}
+
+.vh-50 {
+  height: 50vh !important;
+}
+
+.vh-75 {
+  height: 75vh !important;
+}
+
+@media (min-width: 576px) {
+  .w-sm-25 {
+    width: 25% !important;
+  }
+
+  .w-sm-50 {
+    width: 50% !important;
+  }
+
+  .w-sm-75 {
+    width: 75% !important;
+  }
+
+  .w-sm-100 {
+    width: 100% !important;
+  }
+
+  .w-sm-auto {
+    width: auto !important;
+  }
+
+  /* vh */
+  .vh-sm-25 {
+    height: 25vh !important;
+  }
+
+  .vh-sm-50 {
+    height: 50vh !important;
+  }
+
+  .vh-sm-75 {
+    height: 75vh !important;
+  }
+
+  .vh-sm-100 {
+    height: 100vh !important;
+  }
+}
+@media (min-width: 768px) {
+  .w-md-25 {
+    width: 25% !important;
+  }
+
+  .w-md-50 {
+    width: 50% !important;
+  }
+
+  .w-md-75 {
+    width: 75% !important;
+  }
+
+  .w-md-100 {
+    width: 100% !important;
+  }
+
+  .w-md-auto {
+    width: auto !important;
+  }
+
+  /* vh */
+  .vh-md-25 {
+    height: 25vh !important;
+  }
+
+  .vh-md-50 {
+    height: 50vh !important;
+  }
+
+  .vh-md-75 {
+    height: 75vh !important;
+  }
+
+  .vh-md-100 {
+    height: 100vh !important;
+  }
+}
+@media (min-width: 992px) {
+  .w-lg-25 {
+    width: 25% !important;
+  }
+
+  .w-lg-50 {
+    width: 50% !important;
+  }
+
+  .w-lg-75 {
+    width: 75% !important;
+  }
+
+  .w-lg-100 {
+    width: 100% !important;
+  }
+
+  .w-lg-auto {
+    width: auto !important;
+  }
+
+  /* vh */
+  .vh-lg-25 {
+    height: 25vh !important;
+  }
+
+  .vh-lg-50 {
+    height: 50vh !important;
+  }
+
+  .vh-lg-75 {
+    height: 75vh !important;
+  }
+
+  .vh-lg-100 {
+    height: 100vh !important;
+  }
+}
+@media (min-width: 1200px) {
+  .w-xl-25 {
+    width: 25% !important;
+  }
+
+  .w-xl-50 {
+    width: 50% !important;
+  }
+
+  .w-xl-75 {
+    width: 75% !important;
+  }
+
+  .w-xl-100 {
+    width: 100% !important;
+  }
+
+  .w-xl-auto {
+    width: auto !important;
+  }
+
+  /* vh */
+  .vh-xl-25 {
+    height: 25vh !important;
+  }
+
+  .vh-xl-50 {
+    height: 50vh !important;
+  }
+
+  .vh-xl-75 {
+    height: 75vh !important;
+  }
+
+  .vh-xl-100 {
+    height: 100vh !important;
+  }
+}
+
+/* z-index */
+
+.z-index-0 {
+  z-index: 0 !important;
+}
+
+/* positive */
+
+.z-index-1 {
+  z-index: 1 !important;
+}
+
+.z-index-2 {
+  z-index: 2 !important;
+}
+
+.z-index-3 {
+  z-index: 3 !important;
+}
+
+.z-index-4 {
+  z-index: 4 !important;
+}
+
+.z-index-5 {
+  z-index: 5 !important;
+}
+
+/* negative */
+.z-index-n1 {
+  z-index: -1 !important;
+}
+
+.z-index-n2 {
+  z-index: -2 !important;
+}
+
+.z-index-n3 {
+  z-index: -3 !important;
+}
+
+.z-index-n4 {
+  z-index: -4 !important;
+}
+
+.z-index-n5 {
+  z-index: -5 !important;
+}
+
+/* Custom Properties */
+.glass-mask {
+  backdrop-filter: blur(15px);
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background-clip: padding-box;
+  box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+}
+
+/* object fit/size utils */
+/* used with images, figures etc */
+.obj-fit-cover {
+  object-fit: cover;
+}
+
+.obj-fit-contain {
+  object-fit: contain;
+}
+
+.obj-fit-fill {
+  object-fit: fill;
+}
+
+.obj-fit-none {
+  object-fit: none;
+}
+
+.obj-fit-scale-down {
+  object-fit: scale-down;
+}
+
+/* object postion utils */
+/* used with images, figures etc */
+.obj-pos-center {
+  object-position: center;
+}
+
+.obj-pos-bottom {
+  object-position: bottom;
+}
+
+.obj-pos-top {
+  object-position: top;
+}
+
+.obj-pos-left {
+  object-position: left;
+}
+
+.obj-pos-right {
+  object-position: right;
+}
+
+/* Background size utils */
+/* used with background */
+.bg-size-cover {
+  background-size: cover;
+}
+
+.bg-size-contain {
+  background-size: contain;
+}
+
+.bg-size-auto {
+  background-size: auto;
+}
+
+/* Backgroud postion utils */
+/* used with background */
+.bg-pos-center {
+  background-position: center;
+}
+
+.bg-pos-bottom {
+  background-position: bottom;
+}
+
+.bg-pos-top {
+  background-position: top;
+}
+
+.bg-pos-left {
+  background-position: left;
+}
+
+.bg-pos-right {
+  background-position: right;
+}
