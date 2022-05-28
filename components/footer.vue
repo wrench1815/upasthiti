@@ -1,6 +1,6 @@
 <template>
   <!-- Footer -->
-<footer class="bg-light text-center ">
+<footer class="bg-dark text-center text-light ">
   <!-- Grid container -->
   <div class="container p-4">
     <section class="mb-4">
@@ -10,9 +10,9 @@
     <section class="">
       <!--Grid row-->
       <div class=" text-center  list-unstyled">
-              <nuxt-link to="/" class="text-dark px-2">Link 1</nuxt-link>
-              <nuxt-link to="/" class="text-dark px-2">Link 2</nuxt-link>
-              <nuxt-link to="/"  class="text-dark px-2">Link 3</nuxt-link>
+              <nuxt-link to="/" class="text-light px-2">Link 1</nuxt-link>
+              <nuxt-link to="/" class="text-light px-2">Link 2</nuxt-link>
+              <nuxt-link to="/"  class="text-light px-2">Link 3</nuxt-link>
       </div>
       <!--Grid row-->
     </section>
@@ -22,7 +22,7 @@
   <!-- Grid container -->
 
   <!-- Copyright -->
-  <div class="text-center p-3 bg-dark text-light">
+  <div class="text-center pb-3 ">
     Copyrights and year etc
   </div>
   <!-- Copyright -->
