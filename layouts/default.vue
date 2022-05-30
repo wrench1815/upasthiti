@@ -1,13 +1,18 @@
 <template>
   <div>
+    <Lazy-NavBar />
     <nuxt />
-    <Lazy-UtilsToTop />
+    <Lazy-utilsToTop />
   </div>
 </template>
 
 <script>
+import NavBar from '../components/NavBar'
 export default {
   name: 'DefaultLayout',
+  components: {
+    NavBar,
+  },
 }
 </script>
 
