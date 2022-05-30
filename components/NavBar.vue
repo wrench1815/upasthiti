@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg navbar-light bg-light shadow-0 position-sticky top-0"
+    class="navbar navbar-expand-lg navbar-light bg-white shadow-0 position-sticky top-0"
   >
     <!-- Container wrapper -->
     <div class="container-fluid">
