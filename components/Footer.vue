@@ -13,7 +13,7 @@
           <nuxt-link to="/" class="px-2 text-dark">Home</nuxt-link>
           <nuxt-link to="/about" class="px-2 text-dark">About</nuxt-link>
           <nuxt-link to="/" class="px-2 text-dark">Link 3</nuxt-link>
-          </div>
+        </div>
         <!--Grid row-->
       </section>
       <!-- Section: Links -->
