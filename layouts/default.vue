@@ -2,7 +2,9 @@
   <div>
     <Lazy-NavBar />
     <nuxt />
-    <Lazy-utilsToTop />
+
+    <Lazy-Footer />
+    <Lazy-UtilsToTop />
   </div>
 </template>
 
