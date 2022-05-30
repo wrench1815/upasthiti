@@ -46,6 +46,9 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+
+    // https://auth.nuxtjs.org/
+    '@nuxtjs/axios',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -62,6 +65,41 @@ export default {
     inject: true,
     families: {
       Raleway: true,
+    },
+  },
+
+  // https://auth.nuxtjs.org/guide/scheme
+  auth: {
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'access',
+          maxAge: 60, // 1 minute
+        },
+        refreshToken: {
+          property: 'refresh',
+          maxAge: 60 * 60 * 24, // 1 day
+        },
+        user: {
+          property: false,
+        },
+        endpoints: {
+          login: {
+            url: '/auth/token/',
+            method: 'post',
+          },
+          refresh: {
+            url: '/auth/token/refresh/',
+            method: 'post',
+          },
+          user: {
+            url: '/auth/user/',
+            method: 'get',
+          },
+          logout: false,
+        },
+      },
     },
   },
 
