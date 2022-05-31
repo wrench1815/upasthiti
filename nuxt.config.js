@@ -143,7 +143,7 @@ export default {
     transpile: ['vee-validate/dist/rules'],
   },
 
-  privateRuntimeConfig: {
+  publicRuntimeConfig: {
     axios: {
       baseURL: process.env.API_URL,
     },
