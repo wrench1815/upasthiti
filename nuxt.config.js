@@ -31,6 +31,7 @@ export default {
     '~/plugins/mdb.js',
     '~/plugins/remixIcons.js',
     '~/plugins/vueSelect.js',
+    '~/plugins/veeValidate.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -48,13 +49,13 @@ export default {
     '@nuxtjs/axios',
 
     // https://auth.nuxtjs.org/
-    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: 'https://upasthiti-api.herokuapp.com/api/',
   },
 
   // @nuxtjs/google-fonts: https://google-fonts.nuxtjs.org/setup
@@ -86,11 +87,11 @@ export default {
         },
         endpoints: {
           login: {
-            url: '/auth/token/',
+            url: 'auth/token/',
             method: 'post',
           },
           refresh: {
-            url: '/auth/token/refresh/',
+            url: 'auth/token/refresh/',
             method: 'post',
           },
           user: {
@@ -104,5 +105,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    transpile: ['vee-validate/dist/rules'],
+  },
 }
