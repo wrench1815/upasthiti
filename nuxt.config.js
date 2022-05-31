@@ -53,6 +53,24 @@ export default {
 
     // https://github.com/avil13/vue-sweetalert2
     'vue-sweetalert2/nuxt',
+
+    // https://gitlab.com/broj42/nuxt-lazy-load#readme
+    [
+      'nuxt-lazy-load',
+      {
+        images: true,
+        videos: true,
+        audios: true,
+        iframes: true,
+        native: false,
+        directiveOnly: true,
+
+        // To remove class set value to false
+        loadingClass: 'isLoading',
+        loadedClass: 'isLoaded',
+        appendClass: 'lazyLoad',
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
