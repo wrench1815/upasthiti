@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt -H 0",
+    "dev": "nuxt",
+    "devalt": "nuxt -H 0",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -19,6 +20,7 @@
     "mdb-ui-kit": "^4.1.0",
     "nuxt": "^2.15.8",
     "remixicon": "^2.5.0",
+    "vee-validate": "3",
     "vue": "^2.6.14",
     "vue-select": "^3.18.3",
     "vue-server-renderer": "^2.6.14",
