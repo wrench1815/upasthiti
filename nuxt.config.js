@@ -50,6 +50,9 @@ export default {
 
     // https://auth.nuxtjs.org/
     '@nuxtjs/auth-next',
+
+    // https://github.com/avil13/vue-sweetalert2
+    'vue-sweetalert2/nuxt',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -76,11 +79,12 @@ export default {
         scheme: 'refresh',
         token: {
           property: 'access',
-          maxAge: 60, // 1 minute
+          maxAge: 300, // 5 minutes
         },
         refreshToken: {
           property: 'refresh',
-          maxAge: 60 * 60 * 24, // 1 day
+          data: 'refresh',
+          maxAge: 86400, // 1 day
         },
         user: {
           property: false,
@@ -101,6 +105,17 @@ export default {
           logout: false,
         },
       },
+    },
+  },
+
+  sweetalert: {
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    buttonsStyling: false,
+    customClass: {
+      confirmButton: 'btn btn-success mx-2',
+      cancelButton: 'btn btn-danger mx-2',
+      denyButton: 'btn btn-warning mx-2',
     },
   },
 
