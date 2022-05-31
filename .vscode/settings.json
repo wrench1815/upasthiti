@@ -6,5 +6,5 @@
 
   // file extension patterns to allow css class completion
   "html-css-class-completion.includeGlobPattern": "**/*.{css,html,vue}",
-  "prettier.endOfLine": "crlf"
+  "prettier.endOfLine": "lf"
 }
