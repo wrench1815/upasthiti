@@ -63,6 +63,7 @@ export default {
         audios: true,
         iframes: true,
         native: false,
+        polyfill: false,
         directiveOnly: true,
 
         // To remove class set value to false
@@ -76,7 +77,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https://upasthiti-api.herokuapp.com/api/',
+    baseURL: '/',
   },
 
   // @nuxtjs/google-fonts: https://google-fonts.nuxtjs.org/setup
@@ -117,7 +118,7 @@ export default {
             method: 'post',
           },
           user: {
-            url: '/auth/user/',
+            url: '/auth/me/',
             method: 'get',
           },
           logout: false,
@@ -131,14 +132,20 @@ export default {
     allowEscapeKey: false,
     buttonsStyling: false,
     customClass: {
-      confirmButton: 'btn btn-success mx-2',
-      cancelButton: 'btn btn-danger mx-2',
-      denyButton: 'btn btn-warning mx-2',
+      confirmButton: 'btn btn-success fw-bold mx-2',
+      cancelButton: 'btn btn-danger fw-bold mx-2',
+      denyButton: 'btn btn-warning fw-bold mx-2',
     },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['vee-validate/dist/rules'],
+  },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.API_URL,
+    },
   },
 }
