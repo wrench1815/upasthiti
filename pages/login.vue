@@ -106,8 +106,8 @@ export default {
 
   data() {
     return {
-      email: 'wrench1815@protonmail.com',
-      password: 'Test@123',
+      email: '',
+      password: '',
       showPassword: false,
     }
   },
