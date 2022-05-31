@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg navbar-light bg-white shadow-0 position-sticky top-0"
+    class="navbar navbar-expand-lg navbar-light bg-white shadow-0 position-sticky top-0 z-index-5"
   >
     <!-- Container wrapper -->
     <div class="container-fluid">
@@ -12,18 +12,20 @@
       <div class="d-flex align-items-center ms-auto me-0 d-lg-none">
         <ul class="navbar-nav d-flex flex-row me-1 mb-2 mb-lg-0">
           <li class="nav-item">
-            <button
-              v-if="showLogin"
+            <NuxtLink
+              v-if="!isAuthenticated"
               class="btn btn-primary fw-bold btn-rounded"
+              to="/login"
             >
-              Login
-            </button>
-            <button
-              v-if="!showLogin"
+              Log in
+            </NuxtLink>
+            <div
+              v-if="isAuthenticated"
               class="btn btn-primary fw-bold btn-rounded"
+              @click="logout()"
             >
-              Dash
-            </button>
+              Log out
+            </div>
           </li>
         </ul>
       </div>
@@ -108,18 +110,20 @@
       <div class="d-flex align-items-center ms-1 me-0 d-none d-lg-block">
         <ul class="navbar-nav d-flex flex-row me-1 mb-2 mb-lg-0">
           <li class="nav-item me-3">
-            <button
-              v-if="showLogin"
+            <NuxtLink
+              v-if="!isAuthenticated"
               class="btn btn-primary btn-rounded fw-bold"
+              to="/login"
             >
-              Login
-            </button>
-            <button
-              v-if="!showLogin"
+              Log in
+            </NuxtLink>
+            <div
+              v-if="isAuthenticated"
               class="btn btn-primary btn-rounded fw-bold"
+              @click="logout()"
             >
-              Dash
-            </button>
+              Log Out
+            </div>
           </li>
         </ul>
       </div>
@@ -130,6 +134,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'NavBar',
 
@@ -149,6 +155,50 @@ export default {
       document
         .querySelector('#mainNavbarLeftAlignToggler')
         .setAttribute('aria-expanded', false)
+    },
+  },
+
+  computed: {
+    ...mapGetters(['isAuthenticated']),
+  },
+
+  methods: {
+    logout() {
+      this.$swal({
+        title: 'Logging Out...',
+        icon: 'info',
+        text: 'Please wait...',
+        didOpen: () => {
+          this.$swal.showLoading()
+
+          this.$auth
+            .logout()
+            .then(() => {
+              this.$swal.hideLoading()
+              this.$swal.close()
+
+              this.$swal({
+                title: 'Logged Out!',
+                type: 'success',
+                icon: 'success',
+                text: 'You have been logged Out.',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+              })
+            })
+            .catch((err) => {
+              this.$swal.hideLoading()
+              this.$swal.close()
+              this.$swal({
+                title: 'Error!',
+                type: 'error',
+                icon: 'error',
+                html: `Failed to Log out.<br/>Try Again.`,
+              })
+            })
+        },
+      })
     },
   },
 }
