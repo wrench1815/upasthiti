@@ -4,7 +4,9 @@
       <!-- start:Institute Name -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Institute name</label>
+          <label class="form-label fw-bold">Institute name
+            <i class="ri-asterisk ri-sm ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -17,7 +19,9 @@
       <!-- start:Address -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Address</label>
+          <label class="form-label fw-bold">Address
+            <i class="ri-asterisk ri-sm ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -30,7 +34,9 @@
       <!-- start:principal -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Principal</label>
+          <label class="form-label fw-bold">Principal
+          <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -43,7 +49,9 @@
       <!-- start:college logo -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">College Logo</label>
+          <label class="form-label fw-bold">College Logo
+          <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -56,7 +64,9 @@
       <!-- start:website -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Website</label>
+          <label class="form-label fw-bold">Website
+          <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -69,7 +79,9 @@
       <!-- start:Institute Type-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Institute Type</label>
+          <label class="form-label fw-bold">Institute Type
+          <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <v-select
@@ -84,7 +96,9 @@
       <!-- start:Affiliating University-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Affiliating University</label>
+          <label class="form-label fw-bold">Affiliating University
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -97,7 +111,9 @@
       <!-- start:Institute Alias Name-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Institute Alias Name</label>
+          <label class="form-label fw-bold">Institute Alias Name
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -110,7 +126,9 @@
       <!-- start:Mobile-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Mobile</label>
+          <label class="form-label fw-bold">Mobile
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -123,7 +141,9 @@
       <!-- start:Alternate Contact-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Alternate Contact</label>
+          <label class="form-label fw-bold">Alternate Contact
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -136,7 +156,9 @@
       <!-- start:Email-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Email</label>
+          <label class="form-label fw-bold">Email
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -149,7 +171,9 @@
       <!-- start:Alternate Email-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Alternate Email</label>
+          <label class="form-label fw-bold">Alternate Email
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -162,7 +186,9 @@
       <!-- start:State-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">State</label>
+          <label class="form-label fw-bold">State
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <v-select
@@ -177,7 +203,9 @@
       <!-- start:City-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">City</label>
+          <label class="form-label fw-bold">City
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -190,7 +218,9 @@
       <!-- start:Pincode -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Pincode</label>
+          <label class="form-label fw-bold">Pincode
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -203,7 +233,9 @@
       <!-- start:Running From Own Campus-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Running From Own Campus</label>
+          <label class="form-label fw-bold">Running From Own Campus
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -216,7 +248,9 @@
       <!-- start:Institute For-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Institute For</label>
+          <label class="form-label fw-bold">Institute For
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <v-select
@@ -231,7 +265,9 @@
       <!-- start:Location Type-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Location Type</label>
+          <label class="form-label fw-bold">Location Type
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <v-select
@@ -246,7 +282,9 @@
       <!--start: Financial Model -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Financial Model</label>
+          <label class="form-label fw-bold">Financial Model
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <v-select
@@ -261,7 +299,9 @@
       <!--start: Campus Area (In Acres) -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Campus Area (In Acres)</label>
+          <label class="form-label fw-bold">Campus Area (In Acres)
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -274,7 +314,9 @@
       <!--start:Built-Up Area(In sq. mts.) -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Built-Up Area(In sq. mts.)</label>
+          <label class="form-label fw-bold">Built-Up Area(In sq. mts.)
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -287,7 +329,9 @@
       <!-- start: Minority Instituition-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Minority Instituition</label>
+          <label class="form-label fw-bold">Minority Instituition
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -301,7 +345,8 @@
       <div class="row my-4">
         <div class="col-6">
           <label class="form-label fw-bold"
-            >Recognised By UGC As College With potential For Excellence</label
+            >Recognised By UGC As College With potential For Excellence
+            <i class="ri-asterisk ri-sm text-danger"></i></label
           >
         </div>
         <div class="col-6">
@@ -316,7 +361,8 @@
       <div class="row my-4">
         <div class="col-6">
           <label class="form-label fw-bold"
-            >Recognised Under Section 12B Of UGC</label
+            >Recognised Under Section 12B Of UGC
+            <i class="ri-asterisk ri-sm text-danger"></i></label
           >
         </div>
         <div class="col-6">
@@ -331,7 +377,8 @@
       <div class="row my-4">
         <div class="col-6">
           <label class="form-label fw-bold"
-            >Any Other Recognition By Govt. Agency</label
+            >Any Other Recognition By Govt. Agency
+            <i class="ri-asterisk ri-sm text-danger"></i></label
           >
         </div>
         <div class="col-6">
@@ -345,7 +392,9 @@
       <!--start: NAAC Accredited -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">NAAC Accredited</label>
+          <label class="form-label fw-bold">NAAC Accredited
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -358,7 +407,9 @@
       <!--start:Institue Mission-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Institue Mission</label>
+          <label class="form-label fw-bold">Institue Mission
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -371,7 +422,9 @@
       <!--start:Institue Vision-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Institute Vision</label>
+          <label class="form-label fw-bold">Institute Vision
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
@@ -384,7 +437,9 @@
       <!--start:Quality Policy-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Quality Policy</label>
+          <label class="form-label fw-bold">Quality Policy
+            <i class="ri-asterisk ri-sm text-danger"></i>
+          </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
