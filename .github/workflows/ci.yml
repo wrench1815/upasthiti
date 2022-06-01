@@ -52,8 +52,13 @@ jobs:
         run: yarn test
 
   deploy:
-    runs-on: ubuntu-latest
+    name: Vercel Deploy
 
+    if: github.ref == 'refs/heads/dev'
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
     needs: [ci]
 
     steps:
