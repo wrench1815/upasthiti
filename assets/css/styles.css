@@ -312,7 +312,7 @@ auto: auto,
 }
 
 /* change Font Family */
-* {
-  font-family: Raleway !important;
-  /* font-weight: 600 !important; */
-}
+/* * { */
+/* font-family: Raleway !important; */
+/* font-weight: 600 !important; */
+/* } */
