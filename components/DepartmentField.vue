@@ -4,7 +4,7 @@
       <!-- start:Department  Name -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold"
+          <label class="form-label"
             >Department Name
             <i class="ri-asterisk text-danger ri-sm"></i>
           </label>
@@ -20,7 +20,7 @@
       <!-- start:Department code -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold"
+          <label class="form-label"
             >Department Code
             <i class="ri-asterisk ri-sm text-danger"></i>
           </label>
@@ -36,7 +36,7 @@
       <!-- start:Types of programmes offered-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold"
+          <label class="form-label"
             >Types Of Programmes Offered
             <i class="ri-asterisk ri-sm text-danger"></i>
           </label>
@@ -53,7 +53,7 @@
       <!-- start:Total Semesters-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold"
+          <label class="form-label"
             >Total Semesters
             <i class="ri-asterisk ri-sm text-danger"></i>
           </label>
@@ -67,7 +67,7 @@
       <!--start: Student Intake -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold"
+          <label class="form-label"
             >Student Intake <i class="ri-asterisk ri-sm text-danger"></i>
           </label>
         </div>
@@ -82,7 +82,7 @@
       <!--start: Faculty Intake -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold"
+          <label class="form-label"
             >Faculty Intake
             <i class="ri-asterisk ri-sm text-danger"></i>
           </label>
@@ -98,7 +98,7 @@
       <!--start: No. Of Professors -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold"
+          <label class="form-label"
             >No. Of Professors
             <i class="ri-asterisk ri-sm text-danger"></i>
           </label>
@@ -114,7 +114,7 @@
       <!--start: No. Of Associate Professors -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">
+          <label class="form-label">
             No. Of Associate Professors
             <i class="ri-asterisk ri-sm text-danger"></i>
           </label>
@@ -130,7 +130,7 @@
       <!--start: No. Of Assistant Professors -->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold"
+          <label class="form-label"
             >No. Of Assistant Professors
             <i class="ri-asterisk ri-sm text-danger"></i>
           </label>
@@ -146,7 +146,7 @@
       <!--start: HOD-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold"
+          <label class="form-label"
             >HOD
             <i class="ri-asterisk ri-sm text-danger"></i>
           </label>
