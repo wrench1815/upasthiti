@@ -10,10 +10,10 @@
       <ul class="nav flex-column">
         <li class="nav-item" v-for="items in menuItems">
           <NuxtLink
-            class="nav-link text-primary my-1 rounded-5"
-            exact-active-class="fw-bold bg-primary text-white"
+            class="nav-link my-1 border-start border-2 text-dark border-primary"
+            exact-active-class="fw-bol bg-primary text-white rounded-5"
             :to="items.url"
-            ><i class="me-1" :class="items.icon"></i>{{ items.name }}</NuxtLink
+            ><i class="me-2" :class="items.icon"></i>{{ items.name }}</NuxtLink
           >
         </li>
       </ul>
@@ -23,83 +23,35 @@
 
 <script>
 export default {
+  name: 'DashSideBar',
+
   data() {
     return {
       menuItems: [
         {
           name: 'Dash',
           url: '/dash',
-          icon: 'ri-dashboard-line',
+          icon: 'ri-dashboard-fill',
         },
         {
           name: 'College',
           url: '/dash/college',
-          icon: 'ri-home-line',
+          icon: 'ri-home-fill',
         },
         {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
+          name: 'Student',
+          url: '/dash/student',
+          icon: 'ri-home-fill',
         },
         {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
+          name: 'Test',
+          url: '/dash/test',
+          icon: 'ri-home-fill',
         },
         {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
-        },
-        {
-          name: 'Dash',
-          url: '/dash',
-          icon: 'ri-dashboard-line',
-        },
-        {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
-        },
-        {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
-        },
-        {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
-        },
-        {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
-        },
-        {
-          name: 'Dash',
-          url: '/dash',
-          icon: 'ri-dashboard-line',
-        },
-        {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
-        },
-        {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
-        },
-        {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
-        },
-        {
-          name: 'College',
-          url: '/dash/college',
-          icon: 'ri-home-line',
+          name: 'Test 2',
+          url: '/dash/test2',
+          icon: 'ri-home-fill',
         },
       ],
     }
@@ -107,4 +59,4 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped></style>
