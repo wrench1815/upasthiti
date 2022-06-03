@@ -87,7 +87,7 @@ export default {
     overwriting: false,
     inject: true,
     families: {
-      Raleway: true,
+      Roboto: ['300', '400', '500', '700'],
     },
   },
 

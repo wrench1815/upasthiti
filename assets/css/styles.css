@@ -311,8 +311,117 @@ auto: auto,
   background-position: right;
 }
 
-/* change Font Family */
-* {
-  font-family: Raleway !important;
-  /* font-weight: 600 !important; */
+/* Pointer classes */
+.pointer-alias {
+  cursor: alias;
 }
+.pointer-all-scroll {
+  cursor: all-scroll;
+}
+.pointer-auto {
+  cursor: auto;
+}
+.pointer-cell {
+  cursor: cell;
+}
+.pointer-context-menu {
+  cursor: context-menu;
+}
+.pointer-col-resize {
+  cursor: col-resize;
+}
+.pointer-copy {
+  cursor: copy;
+}
+.pointer-crosshair {
+  cursor: crosshair;
+}
+.pointer-default {
+  cursor: default;
+}
+.pointer-e-resize {
+  cursor: e-resize;
+}
+.pointer-ew-resize {
+  cursor: ew-resize;
+}
+.pointer-grab {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+.pointer-grabbing {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+.pointer-help {
+  cursor: help;
+}
+.pointer-move {
+  cursor: move;
+}
+.pointer-n-resize {
+  cursor: n-resize;
+}
+.pointer-ne-resize {
+  cursor: ne-resize;
+}
+.pointer-nesw-resize {
+  cursor: nesw-resize;
+}
+.pointer-ns-resize {
+  cursor: ns-resize;
+}
+.pointer-nw-resize {
+  cursor: nw-resize;
+}
+.pointer-nwse-resize {
+  cursor: nwse-resize;
+}
+.pointer-no-drop {
+  cursor: no-drop;
+}
+.pointer-none {
+  cursor: none;
+}
+.pointer-not-allowed {
+  cursor: not-allowed;
+}
+.pointer-pointer {
+  cursor: pointer;
+}
+.pointer-progress {
+  cursor: progress;
+}
+.pointer-row-resize {
+  cursor: row-resize;
+}
+.pointer-s-resize {
+  cursor: s-resize;
+}
+.pointer-se-resize {
+  cursor: se-resize;
+}
+.pointer-sw-resize {
+  cursor: sw-resize;
+}
+.pointer-text {
+  cursor: text;
+}
+.pointer-w-resize {
+  cursor: w-resize;
+}
+.pointer-wait {
+  cursor: wait;
+}
+.pointer-zoom-in {
+  cursor: zoom-in;
+}
+.pointer-zoom-out {
+  cursor: zoom-out;
+}
+
+/* change Font Family */
+/* * { */
+/* font-family: Raleway !important; */
+/* font-weight: 600 !important; */
+/* } */
