@@ -17,38 +17,53 @@
       </div>
       <!-- end:Name -->
 
-      <!-- start: Father's Name -->
+      <!-- start: Class Roll No.-->
       <div class="row my-4">
         <div class="col-6">
           <label class="form-label fw-bold"
-            >Father's Name
+            >Class Roll No.
             <i class="ri-asterisk text-danger ri-sm"></i>
           </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
-            <input type="text" class="form-control" />
+            <input type="number" class="form-control" />
           </div>
         </div>
       </div>
-      <!-- end:Father's Name  -->
+      <!-- end:Class Roll No.  -->
 
-      <!-- start: Courses -->
+      <!-- start: Batch -->
       <div class="row my-4">
         <div class="col-6">
           <label class="form-label fw-bold"
-            > Courses
+            >Batch
             <i class="ri-asterisk text-danger ri-sm"></i>
           </label>
         </div>
         <div class="col-6">
           <div class="form-outline">
-            <input type="text" class="form-control" />
+            <input type="number" class="form-control" />
           </div>
         </div>
       </div>
-      <!-- end: Courses -->
+      <!-- end: Batch-->
 
+ <!-- start:Gender-->
+      <div class="row my-4">
+        <div class="col-6">
+          <label class="form-label fw-bold">Gender
+              <i class="ri-asterisk text-danger ri-sm"></i>
+          </label>
+        </div>
+        <div class="col-6">
+          <v-select
+            placeholder="Choose.."
+            :options="availGender"
+          ></v-select>
+        </div>
+      </div>
+      <!-- end:Gender-->
 
     </form>
   </section>
@@ -57,6 +72,19 @@
 <script>
 export default {
   name: 'StudentField',
+
+
+
+  data() {
+    return {
+      Types: '',
+      availGender: [
+        'Male',
+        'Female',
+        'Rather Not Say'
+      ],
+    }
+  },
 
   mounted() {
     document.querySelectorAll('.form-outline').forEach((formOutline) => {
