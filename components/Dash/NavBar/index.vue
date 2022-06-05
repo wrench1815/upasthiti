@@ -80,6 +80,10 @@ export default {
           name: 'College',
           url: '/dash/college',
         },
+        {
+          name: 'User',
+          url: '/dash/user',
+        },
       ],
     }
   },

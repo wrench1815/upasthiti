@@ -39,19 +39,9 @@ export default {
           icon: 'ri-home-fill',
         },
         {
-          name: 'Student',
-          url: '/dash/student',
-          icon: 'ri-home-fill',
-        },
-        {
-          name: 'Test',
-          url: '/dash/test',
-          icon: 'ri-home-fill',
-        },
-        {
-          name: 'Test 2',
-          url: '/dash/test2',
-          icon: 'ri-home-fill',
+          name: 'User',
+          url: '/dash/user',
+          icon: 'ri-user-3-fill',
         },
       ],
     }
