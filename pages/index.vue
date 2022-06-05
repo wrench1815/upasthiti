@@ -1,72 +1,80 @@
 <template>
   <div>
-    <header class="container my-5">
+    <header class="container my-4 car">
       <div class="row">
         <div
           class="col-md-6 col-lg-6 col-12 d-flex justify-content-center align-items-center"
         >
-          <div>
-            <h3 class="my-1">
-              Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet
-              consectetur.
-            </h3>
-            <h4 class="my-2">Lorem ipsum dolor sit amet.</h4>
-            <button type="button" class="btn text-white col-3 my-2">
-              Click Here
-            </button>
+          <div class="card bg-transparen shadow-non">
+            <div class="card-body">
+              <h3 class="card-title">
+                Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit
+                amet consectetur.
+              </h3>
+              <h4 class="card-text text-muted">Lorem ipsum dolor sit amet.</h4>
+              <button type="button" class="btn btn-secondary btn-rounded">
+                Click Here
+              </button>
+            </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-6 col-12 ps-5">
-          <img src="~/assets/images/header.jpg" class="header-img" alt="" />
+        <div class="col-md-6 col-lg-6 col-12 my-2 ps-md-5">
+          <img
+            src="~/assets/svg/attendance_confirmed.svg"
+            class="header-im img-fluid"
+            alt=""
+          />
         </div>
       </div>
     </header>
-    <section class="container my-4">
-      <div class="d-flex justify-content-center">
-        <div class="row my-4 py-5">
-          <div class="col-12">
-            <h2>WHAT WE DO</h2>
+    <section class="container-flui my-4 bg-white rounded-4 shadow-4">
+      <div class="container my-4 py-5">
+        <div class="d-flex justify-content-center">
+          <div class="row">
+            <div class="col-12 pb-4">
+              <h2>WHAT WE DO</h2>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-lg">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
-            quae.
-          </p>
-        </div>
-        <div class="col-lg">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-            cumque culpa aperiam.
-          </p>
-        </div>
-        <div class="col-lg">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis animi
-            laudantium eos.
-          </p>
-        </div>
-        <div class="col-md col-sm">
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-            ipsa corrupti quam!
-          </p>
+        <div class="row">
+          <div class="col-lg">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam,
+              quae.
+            </p>
+          </div>
+          <div class="col-lg">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
+              cumque culpa aperiam.
+            </p>
+          </div>
+          <div class="col-lg">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis
+              animi laudantium eos.
+            </p>
+          </div>
+          <div class="col-md col-sm">
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Assumenda ipsa corrupti quam!
+            </p>
+          </div>
         </div>
       </div>
     </section>
     <section class="container my-4">
       <div class="d-flex justify-content-center">
-        <div class="row my-5 py-5">
+        <div class="row my-5 pt-5">
           <div class="col-12">
             <h2>FEATURES</h2>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col mb-5">
-          <div class="card" style="width: 18rem">
+      <div class="row g-5">
+        <div class="col-4 mb-5">
+          <div class="card">
             <img
               src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp"
               class="card-img-top"
@@ -80,8 +88,8 @@
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card" style="width: 18rem">
+        <div class="col-4">
+          <div class="card">
             <img
               src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp"
               class="card-img-top"
@@ -95,8 +103,8 @@
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card" style="width: 18rem">
+        <div class="col-4">
+          <div class="card">
             <img
               src="https://mdbcdn.b-cdn.net/img/new/standard/nature/182.webp"
               class="card-img-top"
@@ -125,10 +133,8 @@ export default {
   width: 27rem;
   height: 27rem;
 }
-h4 {
-  color: #757575 !important;
-}
-button {
+
+.btn-orange {
   background-color: #da652a;
 }
 </style>
