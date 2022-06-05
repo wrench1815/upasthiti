@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: 'UserIndex',
+  name: 'DashUserIndex',
   layout: 'dash',
 
   data() {
