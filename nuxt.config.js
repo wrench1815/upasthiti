@@ -32,6 +32,7 @@ export default {
     '~/plugins/remixIcons.js',
     '~/plugins/vueSelect.js',
     '~/plugins/veeValidate.js',
+    '~/plugins/api.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
