@@ -14,6 +14,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Date Added</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -24,9 +25,20 @@
                 <td>
                   {{ user.date_added ? dateFormat(user.date_added) : '----' }}
                 </td>
+                <td>
+                  <NuxtLink
+                    :to="`/dash/user/${user.id}`"
+                    class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
+                    ><i class="ri-edit-2-fill ri-lg"></i
+                  ></NuxtLink>
+                </td>
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-primary btn-rounded">Add New User</button>
         </div>
       </div>
     </div>
