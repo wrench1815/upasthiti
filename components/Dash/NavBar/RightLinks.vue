@@ -20,7 +20,12 @@
         </li>
         <li><hr class="dropdown-divider" /></li>
         <li>
-          <div class="dropdown-item text-danger pointer-pointer">Logout</div>
+          <div
+            class="dropdown-item text-danger pointer-pointer"
+            @click="logout"
+          >
+            Logout
+          </div>
         </li>
       </ul>
     </div>
@@ -31,6 +36,46 @@
 <script>
 export default {
   name: 'DashNavBarRightLinks',
+
+  methods: {
+    logout() {
+      this.$swal({
+        title: 'Logging Out...',
+        icon: 'info',
+        text: 'Please wait...',
+        didOpen: () => {
+          this.$swal.showLoading()
+
+          this.$auth
+            .logout()
+            .then(() => {
+              this.$swal.hideLoading()
+              this.$swal.close()
+
+              this.$swal({
+                title: 'Logged Out!',
+                type: 'success',
+                icon: 'success',
+                text: 'You have been logged Out.',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+              })
+            })
+            .catch((err) => {
+              this.$swal.hideLoading()
+              this.$swal.close()
+              this.$swal({
+                title: 'Error!',
+                type: 'error',
+                icon: 'error',
+                html: `Failed to Log out.<br/>Try Again.`,
+              })
+            })
+        },
+      })
+    },
+  },
 }
 </script>
 

@@ -32,6 +32,7 @@ export default {
     '~/plugins/remixIcons.js',
     '~/plugins/vueSelect.js',
     '~/plugins/veeValidate.js',
+    '~/plugins/api.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,6 +42,9 @@ export default {
   buildModules: [
     // @nuxtjs/google-fonts: https://google-fonts.nuxtjs.org/setup
     '@nuxtjs/google-fonts',
+
+    // @nuxtjs/moment: https://github.com/nuxt-community/moment-module
+    '@nuxtjs/moment',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -136,6 +140,12 @@ export default {
       cancelButton: 'btn btn-danger fw-bold mx-2',
       denyButton: 'btn btn-warning fw-bold mx-2',
     },
+  },
+
+  // @nuxtjs/moment: https://github.com/nuxt-community/moment-module
+  moment: {
+    defaultLocale: 'en',
+    defaultTimezone: 'Asia/Kolkata',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

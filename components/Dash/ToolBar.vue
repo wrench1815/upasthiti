@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="card card-body glass-mas pb-0 pt-3" id="glass-object">
+    <div class="card card-body pb-0 pt-3">
       <h5>{{ lastElement.name }}</h5>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
