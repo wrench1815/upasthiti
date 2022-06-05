@@ -9,7 +9,7 @@ export default (axios) => ({
   retrieve: (id) => axios.get(`user/${id}/`),
 
   // update user
-  update: (id, user) => axios.put(`user/${id}/`, user),
+  update: (id, user) => axios.patch(`user/${id}/`, user),
 
   // delete user
   destroy: (id) => axios.delete(`user/${id}/`),
