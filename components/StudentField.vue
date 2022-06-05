@@ -49,22 +49,19 @@
       </div>
       <!-- end: Batch-->
 
- <!-- start:Gender-->
+      <!-- start:Gender-->
       <div class="row my-4">
         <div class="col-6">
-          <label class="form-label fw-bold">Gender
-              <i class="ri-asterisk text-danger ri-sm"></i>
+          <label class="form-label fw-bold"
+            >Gender
+            <i class="ri-asterisk text-danger ri-sm"></i>
           </label>
         </div>
         <div class="col-6">
-          <v-select
-            placeholder="Choose.."
-            :options="availGender"
-          ></v-select>
+          <v-select placeholder="Choose.." :options="availGender"></v-select>
         </div>
       </div>
       <!-- end:Gender-->
-
     </form>
   </section>
 </template>
@@ -73,16 +70,10 @@
 export default {
   name: 'StudentField',
 
-
-
   data() {
     return {
       Types: '',
-      availGender: [
-        'Male',
-        'Female',
-        'Rather Not Say'
-      ],
+      availGender: ['Male', 'Female', 'Rather Not Say'],
     }
   },
 
