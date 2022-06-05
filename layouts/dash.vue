@@ -13,6 +13,7 @@
 <script>
 export default {
   name: 'DashLayout',
+  middleware: ['auth'],
 }
 </script>
 
