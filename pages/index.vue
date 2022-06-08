@@ -12,7 +12,7 @@
                 amet consectetur.
               </h3>
               <h4 class="card-text text-muted">Lorem ipsum dolor sit amet.</h4>
-              <button type="button" class="btn btn-secondary btn-rounded">
+              <button type="button" class="btn btn-primary btn-rounded">
                 Click Here
               </button>
             </div>
@@ -20,9 +20,9 @@
         </div>
         <div class="col-md-6 col-lg-6 col-12 my-2 ps-md-5">
           <img
-            src="~/assets/svg/attendance_confirmed.svg"
-            class="header-im img-fluid"
-            alt=""
+            src="~/assets/svg/attendance_confirmed_alt.svg"
+            class="img-fluid"
+            alt="attendance confirmed illustration"
           />
         </div>
       </div>
