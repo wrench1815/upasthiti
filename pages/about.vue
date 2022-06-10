@@ -8,10 +8,10 @@
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-md-6 col-lg-6 col-12 mb-2  ps-md-5">
+      <div class="col-md-6 col-lg-6 col-12 mb-2 ps-md-5">
         <img
           src="~/assets/images/about.jpg"
-          class="img-fluid "
+          class="img-fluid"
           alt="attendance confirmed illustration"
         />
       </div>
@@ -26,7 +26,8 @@
           consectetur adipisicing elit. Deserunt officia numquam expedita
           corporis! Dolorum veniam, voluptatum deserunt, nam vero repellendus
           nobis quas eaque ipsum non quibusdam possimus vitae necessitatibus
-          rerum dol Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam, rem.
+          rerum dol Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          Aliquam, rem.
         </p>
       </div>
     </div>
