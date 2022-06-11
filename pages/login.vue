@@ -53,6 +53,7 @@
                   passwordNumber: true,
                   passwordUpper: true,
                   passwordLower: true,
+                  passwordSpecial: true,
                 }"
               >
                 <div class="form-outline">
