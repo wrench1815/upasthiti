@@ -6,39 +6,17 @@
         <p>lists all Registerd User</p>
       </div>
       <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-hover table-bordered align-middle">
-            <thead class="align-middle">
-              <tr>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Date Added</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="user in users">
-                <td>{{ user.first_name ? user.first_name : '----' }}</td>
-                <td>{{ user.last_name ? user.last_name : '----' }}</td>
-                <td>{{ user.email ? user.email : '----' }}</td>
-                <td>
-                  {{ user.date_added ? dateFormat(user.date_added) : '----' }}
-                </td>
-                <td>
-                  <NuxtLink
-                    :to="`/dash/user/${user.id}`"
-                    class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
-                    ><i class="ri-edit-2-fill ri-lg"></i
-                  ></NuxtLink>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <Lazy-LoadersTable v-if="loading" />
+        <Lazy-DashUserTable v-if="!loading" :users="users" />
 
         <div class="d-flex justify-content-end">
-          <button class="btn btn-primary btn-rounded">Add New User</button>
+          <Lazy-LoadersButton v-if="loading" :rounded="true" />
+          <Lazy-UtilsLinkButton
+            v-if="!loading"
+            :rounded="true"
+            :link="'/dash/user/add'"
+            >Add new User</Lazy-UtilsLinkButton
+          >
         </div>
       </div>
     </div>
@@ -54,6 +32,7 @@ export default {
     return {
       users: [],
       loading: true,
+      error: true,
     }
   },
 
@@ -68,9 +47,35 @@ export default {
 
   methods: {
     async getUsers() {
-      const response = await this.$api.user.list()
-      this.users = response.data
-      console.log(response.data)
+      this.loading = true
+      const response = await this.$api.user
+        .list()
+        .then(
+          (response) => ((this.users = response.data), (this.error = false))
+        )
+        .catch((error) => {
+          console.log(error)
+          this.$swal({
+            title: 'Error',
+            icon: 'error',
+            type: 'error',
+            html: `${
+              error.response.data.detail
+                ? error.response.data.detail
+                : 'Something went wrong'
+            }`,
+            confirmButtonText: 'Refresh',
+            showCancelButton: true,
+            cancelButtonText: 'To Dash Home',
+            confirmButtonClass: 'btn btn-info',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.getUsers()
+            } else if (result.isDismissed) {
+              this.$router.push('/dash')
+            }
+          })
+        })
     },
 
     dateFormat(date) {
@@ -81,7 +86,9 @@ export default {
 
   mounted() {
     this.getUsers().finally(() => {
-      this.loading = false
+      if (!this.error) {
+        this.loading = false
+      }
     })
   },
 }
