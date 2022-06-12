@@ -1,5 +1,5 @@
 <template>
-  <section class="container my-4 car">
+  <section class="container my-4 card">
     <div class="d-flex justify-content-center">
       <div class="row">
         <div class="col-12 pb-4">
@@ -35,7 +35,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'AboutPage',
+}
 </script>
 
 <style></style>
