@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { extend, ValidationProvider, ValidationObserver } from 'vee-validate'
-import { required, email, min, max } from 'vee-validate/dist/rules'
+import { required, email, min, max, alpha } from 'vee-validate/dist/rules'
 
 extend('required', {
   ...required,
@@ -20,6 +20,11 @@ extend('min', {
 extend('max', {
   ...max,
   message: 'This field must be at most {length} characters.',
+})
+
+extend('alpha', {
+  ...alpha,
+  message: 'This field must be alphabetic.',
 })
 
 // must have atleast 1 special character

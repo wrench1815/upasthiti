@@ -17,4 +17,16 @@ export default (axios) => ({
   // update password
   updatePassword: (id, payload) =>
     axios.post(`user/update_password/${id}/`, payload),
+
+  // get admin list
+  listAdmin: () => axios.get('user/admin/'),
+
+  // get principal list
+  listPrincipal: () => axios.get('user/principal/'),
+
+  // get HOD list
+  listHod: () => axios.get('user/hod/'),
+
+  // get Teacher list
+  listTeacher: () => axios.get('user/teacher/'),
 })

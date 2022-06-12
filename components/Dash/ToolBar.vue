@@ -8,7 +8,12 @@
             <nuxt-link :to="'/dash'">Dash</nuxt-link>
           </li>
           <li class="breadcrumb-item" v-for="crumb in breadCrumbs">
-            {{ crumb.name }}
+            <NuxtLink :to="crumb.url" v-if="crumb.name != lastElement.name">{{
+              crumb.name
+            }}</NuxtLink>
+            <span v-else>
+              {{ crumb.name }}
+            </span>
           </li>
         </ol>
       </nav>

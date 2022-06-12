@@ -2,19 +2,14 @@
   <div class="container my-4">
     <div class="card">
       <div class="card-header">
-        <h2>User Edit</h2>
-        <p>
-          Editing User:
-          <span class="text-info fw-bold"
-            >{{ user.first_name }} {{ user.last_name }}</span
-          >
-        </p>
+        <h2>Add User</h2>
+        <p>Add a New User</p>
       </div>
       <div class="card-body">
         <!-- for Valdation -->
         <ValidationObserver v-slot="{ handleSubmit }">
           <!-- start:User Edit Form -->
-          <form @submit.prevent="handleSubmit(updateUser)">
+          <form @submit.prevent="handleSubmit(addUser)">
             <!-- start:First Name -->
             <div class="row">
               <div class="col-12 col-md-4">
@@ -132,6 +127,58 @@
             </div>
             <!-- end:Gender -->
 
+            <!-- start:Password -->
+            <div class="row">
+              <div class="col-12 col-md-4">
+                <label class="form-label" for="password">Password</label>
+              </div>
+              <div class="col">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :rules="{
+                    required: true,
+                    min: 6,
+                    max: 16,
+                    passwordNumber: true,
+                    passwordUpper: true,
+                    passwordLower: true,
+                    passwordSpecial: true,
+                  }"
+                >
+                  <div class="form-outline">
+                    <input
+                      :type="showPassword ? 'text' : 'password'"
+                      id="password"
+                      name="password"
+                      class="form-control"
+                      v-model="user.password"
+                    />
+                  </div>
+                  <!-- Validation Errors -->
+                  <div
+                    class="text-danger"
+                    :class="{ 'mb-2': !errors[0], 'mb-1': errors[0] }"
+                  >
+                    {{ errors[0] }}
+                  </div>
+                </ValidationProvider>
+                <!-- start:Show Password -->
+                <div class="form-check mb-4">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="showPassword"
+                    v-model="showPassword"
+                  />
+                  <label class="form-check-label" for="showPassword"
+                    >Show Password</label
+                  >
+                </div>
+                <!-- start:Show Password -->
+              </div>
+            </div>
+            <!-- end:Password -->
+
             <!-- start:Is Admin -->
             <div class="row mb-4">
               <div class="col-12 col-md-4">
@@ -209,7 +256,7 @@
             <!-- Submit button -->
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-info btn-rounded mb-4">
-                Update User
+                Add User
               </button>
             </div>
           </form>
@@ -222,7 +269,7 @@
 
 <script>
 export default {
-  name: 'DashUserDetail',
+  name: 'DashUserAdd',
   layout: 'dash',
 
   data() {
@@ -230,18 +277,17 @@ export default {
       loading: true,
       error: true,
       genderList: ['Male', 'Female', 'Rather not Say'],
+      showPassword: false,
       user: {
-        id: '',
         first_name: '',
         last_name: '',
         email: '',
         gender: '',
-        date_added: '',
-        is_active: '',
-        is_admin: '',
-        is_principal: '',
-        is_hod: '',
-        is_teacher: '',
+        is_admin: false,
+        is_principal: false,
+        is_hod: false,
+        is_teacher: false,
+        password: '',
       },
     }
   },
@@ -253,65 +299,21 @@ export default {
         url: '/dash/user',
       },
       {
-        name: 'Detail',
+        name: 'Add',
       },
     ])
   },
 
   methods: {
-    async fetchUser() {
-      this.loading = true
-
-      const response = await this.$api.user
-        .retrieve(this.$route.params.id)
-        .then((response) => {
-          this.user.id = response.data.id
-          this.user.first_name = response.data.first_name
-          this.user.last_name = response.data.last_name
-          this.user.email = response.data.email
-          this.user.gender = response.data.gender
-          this.user.date_added = this.$moment(this.date_added).format(
-            'Do MMMM YYYY, h:mm:ss a'
-          )
-          this.user.is_active = response.data.is_active
-          this.user.is_admin = response.data.is_admin
-          this.user.is_principal = response.data.is_principal
-          this.user.is_hod = response.data.is_hod
-          this.user.is_teacher = response.data.is_teacher
-
-          this.error = false
-        })
-        .catch((error) =>
-          this.$swal({
-            title: 'Error',
-            icon: 'error',
-            type: 'error',
-            text: `${
-              response.data.detail
-                ? error.response.data.detail
-                : 'An error has occured'
-            }`,
-            confirmButtonText: 'Refresh',
-            showCancelButton: true,
-            cancelButtonText: 'To Dash Home',
-            confirmButtonClass: 'btn btn-info',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.fetchUser()
-            } else if (result.isDismissed) {
-              this.$router.push('/dash')
-            }
-          })
-        )
-    },
-
-    async updateUser() {
+    async addUser() {
       try {
         const user = {
           first_name: this.user.first_name,
           last_name: this.user.last_name,
           email: this.user.email,
           gender: this.user.gender,
+          password: this.user.password,
+          confirm_password: this.user.password,
           is_active: this.user.is_active,
           is_admin: this.user.is_admin,
           is_principal: this.user.is_principal,
@@ -320,15 +322,15 @@ export default {
         }
 
         this.$swal({
-          title: 'Updating User',
+          title: 'Adding User',
           icon: 'info',
           type: 'info',
-          text: 'Please wait while we are updating the User',
+          text: 'Please wait while we are Adding a New User',
           didOpen: () => {
             this.$swal.showLoading()
 
             const response = this.$api.user
-              .update(this.$route.params.id, user)
+              .create(user)
               .then(() => {
                 this.$swal.hideLoading()
                 this.$swal.close()
@@ -336,10 +338,10 @@ export default {
                 let timerInterval
 
                 this.$swal({
-                  title: 'Update Successful',
+                  title: 'Success',
                   icon: 'success',
                   type: 'success',
-                  text: 'User has been updated Successfully',
+                  text: 'User has been added Successfully',
                   timer: 2000,
                   timerProgressBar: true,
 
@@ -356,34 +358,28 @@ export default {
                   title: 'Error',
                   icon: 'error',
                   type: 'error',
-                  html: `Failed to Update User.`,
+                  html: `Failed to Add User.`,
                 })
               })
           },
         })
-      } catch (error) {
+      } catch (e) {
         this.$swal({
           title: 'Error',
           icon: 'error',
           type: 'error',
-          html: `Failed to update User.<br/>Try Again`,
+          html: `Failed to Add User.<br/>Try Again`,
         })
       }
     },
   },
 
   mounted() {
-    this.fetchUser()
-      .then(() => {
-        this.loading = false
-      })
-      .finally(() => {
-        document.querySelectorAll('.form-outline').forEach((formOutline) => {
-          new this.$mdb.Input(formOutline).init()
-        })
-      })
+    document.querySelectorAll('.form-outline').forEach((formOutline) => {
+      new this.$mdb.Input(formOutline).init()
+    })
   },
 }
 </script>
 
-<style scoped></style>
+<style></style>
