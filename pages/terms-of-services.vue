@@ -1,24 +1,9 @@
 <template>
-  <section class="container my-4 card">
-    <div class="d-flex justify-content-center">
-      <div class="row">
-        <div class="col-12 pb-4">
-          <h2>ABOUT US</h2>
-        </div>
-      </div>
-    </div>
-    <div class="row mb-4">
-      <div class="col-md-6 col-lg-6 col-12 mb-2 ps-md-5">
-        <img
-          src="~/assets/images/about.jpg"
-          class="img-fluid"
-          alt="attendance confirmed illustration"
-        />
-      </div>
-      <div
-        class="col-md-6 col-lg-6 col-12 d-flex justify-content-center align-items-center"
-      >
-        <p class="fs-5">
+  <section class="container my-4 card p-3">
+    <div class="row mb-2">
+      <h2 class="ps-5 pt-5">Terms Of Services</h2>
+      <div class="col-md-6 col-lg-6 col-12 d-flex justify-content-center mt-4">
+        <p class="fs-5 ps-4">
           Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet
           consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit.
           Harum obcaecati consequuntur consectetur autem eius explicabo dolore
@@ -27,8 +12,18 @@
           corporis! Dolorum veniam, voluptatum deserunt, nam vero repellendus
           nobis quas eaque ipsum non quibusdam possimus vitae necessitatibus
           rerum dol Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Aliquam, rem.
+          Aliquam, rem. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Laborum rerum maxime porro voluptatibus quo earum, asperiores rem
+          eaque dolore ipsum. Quae, facilis.
         </p>
+      </div>
+      <div class="col-md-6 col-lg-6 col-12 ps-md-5 mb-4">
+        <!-- https://storyset.com/illustration/accept-terms/amico  -->
+        <img
+          src="~/assets/svg/terms_of_services.svg"
+          class="img-fluid"
+          alt="Terms of services illustration"
+        />
       </div>
     </div>
   </section>
