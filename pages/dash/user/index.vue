@@ -40,7 +40,7 @@ export default {
     this.$store.commit('breadCrumbs/addBreadCrumb', [
       {
         name: 'User',
-        url: '/user',
+        url: '/dash/user',
       },
     ])
   },
