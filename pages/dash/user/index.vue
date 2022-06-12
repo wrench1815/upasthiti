@@ -6,6 +6,18 @@
         <p>lists all Registerd User</p>
       </div>
       <div class="card-body">
+        <section class="row justify-content-end">
+          <div class="col col-md-3 col-lg-2 mb-3">
+            <v-select
+              placeholder="Select Filter"
+              :options="userFilters"
+              v-model="selectedUserFilter"
+              :clearable="false"
+              @option:selected="refreshUsers"
+            >
+            </v-select>
+          </div>
+        </section>
         <Lazy-LoadersTable v-if="loading" />
         <Lazy-DashUserTable v-if="!loading" :users="users" />
 
@@ -33,6 +45,8 @@ export default {
       users: [],
       loading: true,
       error: true,
+      userFilters: ['All', 'Admin', 'Principal', 'HOD', 'Teacher'],
+      selectedUserFilter: 'All',
     }
   },
 
@@ -48,8 +62,21 @@ export default {
   methods: {
     async getUsers() {
       this.loading = true
-      const response = await this.$api.user
-        .list()
+      let requestUrl
+
+      if (this.selectedUserFilter === 'All') {
+        requestUrl = this.$api.user.list()
+      } else if (this.selectedUserFilter === 'Admin') {
+        requestUrl = this.$api.user.listAdmin()
+      } else if (this.selectedUserFilter === 'Principal') {
+        requestUrl = this.$api.user.listPrincipal()
+      } else if (this.selectedUserFilter === 'HOD') {
+        requestUrl = this.$api.user.listHod()
+      } else if (this.selectedUserFilter === 'Teacher') {
+        requestUrl = this.$api.user.listTeacher()
+      }
+
+      const response = await requestUrl
         .then(
           (response) => ((this.users = response.data), (this.error = false))
         )
@@ -76,6 +103,11 @@ export default {
             }
           })
         })
+    },
+
+    refreshUsers() {
+      this.loading = true
+      this.getUsers().then(() => (this.loading = false))
     },
 
     dateFormat(date) {
