@@ -35,7 +35,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name:'AboutPage'
+}
 </script>
 
 <style></style>
