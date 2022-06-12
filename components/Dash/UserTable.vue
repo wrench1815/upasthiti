@@ -11,7 +11,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users">
+        <tr v-if="users.length == 0">
+          <td colspan="5" class="">
+            <h4 class="text-center">Nothing to see here</h4>
+          </td>
+        </tr>
+        <tr v-for="user in users" v-else>
           <td>{{ user.first_name ? user.first_name : '----' }}</td>
           <td>{{ user.last_name ? user.last_name : '----' }}</td>
           <td>{{ user.email ? user.email : '----' }}</td>
