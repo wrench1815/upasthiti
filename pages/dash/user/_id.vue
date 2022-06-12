@@ -2,8 +2,13 @@
   <div class="container my-4">
     <div class="card">
       <div class="card-header">
-        <h2>User Details</h2>
-        <p>Details of User Id: {{ user.id }}</p>
+        <h2>User Edit</h2>
+        <p>
+          Editing User:
+          <span class="text-info fw-bold"
+            >{{ user.first_name }} {{ user.last_name }}</span
+          >
+        </p>
       </div>
       <div class="card-body">
         <!-- for Valdation -->
@@ -126,57 +131,6 @@
               </div>
             </div>
             <!-- end:Gender -->
-
-            <!-- start:Password -->
-            <!-- <div class="row">
-            <div class="col-12 col-md-4">
-              <label class="form-label" for="password">Password</label>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input
-                  :type="showPassword ? 'text' : 'password'"
-                  id="password"
-                  class="form-control"
-                  v-model="user.password"
-                />
-              </div>
-            </div>
-          </div> -->
-            <!-- end:Password -->
-
-            <!-- start:Confirm Password -->
-            <!-- <div class="row"> -->
-            <!-- <div class="col-12 col-md-4">
-              <label class="form-label" for="confirmPassword"
-                >Confirm Password</label
-              >
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input
-                  :type="showPassword ? 'text' : 'password'"
-                  id="confirmPassword"
-                  class="form-control"
-                  v-model="user.confirmPassword"
-                />
-              </div> -->
-            <!-- start:Show Password -->
-            <!-- <div class="form-check my-2">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="showPassword"
-                  v-model="showPassword"
-                />
-                <label class="form-check-label" for="showPassword"
-                  >Show Password</label
-                >
-              </div> -->
-            <!-- start:Show Password -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- end:Confirm Password -->
 
             <!-- start:Is Admin -->
             <div class="row mb-4">
