@@ -91,7 +91,7 @@ export default {
     overwriting: false,
     inject: true,
     families: {
-      Roboto: ['300', '400', '500', '700'],
+      Poppins: true,
     },
   },
 

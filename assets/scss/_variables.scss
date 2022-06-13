@@ -5,3 +5,16 @@ $success: #05e657;
 $info: #0bc5ea;
 $warning: #ffd91a;
 $danger: #e82113;
+
+// font sizes
+$font-size-base: 1rem;
+$font-size-lg: $font-size-base * 1.075;
+$font-size-sm: $font-size-base * 0.925;
+
+// font weights
+$font-weight-lighter: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-bold: 500;
+$font-weight-bolder: 600;
+$font-weight-boldest: 700;
