@@ -6,8 +6,8 @@
         <p>lists all Registerd User</p>
       </div>
       <div class="card-body">
-        <section class="row justify-content-end">
-          <div class="col col-md-3 col-lg-2 mb-3">
+        <section class="d-flex justify-content-end">
+          <div class="w-10-rem mb-3">
             <v-select
               placeholder="Select Filter"
               :options="userFilters"
