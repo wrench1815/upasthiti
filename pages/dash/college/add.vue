@@ -5,11 +5,12 @@
         <h2>Add College</h2>
         <p>Add a New College</p>
       </div>
+
       <div class="card-body">
         <!-- for Valdation -->
         <ValidationObserver v-slot="{ handleSubmit }">
-          <!-- start:User Edit Form -->
-          <form @submit.prevent="handleSubmit(addUser)">
+          <!-- start:College Add Form -->
+          <form @submit.prevent="handleSubmit(addCollege)">
             <!-- start:Institute name-->
             <div class="row">
               <div class="col-12 col-md-4">
@@ -20,14 +21,14 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
+                  :rules="{ required: true, min: 3 }"
                 >
                   <div class="form-outline">
                     <input
                       type="text"
                       id="institute_name"
                       class="form-control"
-                      v-model="user.first_name"
+                      v-model="college.institute_name"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -42,6 +43,38 @@
             </div>
             <!-- end:Institute name -->
 
+            <!-- start:Institute Address -->
+            <div class="row">
+              <div class="col-12 col-md-4">
+                <label class="form-label" for="institute_address"
+                  >Address</label
+                >
+              </div>
+              <div class="col">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :rules="{ required: true }"
+                >
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="institute_address"
+                      class="form-control"
+                      v-model="college.institute_address"
+                    />
+                  </div>
+                  <!-- Validation Errors -->
+                  <div
+                    class="text-danger"
+                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                  >
+                    {{ errors[0] }}
+                  </div>
+                </ValidationProvider>
+              </div>
+            </div>
+            <!-- end:Institute Address -->
+
             <!-- start:Institute Alias name -->
             <div class="row">
               <div class="col-12 col-md-4">
@@ -52,14 +85,14 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
+                  :rules="{ required: true }"
                 >
                   <div class="form-outline">
                     <input
                       type="text"
                       id="institute_alias_name"
                       class="form-control"
-                      v-model="user.last_name"
+                      v-model="college.institute_alias_name"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -74,39 +107,7 @@
             </div>
             <!-- end:Institute Alias name -->
 
-            <!-- start:Address-->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="institute_address"
-                  >Address</label
-                >
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true, email: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="institute_address"
-                      class="form-control"
-                      v-model="user.email"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
-            <!-- end:Address-->
-
-            <!-- start:Principal -->
+            <!-- start:Institute Principal -->
             <div class="row">
               <div class="col-12 col-md-4">
                 <label class="form-label" for="institute_principal"
@@ -119,9 +120,10 @@
                   :rules="{ required: true }"
                 >
                   <v-select
-                    placeholder="Select Gender"
-                    :options="genderList"
-                    v-model="user.gender"
+                    id="institute_principal"
+                    placeholder="Select Principal"
+                    :options="principalList"
+                    v-model="college.institute_principal"
                   ></v-select>
                   <!-- Validation Errors -->
                   <div
@@ -133,9 +135,9 @@
                 </ValidationProvider>
               </div>
             </div>
-            <!-- end:Principal-->
+            <!-- end:Institute Principal-->
 
-            <!-- start:Logo-->
+            <!-- start:Institute Logo-->
             <div class="row">
               <div class="col-12 col-md-4">
                 <label class="form-label" for="institute_logo">Logo</label>
@@ -143,15 +145,7 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{
-                    required: true,
-                    min: 6,
-                    max: 16,
-                    passwordNumber: true,
-                    passwordUpper: true,
-                    passwordLower: true,
-                    passwordSpecial: true,
-                  }"
+                  :rules="{ required: true }"
                 >
                   <div class="form-outline">
                     <input
@@ -159,7 +153,7 @@
                       id="institute_logo"
                       name="password"
                       class="form-control"
-                      v-model="user.password"
+                      v-model="college.institute_logo"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -170,24 +164,11 @@
                     {{ errors[0] }}
                   </div>
                 </ValidationProvider>
-                <!-- start:Show password-->
-                <div class="form-check mb-4">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="showPassword"
-                    v-model="showPassword"
-                  />
-                  <label class="form-check-label" for="showPassword"
-                    >Show Password</label
-                  >
-                </div>
-                <!-- start:Show Password -->
               </div>
             </div>
-            <!-- end:Logo-->
+            <!-- end:Institute Logo-->
 
-            <!-- start:Website-->
+            <!-- start:Institute Website-->
             <div class="row">
               <div class="col-12 col-md-4">
                 <label class="form-label" for="institute_website"
@@ -197,14 +178,14 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
+                  :rules="{ required: true }"
                 >
                   <div class="form-outline">
                     <input
                       type="text"
                       id="institute_website"
                       class="form-control"
-                      v-model="user.first_name"
+                      v-model="college.institute_website"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -217,9 +198,9 @@
                 </ValidationProvider>
               </div>
             </div>
-            <!-- end:website -->
+            <!-- end:Institute website -->
 
-            <!-- start:Mobile-->
+            <!-- start:Institute Mobile-->
             <div class="row">
               <div class="col-12 col-md-4">
                 <label class="form-label" for="institute_mobile">Mobile</label>
@@ -227,14 +208,14 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
+                  :rules="{ required: true }"
                 >
                   <div class="form-outline">
                     <input
                       type="number"
                       id="institute_mobile"
                       class="form-control"
-                      v-model="user.first_name"
+                      v-model="college.institute_mobile"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -247,9 +228,9 @@
                 </ValidationProvider>
               </div>
             </div>
-            <!-- end:Mobile -->
+            <!-- end:Institute Mobile -->
 
-            <!-- start:Email-->
+            <!-- start:Institute Email-->
             <div class="row">
               <div class="col-12 col-md-4">
                 <label class="form-label" for="institute_email">Email</label>
@@ -257,14 +238,14 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
+                  :rules="{ required: true, email: true }"
                 >
                   <div class="form-outline">
                     <input
                       type="email"
                       id="institute_email"
                       class="form-control"
-                      v-model="user.first_name"
+                      v-model="college.institute_email"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -277,7 +258,7 @@
                 </ValidationProvider>
               </div>
             </div>
-            <!-- end:Email-->
+            <!-- end:Institute Email-->
 
             <!-- Submit button -->
             <div class="d-flex justify-content-end">
@@ -286,7 +267,7 @@
               </button>
             </div>
           </form>
-          <!-- End:User Edit Form -->
+          <!-- End:College Add Form -->
         </ValidationObserver>
       </div>
     </div>
@@ -295,25 +276,23 @@
 
 <script>
 export default {
-  name: 'DashUserAdd',
+  name: 'DashCollegeAdd',
   layout: 'dash',
 
   data() {
     return {
       loading: true,
       error: true,
-      genderList: ['Male', 'Female', 'Rather not Say'],
-      showPassword: false,
-      user: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        gender: '',
-        is_admin: false,
-        is_principal: false,
-        is_hod: false,
-        is_teacher: false,
-        password: '',
+      principalList: [],
+      college: {
+        institute_name: '',
+        institute_address: '',
+        institute_alias_name: '',
+        institute_principal: '',
+        institute_logo: '',
+        institute_website: '',
+        institute_mobile: '',
+        institute_email: '',
       },
     }
   },
@@ -331,32 +310,20 @@ export default {
   },
 
   methods: {
-    async addUser() {
+    async addCollege() {
       try {
-        const user = {
-          first_name: this.user.first_name,
-          last_name: this.user.last_name,
-          email: this.user.email,
-          gender: this.user.gender,
-          password: this.user.password,
-          confirm_password: this.user.password,
-          is_active: this.user.is_active,
-          is_admin: this.user.is_admin,
-          is_principal: this.user.is_principal,
-          is_hod: this.user.is_hod,
-          is_teacher: this.user.is_teacher,
-        }
-
+        let college = this.college
+        college.institute_principal = college.institute_principal.id
         this.$swal({
-          title: 'Adding User',
+          title: 'Adding College',
           icon: 'info',
           type: 'info',
-          text: 'Please wait while we are Adding a New User',
+          text: 'Please wait while we are Adding a New College',
           didOpen: () => {
             this.$swal.showLoading()
 
-            const response = this.$api.user
-              .create(user)
+            const response = this.$api.college
+              .create(this.college)
               .then(() => {
                 this.$swal.hideLoading()
                 this.$swal.close()
@@ -367,14 +334,14 @@ export default {
                   title: 'Success',
                   icon: 'success',
                   type: 'success',
-                  text: 'User has been added Successfully',
+                  text: 'College has been added Successfully',
                   timer: 2000,
                   timerProgressBar: true,
 
                   didOpen: () => {
                     this.$swal.showLoading()
                   },
-                }).then(() => this.$router.push('/dash/user'))
+                }).then(() => this.$router.push('/dash/college'))
               })
               .catch((err) => {
                 this.$swal.hideLoading()
@@ -384,7 +351,7 @@ export default {
                   title: 'Error',
                   icon: 'error',
                   type: 'error',
-                  html: `Failed to Add User.`,
+                  html: `Failed to Add College.`,
                 })
               })
           },
@@ -394,15 +361,30 @@ export default {
           title: 'Error',
           icon: 'error',
           type: 'error',
-          html: `Failed to Add User.<br/>Try Again`,
+          html: `Failed to Add College.<br/>Try Again`,
         })
       }
+    },
+
+    async getPrincipals() {
+      this.$api.user.listPrincipal().then((response) => {
+        // set first_name and last name as label and id as value for select2
+        this.principalList = response.data.map((principal) => {
+          return {
+            id: principal.id,
+            label: `${principal.first_name} ${principal.last_name}`,
+          }
+        })
+        // this.principalList = response.data
+      })
     },
   },
 
   mounted() {
-    document.querySelectorAll('.form-outline').forEach((formOutline) => {
-      new this.$mdb.Input(formOutline).init()
+    this.getPrincipals().finally(() => {
+      document.querySelectorAll('.form-outline').forEach((formOutline) => {
+        new this.$mdb.Input(formOutline).init()
+      })
     })
   },
 }
