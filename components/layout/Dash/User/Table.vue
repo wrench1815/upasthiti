@@ -36,7 +36,7 @@
 
           <td>
             <p class="text-muted mb-0">
-              {{ user.role ? user.role : '----' }}
+              {{ userRole(user) }}
             </p>
           </td>
           <td>
@@ -91,6 +91,21 @@ export default {
         .finally(() => {
           this.loading = false
         })
+    },
+
+    userRole(user) {
+      // return Admin if is_admin is true, return teacher if is_teacher is true, return Hod if is_hod is true, return Principal if is_principal is true
+      if (user.is_admin) {
+        return 'Admin'
+      } else if (user.is_teacher) {
+        return 'Teacher'
+      } else if (user.is_hod) {
+        return 'HOD'
+      } else if (user.is_principal) {
+        return 'Principal'
+      } else {
+        return '----'
+      }
     },
   },
 
