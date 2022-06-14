@@ -44,17 +44,19 @@
               {{ user.date_added ? dateFormat(user.date_added) : '----' }}
             </p>
           </td>
-          <td class="d-flex gap-2">
-            <NuxtLink
-              :to="`/dash/user/${user.id}`"
-              class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
-              ><i class="ri-edit-2-fill ri-lg"></i
-            ></NuxtLink>
-            <a
-              @click="deleteUser(user.id)"
-              class="btn btn-floating btn-danger btn-sm d-flex justify-content-center align-items-center"
-              ><i class="ri-delete-bin-fill ri-lg"></i
-            ></a>
+          <td>
+            <div class="d-flex gap-2 justify-content-center align-items-center">
+              <NuxtLink
+                :to="`/dash/user/${user.id}`"
+                class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
+                ><i class="ri-edit-2-fill ri-lg"></i
+              ></NuxtLink>
+              <a
+                @click="deleteUser(user.id)"
+                class="btn btn-floating btn-danger btn-sm d-flex justify-content-center align-items-center"
+                ><i class="ri-delete-bin-fill ri-lg"></i
+              ></a>
+            </div>
           </td>
         </tr>
       </tbody>
