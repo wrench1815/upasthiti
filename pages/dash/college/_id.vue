@@ -4,15 +4,16 @@
       <div class="card-header">
         <h2>Edit College</h2>
         <p>
-          Editing User:
-          <span class="text-info fw-bold">dummy data</span>
+          Editing College:
+          <span class="text-info fw-bold">{{ college.institute_name }}</span>
         </p>
       </div>
+
       <div class="card-body">
         <!-- for Valdation -->
         <ValidationObserver v-slot="{ handleSubmit }">
-          <!-- start:User Edit Form -->
-          <form @submit.prevent="handleSubmit(addUser)">
+          <!-- start:College Edit Form -->
+          <form @submit.prevent="handleSubmit(editCollege)">
             <!-- start:Institute name-->
             <div class="row">
               <div class="col-12 col-md-4">
@@ -23,14 +24,14 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
+                  :rules="{ required: true, min: 3 }"
                 >
                   <div class="form-outline">
                     <input
                       type="text"
                       id="institute_name"
                       class="form-control"
-                      v-model="user.first_name"
+                      v-model="college.institute_name"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -45,6 +46,38 @@
             </div>
             <!-- end:Institute name -->
 
+            <!-- start:Institute Address -->
+            <div class="row">
+              <div class="col-12 col-md-4">
+                <label class="form-label" for="institute_address"
+                  >Address</label
+                >
+              </div>
+              <div class="col">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :rules="{ required: true }"
+                >
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="institute_address"
+                      class="form-control"
+                      v-model="college.institute_address"
+                    />
+                  </div>
+                  <!-- Validation Errors -->
+                  <div
+                    class="text-danger"
+                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                  >
+                    {{ errors[0] }}
+                  </div>
+                </ValidationProvider>
+              </div>
+            </div>
+            <!-- end:Institute Address -->
+
             <!-- start:Institute Alias name -->
             <div class="row">
               <div class="col-12 col-md-4">
@@ -55,14 +88,14 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
+                  :rules="{ required: true }"
                 >
                   <div class="form-outline">
                     <input
                       type="text"
                       id="institute_alias_name"
                       class="form-control"
-                      v-model="user.last_name"
+                      v-model="college.institute_alias_name"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -77,39 +110,7 @@
             </div>
             <!-- end:Institute Alias name -->
 
-            <!-- start:Address-->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="institute_address"
-                  >Address</label
-                >
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true, email: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="institute_address"
-                      class="form-control"
-                      v-model="user.email"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
-            <!-- end:Address-->
-
-            <!-- start:Principal -->
+            <!-- start:Institute Principal -->
             <div class="row">
               <div class="col-12 col-md-4">
                 <label class="form-label" for="institute_principal"
@@ -122,9 +123,10 @@
                   :rules="{ required: true }"
                 >
                   <v-select
-                    placeholder="Select Gender"
-                    :options="genderList"
-                    v-model="user.gender"
+                    id="institute_principal"
+                    placeholder="Select Principal"
+                    :options="principalList"
+                    v-model="college.institute_principal"
                   ></v-select>
                   <!-- Validation Errors -->
                   <div
@@ -136,9 +138,9 @@
                 </ValidationProvider>
               </div>
             </div>
-            <!-- end:Principal-->
+            <!-- end:Institute Principal-->
 
-            <!-- start:Logo-->
+            <!-- start:Institute Logo-->
             <div class="row">
               <div class="col-12 col-md-4">
                 <label class="form-label" for="institute_logo">Logo</label>
@@ -146,15 +148,7 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{
-                    required: true,
-                    min: 6,
-                    max: 16,
-                    passwordNumber: true,
-                    passwordUpper: true,
-                    passwordLower: true,
-                    passwordSpecial: true,
-                  }"
+                  :rules="{ required: true }"
                 >
                   <div class="form-outline">
                     <input
@@ -162,7 +156,7 @@
                       id="institute_logo"
                       name="password"
                       class="form-control"
-                      v-model="user.password"
+                      v-model="college.institute_logo"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -173,24 +167,11 @@
                     {{ errors[0] }}
                   </div>
                 </ValidationProvider>
-                <!-- start:Show password-->
-                <div class="form-check mb-4">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="showPassword"
-                    v-model="showPassword"
-                  />
-                  <label class="form-check-label" for="showPassword"
-                    >Show Password</label
-                  >
-                </div>
-                <!-- start:Show Password -->
               </div>
             </div>
-            <!-- end:Logo-->
+            <!-- end:Institute Logo-->
 
-            <!-- start:Website-->
+            <!-- start:Institute Website-->
             <div class="row">
               <div class="col-12 col-md-4">
                 <label class="form-label" for="institute_website"
@@ -200,14 +181,14 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
+                  :rules="{ required: true }"
                 >
                   <div class="form-outline">
                     <input
                       type="text"
                       id="institute_website"
                       class="form-control"
-                      v-model="user.first_name"
+                      v-model="college.institute_website"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -220,9 +201,9 @@
                 </ValidationProvider>
               </div>
             </div>
-            <!-- end:website -->
+            <!-- end:Institute website -->
 
-            <!-- start:Mobile-->
+            <!-- start:Institute Mobile-->
             <div class="row">
               <div class="col-12 col-md-4">
                 <label class="form-label" for="institute_mobile">Mobile</label>
@@ -230,14 +211,14 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
+                  :rules="{ required: true }"
                 >
                   <div class="form-outline">
                     <input
                       type="number"
                       id="institute_mobile"
                       class="form-control"
-                      v-model="user.first_name"
+                      v-model="college.institute_mobile"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -250,9 +231,9 @@
                 </ValidationProvider>
               </div>
             </div>
-            <!-- end:Mobile -->
+            <!-- end:Institute Mobile -->
 
-            <!-- start:Email-->
+            <!-- start:Institute Email-->
             <div class="row">
               <div class="col-12 col-md-4">
                 <label class="form-label" for="institute_email">Email</label>
@@ -260,14 +241,14 @@
               <div class="col">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
+                  :rules="{ required: true, email: true }"
                 >
                   <div class="form-outline">
                     <input
                       type="email"
                       id="institute_email"
                       class="form-control"
-                      v-model="user.first_name"
+                      v-model="college.institute_email"
                     />
                   </div>
                   <!-- Validation Errors -->
@@ -280,16 +261,19 @@
                 </ValidationProvider>
               </div>
             </div>
-            <!-- end:Email-->
+            <!-- end:Institute Email-->
 
             <!-- Submit button -->
             <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-info btn-rounded mb-4">
-                Add College
+              <button
+                type="submit"
+                class="btn btn-success fw-bolder btn-rounded mb-4"
+              >
+                Edit College
               </button>
             </div>
           </form>
-          <!-- End:User Edit Form -->
+          <!-- End:College Edit Form -->
         </ValidationObserver>
       </div>
     </div>
@@ -298,26 +282,23 @@
 
 <script>
 export default {
-  name: 'DashCollegeDetail',
+  name: 'DashCollegeEdit',
   layout: 'dash',
 
   data() {
     return {
-      loading: false,
+      loading: true,
       error: true,
-      genderList: ['Male', 'Female', 'Rather not Say'],
-      user: {
-        id: '',
-        first_name: '',
-        last_name: '',
-        email: '',
-        gender: '',
-        date_added: '',
-        is_active: '',
-        is_admin: '',
-        is_principal: '',
-        is_hod: '',
-        is_teacher: '',
+      principalList: [],
+      college: {
+        institute_name: '',
+        institute_address: '',
+        institute_alias_name: '',
+        institute_principal: '',
+        institute_logo: '',
+        institute_website: '',
+        institute_mobile: '',
+        institute_email: '',
       },
     }
   },
@@ -326,34 +307,106 @@ export default {
     this.$store.commit('breadCrumbs/addBreadCrumb', [
       {
         name: 'College',
-        url: '/dash/College',
+        url: '/dash/college',
       },
       {
-        name: 'Detail',
+        name: 'Add',
       },
     ])
   },
 
   methods: {
-    async fetchUser() {
+    async editCollege() {
+      try {
+        let college = this.college
+        college.institute_principal = college.institute_principal.id
+        this.$swal({
+          title: 'Editing College',
+          icon: 'info',
+          type: 'info',
+          text: 'Please wait while we are Editing the College',
+          didOpen: () => {
+            this.$swal.showLoading()
+
+            const response = this.$api.college
+              .update(this.$route.params.id, this.college)
+              .then(() => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                let timerInterval
+
+                this.$swal({
+                  title: 'Success',
+                  icon: 'success',
+                  type: 'success',
+                  text: 'College has been Edited Successfully',
+                  timer: 2000,
+                  timerProgressBar: true,
+
+                  didOpen: () => {
+                    this.$swal.showLoading()
+                  },
+                }).then(() => this.$router.push('/dash/college'))
+              })
+              .catch((err) => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                this.$swal({
+                  title: 'Error',
+                  icon: 'error',
+                  type: 'error',
+                  html: `Failed to Edit College.`,
+                })
+              })
+          },
+        })
+      } catch (e) {
+        this.$swal({
+          title: 'Error',
+          icon: 'error',
+          type: 'error',
+          html: `Failed to Edit College.<br/>Try Again`,
+        })
+      }
+    },
+
+    async getPrincipals() {
+      await this.$api.user.listPrincipal().then((response) => {
+        // set first_name and last name as label and id as value for select2
+        this.principalList = response.data.map((principal) => {
+          return {
+            id: principal.id,
+            label: `${principal.first_name} ${principal.last_name}`,
+          }
+        })
+        // this.principalList = response.data
+      })
+    },
+
+    async getCollege() {
       this.loading = true
 
-      const response = await this.$api.user
+      this.college.institute_principal = this.prin
+      const response = await this.$api.college
         .retrieve(this.$route.params.id)
         .then((response) => {
-          this.user.id = response.data.id
-          this.user.first_name = response.data.first_name
-          this.user.last_name = response.data.last_name
-          this.user.email = response.data.email
-          this.user.gender = response.data.gender
-          this.user.date_added = this.$moment(this.date_added).format(
-            'Do MMMM YYYY, h:mm:ss a'
-          )
-          this.user.is_active = response.data.is_active
-          this.user.is_admin = response.data.is_admin
-          this.user.is_principal = response.data.is_principal
-          this.user.is_hod = response.data.is_hod
-          this.user.is_teacher = response.data.is_teacher
+          this.college = response.data
+
+          // this.user.id = response.data.id
+          // this.user.first_name = response.data.first_name
+          // this.user.last_name = response.data.last_name
+          // this.user.email = response.data.email
+          // this.user.gender = response.data.gender
+          // this.user.date_added = this.$moment(this.date_added).format(
+          //   'Do MMMM YYYY, h:mm:ss a'
+          // )
+          // this.user.is_active = response.data.is_active
+          // this.user.is_admin = response.data.is_admin
+          // this.user.is_principal = response.data.is_principal
+          // this.user.is_hod = response.data.is_hod
+          // this.user.is_teacher = response.data.is_teacher
 
           this.error = false
         })
@@ -373,97 +426,31 @@ export default {
             confirmButtonClass: 'btn btn-info',
           }).then((result) => {
             if (result.isConfirmed) {
-              this.fetchUser()
+              this.getCollege()
             } else if (result.isDismissed) {
               this.$router.push('/dash')
             }
           })
         )
     },
-
-    async updateUser() {
-      try {
-        const user = {
-          first_name: this.user.first_name,
-          last_name: this.user.last_name,
-          email: this.user.email,
-          gender: this.user.gender,
-          is_active: this.user.is_active,
-          is_admin: this.user.is_admin,
-          is_principal: this.user.is_principal,
-          is_hod: this.user.is_hod,
-          is_teacher: this.user.is_teacher,
-        }
-
-        this.$swal({
-          title: 'Updating User',
-          icon: 'info',
-          type: 'info',
-          text: 'Please wait while we are updating the User',
-          didOpen: () => {
-            this.$swal.showLoading()
-
-            const response = this.$api.user
-              .update(this.$route.params.id, user)
-              .then(() => {
-                this.$swal.hideLoading()
-                this.$swal.close()
-
-                let timerInterval
-
-                this.$swal({
-                  title: 'Update Successful',
-                  icon: 'success',
-                  type: 'success',
-                  text: 'User has been updated Successfully',
-                  timer: 2000,
-                  timerProgressBar: true,
-
-                  didOpen: () => {
-                    this.$swal.showLoading()
-                  },
-                }).then(() => this.$router.push('/dash/user'))
-              })
-              .catch((err) => {
-                this.$swal.hideLoading()
-                this.$swal.close()
-
-                this.$swal({
-                  title: 'Error',
-                  icon: 'error',
-                  type: 'error',
-                  html: `Failed to Update User.`,
-                })
-              })
-          },
-        })
-      } catch (error) {
-        this.$swal({
-          title: 'Error',
-          icon: 'error',
-          type: 'error',
-          html: `Failed to update User.<br/>Try Again`,
-        })
-      }
-    },
   },
 
   mounted() {
-    // this.fetchUser()
-    //   .then(() => {
-    //     this.loading = false
-    //   })
-    //   .finally(() => {
-    //     document.querySelectorAll('.form-outline').forEach((formOutline) => {
-    //       new this.$mdb.Input(formOutline).init()
-    //     })
-    //   })
-
-    document.querySelectorAll('.form-outline').forEach((formOutline) => {
-      new this.$mdb.Input(formOutline).init()
+    this.getPrincipals().then(() => {
+      this.getCollege()
+        .then(() => {
+          this.college.institute_principal = this.principalList.find(
+            (principal) => principal.id == this.college.institute_principal
+          )
+        })
+        .finally(() => {
+          document.querySelectorAll('.form-outline').forEach((formOutline) => {
+            new this.$mdb.Input(formOutline).init()
+          })
+        })
     })
   },
 }
 </script>
 
-<style scoped></style>
+<style></style>
