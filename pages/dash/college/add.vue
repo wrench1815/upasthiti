@@ -9,7 +9,7 @@
       <div class="card-body">
         <!-- for Valdation -->
         <ValidationObserver v-slot="{ handleSubmit }">
-          <!-- start:College Edit Form -->
+          <!-- start:College Add Form -->
           <form @submit.prevent="handleSubmit(addCollege)">
             <!-- start:Institute name-->
             <div class="row">
@@ -267,7 +267,7 @@
               </button>
             </div>
           </form>
-          <!-- End:College Edit Form -->
+          <!-- End:College Add Form -->
         </ValidationObserver>
       </div>
     </div>
@@ -365,6 +365,7 @@ export default {
         })
       }
     },
+
     async getPrincipals() {
       this.$api.user.listPrincipal().then((response) => {
         // set first_name and last name as label and id as value for select2
