@@ -6,7 +6,7 @@
         <p>lists all Registered Colleges</p>
       </div>
       <div class="card-body">
-        <section class="d-flex justify-content-end">
+        <!-- <section class="d-flex justify-content-end">
           <div class="w-10-rem mb-3">
             <v-select
               placeholder="Select Filter"
@@ -17,16 +17,16 @@
             >
             </v-select>
           </div>
-        </section>
+        </section> -->
         <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashUserTable v-if="!loading" :users="users" />
+        <Lazy-DashCollegeTable v-if="!loading" :colleges="colleges" />
 
         <div class="d-flex justify-content-end">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
           <Lazy-UtilsLinkButton
             v-if="!loading"
             :rounded="true"
-            :link="'/dash/user/add'"
+            :link="'/dash/college/add'"
             >Add new College</Lazy-UtilsLinkButton
           >
         </div>
@@ -42,7 +42,7 @@ export default {
 
   data() {
     return {
-      users: [],
+      colleges: [],
       loading: true,
       error: true,
       userFilters: ['All', 'Admin', 'Principal', 'HOD', 'Teacher'],
@@ -60,28 +60,19 @@ export default {
   },
 
   methods: {
-    async getUsers() {
+    async getColleges() {
       this.loading = true
-      let requestUrl
 
-      if (this.selectedUserFilter === 'All') {
-        requestUrl = this.$api.user.list()
-      } else if (this.selectedUserFilter === 'Admin') {
-        requestUrl = this.$api.user.listAdmin()
-      } else if (this.selectedUserFilter === 'Principal') {
-        requestUrl = this.$api.user.listPrincipal()
-      } else if (this.selectedUserFilter === 'HOD') {
-        requestUrl = this.$api.user.listHod()
-      } else if (this.selectedUserFilter === 'Teacher') {
-        requestUrl = this.$api.user.listTeacher()
-      }
-
-      const response = await requestUrl
-        .then(
-          (response) => ((this.users = response.data), (this.error = false))
-        )
+      const response = this.$api.college
+        .list()
+        .then((response) => {
+          console.log(response)
+          this.colleges = response.data
+          console.log(this.error)
+          this.error = false
+          console.log(this.error)
+        })
         .catch((error) => {
-          console.log(error)
           this.$swal({
             title: 'Error',
             icon: 'error',
@@ -97,17 +88,12 @@ export default {
             confirmButtonClass: 'btn btn-info',
           }).then((result) => {
             if (result.isConfirmed) {
-              this.getUsers()
+              this.getColleges()
             } else if (result.isDismissed) {
               this.$router.push('/dash')
             }
           })
         })
-    },
-
-    refreshUsers() {
-      this.loading = true
-      this.getUsers().then(() => (this.loading = false))
     },
 
     dateFormat(date) {
@@ -117,10 +103,8 @@ export default {
   },
 
   mounted() {
-    this.getUsers().finally(() => {
-      if (!this.error) {
-        this.loading = false
-      }
+    this.getColleges().finally(() => {
+      this.loading = false
     })
   },
 }
