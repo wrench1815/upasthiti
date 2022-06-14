@@ -81,7 +81,6 @@ export default {
           (response) => ((this.users = response.data), (this.error = false))
         )
         .catch((error) => {
-          console.log(error)
           this.$swal({
             title: 'Error',
             icon: 'error',

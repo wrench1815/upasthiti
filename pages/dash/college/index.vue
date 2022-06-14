@@ -66,11 +66,8 @@ export default {
       const response = this.$api.college
         .list()
         .then((response) => {
-          console.log(response)
           this.colleges = response.data
-          console.log(this.error)
           this.error = false
-          console.log(this.error)
         })
         .catch((error) => {
           this.$swal({

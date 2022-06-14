@@ -389,25 +389,10 @@ export default {
       this.loading = true
 
       this.college.institute_principal = this.prin
-      const response = await this.$api.college
+      await this.$api.college
         .retrieve(this.$route.params.id)
         .then((response) => {
           this.college = response.data
-
-          // this.user.id = response.data.id
-          // this.user.first_name = response.data.first_name
-          // this.user.last_name = response.data.last_name
-          // this.user.email = response.data.email
-          // this.user.gender = response.data.gender
-          // this.user.date_added = this.$moment(this.date_added).format(
-          //   'Do MMMM YYYY, h:mm:ss a'
-          // )
-          // this.user.is_active = response.data.is_active
-          // this.user.is_admin = response.data.is_admin
-          // this.user.is_principal = response.data.is_principal
-          // this.user.is_hod = response.data.is_hod
-          // this.user.is_teacher = response.data.is_teacher
-
           this.error = false
         })
         .catch((error) =>
