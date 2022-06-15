@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: 'DashNavBarRightLinks',
+  name: 'DashNavRightLinks',
 
   methods: {
     logout() {

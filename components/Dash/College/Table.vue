@@ -45,6 +45,11 @@
           <td>
             <div class="d-flex justify-content-center align-items-center gap-2">
               <NuxtLink
+                :to="`/dash/college/detail?id=${college.id}`"
+                class="btn btn-floating btn-success btn-sm d-flex justify-content-center align-items-center"
+                ><i class="ri-eye-fill ri-lg"></i
+              ></NuxtLink>
+              <NuxtLink
                 :to="`/dash/college/${college.id}`"
                 class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
                 ><i class="ri-edit-2-fill ri-lg"></i

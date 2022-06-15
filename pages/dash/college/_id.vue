@@ -388,7 +388,6 @@ export default {
     async getCollege() {
       this.loading = true
 
-      this.college.institute_principal = this.prin
       await this.$api.college
         .retrieve(this.$route.params.id)
         .then((response) => {
