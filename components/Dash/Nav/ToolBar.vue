@@ -25,7 +25,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'DashToolBar',
+  name: 'DashNavToolBar',
 
   computed: {
     ...mapGetters('breadCrumbs', ['breadCrumbs', 'lastElement']),

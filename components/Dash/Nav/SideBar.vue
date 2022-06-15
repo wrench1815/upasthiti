@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'DashSideBar',
+  name: 'DashNavSideBar',
 
   data() {
     return {

@@ -1,12 +1,19 @@
 <template>
-  <div class="bg-nav">
-    <Lazy-DashNavBar />
-    <Lazy-DashToolBar />
-    <Lazy-DashSideBar />
+  <div class="container-fluid bg-nav">
+    <div class="row g-0">
+      <div class="col-3 d-none d-lg-block" style="width: 17rem">
+        <Lazy-DashNavSideNav />
+      </div>
+      <div class="col">
+        <Lazy-DashNav />
+        <Lazy-DashNavToolBar />
+        <Lazy-DashNavSideBar />
 
-    <nuxt />
-    <Lazy-UtilsToTop />
-    <Lazy-DashFooter />
+        <nuxt />
+        <Lazy-UtilsToTop />
+        <Lazy-DashFooter />
+      </div>
+    </div>
   </div>
 </template>
 

@@ -1,21 +1,21 @@
 <template>
   <nav
     id="nav"
-    class="navbar navbar-expand-lg navbar-light z-index-5"
+    class="navbar navbar-expand-lg navbar-light z-index-5 rounded-5 nav-rounded px-lg-2"
     :class="scrollClasses"
   >
     <!-- Container wrapper -->
     <div class="container-fluid">
       <nuxt-link
         id="brand"
-        class="nav-link fs-5"
+        class="nav-link fs-5 d-lg-none"
         :class="linkClass"
         aria-current="page"
         to="/dash"
         >Upasthiti Dash</nuxt-link
       >
       <!-- start:responsive mid links -->
-      <Lazy-DashNavBarRightLinks class="d-lg-none" />
+      <Lazy-DashNavRightLinks class="d-lg-none" />
       <!-- end:responsive mid links -->
 
       <!-- Toggle button -->
@@ -37,7 +37,7 @@
       <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="mainNavbarLeftAlign">
         <!-- start:mid links -->
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 d-none">
           <li class="nav-item" v-for="item in menuItems">
             <nuxt-link
               class="nav-link"
@@ -52,7 +52,7 @@
         <!-- end:mid links -->
 
         <!-- start:right links -->
-        <Lazy-DashNavBarRightLinks />
+        <Lazy-DashNavRightLinks />
         <!-- start:right links -->
       </div>
       <!-- Collapsible wrapper -->
@@ -63,7 +63,7 @@
 
 <script>
 export default {
-  name: 'DashNavBar',
+  name: 'DashNav',
 
   data() {
     return {
@@ -102,14 +102,35 @@ export default {
         ? 'ri-close-line'
         : 'ri-menu-fill'
     },
+
+    getBootstrapBreakpoint() {
+      var w =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth
+      return w < 768 ? 'xs' : w < 992 ? 'sm' : w < 1200 ? 'md' : 'lg'
+    },
   },
 
   mounted() {
     window.addEventListener('scroll', () => {
-      this.scrollClasses =
-        window.scrollY > 300
-          ? 'bg-white position-sticky top-0 shadow-3 slide-bottom'
-          : 'shadow-0'
+      let currentBreakPoint = this.getBootstrapBreakpoint()
+
+      if (
+        currentBreakPoint === 'sm' ||
+        currentBreakPoint === 'xs' ||
+        currentBreakPoint === 'md'
+      ) {
+        this.scrollClasses =
+          window.scrollY > 300
+            ? 'bg-white position-fixed end-0 start-0 shadow-3 slide-bottom'
+            : 'shadow-0'
+      } else {
+        this.scrollClasses =
+          window.scrollY > 300
+            ? 'bg-white position-sticky top-0 shadow-3 slide-bottom'
+            : 'shadow-0'
+      }
       this.linkClass = window.scrollY > 300 ? 'link-dark' : 'text-white'
       this.activeClass =
         window.scrollY > 300
@@ -127,6 +148,11 @@ export default {
 
 .slide-bottom {
   animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.nav-rounded {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }
 
 /**
