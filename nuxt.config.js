@@ -129,6 +129,9 @@ export default {
         },
       },
     },
+    redirect: {
+      home: '/dash',
+    },
   },
 
   sweetalert: {
