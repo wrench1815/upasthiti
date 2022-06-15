@@ -3,7 +3,10 @@
     <div class="card">
       <div class="card-header">
         <h2>College Details</h2>
-        <p>Details of College</p>
+        <p>
+          Details of College:
+          <span class="text-info fw-bold">{{ college.institute_name }}</span>
+        </p>
       </div>
       <div class="card-body">
         <div class="row mb-3">
@@ -95,55 +98,38 @@
     <div class="card mt-4">
       <div class="card-header">
         <h2>College Principal Details</h2>
-        <p>Details of College Principal</p>
+        <p>
+          Details of User:
+          <span class="text-info fw-bold"
+            >{{ principal.first_name }} {{ principal.last_name }}</span
+          >
+        </p>
       </div>
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Institute name</label>
+            <label class="text-muted fw-bold-500">Full Name</label>
           </div>
           <div class="col">
-            <span class="fw-bold-600 fs-6">test dta</span>
+            <span class="fw-bold-600 fs-6"
+              >{{ principal.first_name }} {{ principal.last_name }}</span
+            >
           </div>
         </div>
         <div class="row mb-3">
           <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Institute name</label>
+            <label class="text-muted fw-bold-500">Email</label>
           </div>
           <div class="col">
-            <span class="fw-bold-600 fs-6">test dta</span>
+            <span class="fw-bold-600 fs-6">{{ principal.email }}</span>
           </div>
         </div>
         <div class="row mb-3">
           <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Institute name</label>
+            <label class="text-muted fw-bold-500">Gender</label>
           </div>
           <div class="col">
-            <span class="fw-bold-600 fs-6">test dta</span>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Institute name</label>
-          </div>
-          <div class="col">
-            <span class="fw-bold-600 fs-6">test dta</span>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Institute name</label>
-          </div>
-          <div class="col">
-            <span class="fw-bold-600 fs-6">test dta</span>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Institute name</label>
-          </div>
-          <div class="col">
-            <span class="fw-bold-600 fs-6">test dta</span>
+            <span class="fw-bold-600 fs-6">{{ principal.gender }}</span>
           </div>
         </div>
       </div>
