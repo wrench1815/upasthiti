@@ -153,9 +153,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    // parallel: true,
-    // hardSource: true,
-    // cache: true,
+    parallel: process.env.NODE_ENV == 'development',
+    hardSource: process.env.NODE_ENV == 'development',
+    cache: process.env.NODE_ENV == 'development',
     transpile: ['vee-validate/dist/rules'],
   },
 
