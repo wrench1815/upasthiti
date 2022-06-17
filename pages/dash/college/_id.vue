@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-4">
+  <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
         <h2>Edit College</h2>

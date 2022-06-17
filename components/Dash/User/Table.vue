@@ -21,7 +21,11 @@
           <td>{{ user.last_name ? user.last_name : '----' }}</td>
           <td>{{ user.email ? user.email : '----' }}</td>
           <td>
-            {{ user.date_added ? dateFormat(user.date_added) : '----' }}
+            {{
+              user.date_added
+                ? $nuxt.$utils.dateFormat(user.date_added)
+                : '----'
+            }}
           </td>
           <td class="d-flex gap-2">
             <NuxtLink
@@ -53,11 +57,6 @@ export default {
   },
 
   methods: {
-    dateFormat(date) {
-      // return strf date
-      return this.$moment(date).format('Do MMMM YYYY, h:mm:ss a')
-    },
-
     deleteUser(id) {
       this.$swal({
         title: 'Are you sure?',

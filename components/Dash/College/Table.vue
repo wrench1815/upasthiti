@@ -40,7 +40,11 @@
             {{ college.institute_address ? college.institute_address : '----' }}
           </td>
           <td class="text-nowrap">
-            {{ college.created_on ? dateFormat(college.created_on) : '----' }}
+            {{
+              college.created_on
+                ? $nuxt.$utils.dateFormat(college.created_on)
+                : '----'
+            }}
           </td>
           <td>
             <div class="d-flex justify-content-center align-items-center gap-2">
@@ -79,11 +83,6 @@ export default {
   },
 
   methods: {
-    dateFormat(date) {
-      // return strf date
-      return this.$moment(date).format('Do MMMM YYYY, h:mm:ss a')
-    },
-
     deleteCollege(id) {
       this.$swal({
         title: 'Are you sure?',
