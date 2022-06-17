@@ -92,12 +92,13 @@ export default {
 
   methods: {
     showSettingsSwal() {
+      let loggedInUser = this.loggedInUser
       this.$swal({
         showConfirmButton: false,
         allowOutsideClick: true,
         backdrop: 'rgba(0,0,0,0.1)',
         width: '20rem',
-        position: 'center-start',
+        position: 'bottom-start',
         allowEscKey: true,
         padding: '0px',
         customClass: { container: '' },
@@ -105,33 +106,35 @@ export default {
         <div class="">
           <div class="card">
             <div class="card-header">
-              <div class="d-flex justify-content-start align-items-start gap-2">
+              <div class="d-flex flex-column align-items-center justify-content-center align-items-start gap-2">
                 <img
                   class="avatar avatar-lg rounded-circle obj-fit-cover shadow"
                   src="${'https://images.unsplash.com/photo-1494790108377-be9c29b29330'}"
                   alt=""
                 />
                 <div class="">
-                  <h6 class="text-dark">Logged in User</h6>
-                  <p class="pb-0 text-muted">user@mail.com</p>
+                  <h5 class="text-dark">${
+                    loggedInUser.first_name + ' ' + loggedInUser.last_name
+                  }</h5>
+                  <p class="pb-0 text-muted">${loggedInUser.email}</p>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <ul class="nav flex-column gap-2">
                 <li class="nav-item">
-                  <span class="nav-link rounded-5 shadow-2-soft bg-ligh text-dark d-flex"
+                  <span class="nav-link rounded-5 shadow-1-soft bg-ligh pointer-pointer text-dark d-flex"
                     >Profile</span
                   >
                 </li>
                 <li class="nav-item">
-                  <span class="nav-link rounded-5 shadow-2-soft bg-ligh text-dark d-flex"
+                  <span class="nav-link rounded-5 shadow-1-soft bg-ligh pointer-pointer text-dark d-flex"
                     >Main Site</span
                   >
                 </li>
                 <li class="nav-item">
                   <span
-                    class="nav-link rounded-5 shadow-2-soft bg-ligh text-danger d-flex gap-1"
+                    class="nav-link rounded-5 shadow-1-soft bg-ligh pointer-pointer text-danger d-flex align-items-center gap-1"
                     ><i class="ri-logout-circle-line"></i> Logout</span
                   >
                 </li>
