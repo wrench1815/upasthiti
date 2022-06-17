@@ -12,7 +12,7 @@ export default {
       lang: 'en',
     },
     bodyAttrs: {
-      class: 'bg-light',
+      class: 'bg-light g-sidebar-show',
     },
     meta: [
       { charset: 'utf-8' },
@@ -33,6 +33,7 @@ export default {
     '~/plugins/vueSelect.js',
     '~/plugins/veeValidate.js',
     '~/plugins/api.js',
+    '~/plugins/utils.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
