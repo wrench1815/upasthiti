@@ -211,7 +211,7 @@
   .navbar-heading {
     display: block;
   }
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-up(lg) {
     &:hover {
       max-width: $navbar-vertical-open-width;
     }
@@ -293,7 +293,7 @@
   }
 }
 // Media fixes for iPhone 5 like resolutions
-@include media-breakpoint-down(xl) {
+@include media-breakpoint-down(lg) {
   .g-sidenav-show {
     &.rtl {
       .sidenav {
@@ -475,7 +475,7 @@
     .nav-link {
       margin-top: 3px;
       margin-bottom: 3px;
-      border-radius: $navbar-nav-link-border-radius;
+      border-radius: 0;
       margin-bottom: 1.5px;
       margin-top: 1.5px;
 
@@ -536,7 +536,7 @@
   }
 }
 
-@include media-breakpoint-up(xl) {
+@include media-breakpoint-up(lg) {
   .g-sidenav-hidden {
     &.rtl {
       .main-content {
