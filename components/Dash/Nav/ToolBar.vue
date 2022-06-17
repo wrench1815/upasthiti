@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="card card-body pb-0 pt-3">
       <h5>{{ lastElement.name }}</h5>
       <nav aria-label="breadcrumb">

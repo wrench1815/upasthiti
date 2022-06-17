@@ -1,5 +1,5 @@
 <template>
-  <section class="container my-4">
+  <section class="container-fluid my-4">
     <section v-for="iter in 5" class="card card-body">
       <h1 class="mb-3 h1">Main website heading</h1>
       <h4 class="mb-3 h4 text-muted">Website subheading</h4>

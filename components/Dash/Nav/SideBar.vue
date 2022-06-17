@@ -4,7 +4,7 @@
     style="width: 15.625rem"
     tabindex="-1"
     id="navOffCanvas"
-    data-mdb-backdrop="false"
+    data-mdb-backdrop="true"
   >
     <div class="offcanvas-body">
       <ul class="nav flex-column">

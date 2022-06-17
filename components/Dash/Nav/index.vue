@@ -1,8 +1,8 @@
 <template>
   <nav
     id="nav"
-    class="navbar navbar-expand-lg navbar-light z-index-5 rounded-5 nav-rounded px-lg-2"
-    :class="scrollClasses"
+    class="navbar navbar-expand-lg navbar-light z-index-5 px-lg-2"
+    :class="[scrollClasses, navClass]"
   >
     <!-- Container wrapper -->
     <div class="container-fluid">
@@ -29,7 +29,6 @@
         aria-controls="mainNavbarLeftAlign"
         aria-expanded="false"
         aria-label="Toggle navigation"
-        @click="toggleNav"
       >
         <i :class="navButton"></i>
       </button>
@@ -69,6 +68,7 @@ export default {
     return {
       navButton: 'ri-menu-fill',
       scrollClasses: 'shadow-0',
+      navClass: '',
       linkClass: 'text-white',
       activeClass: 'bg-active rounded-5',
       menuItems: [
@@ -110,32 +110,44 @@ export default {
         document.body.clientWidth
       return w < 768 ? 'xs' : w < 992 ? 'sm' : w < 1200 ? 'md' : 'lg'
     },
+
+    setNavClasses() {
+      let currentBreakPoint = this.getBootstrapBreakpoint()
+
+      if (currentBreakPoint === 'lg') {
+        this.navClass = 'rounded-5 nav-rounded m-lg-nav'
+      } else {
+        this.navClass = ''
+      }
+    },
   },
 
   mounted() {
-    window.addEventListener('scroll', () => {
-      let currentBreakPoint = this.getBootstrapBreakpoint()
+    this.setNavClasses()
 
-      if (
-        currentBreakPoint === 'sm' ||
-        currentBreakPoint === 'xs' ||
-        currentBreakPoint === 'md'
-      ) {
-        this.scrollClasses =
-          window.scrollY > 300
-            ? 'bg-white position-fixed end-0 start-0 shadow-3 slide-bottom'
-            : 'shadow-0'
-      } else {
-        this.scrollClasses =
-          window.scrollY > 300
-            ? 'bg-white position-sticky top-0 shadow-3 slide-bottom'
-            : 'shadow-0'
-      }
+    window.addEventListener('scroll', () => {
+      this.scrollClasses =
+        window.scrollY > 300
+          ? 'bg-white position-sticky top-0 end-0 start-0 shadow-3 slide-bottom'
+          : 'shadow-0'
+
       this.linkClass = window.scrollY > 300 ? 'link-dark' : 'text-white'
+
       this.activeClass =
         window.scrollY > 300
           ? 'text-primary border-bottom border-primary '
           : 'bg-active rounded'
+    })
+
+    window.addEventListener('resize', () => {
+      let currentBreakPoint = this.getBootstrapBreakpoint()
+
+      if (currentBreakPoint === 'lg') {
+        this.navClass =
+          window.scrollY > 300 ? 'rounded-5 nav-rounded m-lg-nav' : ''
+      } else {
+        this.navClass = window.scrollY > 300 ? '' : ''
+      }
     })
   },
 }
@@ -153,6 +165,11 @@ export default {
 .nav-rounded {
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
+}
+
+.m-lg-nav {
+  margin-left: 0.75rem !important;
+  margin-right: 0.75rem !important;
 }
 
 /**
