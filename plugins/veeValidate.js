@@ -63,5 +63,13 @@ extend('passwordLower', {
   message: 'Password must contain atleast 1 lowercase.',
 })
 
+// all letters must be capitalized
+extend('capitalize', {
+  validate: (value) => {
+    return /^[A-Z\s]+$/.test(value)
+  },
+  message: 'This field must be all Capitalized.',
+})
+
 Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('ValidationObserver', ValidationObserver)
