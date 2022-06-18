@@ -38,6 +38,31 @@
           </NuxtLink>
         </li>
         <!-- End:Dynamic Nav List -->
+
+        <!-- <li
+          class="nav-item"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#collapseExample"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+          v-for="item in menuItems"
+          :key="item.name"
+        >
+          <div
+            class="nav-link my-1 border-start border-2 text-dark border-primary hover-shad"
+          >
+            Departments
+          </div>
+          <div class="collapse mt-3" id="collapseExample">
+            <NuxtLink
+              class="nav-link my-1 border-start border-2 text-dark border-primary hover-shad"
+              :to="item.url"
+              exact-active-class="fw-bol bg-primary text-white rounded-5 shadow-3-strong active-hover-fix"
+            >
+              <i class="me-2" :class="item.icon"></i>{{ item.name }}
+            </NuxtLink>
+          </div>
+        </li> -->
       </ul>
     </div>
     <!-- end:Menu Links -->
@@ -78,9 +103,14 @@ export default {
           icon: 'ri-building-fill',
         },
         {
+          name: 'Department Type',
+          url: '/dash/department/type',
+          icon: 'ri-hotel-fill',
+        },
+        {
           name: 'Department',
           url: '/dash/department',
-          icon: 'ri-hotel-fill',
+          icon: 'ri-building-4-fill',
         },
         {
           name: 'User',

@@ -39,9 +39,14 @@ export default {
           icon: 'ri-building-fill',
         },
         {
+          name: 'Department Type',
+          url: '/dash/department/type',
+          icon: 'ri-hotel-fill',
+        },
+        {
           name: 'Department',
           url: '/dash/department',
-          icon: 'ri-hotel-fill',
+          icon: 'ri-building-4-fill',
         },
         {
           name: 'User',
