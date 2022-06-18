@@ -5,7 +5,7 @@
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Hod</th>
-          <th scope="col">Teacher Count</th>
+          <th scope="col">College</th>
           <th scope="col">Created on</th>
           <th scope="col">Actions</th>
         </tr>
@@ -26,7 +26,9 @@
             {{ department.hod ? department.hod : '----' }}
           </td>
           <td>
-            {{ department.teacher ? department.teacher : '----' }}
+            {{
+              department.college ? department.college.institute_name : '----'
+            }}
           </td>
           <td>
             {{

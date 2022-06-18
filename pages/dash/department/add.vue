@@ -66,6 +66,33 @@
             </div>
             <!-- end:HoD -->
 
+            <!-- start:College -->
+            <div class="row">
+              <div class="col-12 col-md-4">
+                <label class="form-label" for="hod">College</label>
+              </div>
+              <div class="col">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :rules="{ required: true }"
+                >
+                  <v-select
+                    placeholder="Select College"
+                    :options="collegeList"
+                    v-model="department.college"
+                  ></v-select>
+                  <!-- Validation Errors -->
+                  <div
+                    class="text-danger"
+                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                  >
+                    {{ errors[0] }}
+                  </div>
+                </ValidationProvider>
+              </div>
+            </div>
+            <!-- end:College -->
+
             <!-- Submit button -->
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-info btn-rounded mb-4">
@@ -91,9 +118,11 @@ export default {
       error: true,
       hodList: [],
       departmentNameList: [],
+      collegeList: [],
       department: {
         department_name: '',
         hod: '',
+        college: '',
       },
     }
   },
@@ -116,6 +145,7 @@ export default {
         const department = {
           department_name: this.department.department_name.id,
           hod: this.department.hod.id,
+          college: this.department.college.id,
         }
 
         this.$swal({
@@ -193,16 +223,33 @@ export default {
         })
       })
     },
+
+    async getCollegeList() {
+      this.$api.college.list().then((response) => {
+        this.collegeList = response.data.map((college) => {
+          return {
+            id: college.id,
+            label: college.institute_name,
+          }
+        })
+      })
+    },
   },
 
   mounted() {
-    this.getDepartmentNameList().then(() => {
-      this.getHodList().then(() => {
+    this.getDepartmentNameList()
+      .then(() => {
+        this.getHodList()
+      })
+      .then(() => {
+        this.getCollegeList()
+      })
+      .then(() => {
+        this.loading = false
         document.querySelectorAll('.form-outline').forEach((formOutline) => {
           new this.$mdb.Input(formOutline).init()
         })
       })
-    })
   },
 }
 </script>
