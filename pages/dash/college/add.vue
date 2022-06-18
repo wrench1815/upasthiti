@@ -368,7 +368,7 @@ export default {
 
     async getPrincipals() {
       this.$api.user.listPrincipal().then((response) => {
-        // set first_name and last name as label and id as value for select2
+        // set first_name and last name as label and id as value for v-select
         this.principalList = response.data.map((principal) => {
           return {
             id: principal.id,
