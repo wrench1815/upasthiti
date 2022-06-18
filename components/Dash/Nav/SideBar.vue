@@ -36,7 +36,12 @@ export default {
         {
           name: 'College',
           url: '/dash/college',
-          icon: 'ri-home-fill',
+          icon: 'ri-building-fill',
+        },
+        {
+          name: 'Department',
+          url: '/dash/department',
+          icon: 'ri-hotel-fill',
         },
         {
           name: 'User',
