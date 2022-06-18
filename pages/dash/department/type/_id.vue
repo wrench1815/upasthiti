@@ -51,7 +51,10 @@
 
             <!-- Submit button -->
             <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-success fw-bold btn-rounded mb-4">
+              <button
+                type="submit"
+                class="btn btn-success fw-bold btn-rounded mb-4"
+              >
                 Update Department Type
               </button>
             </div>
