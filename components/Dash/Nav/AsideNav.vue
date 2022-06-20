@@ -23,7 +23,7 @@
 
     <!-- start:Menu Links -->
     <div
-      class="collapse navbar-collapse w-auto menu-list-height sidenav-body"
+      class="collapse navbar-collapse w-auto menu-list-height sidenav-body border-bottom"
       id="sidenav-collapse-main"
     >
       <ul class="nav flex-column mx-2">
@@ -38,48 +38,54 @@
           </NuxtLink>
         </li>
         <!-- End:Dynamic Nav List -->
-
-        <!-- <li
-          class="nav-item"
-          data-mdb-toggle="collapse"
-          data-mdb-target="#collapseExample"
-          aria-expanded="false"
-          aria-controls="collapseExample"
-          v-for="item in menuItems"
-          :key="item.name"
-        >
-          <div
-            class="nav-link my-1 border-start border-2 text-dark border-primary hover-shad"
-          >
-            Departments
-          </div>
-          <div class="collapse mt-3" id="collapseExample">
-            <NuxtLink
-              class="nav-link my-1 border-start border-2 text-dark border-primary hover-shad"
-              :to="item.url"
-              exact-active-class="fw-bol bg-primary text-white rounded-5 shadow-3-strong active-hover-fix"
-            >
-              <i class="me-2" :class="item.icon"></i>{{ item.name }}
-            </NuxtLink>
-          </div>
-        </li> -->
       </ul>
     </div>
     <!-- end:Menu Links -->
 
+    <!-- start:Footer -->
     <div class="sidenav-footer position-absolute w-100 bottom-0">
       <div class="mx-3 mt-3 mb-2">
-        <div class="d-flex align-items-center">
-          <span class="ms-0 me-auto"
-            >{{ this.loggedInUser.first_name }}
-            {{ this.loggedInUser.last_name }}</span
+        <LoadersAsideNavProfile v-if="loading" />
+        <div
+          class="d-flex align-items-center justify-content-between gap-2"
+          v-else
+        >
+          <div>
+            <img
+              class="avatar avatar- rounded-circle obj-fit-cover shadow"
+              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+              height="2rem"
+              width="2rem"
+              :alt="`${loggedInUser.first_name}'s profile image`"
+            />
+          </div>
+          <div
+            class="d-flex justify-content-center align-items-center text-clip"
           >
-          <span class="btn btn-white btn-floating" @click="showSettingsSwal"
-            ><i class="ri-settings-line ri-2x text-primary"></i
-          ></span>
+            <p class="ms-0 me-auto mb-0 pb-0 text-clip fw-bold fs-6">
+              {{ loggedInUser.first_name }}
+              {{ loggedInUser.last_name }}
+              <br class="p-0 m-0" />
+              <span class="small text-muted text-clip">
+                {{ loggedInUser.email }}
+              </span>
+            </p>
+
+            <!-- start:Profile Modal Toggle -->
+            <div
+              id="profileModalToggle"
+              class=""
+              data-mdb-toggle="modal"
+              data-mdb-target="#profileModal"
+            >
+              <i class="ri-settings-2-line ri-xl rotate-center cog"></i>
+            </div>
+            <!-- end:Profile Modal Toggle -->
+          </div>
         </div>
       </div>
     </div>
+    <!-- end:Footer -->
   </aside>
 </template>
 
@@ -91,6 +97,7 @@ export default {
 
   data() {
     return {
+      loading: true,
       menuItems: [
         {
           name: 'Dash',
@@ -125,61 +132,8 @@ export default {
     ...mapGetters(['loggedInUser']),
   },
 
-  methods: {
-    showSettingsSwal() {
-      let loggedInUser = this.loggedInUser
-      this.$swal({
-        showConfirmButton: false,
-        allowOutsideClick: true,
-        backdrop: 'rgba(0,0,0,0.1)',
-        width: '20rem',
-        position: 'bottom-start',
-        allowEscKey: true,
-        padding: '0px',
-        customClass: { container: '' },
-        html: `
-        <div class="">
-          <div class="card">
-            <div class="card-header">
-              <div class="d-flex flex-column align-items-center justify-content-center align-items-start gap-2">
-                <img
-                  class="avatar avatar-lg rounded-circle obj-fit-cover shadow"
-                  src="${'https://images.unsplash.com/photo-1494790108377-be9c29b29330'}"
-                  alt=""
-                />
-                <div class="">
-                  <h5 class="text-dark">${
-                    loggedInUser.first_name + ' ' + loggedInUser.last_name
-                  }</h5>
-                  <p class="pb-0 text-muted">${loggedInUser.email}</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <ul class="nav flex-column gap-2">
-                <li class="nav-item">
-                  <span class="nav-link rounded-5 shadow-1-soft bg-ligh pointer-pointer text-dark d-flex"
-                    >Profile</span
-                  >
-                </li>
-                <li class="nav-item">
-                  <span class="nav-link rounded-5 shadow-1-soft bg-ligh pointer-pointer text-dark d-flex"
-                    >Main Site</span
-                  >
-                </li>
-                <li class="nav-item">
-                  <span
-                    class="nav-link rounded-5 shadow-1-soft bg-ligh pointer-pointer text-danger d-flex align-items-center gap-1"
-                    ><i class="ri-logout-circle-line"></i> Logout</span
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      `,
-      })
-    },
+  mounted() {
+    this.loading = false
   },
 }
 </script>
@@ -190,7 +144,40 @@ export default {
 }
 
 .menu-list-height {
-  height: calc(100vh - 52px - 78px - 2rem - 2.5rem) !important;
-  max-height: calc(100vh - 52px - 78px - 2rem - 2.5rem);
+  height: calc(100vh - 52px - 78px - 2rem - 3rem) !important;
+  max-height: calc(100vh - 52px - 78px - 2rem - 3rem);
+}
+
+.text-clip {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rotate-center:hover {
+  display: inline-block;
+  animation: rotate-center 0.6s ease-in-out both;
+}
+
+.cog:hover {
+  cursor: pointer;
+  color: var(--mdb-primary);
+  transition: color 0.3s ease-in-out;
+}
+
+/**
+ * ----------------------------------------
+ * animation rotate-center
+ * ----------------------------------------
+ */
+@keyframes rotate-center {
+  0% {
+    transform-origin: center;
+    transform: rotate(0);
+  }
+  100% {
+    transform-origin: center;
+    transform: rotate(360deg);
+  }
 }
 </style>

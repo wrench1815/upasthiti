@@ -1,7 +1,7 @@
 <template>
   <nav
     id="nav"
-    class="navbar navbar-expand-lg navbar-light z-index-5 px-lg-2"
+    class="navbar navbar-expand-lg navbar-light z-index-5 px-lg-2 d-lg-none"
     :class="[scrollClasses, navClass]"
   >
     <!-- Container wrapper -->
@@ -51,7 +51,7 @@
         <!-- end:mid links -->
 
         <!-- start:right links -->
-        <Lazy-DashNavRightLinks />
+        <!-- <Lazy-DashNavRightLinks /> -->
         <!-- start:right links -->
       </div>
       <!-- Collapsible wrapper -->
@@ -90,7 +90,7 @@ export default {
 
   watch: {
     $route() {
-      if (document.querySelector('.show')) {
+      if (document.querySelector('#navOffCanvas').classList.contains('show')) {
         document.querySelector('#mainNavbarLeftAlignToggler').click()
       }
     },
