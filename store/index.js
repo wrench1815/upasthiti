@@ -1,4 +1,6 @@
-export const state = () => ({})
+export const state = () => ({
+  role: '',
+})
 
 // getters
 export const getters = {
@@ -11,6 +13,19 @@ export const getters = {
   loggedInUser(state) {
     if (state.auth.loggedIn) {
       return state.auth.user
+    } else {
+      return null
+    }
+  },
+
+  // return the logged in user role
+  loggedInUserRole(state) {
+    if (state.auth.loggedIn) {
+      if (state.auth.user.is_admin) return 'admin'
+      else if (state.auth.user.is_principal) return 'principal'
+      else if (state.auth.user.is_teacher) return 'teacher'
+      else if (state.auth.user.is_hod) return 'hod'
+      else return null
     } else {
       return null
     }
