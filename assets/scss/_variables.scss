@@ -81,8 +81,11 @@ $font-size-xs: $font-size-base * 0.75 !default;
 $font-size-2xl: $font-size-base * 1.5 !default;
 $font-size-3xl: $font-size-base * 1.875 !default;
 $font-size-4xl: $font-size-base * 2 !default;
-$navbar-vertical-open-width: 15.625rem !default;
 $navbar-vertical-inner: calc(100vh - 360px) !default;
 
 // dark version fix
 $dark-version-caret-sidebar-color: rgba(206, 212, 218, 0.7) !default;
+
+// modal
+// $modal-backdrop-bg: red;
+$modal-backdrop-opacity: 0.2;

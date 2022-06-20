@@ -6,6 +6,7 @@
       <Lazy-DashNav />
       <Lazy-DashNavToolBar />
       <Lazy-DashNavSideBar />
+      <Lazy-DashNavProfile />
 
       <nuxt />
       <Lazy-UtilsToTop />

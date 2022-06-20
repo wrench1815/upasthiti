@@ -1,0 +1,214 @@
+<template>
+  <div>
+    <!-- start:Profile Modal -->
+    <div
+      class="modal fade"
+      id="profileModal"
+      tabindex="-1"
+      aria-labelledby="profileModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-side modal-bottom-left modal-dialog-width shadow"
+      >
+        <div class="modal-content">
+          <div class="modal-header pb-0">
+            <div
+              class="d-flex flex-column align-items-center justify-content-center align-items-start gap-2"
+            >
+              <img
+                class="avatar avatar-lg rounded-circle obj-fit-cover shadow"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+                alt=""
+              />
+              <div class="text-center text-break">
+                <h5 class="text-dark">
+                  {{ user.first_name }} {{ user.last_name }}
+                </h5>
+                <p class="pb-0 mb-0 text-muted">{{ user.email }}</p>
+                <span
+                  class="badge rounded-pill mb-2 text-uppercase shadow-2-strong"
+                  :class="roleClass"
+                  >{{ role }}</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="modal-body">
+            <ul class="nav flex-column">
+              <!-- start:Profile -->
+              <li class="nav-item">
+                <NuxtLink
+                  to="/dash/user"
+                  class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
+                >
+                  <i class="ri-profile-line"></i>Profile
+                </NuxtLink>
+              </li>
+              <!-- end:Profile -->
+
+              <!-- start:Main Site -->
+              <li class="nav-item">
+                <div
+                  class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
+                  @click="toMainSite"
+                >
+                  <i class="ri-home-2-line"></i>Main Site
+                </div>
+              </li>
+              <!-- end:Main Site -->
+
+              <!-- start:Logout -->
+              <li class="nav-item">
+                <div
+                  class="nav-link rounded-4 text-danger pointer-pointer d-flex align-items-center gap-1"
+                  @click="logout"
+                >
+                  <i class="ri-logout-circle-line"></i>Logout
+                </div>
+              </li>
+              <!-- end:Logout -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end:Profile Modal -->
+  </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  name: 'DashNavProfile',
+
+  data() {
+    return {
+      roleClass: '',
+      loading: true,
+    }
+  },
+
+  watch: {
+    $route() {
+      if (document.querySelector('#profileModal').classList.contains('show')) {
+        document.querySelector('#profileModalToggle').click()
+      }
+    },
+  },
+
+  computed: {
+    ...mapGetters({
+      user: 'loggedInUser',
+      role: 'loggedInUserRole',
+    }),
+  },
+
+  methods: {
+    async logout() {
+      if (document.querySelector('#profileModal').classList.contains('show')) {
+        await document.querySelector('#profileModalToggle').click()
+      }
+
+      await this.$swal({
+        title: 'Logging Out...',
+        icon: 'info',
+        text: 'Please wait...',
+        didOpen: () => {
+          this.$swal.showLoading()
+
+          this.$auth
+            .logout()
+            .then(() => {
+              this.$swal.hideLoading()
+              this.$swal.close()
+
+              this.$swal({
+                title: 'Logged Out!',
+                type: 'success',
+                icon: 'success',
+                text: 'You have been logged Out.',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+              })
+            })
+            .catch((err) => {
+              this.$swal.hideLoading()
+              this.$swal.close()
+              this.$swal({
+                title: 'Error!',
+                type: 'error',
+                icon: 'error',
+                html: `Failed to Log out.<br/>Try Again.`,
+              })
+            })
+        },
+      })
+    },
+
+    async toMainSite() {
+      try {
+        if (
+          document.querySelector('#profileModal').classList.contains('show')
+        ) {
+          await document.querySelector('#profileModalToggle').click()
+        }
+      } catch (error) {
+        await document.querySelector('#profileModalToggle').click()
+      } finally {
+        this.$router.push('/')
+      }
+    },
+
+    async setRoleClass() {
+      if ((await this.role) === 'admin') {
+        this.roleClass = 'badge-danger'
+      } else if ((await this.role) === 'principal') {
+        this.roleClass = 'badge-primary'
+      } else if ((await this.role) === 'hod') {
+        this.roleClass = 'badge-success'
+      } else if ((await this.role) === 'teacher') {
+        this.roleClass = 'badge-info'
+      }
+    },
+  },
+
+  mounted() {
+    this.setRoleClass().then(() => (this.loading = false))
+  },
+}
+</script>
+
+<style scoped>
+.modal .modal-side {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  margin: 0;
+}
+
+.modal .modal-dialog.modal-bottom-left {
+  bottom: 10px;
+  left: 10px;
+}
+
+.modal-dialog-width {
+  width: 17rem;
+}
+
+.nav-link {
+  border-left: 2px solid transparent;
+}
+
+.nav-link:hover {
+  background-color: var(--mdb-light);
+  border-left: 2px solid var(--mdb-primary);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.nav-link:hover i {
+  color: var(--mdb-primary);
+}
+</style>
