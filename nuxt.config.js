@@ -167,5 +167,5 @@ export default {
   },
 
   // custom loading indicator
-  loadingIndicator: '~/components/loaders/loading-indicator.html',
+  loadingIndicator: '~/components/Loaders/loading-indicator.html',
 }
