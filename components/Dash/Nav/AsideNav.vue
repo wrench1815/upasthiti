@@ -6,7 +6,7 @@
     <!-- start:Sidenav Header -->
     <div class="sidenav-header">
       <div
-        class="d-flex justify-content-center align-items-center mx-auto my-3 gap-2"
+        class="d-flex justify-content-center align-items-center mx-auto mt-3 gap-2"
       >
         <img
           class="avatar obj-fit-cover rounded-circle shadow-3-strong"
@@ -74,7 +74,6 @@
             <!-- start:Profile Modal Toggle -->
             <div
               id="profileModalToggle"
-              class=""
               data-mdb-toggle="modal"
               data-mdb-target="#profileModal"
             >
