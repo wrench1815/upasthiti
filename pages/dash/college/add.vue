@@ -12,99 +12,30 @@
           <!-- start:College Add Form -->
           <form @submit.prevent="handleSubmit(addCollege)">
             <!-- start:Institute name-->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="institute_name"
-                  >Institute name</label
-                >
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true, min: 3 }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="institute_name"
-                      class="form-control"
-                      v-model="college.institute_name"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'Name'"
+              :validationRules="{ required: true, min: 3 }"
+              :data.sync="college.institute_name"
+              :type="'text'"
+            />
             <!-- end:Institute name -->
 
             <!-- start:Institute Address -->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="institute_address"
-                  >Address</label
-                >
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="institute_address"
-                      class="form-control"
-                      v-model="college.institute_address"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'Address'"
+              :validationRules="{ required: true, min: 3 }"
+              :data.sync="college.institute_address"
+              :type="'text'"
+            />
             <!-- end:Institute Address -->
 
             <!-- start:Institute Alias name -->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="institute_alias_name"
-                  >Institute Alias</label
-                >
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="institute_alias_name"
-                      class="form-control"
-                      v-model="college.institute_alias_name"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'Alias'"
+              :validationRules="{ required: true, min: 3 }"
+              :data.sync="college.institute_alias_name"
+              :type="'text'"
+            />
             <!-- end:Institute Alias name -->
 
             <!-- start:Institute Principal -->
@@ -138,126 +69,39 @@
             <!-- end:Institute Principal-->
 
             <!-- start:Institute Logo-->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="institute_logo">Logo</label>
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="institute_logo"
-                      name="password"
-                      class="form-control"
-                      v-model="college.institute_logo"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-2': !errors[0], 'mb-1': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'Logo'"
+              :validationRules="{ required: true }"
+              :data.sync="college.institute_logo"
+              :type="'url'"
+            />
             <!-- end:Institute Logo-->
 
             <!-- start:Institute Website-->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="institute_website"
-                  >Website</label
-                >
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="institute_website"
-                      class="form-control"
-                      v-model="college.institute_website"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'Website'"
+              :validationRules="{ required: true }"
+              :data.sync="college.institute_website"
+              :type="'url'"
+            />
             <!-- end:Institute website -->
 
             <!-- start:Institute Mobile-->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="institute_mobile">Mobile</label>
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="number"
-                      id="institute_mobile"
-                      class="form-control"
-                      v-model="college.institute_mobile"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'Mobile'"
+              :validationRules="{ required: true }"
+              :data.sync="college.institute_mobile"
+              :type="'tel'"
+            />
             <!-- end:Institute Mobile -->
 
             <!-- start:Institute Email-->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="institute_email">Email</label>
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true, email: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="email"
-                      id="institute_email"
-                      class="form-control"
-                      v-model="college.institute_email"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'Email'"
+              :validationRules="{ required: true }"
+              :data.sync="college.institute_email"
+              :type="'email'"
+            />
             <!-- end:Institute Email-->
 
             <!-- Submit button -->
