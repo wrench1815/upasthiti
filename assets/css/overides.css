@@ -1,0 +1,4 @@
+/* overide shadows on input focus */
+.form-outline .form-control:focus {
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.21) !important;
+}
