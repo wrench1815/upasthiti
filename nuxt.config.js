@@ -171,6 +171,6 @@ export default {
 
   // loading bar
   loading: {
-    color: '#ff0a54',
+    color: '#5e72e4',
   },
 }
