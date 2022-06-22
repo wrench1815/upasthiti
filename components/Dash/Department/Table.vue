@@ -37,17 +37,21 @@
                 : '----'
             }}
           </td>
-          <td class="d-flex gap-2">
-            <NuxtLink
-              :to="`/dash/department/${department.id}`"
-              class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
-              ><i class="ri-edit-2-fill ri-lg"></i
-            ></NuxtLink>
-            <a
-              @click="deleteDepartment(department.id)"
-              class="btn btn-floating btn-danger btn-sm d-flex justify-content-center align-items-center"
-              ><i class="ri-delete-bin-fill ri-lg"></i
-            ></a>
+          <td>
+            <div
+              class="d-flex justify-content-center justify-content-lg-start align-items-center gap-2"
+            >
+              <NuxtLink
+                :to="`/dash/department/${department.id}`"
+                class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
+                ><i class="ri-edit-2-fill ri-lg"></i
+              ></NuxtLink>
+              <a
+                @click="deleteDepartment(department.id)"
+                class="btn btn-floating btn-danger btn-sm d-flex justify-content-center align-items-center"
+                ><i class="ri-delete-bin-fill ri-lg"></i
+              ></a>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -97,9 +101,10 @@ export default {
                   type: 'success',
                 })
                   .then(() => {
-                    this.departments = this.departments.filter(
+                    let departmentList = this.departments.filter(
                       (department) => department.id !== id
                     )
+                    this.$emit('update:departments', departmentList)
                   })
                   .catch((err) => {
                     this.$swal.close()

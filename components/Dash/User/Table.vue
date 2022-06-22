@@ -1,6 +1,7 @@
 <template>
   <div class="table-responsive">
     <table class="table table-hover table-bordered align-middle">
+      <!-- start:Header -->
       <thead class="align-middle">
         <tr>
           <th scope="col">First Name</th>
@@ -10,6 +11,7 @@
           <th scope="col">Actions</th>
         </tr>
       </thead>
+      <!-- end:Header -->
       <tbody>
         <tr v-if="users.length == 0">
           <td colspan="5" class="">
@@ -27,17 +29,19 @@
                 : '----'
             }}
           </td>
-          <td class="d-flex gap-2">
-            <NuxtLink
-              :to="`/dash/user/${user.id}`"
-              class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
-              ><i class="ri-edit-2-fill ri-lg"></i
-            ></NuxtLink>
-            <a
-              @click="deleteUser(user.id)"
-              class="btn btn-floating btn-danger btn-sm d-flex justify-content-center align-items-center"
-              ><i class="ri-delete-bin-fill ri-lg"></i
-            ></a>
+          <td>
+            <div class="d-flex justify-content-center align-items-center gap-2">
+              <NuxtLink
+                :to="`/dash/user/${user.id}`"
+                class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
+                ><i class="ri-edit-2-fill ri-lg"></i
+              ></NuxtLink>
+              <a
+                @click="deleteUser(user.id)"
+                class="btn btn-floating btn-danger btn-sm d-flex justify-content-center align-items-center"
+                ><i class="ri-delete-bin-fill ri-lg"></i
+              ></a>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -50,6 +54,7 @@ export default {
   name: 'DashUserTable',
 
   props: {
+    // takes a list of users
     users: {
       type: Array,
       required: true,
@@ -57,6 +62,7 @@ export default {
   },
 
   methods: {
+    // deletes the User of the Id
     deleteUser(id) {
       this.$swal({
         title: 'Are you sure?',
@@ -87,7 +93,8 @@ export default {
                   type: 'success',
                 })
                   .then(() => {
-                    this.users = this.users.filter((user) => user.id !== id)
+                    let usersList = this.users.filter((user) => user.id !== id)
+                    this.$emit('update:users', usersList)
                   })
                   .catch((err) => {
                     this.$swal.close()

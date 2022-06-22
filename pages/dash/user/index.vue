@@ -19,7 +19,7 @@
           </div>
         </section>
         <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashUserTable v-if="!loading" :users="users" />
+        <Lazy-DashUserTable v-if="!loading" :users.sync="users" />
 
         <div class="d-flex justify-content-end">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />

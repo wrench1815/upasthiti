@@ -113,9 +113,10 @@ export default {
                   type: 'success',
                 })
                   .then(() => {
-                    this.colleges = this.colleges.filter(
+                    let collegeList = this.colleges.filter(
                       (college) => college.id !== id
                     )
+                    this.$emit('update:colleges', collegeList)
                   })
                   .catch((err) => {
                     this.$swal.close()
