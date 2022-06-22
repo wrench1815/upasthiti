@@ -25,8 +25,6 @@ export default {
         this.user = resp.data
       })
     },
-
-   
   },
 
   mounted() {
