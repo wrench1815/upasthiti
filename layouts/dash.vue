@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-nav">
+  <div>
     <Lazy-DashNavAsideNav class="d-none d-lg-block" />
 
     <main class="main-content position-relative h-100 border-radius-lg">
       <Lazy-DashNav />
-      <Lazy-DashNavToolBar />
+      <Lazy-DashNavToolBar class="mt-lg-3" />
       <Lazy-DashNavSideBar />
       <Lazy-DashNavProfile />
 

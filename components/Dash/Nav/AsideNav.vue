@@ -60,7 +60,7 @@
             />
           </div>
           <div
-            class="d-flex justify-content-center align-items-center text-clip"
+            class="d-flex justify-content-center align-items-center text-clip ms-0 me-auto"
           >
             <p class="ms-0 me-auto mb-0 pb-0 text-clip fw-bold fs-6">
               {{ loggedInUser.first_name }}
@@ -70,17 +70,17 @@
                 {{ loggedInUser.email }}
               </span>
             </p>
-
-            <!-- start:Profile Modal Toggle -->
-            <div
-              id="profileModalToggle"
-              data-mdb-toggle="modal"
-              data-mdb-target="#profileModal"
-            >
-              <i class="ri-settings-2-line ri-xl rotate-center cog"></i>
-            </div>
-            <!-- end:Profile Modal Toggle -->
           </div>
+          <!-- start:Profile Modal Toggle -->
+          <div
+            class="ms-auto me-0 mb-n2"
+            id="profileModalToggle"
+            data-mdb-toggle="modal"
+            data-mdb-target="#profileModal"
+          >
+            <i class="ri-settings-2-line ri-xl rotate-center cog"></i>
+          </div>
+          <!-- end:Profile Modal Toggle -->
         </div>
       </div>
     </div>
