@@ -1,10 +1,107 @@
 // Theme colors
-$primary: #ff0a54;
-$secondary: #a855f7;
-$success: #05e657;
-$info: #0bc5ea;
-$warning: #ffd91a;
-$danger: #e82113;
+$primary: #5e72e4;
+$secondary: #8392ab;
+$success: #2dce89;
+$info: #11cdef;
+$warning: #fb6340;
+$danger: #f5365c;
+$light: #e9ecef;
+$dark: #344767;
+
+// Gradient colors
+$primary-gradient: #5e72e4 !default;
+$primary-gradient-state: #825ee4 !default;
+
+$secondary-gradient: #627594 !default;
+$secondary-gradient-state: #a8b8d8 !default;
+
+$info-gradient: #1171ef !default;
+$info-gradient-state: #11cdef !default;
+
+$success-gradient: #2dce89 !default;
+$success-gradient-state: #2dcecc !default;
+
+$danger-gradient: #f5365c !default;
+$danger-gradient-state: #f56036 !default;
+
+$warning-gradient: #fb6340 !default;
+$warning-gradient-state: #fbb140 !default;
+
+$dark-gradient: #212229 !default;
+$dark-gradient-state: #212529 !default;
+
+$light-gradient: #ced4da !default;
+$light-gradient-state: #ebeff4 !default;
+
+$dark-gradient-dark: #323a54 !default;
+$dark-gradient-state-dark: #1a2035 !default;
+
+$text-gradient-bg-primary: linear-gradient(
+  310deg,
+  $primary-gradient,
+  $primary-gradient-state
+) !default;
+$text-gradient-bg-info: linear-gradient(
+  310deg,
+  $info-gradient,
+  $info-gradient-state
+) !default;
+$text-gradient-bg-success: linear-gradient(
+  310deg,
+  $success-gradient,
+  $success-gradient-state
+) !default;
+$text-gradient-bg-warning: linear-gradient(
+  310deg,
+  $warning-gradient,
+  $warning-gradient-state
+) !default;
+$text-gradient-bg-danger: linear-gradient(
+  310deg,
+  $danger-gradient,
+  $danger-gradient-state
+) !default;
+$text-gradient-bg-dark: linear-gradient(
+  310deg,
+  $dark-gradient,
+  $dark-gradient-state
+) !default;
+
+// Gradient Colors map
+$theme-gradient-colors: (
+  'primary': (
+    $primary-gradient,
+    $primary-gradient-state,
+  ),
+  'secondary': (
+    $secondary-gradient,
+    $secondary-gradient-state,
+  ),
+  'success': (
+    $success-gradient,
+    $success-gradient-state,
+  ),
+  'info': (
+    $info-gradient,
+    $info-gradient-state,
+  ),
+  'warning': (
+    $warning-gradient,
+    $warning-gradient-state,
+  ),
+  'danger': (
+    $danger-gradient,
+    $danger-gradient-state,
+  ),
+  'light': (
+    $light-gradient,
+    $light-gradient-state,
+  ),
+  'dark': (
+    $dark-gradient,
+    $dark-gradient-state,
+  ),
+) !default;
 
 // font sizes
 $font-size-base: 1rem;

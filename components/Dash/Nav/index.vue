@@ -30,7 +30,7 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <i :class="navButton"></i>
+        <i class="ri-menu-fill link-primary ri-lg"></i>
       </button>
 
       <!-- Collapsible wrapper -->
@@ -40,7 +40,6 @@
           <li class="nav-item" v-for="item in menuItems">
             <nuxt-link
               class="nav-link"
-              :class="linkClass"
               aria-current="page"
               :exact-active-class="activeClass"
               :to="item.url"
@@ -67,9 +66,9 @@ export default {
   data() {
     return {
       navButton: 'ri-menu-fill',
-      scrollClasses: 'shadow-0',
+      scrollClasses: 'shadow-0 bg-white mb-3',
       navClass: '',
-      linkClass: 'text-white',
+      linkClass: 'text-primary',
       activeClass: 'bg-active rounded-5',
       menuItems: [
         {
@@ -129,9 +128,9 @@ export default {
       this.scrollClasses =
         window.scrollY > 300
           ? 'bg-white position-sticky top-0 end-0 start-0 shadow-3 slide-bottom'
-          : 'shadow-0'
+          : 'shadow-0 bg-white mb-3'
 
-      this.linkClass = window.scrollY > 300 ? 'link-dark' : 'text-white'
+      this.linkClass = window.scrollY > 300 ? 'link-primary' : 'text-primary'
 
       this.activeClass =
         window.scrollY > 300

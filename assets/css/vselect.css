@@ -1,7 +1,7 @@
 :root {
-  --vs-colors--lightest: rgba(60, 60, 60, 0.26);
+  --vs-colors--lightest: #bdbdbd;
   --vs-colors--light: rgba(60, 60, 60, 0.5);
-  --vs-colors--dark: #333;
+  --vs-colors--dark: #344767;
   --vs-colors--darkest: rgba(0, 0, 0, 0.15);
 
   /* Search Input */
@@ -19,8 +19,8 @@
   --vs-state-disabled-cursor: not-allowed;
 
   /* Borders */
-  --vs-border-color: var(--vs-colors--lightest);
-  --vs-border-width: 1px;
+  --vs-border-color: transparent !important;
+  --vs-border-width: 1px !important;
   --vs-border-style: solid;
   --vs-border-radius: 0.25rem !important;
 
@@ -45,7 +45,7 @@
   --vs-dropdown-z-index: 1000;
   --vs-dropdown-min-width: 160px;
   --vs-dropdown-max-height: 350px;
-  --vs-dropdown-box-shadow: 0px 3px 6px 0px var(--vs-colors--darkest);
+  --vs-dropdown-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.21);
 
   /* Options */
   --vs-dropdown-option-bg: #000;
@@ -65,6 +65,18 @@
   --vs-transition-duration: 150ms;
 }
 
+.v-select {
+  border: 1px solid #bdbdbd;
+  border-radius: 0.25rem;
+}
+.v-select.vs--open {
+  border: 0px solid #bdbdbd;
+}
 .vs--open {
+  --vs-border-width: 0.125rem !important;
   --vs-border-color: var(--mdb-primary) !important;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.21) !important;
+}
+.vs__dropdown-menu {
+  --vs-border-width: 0.125rem !important;
 }

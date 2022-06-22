@@ -19,7 +19,7 @@
           </div>
         </section> -->
         <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashCollegeTable v-if="!loading" :colleges="colleges" />
+        <Lazy-DashCollegeTable v-else :colleges.sync="colleges" />
 
         <div class="d-flex justify-content-end">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
@@ -63,7 +63,7 @@ export default {
     async getColleges() {
       this.loading = true
 
-      const response = this.$api.college
+      const response = await this.$api.college
         .list()
         .then((response) => {
           this.colleges = response.data

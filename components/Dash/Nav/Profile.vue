@@ -12,9 +12,11 @@
         class="modal-dialog modal-side modal-bottom-left modal-dialog-width shadow"
       >
         <div class="modal-content">
-          <div class="modal-header pb-0">
+          <div class="modal-header justify-content-center pb-0">
+            <LoadersAsideNavProfileModal v-if="loading" />
             <div
-              class="d-flex flex-column align-items-center justify-content-center align-items-start gap-2"
+              class="d-flex flex-column align-items-center justify-content-center gap-2"
+              v-else
             >
               <img
                 class="avatar avatar-lg rounded-circle obj-fit-cover shadow"

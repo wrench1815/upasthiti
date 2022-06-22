@@ -19,12 +19,15 @@
           </div>
         </section> -->
         <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashDepartmentTable v-if="!loading" :departments="departments" />
+        <Lazy-DashDepartmentTable
+          v-if="!loading"
+          :departments.sync="departments"
+        />
 
         <div class="d-flex justify-content-end">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
           <Lazy-UtilsLinkButton
-            v-if="!loading"
+            v-else
             :rounded="true"
             :link="'/dash/department/add'"
             >Add new Department</Lazy-UtilsLinkButton

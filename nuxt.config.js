@@ -165,4 +165,12 @@ export default {
       baseURL: process.env.API_URL,
     },
   },
+
+  // custom loading indicator
+  loadingIndicator: '~/components/Loaders/loading-indicator.html',
+
+  // loading bar
+  loading: {
+    color: '#5e72e4',
+  },
 }
