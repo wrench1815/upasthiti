@@ -172,7 +172,5 @@ export default {
   // loading bar
   loading: {
     color: '#ff0a54',
-    throttle: 0,
-    continous: true,
   },
 }

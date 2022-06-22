@@ -1,6 +1,7 @@
 <template>
   <div class="table-responsive">
     <table class="table table-hover table-bordered align-middle">
+      <!-- start:Header -->
       <thead class="align-middle">
         <tr>
           <th scope="col">Logo</th>
@@ -11,13 +12,21 @@
           <th scope="col">Action</th>
         </tr>
       </thead>
+      <!-- end:Header -->
+
+      <!-- start:Body -->
       <tbody>
+        <!-- start:Fallback if empty -->
         <tr v-if="colleges.length == 0">
-          <td colspan="6" class="">
+          <td colspan="6">
             <h4 class="text-center">Nothing to see here</h4>
           </td>
         </tr>
+        <!-- end:Fallback if empty -->
+
+        <!-- start:Display Colleges -->
         <tr v-for="college in colleges" v-else>
+          <!-- start:College Logo -->
           <td>
             <img
               :data-src="`${college.institute_logo}`"
@@ -26,9 +35,15 @@
               v-lazy-load
             />
           </td>
+          <!-- end:College Logo -->
+
+          <!-- start:College Name -->
           <td>
             {{ college.institute_name ? college.institute_name : '----' }}
           </td>
+          <!-- end:College Name -->
+
+          <!-- start:College Alias -->
           <td>
             {{
               college.institute_alias_name
@@ -36,9 +51,12 @@
                 : '----'
             }}
           </td>
+          <!-- end:College Alias -->
           <td>
             {{ college.institute_address ? college.institute_address : '----' }}
           </td>
+
+          <!-- start:Created On -->
           <td class="text-nowrap">
             {{
               college.created_on
@@ -46,18 +64,26 @@
                 : '----'
             }}
           </td>
+          <!-- end:Created On -->
+
+          <!-- start:Actions -->
           <td>
             <div class="d-flex justify-content-center align-items-center gap-2">
+              <!-- detail -->
               <NuxtLink
                 :to="`/dash/college/detail?id=${college.id}`"
                 class="btn btn-floating btn-success btn-sm d-flex justify-content-center align-items-center"
                 ><i class="ri-eye-fill ri-lg"></i
               ></NuxtLink>
+
+              <!-- edit -->
               <NuxtLink
                 :to="`/dash/college/${college.id}`"
                 class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
                 ><i class="ri-edit-2-fill ri-lg"></i
               ></NuxtLink>
+
+              <!-- destroy -->
               <a
                 @click="deleteCollege(college.id)"
                 class="btn btn-floating btn-danger btn-sm d-flex justify-content-center align-items-center"
@@ -65,8 +91,11 @@
               ></a>
             </div>
           </td>
+          <!-- end:Actions -->
         </tr>
+        <!-- end:Display Colleges -->
       </tbody>
+      <!-- end:Body -->
     </table>
   </div>
 </template>
@@ -76,6 +105,7 @@ export default {
   name: 'DashCollegeTable',
 
   props: {
+    // list of Colleges
     colleges: {
       type: Array,
       required: true,
@@ -138,9 +168,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.logo-img {
-  /* width: 100px; */
-  /* height: 100px; */
-}
-</style>
+<style scoped></style>
