@@ -168,4 +168,11 @@ export default {
 
   // custom loading indicator
   loadingIndicator: '~/components/Loaders/loading-indicator.html',
+
+  // loading bar
+  loading: {
+    color: '#ff0a54',
+    throttle: 0,
+    continous: true,
+  },
 }
