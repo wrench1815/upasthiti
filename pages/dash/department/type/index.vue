@@ -21,7 +21,7 @@
         <Lazy-LoadersTable v-if="loading" />
         <Lazy-DashDepartmentTypeTable
           v-if="!loading"
-          :departmentTypes="departmentTypes"
+          :departmentTypes.sync="departmentTypes"
         />
 
         <div class="d-flex justify-content-end">
