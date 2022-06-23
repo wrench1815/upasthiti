@@ -13,7 +13,7 @@
         <Lazy-LoadersForm
           :inputCount="6"
           :btnEnd="true"
-          :btnColor="'info'"
+          :btnColor="'success'"
           v-if="loading"
         />
 
