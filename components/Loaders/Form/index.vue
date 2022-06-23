@@ -1,0 +1,51 @@
+<template>
+  <div>
+    <Lazy-LoadersFormInput v-for="item in inputCount" :key="item" />
+
+    <div
+      class="d-flex"
+      :class="{
+        'justify-content-start': btnStart,
+        'justify-content-end': btnEnd,
+        'justify-content-center': btnCenter,
+      }"
+    >
+      <button
+        type="submit"
+        class="btn btn-rounded mb-4 px-5 placeholder"
+        :class="`btn-${btnColor}`"
+      ></button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'LoadersFormIndex',
+
+  props: {
+    inputCount: {
+      type: Number,
+      default: 1,
+    },
+    btnStart: {
+      type: Boolean,
+      default: true,
+    },
+    btnEnd: {
+      type: Boolean,
+      default: false,
+    },
+    btnCenter: {
+      type: Boolean,
+      default: false,
+    },
+    btnColor: {
+      type: String,
+      default: 'primary',
+    },
+  },
+}
+</script>
+
+<style></style>
