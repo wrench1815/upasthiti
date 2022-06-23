@@ -57,9 +57,10 @@
                 v-else-if="userRole(user) === 'Principal'"
               >
                 <div
-                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-danger badge-fs shadow-3-strong py-2 rounded-pill"
+                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-info badge-fs shadow-3-strong py-2 rounded-pill"
                 >
-                  <i class="ri-admin-fill"></i>
+                  <!-- <i class="ri-admin-fill"></i> -->
+                  <i class="ri-shield-user-fill"></i>
                   <div class="">Principal</div>
                 </div>
               </div>
@@ -70,9 +71,9 @@
                 v-else-if="userRole(user) === 'HOD'"
               >
                 <div
-                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-danger badge-fs shadow-3-strong py-2 rounded-pill"
+                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-primary badge-fs shadow-3-strong py-2 rounded-pill"
                 >
-                  <i class="ri-admin-fill"></i>
+                  <i class="ri-user-star-fill"></i>
                   <div class="">HOD</div>
                 </div>
               </div>
@@ -83,9 +84,9 @@
                 v-else-if="userRole(user) === 'Teacher'"
               >
                 <div
-                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-danger badge-fs shadow-3-strong py-2 rounded-pill"
+                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-warning badge-fs shadow-3-strong py-2 rounded-pill"
                 >
-                  <i class="ri-admin-fill"></i>
+                  <i class="ri-user-2-fill"></i>
                   <div class="">Teacher</div>
                 </div>
               </div>
@@ -96,7 +97,7 @@
                 v-else
               >
                 <div
-                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-danger badge-fs shadow-3-strong py-2 rounded-pill"
+                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-success badge-fs shadow-3-strong py-2 rounded-pill"
                 >
                   <div class="">----</div>
                 </div>
