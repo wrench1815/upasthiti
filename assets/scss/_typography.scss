@@ -1,0 +1,29 @@
+.text-gradient {
+  background-clip: $text-gradient-bg-clip;
+  -webkit-background-clip: $text-gradient-bg-clip;
+  -webkit-text-fill-color: $text-gradient-text-fill;
+  position: $text-gradient-position;
+  z-index: $text-gradient-zindex;
+
+  &.text-primary {
+    background-image: $text-gradient-bg-primary;
+  }
+  &.text-info {
+    background-image: $text-gradient-bg-info;
+  }
+  &.text-success {
+    background-image: $text-gradient-bg-success;
+  }
+  &.text-warning {
+    background-image: $text-gradient-bg-warning;
+  }
+  &.text-danger {
+    background-image: $text-gradient-bg-danger;
+  }
+  &.text-light {
+    background-image: $text-gradient-bg-light;
+  }
+  &.text-dark {
+    background-image: $text-gradient-bg-dark;
+  }
+}
