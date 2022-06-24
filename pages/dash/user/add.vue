@@ -6,98 +6,42 @@
         <p>Add a New User</p>
       </div>
       <div class="card-body">
+        <Lazy-LoadersForm
+          :inputCount="6"
+          :btnEnd="true"
+          :btnColor="'info'"
+          v-if="loading"
+        />
+
         <!-- for Valdation -->
-        <ValidationObserver v-slot="{ handleSubmit }">
+        <ValidationObserver v-slot="{ handleSubmit }" v-else>
           <!-- start:User Edit Form -->
           <form @submit.prevent="handleSubmit(addUser)">
             <!-- start:First Name -->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="first_name">First name</label>
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="first_name"
-                      class="form-control"
-                      v-model="user.first_name"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'First Name'"
+              :validationRules="{ required: true, min: 3, alpha: true }"
+              :data.sync="user.first_name"
+              :type="'text'"
+            />
             <!-- end:First Name -->
 
             <!-- start:Last Name -->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="last_name">Last name</label>
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true, min: 3, alpha: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="last_name"
-                      class="form-control"
-                      v-model="user.last_name"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'Last Name'"
+              :validationRules="{ required: true, min: 3, alpha: true }"
+              :data.sync="user.last_name"
+              :type="'text'"
+            />
             <!-- end:Last Name -->
 
             <!-- start:Email -->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="email">Email</label>
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{ required: true, email: true }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="email"
-                      id="email"
-                      class="form-control"
-                      v-model="user.email"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'Email'"
+              :validationRules="{ required: true, email: true }"
+              :data.sync="user.email"
+              :type="'text'"
+            />
             <!-- end:Email -->
 
             <!-- start:Gender -->
@@ -117,7 +61,7 @@
                   ></v-select>
                   <!-- Validation Errors -->
                   <div
-                    class="text-danger"
+                    class="text-danger transition-all-ease-out-sine"
                     :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
                   >
                     {{ errors[0] }}
@@ -156,7 +100,7 @@
                   </div>
                   <!-- Validation Errors -->
                   <div
-                    class="text-danger"
+                    class="text-danger transition-all-ease-out-sine"
                     :class="{ 'mb-2': !errors[0], 'mb-1': errors[0] }"
                   >
                     {{ errors[0] }}
@@ -372,11 +316,17 @@ export default {
         })
       }
     },
+
+    async unsetLoading() {
+      this.loading = await false
+    },
   },
 
   mounted() {
-    document.querySelectorAll('.form-outline').forEach((formOutline) => {
-      new this.$mdb.Input(formOutline).init()
+    this.unsetLoading().then(() => {
+      document.querySelectorAll('.form-outline').forEach((formOutline) => {
+        new this.$mdb.Input(formOutline).init()
+      })
     })
   },
 }
