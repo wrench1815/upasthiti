@@ -9,44 +9,19 @@
         </p>
       </div>
       <div class="card-body">
+        <Lazy-LoadersForm :btnEnd="true" :btnColor="'success'" v-if="loading" />
+
         <!-- for Valdation -->
-        <ValidationObserver v-slot="{ handleSubmit }">
+        <ValidationObserver v-slot="{ handleSubmit }" v-else>
           <!-- start:Department Type Edit Form -->
           <form @submit.prevent="handleSubmit(updateDepartmentType)">
             <!-- start:Department Name -->
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="department_name"
-                  >Department Name</label
-                >
-              </div>
-              <div class="col">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  :rules="{
-                    required: true,
-                    min: 3,
-                    capitalize: true,
-                  }"
-                >
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="department_name"
-                      class="form-control"
-                      v-model="departmentType.department_name"
-                    />
-                  </div>
-                  <!-- Validation Errors -->
-                  <div
-                    class="text-danger"
-                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-                  >
-                    {{ errors[0] }}
-                  </div>
-                </ValidationProvider>
-              </div>
-            </div>
+            <Lazy-DashInput
+              :label="'Department Name'"
+              :validationRules="{ required: true, min: 3, capitalize: true }"
+              :data.sync="departmentType.department_name"
+              :type="'text'"
+            />
             <!-- end:Department Name -->
 
             <!-- Submit button -->

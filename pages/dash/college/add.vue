@@ -7,8 +7,15 @@
       </div>
 
       <div class="card-body">
+        <Lazy-LoadersForm
+          :inputCount="6"
+          :btnEnd="true"
+          :btnColor="'info'"
+          v-if="loading"
+        />
+
         <!-- for Valdation -->
-        <ValidationObserver v-slot="{ handleSubmit }">
+        <ValidationObserver v-slot="{ handleSubmit }" v-else>
           <!-- start:College Add Form -->
           <form @submit.prevent="handleSubmit(addCollege)">
             <!-- start:Institute name-->
@@ -58,7 +65,7 @@
                   ></v-select>
                   <!-- Validation Errors -->
                   <div
-                    class="text-danger"
+                    class="text-danger transition-all-ease-out-sine"
                     :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
                   >
                     {{ errors[0] }}
@@ -211,7 +218,7 @@ export default {
     },
 
     async getPrincipals() {
-      this.$api.user.listPrincipal().then((response) => {
+      await this.$api.user.listPrincipal().then((response) => {
         // set first_name and last name as label and id as value for v-select
         this.principalList = response.data.map((principal) => {
           return {
@@ -219,17 +226,20 @@ export default {
             label: `${principal.first_name} ${principal.last_name}`,
           }
         })
-        // this.principalList = response.data
       })
     },
   },
 
   mounted() {
-    this.getPrincipals().finally(() => {
-      document.querySelectorAll('.form-outline').forEach((formOutline) => {
-        new this.$mdb.Input(formOutline).init()
+    this.getPrincipals()
+      .then(() => {
+        this.loading = false
       })
-    })
+      .finally(() => {
+        document.querySelectorAll('.form-outline').forEach((formOutline) => {
+          new this.$mdb.Input(formOutline).init()
+        })
+      })
   },
 }
 </script>

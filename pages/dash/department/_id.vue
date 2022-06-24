@@ -32,7 +32,7 @@
                   ></v-select>
                   <!-- Validation Errors -->
                   <div
-                    class="text-danger"
+                    class="text-danger transition-all-ease-out-sine"
                     :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
                   >
                     {{ errors[0] }}
@@ -59,7 +59,7 @@
                   ></v-select>
                   <!-- Validation Errors -->
                   <div
-                    class="text-danger"
+                    class="text-danger transition-all-ease-out-sine"
                     :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
                   >
                     {{ errors[0] }}
@@ -86,7 +86,7 @@
                   ></v-select>
                   <!-- Validation Errors -->
                   <div
-                    class="text-danger"
+                    class="text-danger transition-all-ease-out-sine"
                     :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
                   >
                     {{ errors[0] }}

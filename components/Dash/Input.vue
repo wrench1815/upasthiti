@@ -1,10 +1,7 @@
 <template>
   <div>
-    <!-- Input placeholder -->
-    <Lazy-LoadersFormInput v-if="loading" />
-
     <!-- start:Input Element -->
-    <div class="row" v-else>
+    <div class="row">
       <div class="col-12 col-md-4">
         <label class="form-label" :for="randomUUID">{{ label }} </label>
       </div>
@@ -21,7 +18,7 @@
           </div>
           <!-- Validation Errors -->
           <div
-            class="text-danger"
+            class="text-danger transition-all-ease-out-sine"
             :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
           >
             {{ errors[0] }}
@@ -41,7 +38,6 @@ export default {
     return {
       inputData: this.data,
       randomUUID: this.uuidGenerator(),
-      loading: true,
     }
   },
 
@@ -75,17 +71,11 @@ export default {
         }
       )
     },
-
-    async unsetLoading() {
-      this.loading = await false
-    },
   },
 
   mounted() {
-    this.unsetLoading().then(() => {
-      document.querySelectorAll('.form-outline').forEach((formOutline) => {
-        new this.$mdb.Input(formOutline).init()
-      })
+    document.querySelectorAll('.form-outline').forEach((formOutline) => {
+      new this.$mdb.Input(formOutline).init()
     })
   },
 }
