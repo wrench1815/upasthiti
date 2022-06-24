@@ -1,47 +1,70 @@
 <template>
   <div class="table-responsive">
-    <table class="table table-hover table-bordered align-middle">
-      <thead class="align-middle">
+    <table class="table mb-0 bg-white align-middle table-borderless">
+      <!-- start:Header -->
+      <thead class="align-middle bg-primary text-white">
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Created on</th>
-          <th scope="col">Actions</th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">Name</th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">
+            Created on
+          </th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">
+            Actions
+          </th>
         </tr>
       </thead>
+      <!-- end:Header -->
       <tbody>
+        <!-- start:no data fallback -->
         <tr v-if="departmentTypes.length == 0">
-          <td colspan="5" class="">
-            <h4 class="text-center">Nothing to see here</h4>
+          <td colspan="3" class="bg-white">
+            <UtilsNoData class="mx-auto" message="No Department Types found" />
           </td>
         </tr>
+        <!-- end:no data fallback -->
+
+        <!-- start:Department Types -->
         <tr v-for="type in departmentTypes" v-else>
+          <!-- start:Department Name -->
           <td>
-            {{ type.department_name ? type.department_name : '----' }}
+            <div class="text-primary fw-bold mb-0">
+              {{ type.department_name ? type.department_name : '----' }}
+            </div>
           </td>
+          <!-- end:Department Name -->
+
+          <!-- start:Created On -->
           <td>
-            {{
-              type.created_on
-                ? $nuxt.$utils.dateFormat(type.created_on)
-                : '----'
-            }}
+            <div class="text-dark mb-0 text-nowrap">
+              {{
+                type.created_on
+                  ? $nuxt.$utils.dateFormat(type.created_on)
+                  : '----'
+              }}
+            </div>
           </td>
+          <!-- end:Created On -->
+
+          <!-- start:Actions-->
           <td>
             <div
               class="d-flex justify-content-center justify-content-lg-start align-items-center gap-2"
             >
               <NuxtLink
                 :to="`/dash/department/type/${type.id}`"
-                class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
+                class="btn btn-floating bg-gradient-info text-white btn-sm d-flex justify-content-center align-items-center"
                 ><i class="ri-edit-2-fill ri-lg"></i
               ></NuxtLink>
               <a
                 @click="deleteDepartmentType(type.id)"
-                class="btn btn-floating btn-danger btn-sm d-flex justify-content-center align-items-center"
+                class="btn btn-floating bg-gradient-danger text-white btn-sm d-flex justify-content-center align-items-center"
                 ><i class="ri-delete-bin-fill ri-lg"></i
               ></a>
             </div>
           </td>
+          <!-- end:Actions-->
         </tr>
+        <!-- end:Department Types -->
       </tbody>
     </table>
   </div>
@@ -114,4 +137,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.badge-fs {
+  font-size: 0.9rem !important;
+}
+
+table th:first-child {
+  border-radius: 10px 0 0 10px !important;
+}
+
+table th:last-child {
+  border-radius: 0 10px 10px 0 !important;
+}
+</style>

@@ -1,59 +1,106 @@
 <template>
   <div class="table-responsive">
-    <table class="table table-hover table-bordered align-middle">
-      <thead class="align-middle">
+    <table class="table mb-0 bg-white align-middle table-borderless">
+      <thead class="align-middle bg-primary text-white">
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Hod</th>
-          <th scope="col">College</th>
-          <th scope="col">Created on</th>
-          <th scope="col">Actions</th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">Name</th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">Hod</th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">
+            College
+          </th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">
+            Created on
+          </th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">
+            Actions
+          </th>
         </tr>
       </thead>
       <tbody>
+        <!-- start:no departments fallback -->
         <tr v-if="departments.length == 0">
-          <td colspan="5" class="">
-            <h4 class="text-center">Nothing to see here</h4>
+          <td colspan="5" class="bg-white">
+            <UtilsNoData class="mx-auto" message="No Departments found" />
           </td>
         </tr>
+        <!-- end:no departments fallback -->
+
+        <!-- start:Departments -->
         <tr v-for="department in departments" v-else>
+          <!-- start:Department Name -->
           <td>
-            {{
-              department.department_name ? department.department_name : '----'
-            }}
+            <div class="text-primary fw-bold mb-0">
+              {{
+                department.department_name ? department.department_name : '----'
+              }}
+            </div>
           </td>
+          <!-- end:Department Name -->
+
+          <!-- start:Department HOD -->
           <td>
-            {{ department.hod ? department.hod : '----' }}
+            <div class="d-flex align-items-center">
+              <!-- profile image -->
+              <div class="avatar rounded-circle">
+                <img
+                  :data-src="`https://images.unsplash.com/photo-1494790108377-be9c29b29330`"
+                  class="avatar rounded-circle obj-pos-center obj-fit-cover shadow"
+                  :alt="`${department.hod}'s profile image`"
+                  v-lazy-load
+                />
+              </div>
+              <!-- Name -->
+              <div class="ms-3">
+                <p class="fw-bold mb-1 text-dark">
+                  {{ department.hod ? department.hod : '----' }}
+                </p>
+              </div>
+            </div>
           </td>
+          <!-- end:Department HOD -->
+
+          <!-- start:Department College -->
           <td>
-            {{
-              department.college ? department.college.institute_name : '----'
-            }}
+            <div class="text-dark mb-0">
+              {{
+                department.college ? department.college.institute_name : '----'
+              }}
+            </div>
           </td>
+          <!-- end:Department College -->
+
+          <!-- start:Department College -->
           <td>
-            {{
-              department.created_on
-                ? $nuxt.$utils.dateFormat(department.created_on)
-                : '----'
-            }}
+            <div class="text-dark mb-0 text-nowrap">
+              {{
+                department.created_on
+                  ? $nuxt.$utils.dateFormat(department.created_on)
+                  : '----'
+              }}
+            </div>
           </td>
+          <!-- end:Department College -->
+
+          <!-- start:Actions -->
           <td>
             <div
               class="d-flex justify-content-center justify-content-lg-start align-items-center gap-2"
             >
               <NuxtLink
                 :to="`/dash/department/${department.id}`"
-                class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
+                class="btn btn-floating bg-gradient-info text-white btn-sm d-flex justify-content-center align-items-center"
                 ><i class="ri-edit-2-fill ri-lg"></i
               ></NuxtLink>
               <a
                 @click="deleteDepartment(department.id)"
-                class="btn btn-floating btn-danger btn-sm d-flex justify-content-center align-items-center"
+                class="btn btn-floating bg-gradient-danger text-white btn-sm d-flex justify-content-center align-items-center"
                 ><i class="ri-delete-bin-fill ri-lg"></i
               ></a>
             </div>
           </td>
+          <!-- end:Actions -->
         </tr>
+        <!-- end:Departments -->
       </tbody>
     </table>
   </div>
@@ -126,4 +173,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.badge-fs {
+  font-size: 0.9rem !important;
+}
+
+table th:first-child {
+  border-radius: 10px 0 0 10px !important;
+}
+
+table th:last-child {
+  border-radius: 0 10px 10px 0 !important;
+}
+</style>

@@ -2,8 +2,10 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h2>Colleges</h2>
-        <p>lists all Registered Colleges</p>
+        <h1 class="text-gradient text-primary d-inline-block">Colleges</h1>
+        <h3 class="text-secondary text-capitalize">
+          lists all Registered Colleges
+        </h3>
       </div>
       <div class="card-body">
         <!-- <section class="d-flex justify-content-end">
@@ -21,7 +23,7 @@
         <Lazy-LoadersTable v-if="loading" />
         <Lazy-DashCollegeTable v-else :colleges.sync="colleges" />
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mt-3">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
           <Lazy-UtilsLinkButton
             v-if="!loading"

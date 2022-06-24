@@ -22,7 +22,7 @@
         <Lazy-LoadersTable v-if="loading" />
         <Lazy-DashUserTable v-else :users.sync="users" />
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mt-3">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
           <Lazy-UtilsLinkButton
             v-if="!loading"
