@@ -2,8 +2,8 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h2>Users</h2>
-        <p>lists all Registerd User</p>
+        <h1 class="text-dark">Users</h1>
+        <h3 class="text-secondary text-capitalize">lists all Registerd User</h3>
       </div>
       <div class="card-body">
         <section class="d-flex justify-content-end">
@@ -108,11 +108,6 @@ export default {
     refreshUsers() {
       this.loading = true
       this.getUsers().then(() => (this.loading = false))
-    },
-
-    dateFormat(date) {
-      // return strf date
-      return this.$moment(date).format('Do MMMM YYYY, h:mm:ss a')
     },
   },
 
