@@ -2,7 +2,7 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h1 class="text-dark">Users</h1>
+        <h1 class="text-gradient text-primary d-inline-block">Users</h1>
         <h3 class="text-secondary text-capitalize">lists all Registerd User</h3>
       </div>
       <div class="card-body">
@@ -22,7 +22,7 @@
         <Lazy-LoadersTable v-if="loading" />
         <Lazy-DashUserTable v-else :users.sync="users" />
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mt-3">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
           <Lazy-UtilsLinkButton
             v-if="!loading"

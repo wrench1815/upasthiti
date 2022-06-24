@@ -2,8 +2,12 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h2>Department Type</h2>
-        <p>lists all Registerd Department Types</p>
+        <h1 class="text-gradient text-primary d-inline-block">
+          Department Type
+        </h1>
+        <h3 class="text-secondary text-capitalize">
+          lists all Registerd Department Types
+        </h3>
       </div>
       <div class="card-body">
         <!-- <section class="d-flex justify-content-end">
@@ -20,11 +24,11 @@
         </section> -->
         <Lazy-LoadersTable v-if="loading" />
         <Lazy-DashDepartmentTypeTable
-          v-if="!loading"
           :departmentTypes.sync="departmentTypes"
+          v-else
         />
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mt-3">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
           <Lazy-UtilsLinkButton
             v-if="!loading"

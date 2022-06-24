@@ -1,12 +1,14 @@
 <template>
   <div class="table-responsive">
-    <table class="table table-hove mb-0 bg-white align-middle table-borderless">
+    <table class="table mb-0 bg-white align-middle table-borderless">
       <!-- start:Header -->
       <thead class="align-middle bg-primary text-white">
         <tr>
-          <th scope="col" class="fw-bolder text-uppercase">Name</th>
-          <th scope="col" class="fw-bolder text-uppercase">Email</th>
-          <th scope="col" class="fw-bolder text-uppercase">Role</th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">Name</th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">
+            Email
+          </th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">Role</th>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">
             Date Added
           </th>
@@ -17,8 +19,8 @@
       <tbody>
         <!-- start:no users -->
         <tr v-if="users.length == 0">
-          <td colspan="5" class="">
-            <h4 class="text-center">Nothing to see here</h4>
+          <td colspan="6" class="bg-white">
+            <UtilsNoData class="mx-auto" message="No Users found" />
           </td>
         </tr>
         <!-- end:no users -->
@@ -136,20 +138,24 @@
             </p>
           </td>
 
+          <!-- start:Actions-->
           <td>
             <div class="d-flex justify-content-center align-items-center gap-2">
+              <!-- edit -->
               <NuxtLink
                 :to="`/dash/user/${user.id}`"
-                class="btn btn-floating btn-info btn-sm d-flex justify-content-center align-items-center"
+                class="btn btn-floating bg-gradient-info text-white btn-sm d-flex justify-content-center align-items-center"
                 ><i class="ri-edit-2-fill ri-lg"></i
               ></NuxtLink>
+              <!-- destroy -->
               <a
                 @click="deleteUser(user.id)"
-                class="btn btn-floating btn-danger btn-sm d-flex justify-content-center align-items-center"
+                class="btn btn-floating bg-gradient-danger text-white btn-sm d-flex justify-content-center align-items-center"
                 ><i class="ri-delete-bin-fill ri-lg"></i
               ></a>
             </div>
           </td>
+          <!-- end:Actions-->
         </tr>
         <!-- end:has users -->
       </tbody>

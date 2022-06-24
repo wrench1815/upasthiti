@@ -2,6 +2,13 @@
 
 @import 'mdb-ui-kit/src/scss/mdb.free.scss';
 
+// gradients
 @import '~/assets/scss/_gradients.scss';
+@import '~/assets/scss/_typography.scss';
 
+// asidenav
 @import '~/assets/scss/_navbar-vertical.scss';
+
+// sweetalerts2
+@import '~/assets/scss/sweetalerts2/_sweetalerts2.scss';
+@import '~/assets/scss/sweetalerts2/_sweetalerts2-extend.scss';

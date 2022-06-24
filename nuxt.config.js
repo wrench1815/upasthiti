@@ -57,7 +57,7 @@ export default {
     '@nuxtjs/auth-next',
 
     // https://github.com/avil13/vue-sweetalert2
-    'vue-sweetalert2/nuxt',
+    'vue-sweetalert2/nuxt/no-css',
 
     // https://gitlab.com/broj42/nuxt-lazy-load#readme
     [
@@ -140,9 +140,9 @@ export default {
     allowEscapeKey: false,
     buttonsStyling: false,
     customClass: {
-      confirmButton: 'btn btn-success fw-bold mx-2',
-      cancelButton: 'btn btn-danger fw-bold mx-2',
-      denyButton: 'btn btn-warning fw-bold mx-2',
+      confirmButton: 'btn btn-success btn-rounded fw-bolder mx-2',
+      cancelButton: 'btn btn-danger btn-rounded fw-bolder mx-2',
+      denyButton: 'btn btn-warning btn-rounded fw-bolder mx-2',
     },
   },
 
@@ -154,6 +154,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    parallel: process.env.NODE_ENV == 'development',
+    hardSource: process.env.NODE_ENV == 'development',
+    cache: process.env.NODE_ENV == 'development',
     transpile: ['vee-validate/dist/rules'],
   },
 

@@ -1,24 +1,21 @@
 /*
+  New Color Pallette
+*/
+:root {
+  --primary: #5e72e4;
+  --secondary: #8392ab;
+  --success: #2dce89;
+  --info: #11cdef;
+  --warning: #fb6340;
+  --danger: #f5365c;
+  --light: #e9ecef;
+  --dark: #344767;
+  --white: #fff;
+  --black: #000;
+}
 
-primary:
-  hex: #ff0a54;
-  rgb: 255, 10, 84
-secondary:
-  hex: #a855f7;
-  rgb: 168, 85, 247
-success:
-  hex: #05e657;
-  rgb: 5, 230, 87
-info:
-  hex: #0bc5ea;
-  rgb: 11, 197, 234
-warning:
-  hex: #ffd91a;
-  rgb: 255, 217, 26
-danger:
-  hex: #e82113;
-  rgb: 232, 33, 19
-
+/*
+  Old Color Pallette
 */
 :root {
   --primary: #ff0a54;
@@ -31,21 +28,4 @@ danger:
   --dark: #262626;
   --white: #fff;
   --black: #000;
-  --primary-rgb: 255, 10, 84;
-  --secondary-rgb: 168, 85, 247;
-  --success-rgb: 5, 230, 87;
-  --info-rgb: 11, 197, 234;
-  --warning-rgb: 255, 217, 26;
-  --danger-rgb: 232, 33, 19;
-  --light-rgb: 249, 249, 249;
-  --dark-rgb: 38, 38, 38;
-  --white-rgb: 255, 255, 255;
-  --black-rgb: 0, 0, 0;
-  --white-rgb: 255, 255, 255;
-  --black-rgb: 0, 0, 0;
-  --gradient: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.15),
-    rgba(255, 255, 255, 0)
-  );
 }
