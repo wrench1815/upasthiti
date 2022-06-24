@@ -48,10 +48,6 @@
           </li>
         </ul>
         <!-- end:mid links -->
-
-        <!-- start:right links -->
-        <!-- <Lazy-DashNavRightLinks /> -->
-        <!-- start:right links -->
       </div>
       <!-- Collapsible wrapper -->
     </div>
