@@ -20,19 +20,26 @@
             >
               <img
                 class="avatar avatar-lg rounded-circle obj-fit-cover shadow"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
-                alt=""
+                data-src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+                :alt="`${user.first_name}'s profile image`"
+                v-lazy-load
               />
               <div class="text-center text-break">
                 <h5 class="text-dark">
                   {{ user.first_name }} {{ user.last_name }}
                 </h5>
                 <p class="pb-0 mb-0 text-muted">{{ user.email }}</p>
-                <span
-                  class="badge rounded-pill mb-2 text-uppercase shadow-2-strong"
-                  :class="roleClass"
-                  >{{ role }}</span
+                <div
+                  class="d-flex justify-content-center align-items-center mt-2 mb-3"
                 >
+                  <span
+                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs shadow-3-strong py-2 rounded-pill flex-wrap"
+                    :class="roleClass"
+                  >
+                    <i :class="roleIcon"></i>
+                    {{ role }}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -66,7 +73,7 @@
                   class="nav-link rounded-4 text-danger pointer-pointer d-flex align-items-center gap-1"
                   @click="logout"
                 >
-                  <i class="ri-logout-circle-line"></i>Logout
+                  <i class="ri-logout-circle-line text-danger"></i>Logout
                 </div>
               </li>
               <!-- end:Logout -->
@@ -88,6 +95,7 @@ export default {
   data() {
     return {
       roleClass: '',
+      roleIcon: '',
       loading: true,
     }
   },
@@ -166,13 +174,17 @@ export default {
 
     async setRoleClass() {
       if ((await this.role) === 'admin') {
-        this.roleClass = 'badge-danger'
+        this.roleClass = await 'bg-gradient-danger'
+        this.roleIcon = await 'ri-shield-user-fill'
       } else if ((await this.role) === 'principal') {
-        this.roleClass = 'badge-primary'
+        this.roleClass = 'bg-gradient-info'
+        this.roleIcon = 'ri-admin-fill'
       } else if ((await this.role) === 'hod') {
-        this.roleClass = 'badge-success'
+        this.roleClass = 'bg-gradient-primary'
+        this.roleIcon = 'ri-user-star-fill'
       } else if ((await this.role) === 'teacher') {
-        this.roleClass = 'badge-info'
+        this.roleClass = 'bg-gradient-warning'
+        this.roleIcon = 'ri-user-2-fill'
       }
     },
   },
@@ -212,5 +224,9 @@ export default {
 
 .nav-link:hover i {
   color: var(--mdb-primary);
+}
+
+.badge-fs {
+  font-size: 0.9rem !important;
 }
 </style>
