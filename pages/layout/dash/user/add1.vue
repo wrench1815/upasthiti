@@ -17,11 +17,16 @@
                   <input
                     type="text"
                     id="form6Example1"
-                    class="form-control form-control-lg"
+                    class="form-control form-control-"
                   />
                   <label class="form-label" for="form6Example1">
-                    <i class="ri-user-fill"></i> First name</label
-                  >
+                    <div class="d-flex justify-content-center gap-1">
+                      <i
+                        class="ri-user-fill text-primary text-gradient d-block-inline"
+                      ></i>
+                      <span> First name </span>
+                    </div>
+                  </label>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12 mb-4">
@@ -29,11 +34,16 @@
                   <input
                     type="text"
                     id="form6Example2"
-                    class="form-control form-control-lg"
+                    class="form-control form-control-"
                   />
                   <label class="form-label" for="form6Example2">
-                    <i class="ri-user-fill"></i> Last name</label
-                  >
+                    <div class="d-flex justify-content-center gap-1">
+                      <i
+                        class="ri-user-fill text-primary text-gradient d-block-inline"
+                      ></i>
+                      <span> Last name </span>
+                    </div>
+                  </label>
                 </div>
               </div>
             </div>
@@ -43,21 +53,42 @@
               <input
                 type="email"
                 id="form6Example5"
-                class="form-control form-control-lg"
+                class="form-control form-control-"
               />
               <label class="form-label" for="form6Example5">
-                <i class="ri-mail-fill"></i>
-                Email</label
-              >
+                <div class="d-flex justify-content-center gap-1">
+                  <i
+                    class="ri-mail-fill text-primary text-gradient d-block-inline"
+                  ></i>
+                  <span> Email </span>
+                </div>
+              </label>
             </div>
 
             <!-- Gender -->
-            <div class="form-outline mb-4">
+            <div class="mb-4">
               <v-select
                 placeholder="Select Gender"
                 :options="genderList"
                 v-model="user.gender"
-              ></v-select>
+              >
+                <template #option="{ label, icon }">
+                  <div
+                    class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                  >
+                    <i :class="icon"></i>
+                    <span>{{ label }}</span>
+                  </div>
+                </template>
+                <template #selected-option="{ label, icon }">
+                  <div
+                    class="d-flex justify-content-start align-items-center gap-1 fw-5"
+                  >
+                    <i class="text-primary" :class="icon"></i>
+                    <span>{{ label }}</span>
+                  </div>
+                </template>
+              </v-select>
             </div>
 
             <!-- Password-->
@@ -66,70 +97,139 @@
               <input
                 type="password"
                 id="form6Example5"
-                class="form-control form-control-lg"
+                class="form-control form-control-"
               />
               <label class="form-label" for="form6Example5">
-                <i class="ri-lock-2-fill"></i> Password</label
-              >
+                <div class="d-flex justify-content-center gap-1">
+                  <i
+                    class="ri-lock-2-fill text-primary text-gradient d-block-inline"
+                  ></i>
+                  <span> Password </span>
+                </div>
+              </label>
             </div>
             <!-- end password -->
 
             <!-- Checkbox -->
-            <div class="row form-check d-flex justify-content-center my-4 pb-4">
-              <div class="col-6 col-lg-3 col-md-3">
-                <label class="form-check-label" for="form6Example8">
-                  <!-- <i class="ri-shield-user-fill text-gradient text-danger d-inline-block"></i> -->
-                  Admin
+            <div class="row justify-content-center g-3 my-4 pb-4">
+              <!-- start:Admin Check -->
+              <div
+                class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
+              >
+                <label class="form-check-label" for="admin">
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
+                    :class="{
+                      'border-transparent bg-gradient-danger shadow-3-strong text-white':
+                        user.is_admin,
+                      'border-danger text-danger text-gradient bg-white fw-bolder':
+                        !user.is_admin,
+                    }"
+                  >
+                    <i class="ri-shield-user-fill"></i>
+                    <span>Admin</span>
+                  </div>
                 </label>
                 <input
-                  class="form-check-input me-2"
+                  class="form-check-input me-2 d-none"
                   type="checkbox"
-                  value=""
-                  id="form6Example8"
+                  id="admin"
+                  v-model="user.is_admin"
                 />
               </div>
-              <div class="col-6 col-lg-3 col-md-3">
-                <label class="form-check-label" for="form6Example8">
-                  Principal
+              <!-- end:Admin Check -->
+
+              <!-- start:Principal Check -->
+              <div
+                class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
+              >
+                <label class="form-check-label" for="principal">
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
+                    :class="{
+                      'border-transparent bg-gradient-info text-white shadow-3-strong':
+                        user.is_principal,
+                      'border-info text-info text-gradient bg-white fw-bolder':
+                        !user.is_principal,
+                    }"
+                  >
+                    <i class="ri-admin-fill"></i>
+                    Principal
+                  </div>
                 </label>
                 <input
-                  class="form-check-input me-2"
+                  class="form-check-input me-2 d-none"
                   type="checkbox"
-                  value=""
-                  id="form6Example8"
+                  id="principal"
+                  v-model="user.is_principal"
                 />
               </div>
-              <div class="col-6 col-lg-3 col-md-3">
-                <input
-                  class="form-check-input me-2"
-                  type="checkbox"
-                  value=""
-                  id="form6Example8"
-                />
-                <label class="form-check-label" for="form6Example8">
-                  HOD
+              <!-- end:Principal Check -->
+
+              <!-- start:HOD Check -->
+              <div
+                class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
+              >
+                <label class="form-check-label" for="hod">
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
+                    :class="{
+                      'border-transparent bg-gradient-primary text-white shadow-3-strong':
+                        user.is_hod,
+                      'border-primary text-primary text-gradient bg-white fw-bolder':
+                        !user.is_hod,
+                    }"
+                  >
+                    <i class="ri-user-star-fill"></i>
+                    HoD
+                  </div>
                 </label>
-              </div>
-              <div class="col-6 col-lg-3 col-md-3">
                 <input
-                  class="form-check-input me-2"
+                  class="form-check-input me-2 d-none"
                   type="checkbox"
-                  value=""
-                  id="form6Example8"
+                  id="hod"
+                  v-model="user.is_hod"
                 />
-                <label class="form-check-label" for="form6Example8">
-                  Teacher
-                </label>
               </div>
+              <!-- end:HOD Check -->
+
+              <!-- start:Teacher Check -->
+              <div
+                class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
+              >
+                <label class="form-check-label" for="teacher">
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
+                    :class="{
+                      'border-transparent bg-gradient-warning text-white shadow-3-strong':
+                        user.is_teacher,
+                      'border-warning text-warning text-gradient bg-white fw-bolder':
+                        !user.is_teacher,
+                    }"
+                  >
+                    <i class="ri-user-2-fill"></i>
+                    Teacher
+                  </div>
+                </label>
+                <input
+                  class="form-check-input me-2 d-none"
+                  type="checkbox"
+                  id="teacher"
+                  v-model="user.is_teacher"
+                />
+              </div>
+              <!-- end:Teacher Check -->
             </div>
 
             <!-- Submit button -->
-            <button
-              type="submit"
-              class="btn bg-gradient-primary d-grid gap-2 col-6 mx-auto text-white btn-rounded my-4"
-            >
-              Add User
-            </button>
+            <div class="d-flex justify-content-center">
+              <button
+                type="submit"
+                class="btn bg-gradient-primary col- text-white btn-rounded my-4"
+              >
+                Add a new User
+              </button>
+            </div>
           </form>
           <!-- End:User Edit Form -->
         </ValidationObserver>
@@ -147,7 +247,20 @@ export default {
     return {
       loading: true,
       error: true,
-      genderList: ['Male', 'Female', 'Rather not Say'],
+      genderList: [
+        {
+          label: 'Male',
+          icon: 'ri-men-fill',
+        },
+        {
+          label: 'Female',
+          icon: 'ri-women-fill',
+        },
+        {
+          label: 'Rather not Say',
+          icon: 'ri-genderless-fill',
+        },
+      ],
       showPassword: false,
       user: {
         first_name: '',
@@ -258,5 +371,23 @@ export default {
   content: '*';
   color: var(--mdb-danger);
   font-size: 1.2rem;
+}
+
+hover-select i {
+  color: var(--mdb-primary) !important;
+}
+.vs__dropdown-option--highlight {
+  background: #5897fb;
+  background: var(--vs-dropdown-option--active-bg);
+  color: #fff;
+  color: var(--vs-dropdown-option--active-color);
+}
+
+.badge-fs {
+  font-size: 0.9rem !important;
+}
+
+.border-transparent {
+  border-color: transparent !important;
 }
 </style>
