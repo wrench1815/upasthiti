@@ -67,7 +67,7 @@
                 <div
                   class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-danger badge-fs shadow-3-strong py-2 rounded-pill flex-wrap"
                 >
-                  <i class="ri-admin-fill"></i>
+                  <i class="ri-shield-user-fill"></i>
                   <div class="">Admin</div>
                 </div>
               </div>
@@ -80,8 +80,7 @@
                 <div
                   class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-info badge-fs shadow-3-strong py-2 rounded-pill"
                 >
-                  <!-- <i class="ri-admin-fill"></i> -->
-                  <i class="ri-shield-user-fill"></i>
+                  <i class="ri-admin-fill"></i>
                   <div class="">Principal</div>
                 </div>
               </div>
