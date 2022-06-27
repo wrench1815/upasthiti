@@ -10,6 +10,49 @@
         <ValidationObserver v-slot="{ handleSubmit }">
           <!-- start:User Edit Form -->
           <form>
+            <div class="row mb-4">
+              <div class="col-12">
+                <label class="form-label">
+                  <div class="d-flex justify-content-center gap-1">
+                    <i
+                      class="ri-image-fill text-primary text-gradient d-block-inline"
+                    ></i>
+                    <span> Profile Image </span>
+                  </div>
+                </label>
+              </div>
+              <div class="col-12">
+                <div
+                  class="profile-img-input bg-secondar position-relative rounded-5 shadow-3 borde border-primar border- user-bg"
+                  style="width: 125px; height: 125px"
+                >
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle bg-white border border-dange avatar avatar-s rounded-circle shadow-1-strong"
+                    style="width: 22px; height: 22px"
+                    data-mdb-toggle="tooltip"
+                    data-mdb-placement="bottom"
+                    title="Remove Image"
+                  >
+                    <i class="ri-close-line text-danger"></i>
+                  </span>
+                  <label
+                    class="position-absolute top-100 start-100 translate-middle bg-white border border-dange avatar avatar-s rounded-circle shadow-1-strong"
+                    style="width: 22px; height: 22px"
+                    for="profileImage"
+                    data-mdb-toggle="tooltip"
+                    data-mdb-placement="bottom"
+                    title="Select Image"
+                  >
+                    <i class="ri-pencil-fill text-primary"></i>
+                  </label>
+                </div>
+                <input
+                  type="file"
+                  class="form-control d-none"
+                  id="profileImage"
+                />
+              </div>
+            </div>
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row">
               <div class="col-lg-6 col-md-6 col-12 mb-4">
@@ -92,7 +135,6 @@
             </div>
 
             <!-- Password-->
-
             <div class="form-outline mb-4">
               <input
                 type="password"
@@ -108,10 +150,30 @@
                 </div>
               </label>
             </div>
-            <!-- end password -->
 
-            <!-- Checkbox -->
-            <div class="row justify-content-center g-3 my-4 pb-4">
+            <!-- Role Checkbox -->
+            <div class="row justify-content-center g-3 pb-4">
+              <div class="col-12">
+                <label class="form-label">
+                  <div class="d-flex justify-content-center gap-1">
+                    <i
+                      class="ri-mail-fill text-primary text-gradient d-block-inline"
+                    ></i>
+                    <span> Roles </span>
+                    <a
+                      tabindex="0"
+                      class=""
+                      role="button"
+                      data-mdb-toggle="popover"
+                      data-mdb-trigger="focus"
+                      data-mdb-content="Select a role to assign to the user. Can be multiple."
+                    >
+                      <i class="ri-information-line text-danger"></i>
+                    </a>
+                  </div>
+                </label>
+              </div>
+
               <!-- start:Admin Check -->
               <div
                 class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
@@ -362,6 +424,18 @@ export default {
     document.querySelectorAll('.form-outline').forEach((formOutline) => {
       new this.$mdb.Input(formOutline).init()
     })
+
+    // get element by attribute
+    document
+      .querySelectorAll('[data-mdb-toggle="popover"]')
+      .forEach((popover) => {
+        new this.$mdb.Popover(popover)
+      })
+    document
+      .querySelectorAll('[data-mdb-toggle="tooltip"]')
+      .forEach((tooltip) => {
+        new this.$mdb.Tooltip(tooltip)
+      })
   },
 }
 </script>
@@ -389,5 +463,11 @@ hover-select i {
 
 .border-transparent {
   border-color: transparent !important;
+}
+
+.user-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M4 22a8 8 0 1 1 16 0H4zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6z' fill='rgba(94,114,228,1)'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 </style>
