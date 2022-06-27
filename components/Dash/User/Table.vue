@@ -35,7 +35,7 @@
                 src="https://mdbootstrap.com/img/new/avatars/8.jpg"
                 alt=""
                 style="width: 45px; height: 45px"
-                class="rounded-circle"
+                class="rounded-circle shadow-2-strong"
               />
               <!-- full name -->
               <div class="ms-3">
@@ -58,14 +58,14 @@
 
           <!-- start:Roles -->
           <td>
-            <div class="text-dark mb-0 badge-fs">
+            <div class="d-flex gap-2 mb-0 badge-fs">
               <!-- if Admin -->
               <div
                 class="d-flex justify-content-center align-items-center"
-                v-if="userRole(user) === 'Admin'"
+                v-if="roleAdmin(user)"
               >
                 <div
-                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-danger badge-fs shadow-3-strong py-2 rounded-pill flex-wrap"
+                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-danger badge-fs shadow-3-strong py-2 rounded-pill"
                 >
                   <i class="ri-shield-user-fill"></i>
                   <div class="">Admin</div>
@@ -75,7 +75,7 @@
               <!-- if Principal -->
               <div
                 class="d-flex justify-content-center align-items-center"
-                v-else-if="userRole(user) === 'Principal'"
+                v-if="rolePrincipal(user)"
               >
                 <div
                   class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-info badge-fs shadow-3-strong py-2 rounded-pill"
@@ -88,7 +88,7 @@
               <!-- if HOD -->
               <div
                 class="d-flex justify-content-center align-items-center"
-                v-else-if="userRole(user) === 'HOD'"
+                v-if="roleHod(user)"
               >
                 <div
                   class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-primary badge-fs shadow-3-strong py-2 rounded-pill"
@@ -101,7 +101,7 @@
               <!-- if Teacher -->
               <div
                 class="d-flex justify-content-center align-items-center"
-                v-else-if="userRole(user) === 'Teacher'"
+                v-if="roleTeacher(user)"
               >
                 <div
                   class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-warning badge-fs shadow-3-strong py-2 rounded-pill"
@@ -114,7 +114,7 @@
               <!-- fallback -->
               <div
                 class="d-flex justify-content-center align-items-center"
-                v-else
+                v-if="roleNone(user)"
               >
                 <div
                   class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-success badge-fs shadow-3-strong py-2 rounded-pill"
@@ -238,8 +238,30 @@ export default {
       } else if (user.is_principal) {
         return 'Principal'
       } else {
-        return '----'
+        return undefined
       }
+    },
+
+    roleAdmin(user) {
+      return user.is_admin
+    },
+
+    rolePrincipal(user) {
+      return user.is_principal
+    },
+
+    roleHod(user) {
+      return user.is_hod
+    },
+
+    roleTeacher(user) {
+      return user.is_teacher
+    },
+
+    roleNone(user) {
+      return (
+        !user.is_admin && !user.is_principal && !user.is_hod && !user.is_teacher
+      )
     },
   },
 }
