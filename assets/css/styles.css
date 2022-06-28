@@ -674,3 +674,9 @@ auto: auto,
 .transition-all-ease-out-sine {
   transition: all 0.6s cubic-bezier(0.61, 1, 0.88, 1) !important;
 }
+
+/* required */
+.required::after {
+  content: '*';
+  color: var(--mdb-danger);
+}
