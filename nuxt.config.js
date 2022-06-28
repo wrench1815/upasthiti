@@ -164,6 +164,9 @@ export default {
     axios: {
       baseURL: process.env.API_URL,
     },
+
+    // default User Image
+    defaultUserImage: process.env.DEFAULT_USER_IMAGE,
   },
 
   // custom loading indicator
