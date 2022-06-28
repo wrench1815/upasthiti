@@ -46,6 +46,9 @@ export default {
 
     // @nuxtjs/moment: https://github.com/nuxt-community/moment-module
     '@nuxtjs/moment',
+
+    // @nuxtjs/web-vitals: https://github.com/nuxt-community/web-vitals-module
+    '@nuxtjs/web-vitals',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -150,6 +153,12 @@ export default {
   moment: {
     defaultLocale: 'en',
     defaultTimezone: 'Asia/Kolkata',
+  },
+
+  webVitals: {
+    // provider: '', // auto detectd
+    debug: false,
+    disabled: false,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
