@@ -38,7 +38,10 @@
                 >
                   <!-- profile image, reset -->
                   <span
-                    class="position-absolute top-0 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size"
+                    class="position-absolute top-0 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size ripple"
+                    data-mdb-ripple-radius="40"
+                    data-mdb-ripple-unbound="true"
+                    data-mdb-ripple-centered="true"
                     data-mdb-toggle="tooltip"
                     data-mdb-placement="bottom"
                     title="Remove Profile Image"
@@ -49,7 +52,10 @@
 
                   <!-- profile image, select -->
                   <label
-                    class="position-absolute top-100 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size"
+                    class="position-absolute top-100 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size ripple"
+                    data-mdb-ripple-radius="40"
+                    data-mdb-ripple-unbound="true"
+                    data-mdb-ripple-centered="true"
                     for="profileImage"
                     data-mdb-toggle="tooltip"
                     data-mdb-placement="bottom"
@@ -195,7 +201,11 @@
                 id="showPassword"
                 v-model="showPassword"
               />
-              <label class="form-check-label" for="showPassword"
+              <label
+                class="form-check-label ripple"
+                data-mdb-ripple-unbound="true"
+                data-mdb-ripple-radius="40"
+                for="showPassword"
                 >Show Password</label
               >
             </div>
@@ -213,7 +223,9 @@
                     <span> Roles </span>
                     <a
                       tabindex="0"
-                      class=""
+                      class="ripple"
+                      data-mdb-ripple-unbound="true"
+                      data-mdb-ripple-radius="40"
                       role="button"
                       data-mdb-toggle="popover"
                       data-mdb-html="true"
@@ -230,7 +242,12 @@
               <div
                 class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
               >
-                <label class="form-check-label" for="admin">
+                <label
+                  class="form-check-label ripple"
+                  data-mdb-ripple-unbound="true"
+                  data-mdb-ripple-radius="40"
+                  for="admin"
+                >
                   <div
                     class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
                     :class="{
@@ -257,7 +274,12 @@
               <div
                 class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
               >
-                <label class="form-check-label" for="principal">
+                <label
+                  class="form-check-label ripple"
+                  data-mdb-ripple-unbound="true"
+                  data-mdb-ripple-radius="40"
+                  for="principal"
+                >
                   <div
                     class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
                     :class="{
@@ -284,7 +306,12 @@
               <div
                 class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
               >
-                <label class="form-check-label" for="hod">
+                <label
+                  class="form-check-label ripple"
+                  data-mdb-ripple-unbound="true"
+                  data-mdb-ripple-radius="40"
+                  for="hod"
+                >
                   <div
                     class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
                     :class="{
@@ -311,7 +338,12 @@
               <div
                 class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
               >
-                <label class="form-check-label" for="teacher">
+                <label
+                  class="form-check-label ripple"
+                  data-mdb-ripple-unbound="true"
+                  data-mdb-ripple-radius="40"
+                  for="teacher"
+                >
                   <div
                     class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
                     :class="{
@@ -648,6 +680,14 @@ export default {
           .forEach((tooltip) => {
             new this.$mdb.Tooltip(tooltip)
           })
+
+        document.querySelectorAll('.custom-ripple').forEach((ripple) => {
+          new this.$mdb.Ripple(ripple, {
+            color: 'primary',
+            rippleUnbound: true,
+            rippleRadius: 40,
+          })
+        })
       })
   },
 }
