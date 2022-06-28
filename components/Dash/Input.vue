@@ -1,31 +1,34 @@
 <template>
   <div>
     <!-- start:Input Element -->
-    <div class="row">
-      <div class="col-12 col-md-4">
-        <label class="form-label" :for="randomUUID">{{ label }} </label>
-      </div>
-      <div class="col">
-        <ValidationProvider v-slot="{ errors }" :rules="validationRules">
-          <div class="form-outline">
-            <input
-              :type="type"
-              :id="randomUUID"
-              class="form-control"
-              v-model="inputData"
-              @keyup="$emit('update:data', inputData)"
-            />
+    <ValidationProvider v-slot="{ errors }" :rules="validationRules">
+      <div class="form-outline">
+        <input
+          :type="type"
+          :id="randomUUID"
+          class="form-control mb-0"
+          v-model="inputData"
+          @keyup="$emit('update:data', inputData)"
+        />
+        <label class="form-label" :for="randomUUID">
+          <div class="d-flex justify-content-center gap-1 required">
+            <i
+              class="text-primary text-gradient d-block-inline"
+              :class="[icon, iconClasses]"
+            ></i>
+            <span>{{ label }}</span>
+            <!-- <span class="text-danger">*</span> -->
           </div>
-          <!-- Validation Errors -->
-          <div
-            class="text-danger transition-all-ease-out-sine"
-            :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-          >
-            {{ errors[0] }}
-          </div>
-        </ValidationProvider>
+        </label>
       </div>
-    </div>
+      <!-- Valdation Errors -->
+      <div
+        class="text-danger transition-all-ease-out-sine"
+        :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+      >
+        {{ errors[0] }}
+      </div>
+    </ValidationProvider>
     <!-- end:Input Element -->
   </div>
 </template>
@@ -56,6 +59,18 @@ export default {
     type: {
       type: String,
       default: 'text',
+    },
+    icon: {
+      type: String,
+      default: '',
+    },
+    iconClasses: {
+      type: String,
+      default: 'text-primary text-gradient',
+    },
+    isRequired: {
+      type: Boolean,
+      default: false,
     },
   },
 
