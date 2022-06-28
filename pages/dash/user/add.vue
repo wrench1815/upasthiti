@@ -667,27 +667,24 @@ export default {
         this.unsetLoading()
       })
       .finally(() => {
+        // initialize form elements
         document.querySelectorAll('.form-outline').forEach((formOutline) => {
           new this.$mdb.Input(formOutline).init()
         })
+
+        // initialize popover elements
         document
           .querySelectorAll('[data-mdb-toggle="popover"]')
           .forEach((popover) => {
             new this.$mdb.Popover(popover)
           })
+
+        // initialize tooltip elements
         document
           .querySelectorAll('[data-mdb-toggle="tooltip"]')
           .forEach((tooltip) => {
             new this.$mdb.Tooltip(tooltip)
           })
-
-        document.querySelectorAll('.custom-ripple').forEach((ripple) => {
-          new this.$mdb.Ripple(ripple, {
-            color: 'primary',
-            rippleUnbound: true,
-            rippleRadius: 40,
-          })
-        })
       })
   },
 }
