@@ -9,6 +9,33 @@
         </p>
       </div>
       <div class="card-body">
+        <div
+          class="mb-3 shadow-5 d-flex card-header gap-3 rounded-5 align-items-center flex-column flex-md-row"
+        >
+          <div>
+            <img
+              :data-src="college.institute_logo"
+              :alt="`${college.institute_name} logo`"
+              v-lazy-load
+              class="avatar avatar-xxl obj-fit-cover shadow-1-strong"
+            />
+          </div>
+          <div
+            class="d-flex flex-column justify-content-center align-content-start text-break"
+          >
+            <div class="fw-bold fs-5 text-primary text-gradient">
+              {{ college.institute_name }}
+            </div>
+            <div class="text-muted small d-flex gap-1">
+              <i class="ri-mail-fill text-primary text-gradient"></i>
+              {{ college.institute_email }}
+            </div>
+            <div class="text-muted small d-flex gap-1">
+              <i class="ri-phone-fill text-primary text-gradient"></i>
+              {{ college.institute_mobile }}
+            </div>
+          </div>
+        </div>
         <div class="row mb-3 card-header shadow">
           <!-- <div class="col-12 col-md-4">
             <label class="text-muted fw-bold-500">Institute Logo</label>
