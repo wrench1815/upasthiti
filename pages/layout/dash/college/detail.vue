@@ -2,7 +2,7 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h2 class="text-primary">College Details</h2>
+        <h2 class="text-primary text-gradient">College Details</h2>
         <p class="text-secondary">
           Details of College:
           <span class="text-info fw-bold">{{ college.institute_name }}</span>
@@ -36,10 +36,8 @@
             </div>
           </div>
         </div>
-        <div class="row mb-3 card-header shadow">
-          <!-- <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Institute Logo</label>
-          </div> -->
+        <!-- <div class="row mb-3 card-header shadow">
+
           <div class="col-12 col-md-4 col-lg-4">
             <div
               class="d-flex justify-content-lg-start justify-content-md-end justify-content-sm-center justify-content-center"
@@ -59,12 +57,6 @@
               college.institute_name
             }}</span>
           </div>
-        </div>
-        <!-- <div class="row mb-3">
-          <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Institute name</label>
-          </div>
-
         </div> -->
 
         <div class="row mb-3">
@@ -93,29 +85,12 @@
             <label class="text-muted fw-bold-500">Institute Website</label>
           </div>
           <div class="col d-flex">
-            <a :href="college.institute_website" target="_blank">{{
-              college.institute_website
-            }}</a>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-12 col-md-4 d-flex">
-            <label class="text-muted fw-bold-500">Institute Mobile</label>
-          </div>
-          <div class="col d-flex">
-            <a :href="`tel:${college.institute_mobile}`" target="_blank">{{
-              college.institute_mobile
-            }}</a>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-12 col-md-4 d-flex">
-            <label class="text-muted fw-bold-500">Institute website</label>
-          </div>
-          <div class="col d-flex">
-            <a :href="`mailto:${college.institute_email}`" target="_blank">{{
-              college.institute_email
-            }}</a>
+            <a
+              :href="college.institute_website"
+              target="_blank"
+              class="text-gradient text-primary"
+              >{{ college.institute_website }}</a
+            >
           </div>
         </div>
         <div class="row mb-3">
@@ -133,7 +108,7 @@
 
     <div class="card mt-4">
       <div class="card-header">
-        <h2>College Principal Details</h2>
+        <h2 class="text-primary text-gradient">College Principal Details</h2>
         <p>
           Details of User:
           <span class="text-info fw-bold"
@@ -142,38 +117,74 @@
         </p>
       </div>
       <div class="card-body">
-        <div class="row mb-3">
-          <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Full Name</label>
+        <div class="card" style="max-width: 300px">
+          <div
+            class="bg-image hover-overlay ripple d-flex justify-content-center z-index-5"
+            data-mdb-ripple-color="light"
+          >
+            <img
+              src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
+              class="img-fluid avatar avatar-xxl rounded-circle mt-n5 shadow"
+            />
+            <a href="#!">
+              <div
+                class="mask"
+                style="background-color: rgba(251, 251, 251, 0.15)"
+              ></div>
+            </a>
           </div>
-          <div class="col">
-            <span class="fw-bold-600 fs-6"
-              >{{ principal.first_name }} {{ principal.last_name }}</span
-            >
+
+          <div class="card-body">
+            <div class="card-title fw-bold fs-5 text-primary text-gradient">
+              {{ principal.first_name }} {{ principal.last_name }}
+            </div>
+            <label class="text-muted fw-bold-500">Email :</label>
+            <span class="fw-bold-600 text-dark fs-6 card-text">{{
+              principal.email
+            }}</span>
+            <label class="text-muted fw-bold-500">Gender :</label>
+            <span class="fw-bold-600 text-dark fs-6">{{
+              principal.gender
+            }}</span>
           </div>
         </div>
-        <div class="row mb-3">
-          <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Email</label>
+        <!-- <div
+          class="mb-3 shadow-5 d-flex card-header gap-3 rounded-5 align-items-center flex-column flex-md-row"
+        >
+          <div>
+            <img
+              :data-src="college.institute_logo"
+              :alt="`${college.institute_name} logo`"
+              v-lazy-load
+              class="avatar avatar-xxl obj-fit-cover shadow-1-strong"
+            />
           </div>
-          <div class="col">
-            <span class="fw-bold-600 fs-6">{{ principal.email }}</span>
+          <div
+            class="d-flex flex-column justify-content-center align-content-start text-break"
+          >
+            <div class="fw-bold fs-5 text-primary text-gradient">
+              {{ principal.first_name }} {{ principal.last_name }}
+            </div>
+            <div class="text-muted small d-flex gap-1">
+              <label class="text-muted fw-bold-500">Email :</label>
+              <span class="fw-bold-600 text-dark  card-text">{{
+                principal.email
+              }}</span>
+            </div>
+            <div class="text-muted small d-flex gap-1">
+             <label class="text-muted fw-bold-500">Gender :</label>
+            <span class="fw-bold-600 text-dark card-text">{{
+              principal.gender
+            }}</span>
+            </div>
           </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-12 col-md-4">
-            <label class="text-muted fw-bold-500">Gender</label>
-          </div>
-          <div class="col">
-            <span class="fw-bold-600 fs-6">{{ principal.gender }}</span>
-          </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div class="card mt-4">
       <div class="card-header">
-        <h2>Departmenft Details</h2>
+        <h2 class="text-primary text-gradient">College Department Details</h2>
         <p>Details of College Department</p>
       </div>
       <div class="card-body">
@@ -186,12 +197,28 @@
                 alt="Hollywood Sign on The Hill"
               />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
+                <!-- <h5 class="card-title ">Card title</h5> -->
+                <div class="card-title fw-bold fs-5 text-primary text-gradient">
+                  {{ principal.first_name }} {{ principal.last_name }}
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">HOD :</label>
+                  <span class="fw-bold-600 text-dark fs-6 card-text">{{
+                    principal.email
+                  }}</span>
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">Teacher :</label>
+                  <span class="fw-bold-600 text-dark fs-6">{{
+                    principal.gender
+                  }}</span>
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">Course :</label>
+                  <span class="fw-bold-600 text-dark fs-6">{{
+                    principal.gender
+                  }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -203,12 +230,27 @@
                 alt="Palm Springs Road"
               />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
+                <div class="card-title fw-bold fs-5 text-primary text-gradient">
+                  {{ principal.first_name }} {{ principal.last_name }}
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">HOD :</label>
+                  <span class="fw-bold-600 text-dark fs-6 card-text">{{
+                    principal.email
+                  }}</span>
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">Teacher :</label>
+                  <span class="fw-bold-600 text-dark fs-6">{{
+                    principal.gender
+                  }}</span>
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">Course :</label>
+                  <span class="fw-bold-600 text-dark fs-6">{{
+                    principal.gender
+                  }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -220,11 +262,27 @@
                 alt="Los Angeles Skyscrapers"
               />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content.
-                </p>
+                <div class="card-title fw-bold fs-5 text-primary text-gradient">
+                  {{ principal.first_name }} {{ principal.last_name }}
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">HOD :</label>
+                  <span class="fw-bold-600 text-dark fs-6 card-text">{{
+                    principal.email
+                  }}</span>
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">Teacher :</label>
+                  <span class="fw-bold-600 text-dark fs-6">{{
+                    principal.gender
+                  }}</span>
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">Course :</label>
+                  <span class="fw-bold-600 text-dark fs-6">{{
+                    principal.gender
+                  }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -236,12 +294,27 @@
                 alt="Skyscrapers"
               />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
+                <div class="card-title fw-bold fs-5 text-primary text-gradient">
+                  {{ principal.first_name }} {{ principal.last_name }}
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">HOD :</label>
+                  <span class="fw-bold-600 text-dark fs-6 card-text">{{
+                    principal.email
+                  }}</span>
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">Teacher :</label>
+                  <span class="fw-bold-600 text-dark fs-6">{{
+                    principal.gender
+                  }}</span>
+                </div>
+                <div>
+                  <label class="text-muted fw-bold-500">Course :</label>
+                  <span class="fw-bold-600 text-dark fs-6">{{
+                    principal.gender
+                  }}</span>
+                </div>
               </div>
             </div>
           </div>
