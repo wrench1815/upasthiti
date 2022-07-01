@@ -20,7 +20,11 @@
         </section>
 
         <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashUserTable v-else :users.sync="users" />
+        <Lazy-DashUserTable
+          v-else
+          :users.sync="users"
+          :defaultProfileImage="defaultProfileImage"
+        />
 
         <div class="d-flex justify-content-end mt-3">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
@@ -44,8 +48,9 @@ export default {
   data() {
     return {
       users: [],
+      defaultProfileImage: '',
       loading: true,
-      error: true,
+      error: false,
       userFilters: ['All', 'Admin', 'Principal', 'HOD', 'Teacher'],
       selectedUserFilter: 'All',
     }
@@ -78,9 +83,10 @@ export default {
       }
 
       const response = await requestUrl
-        .then(
-          (response) => ((this.users = response.data), (this.error = false))
-        )
+        .then((response) => {
+          this.users = response.data
+          this.error = false
+        })
         .catch((error) => {
           this.$swal({
             title: 'Error',
@@ -109,14 +115,25 @@ export default {
       this.loading = true
       this.getUsers().then(() => (this.loading = false))
     },
+
+    async setdefaultProfileImage() {
+      return new Promise((resolve, reject) => {
+        this.defaultProfileImage = this.$config.defaultProfileImage
+        resolve()
+      })
+    },
   },
 
   mounted() {
-    this.getUsers().finally(() => {
-      if (!this.error) {
-        this.loading = false
-      }
-    })
+    this.setdefaultProfileImage()
+      .then(() => {
+        this.getUsers()
+      })
+      .then(() => {
+        if (!this.error) {
+          this.loading = false
+        }
+      })
   },
 }
 </script>

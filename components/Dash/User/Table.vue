@@ -26,136 +26,145 @@
         <!-- end:no users -->
 
         <!-- start:has users -->
-        <tr v-for="user in users" v-else>
-          <!-- start:name -->
-          <td>
-            <div class="d-flex align-items-center">
-              <!-- profile image -->
-              <img
-                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                alt=""
-                style="width: 45px; height: 45px"
-                class="rounded-circle"
-              />
-              <!-- full name -->
-              <div class="ms-3">
-                <p class="fw-bolder mb-1 text-primary">
-                  {{ user.first_name ? user.first_name : '----' }}
-                  {{ user.last_name ? user.last_name : '----' }}
-                </p>
-              </div>
-            </div>
-          </td>
-          <!-- end:name -->
-
-          <!-- start:email -->
-          <td>
-            <div class="text-dark mb-0">
-              {{ user.email ? user.email : '----' }}
-            </div>
-          </td>
-          <!-- end:email -->
-
-          <!-- start:Roles -->
-          <td>
-            <div class="text-dark mb-0 badge-fs">
-              <!-- if Admin -->
-              <div
-                class="d-flex justify-content-center align-items-center"
-                v-if="userRole(user) === 'Admin'"
-              >
-                <div
-                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-danger badge-fs shadow-3-strong py-2 rounded-pill flex-wrap"
-                >
-                  <i class="ri-shield-user-fill"></i>
-                  <div class="">Admin</div>
+        <template v-else>
+          <tr v-for="user in users" :key="user.id">
+            <!-- start:name -->
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="avatar rounded-circle">
+                  <!-- profile image -->
+                  <img
+                    :data-src="
+                      user.profile_image
+                        ? user.profile_image
+                        : $nuxt.$config.defaultProfileImage
+                    "
+                    class="avatar rounded-circle shadow-2-strong"
+                    v-lazy-load
+                  />
+                </div>
+                <!-- full name -->
+                <div class="ms-3">
+                  <p class="fw-bolder mb-1 text-primary">
+                    {{ user.first_name ? user.first_name : '----' }}
+                    {{ user.last_name ? user.last_name : '----' }}
+                  </p>
                 </div>
               </div>
+            </td>
+            <!-- end:name -->
 
-              <!-- if Principal -->
-              <div
-                class="d-flex justify-content-center align-items-center"
-                v-else-if="userRole(user) === 'Principal'"
-              >
+            <!-- start:email -->
+            <td>
+              <div class="text-dark mb-0">
+                {{ user.email ? user.email : '----' }}
+              </div>
+            </td>
+            <!-- end:email -->
+
+            <!-- start:Roles -->
+            <td>
+              <div class="d-flex gap-2 mb-0 badge-fs">
+                <!-- if Admin -->
                 <div
-                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-info badge-fs shadow-3-strong py-2 rounded-pill"
+                  class="d-flex justify-content-center align-items-center"
+                  v-if="roleAdmin(user)"
                 >
-                  <i class="ri-admin-fill"></i>
-                  <div class="">Principal</div>
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-danger badge-fs shadow-3-strong py-2 rounded-pill"
+                  >
+                    <i class="ri-shield-user-fill"></i>
+                    <div class="">Admin</div>
+                  </div>
+                </div>
+
+                <!-- if Principal -->
+                <div
+                  class="d-flex justify-content-center align-items-center"
+                  v-if="rolePrincipal(user)"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-info badge-fs shadow-3-strong py-2 rounded-pill"
+                  >
+                    <i class="ri-admin-fill"></i>
+                    <div class="">Principal</div>
+                  </div>
+                </div>
+
+                <!-- if HOD -->
+                <div
+                  class="d-flex justify-content-center align-items-center"
+                  v-if="roleHod(user)"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-primary badge-fs shadow-3-strong py-2 rounded-pill"
+                  >
+                    <i class="ri-user-star-fill"></i>
+                    <div class="">HOD</div>
+                  </div>
+                </div>
+
+                <!-- if Teacher -->
+                <div
+                  class="d-flex justify-content-center align-items-center"
+                  v-if="roleTeacher(user)"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-warning badge-fs shadow-3-strong py-2 rounded-pill"
+                  >
+                    <i class="ri-user-2-fill"></i>
+                    <div class="">Teacher</div>
+                  </div>
+                </div>
+
+                <!-- fallback -->
+                <div
+                  class="d-flex justify-content-center align-items-center"
+                  v-if="roleNone(user)"
+                >
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-success badge-fs shadow-3-strong py-2 rounded-pill"
+                  >
+                    <div class="">----</div>
+                  </div>
                 </div>
               </div>
+            </td>
+            <!-- end:Roles -->
 
-              <!-- if HOD -->
+            <!-- start:Date Added -->
+            <td>
+              <p class="text-dark mb-0">
+                {{
+                  user.date_added
+                    ? $nuxt.$utils.dateFormat(user.date_added)
+                    : '----'
+                }}
+              </p>
+            </td>
+
+            <!-- start:Actions-->
+            <td>
               <div
-                class="d-flex justify-content-center align-items-center"
-                v-else-if="userRole(user) === 'HOD'"
+                class="d-flex justify-content-center align-items-center gap-2"
               >
-                <div
-                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-primary badge-fs shadow-3-strong py-2 rounded-pill"
-                >
-                  <i class="ri-user-star-fill"></i>
-                  <div class="">HOD</div>
-                </div>
+                <!-- edit -->
+                <NuxtLink
+                  :to="`/dash/user/${user.id}`"
+                  class="btn btn-floating bg-gradient-info text-white btn-sm d-flex justify-content-center align-items-center"
+                  ><i class="ri-edit-2-fill ri-lg"></i
+                ></NuxtLink>
+                <!-- destroy -->
+                <a
+                  @click="deleteUser(user.id)"
+                  class="btn btn-floating bg-gradient-danger text-white btn-sm d-flex justify-content-center align-items-center"
+                  ><i class="ri-delete-bin-fill ri-lg"></i
+                ></a>
               </div>
-
-              <!-- if Teacher -->
-              <div
-                class="d-flex justify-content-center align-items-center"
-                v-else-if="userRole(user) === 'Teacher'"
-              >
-                <div
-                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-warning badge-fs shadow-3-strong py-2 rounded-pill"
-                >
-                  <i class="ri-user-2-fill"></i>
-                  <div class="">Teacher</div>
-                </div>
-              </div>
-
-              <!-- fallback -->
-              <div
-                class="d-flex justify-content-center align-items-center"
-                v-else
-              >
-                <div
-                  class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-success badge-fs shadow-3-strong py-2 rounded-pill"
-                >
-                  <div class="">----</div>
-                </div>
-              </div>
-            </div>
-          </td>
-          <!-- end:Roles -->
-
-          <!-- start:Date Added -->
-          <td>
-            <p class="text-dark mb-0">
-              {{
-                user.date_added
-                  ? $nuxt.$utils.dateFormat(user.date_added)
-                  : '----'
-              }}
-            </p>
-          </td>
-
-          <!-- start:Actions-->
-          <td>
-            <div class="d-flex justify-content-center align-items-center gap-2">
-              <!-- edit -->
-              <NuxtLink
-                :to="`/dash/user/${user.id}`"
-                class="btn btn-floating bg-gradient-info text-white btn-sm d-flex justify-content-center align-items-center"
-                ><i class="ri-edit-2-fill ri-lg"></i
-              ></NuxtLink>
-              <!-- destroy -->
-              <a
-                @click="deleteUser(user.id)"
-                class="btn btn-floating bg-gradient-danger text-white btn-sm d-flex justify-content-center align-items-center"
-                ><i class="ri-delete-bin-fill ri-lg"></i
-              ></a>
-            </div>
-          </td>
-          <!-- end:Actions-->
-        </tr>
+            </td>
+            <!-- end:Actions-->
+          </tr>
+        </template>
         <!-- end:has users -->
       </tbody>
     </table>
@@ -170,6 +179,11 @@ export default {
     // takes a list of users
     users: {
       type: Array,
+      required: true,
+    },
+
+    defaultProfileImage: {
+      type: String,
       required: true,
     },
   },
@@ -226,20 +240,31 @@ export default {
       })
     },
 
-    // return User Role name
-    userRole(user) {
-      // return Admin if is_admin is true, return teacher if is_teacher is true, return Hod if is_hod is true, return Principal if is_principal is true
-      if (user.is_admin) {
-        return 'Admin'
-      } else if (user.is_teacher) {
-        return 'Teacher'
-      } else if (user.is_hod) {
-        return 'HOD'
-      } else if (user.is_principal) {
-        return 'Principal'
-      } else {
-        return '----'
-      }
+    // checks if user is Admin
+    roleAdmin(user) {
+      return user.is_admin
+    },
+
+    // checks if user is Principal
+    rolePrincipal(user) {
+      return user.is_principal
+    },
+
+    // checks if user is HOD
+    roleHod(user) {
+      return user.is_hod
+    },
+
+    // checks if user is Teacher
+    roleTeacher(user) {
+      return user.is_teacher
+    },
+
+    // checks if user has no role
+    roleNone(user) {
+      return (
+        !user.is_admin && !user.is_principal && !user.is_hod && !user.is_teacher
+      )
     },
   },
 }
