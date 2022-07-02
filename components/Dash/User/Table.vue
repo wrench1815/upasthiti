@@ -37,7 +37,7 @@
                     :data-src="
                       user.profile_image
                         ? user.profile_image
-                        : $nuxt.$config.defaultProfileImage
+                        : defaultProfileImage
                     "
                     class="avatar rounded-circle shadow-2-strong"
                     v-lazy-load

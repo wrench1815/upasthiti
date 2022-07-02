@@ -50,7 +50,7 @@ export default {
       users: [],
       defaultProfileImage: '',
       loading: true,
-      error: false,
+      error: true,
       userFilters: ['All', 'Admin', 'Principal', 'HOD', 'Teacher'],
       selectedUserFilter: 'All',
     }
@@ -66,10 +66,15 @@ export default {
   },
 
   methods: {
+    // fetches list of users from API
+    // fetches all users initially
+    // if filter is selected, fetches list of user per filter
+    // has ability to refetch in case of error or gives option to go to Dash home
     async getUsers() {
       this.loading = true
       let requestUrl
 
+      // set user to fetch as per filter
       if (this.selectedUserFilter === 'All') {
         requestUrl = this.$api.user.list()
       } else if (this.selectedUserFilter === 'Admin') {
@@ -100,7 +105,6 @@ export default {
             confirmButtonText: 'Refresh',
             showCancelButton: true,
             cancelButtonText: 'To Dash Home',
-            confirmButtonClass: 'btn btn-info',
           }).then((result) => {
             if (result.isConfirmed) {
               this.getUsers()
@@ -111,29 +115,30 @@ export default {
         })
     },
 
+    // refreshes list of users in case error
     refreshUsers() {
       this.loading = true
       this.getUsers().then(() => (this.loading = false))
     },
 
+    // set default profile image on mounted
+    // env variables can only i read after mounted
     async setdefaultProfileImage() {
       return new Promise((resolve, reject) => {
-        this.defaultProfileImage = this.$config.defaultProfileImage
+        this.defaultProfileImage = this.$config.defaultUserImage
         resolve()
       })
     },
   },
 
   mounted() {
-    this.setdefaultProfileImage()
-      .then(() => {
-        this.getUsers()
-      })
-      .then(() => {
+    this.setdefaultProfileImage().then(() => {
+      this.getUsers().then(() => {
         if (!this.error) {
           this.loading = false
         }
       })
+    })
   },
 }
 </script>
