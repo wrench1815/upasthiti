@@ -35,7 +35,7 @@
 
                 <!-- Validation Errors -->
                 <div
-                  class="text-danger"
+                  class="text-danger transition-all-ease-out-sine"
                   :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
                 >
                   {{ errors[0] }}
@@ -67,7 +67,7 @@
 
                 <!-- Validation Errors -->
                 <div
-                  class="text-danger"
+                  class="text-danger transition-all-ease-out-sine"
                   :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
                 >
                   {{ errors[0] }}
@@ -77,18 +77,28 @@
               <!-- start:Show Password -->
               <div class="form-check my-2">
                 <input
+                  id="showPassword"
                   class="form-check-input"
                   type="checkbox"
                   v-model="showPassword"
                 />
-                <label class="form-check-label">Show Password</label>
+                <label
+                  for="showPassword"
+                  class="form-check-label ripple"
+                  data-mdb-ripple-unbound="true"
+                  data-mdb-ripple-radius="40"
+                  >Show Password</label
+                >
               </div>
               <!-- start:Show Password -->
               <!-- end:Password input -->
 
               <!-- Submit button -->
               <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary fw-bold">
+                <button
+                  type="submit"
+                  class="btn btn-primary fw-bold btn-rounded"
+                >
                   Log in
                 </button>
               </div>
