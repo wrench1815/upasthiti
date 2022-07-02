@@ -20,9 +20,10 @@
         </div>
         <div class="col-md-6 col-lg-6 col-12 my-2 ps-md-5">
           <img
-            src="~/assets/svg/attendance_confirmed_alt.svg"
+            data-src="~/assets/svg/attendance_confirmed.svg"
             class="img-fluid"
             alt="attendance confirmed illustration"
+            v-lazy-load
           />
         </div>
       </div>
