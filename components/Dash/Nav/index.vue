@@ -98,18 +98,10 @@ export default {
         : 'ri-menu-fill'
     },
 
-    getBootstrapBreakpoint() {
-      var w =
-        window.innerWidth ||
-        document.documentElement.clientWidth ||
-        document.body.clientWidth
-      return w < 768 ? 'xs' : w < 992 ? 'sm' : w < 1200 ? 'md' : 'lg'
-    },
-
     setNavClasses() {
-      let currentBreakPoint = this.getBootstrapBreakpoint()
+      let currentBreakPoint = this.$utils.getBsBp()
 
-      if (currentBreakPoint === 'lg') {
+      if (currentBreakPoint in ['lg', 'xl', 'xxl']) {
         this.navClass = 'rounded-5 nav-rounded m-lg-nav'
       } else {
         this.navClass = ''
@@ -135,9 +127,9 @@ export default {
     })
 
     window.addEventListener('resize', () => {
-      let currentBreakPoint = this.getBootstrapBreakpoint()
+      let currentBreakPoint = this.$utils.getBsBp()
 
-      if (currentBreakPoint === 'lg') {
+      if (currentBreakPoint in ['lg', 'xl', 'xxl']) {
         this.navClass =
           window.scrollY > 300 ? 'rounded-5 nav-rounded m-lg-nav' : ''
       } else {
