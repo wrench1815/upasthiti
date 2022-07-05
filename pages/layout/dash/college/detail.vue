@@ -36,29 +36,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="row mb-3 card-header shadow">
-
-          <div class="col-12 col-md-4 col-lg-4">
-            <div
-              class="d-flex justify-content-lg-start justify-content-md-end justify-content-sm-center justify-content-center"
-            >
-              <img
-                :data-src="college.institute_logo"
-                :alt="`${college.institute_name} logo`"
-                v-lazy-load
-                class="avatar avatar-xl rounded-circle obj-fit-cover shadow"
-              />
-            </div>
-          </div>
-          <div
-            class="col d-flex align-items-center justify-content-lg-start justify-content-sm-center justify-content-md-start"
-          >
-            <span class="fw-bold-600 h5 pt-3 text-center">{{
-              college.institute_name
-            }}</span>
-          </div>
-        </div> -->
-
         <div class="row mb-3">
           <div class="col-12 col-md-4 mt-lg-4 mt-sm-4 d-flex">
             <label class="text-muted fw-bold-500">Institute Alias</label>
@@ -89,8 +66,9 @@
               :href="college.institute_website"
               target="_blank"
               class="text-gradient text-primary"
-              >{{ college.institute_website }}</a
-            >
+              >{{ college.institute_website }}
+              <i class="ri-external-link-fill"></i
+            ></a>
           </div>
         </div>
         <div class="row mb-3">
@@ -117,27 +95,37 @@
         </p>
       </div>
       <div class="card-body">
-        <div class="card" style="max-width: 300px">
+        <div class="card shadow mt-5" style="width: 300px">
           <div
-            class="bg-image hover-overlay ripple d-flex justify-content-center z-index-5"
+            class="bg-image hover-overlay ripple mt-n5 d-flex justify-content-center"
             data-mdb-ripple-color="light"
           >
             <img
               src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
-              class="img-fluid avatar avatar-xxl rounded-circle mt-n5 shadow"
+              class="img-fluid avatar avatar-xl shadow"
             />
+
             <a href="#!">
               <div
                 class="mask"
                 style="background-color: rgba(251, 251, 251, 0.15)"
               ></div>
             </a>
+            <div
+              class="d-flex flex-column justify-content-center align-content-start text-break"
+            >
+              <div
+                class="card-title fw-bold fs-5 text-primary text-gradient pt-3 ps-3"
+              >
+                {{ principal.first_name }} {{ principal.last_name }}
+              </div>
+            </div>
           </div>
 
           <div class="card-body">
-            <div class="card-title fw-bold fs-5 text-primary text-gradient">
+            <!-- <div class="card-title fw-bold fs-5 text-primary text-gradient">
               {{ principal.first_name }} {{ principal.last_name }}
-            </div>
+            </div> -->
             <label class="text-muted fw-bold-500">Email :</label>
             <span class="fw-bold-600 text-dark fs-6 card-text">{{
               principal.email
@@ -148,173 +136,233 @@
             }}</span>
           </div>
         </div>
-        <!-- <div
-          class="mb-3 shadow-5 d-flex card-header gap-3 rounded-5 align-items-center flex-column flex-md-row"
-        >
-          <div>
-            <img
-              :data-src="college.institute_logo"
-              :alt="`${college.institute_name} logo`"
-              v-lazy-load
-              class="avatar avatar-xxl obj-fit-cover shadow-1-strong"
-            />
-          </div>
-          <div
-            class="d-flex flex-column justify-content-center align-content-start text-break"
-          >
-            <div class="fw-bold fs-5 text-primary text-gradient">
-              {{ principal.first_name }} {{ principal.last_name }}
-            </div>
-            <div class="text-muted small d-flex gap-1">
-              <label class="text-muted fw-bold-500">Email :</label>
-              <span class="fw-bold-600 text-dark  card-text">{{
-                principal.email
-              }}</span>
-            </div>
-            <div class="text-muted small d-flex gap-1">
-             <label class="text-muted fw-bold-500">Gender :</label>
-            <span class="fw-bold-600 text-dark card-text">{{
-              principal.gender
-            }}</span>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
-
     <div class="card mt-4">
       <div class="card-header">
         <h2 class="text-primary text-gradient">College Department Details</h2>
         <p>Details of College Department</p>
       </div>
-      <div class="card-body">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col">
-            <div class="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
-                class="card-img-top"
-                alt="Hollywood Sign on The Hill"
-              />
+      <div class="row mx-2">
+        <div
+          class="col-sm-6 col-lg-4 col-md-6 col-12"
+          v-for="item in 3"
+          :key="item"
+        >
+          <div class="card my-4 shadow">
+            <div class="card-header fw-bold fs-5 bg-primary text-white">
+              {{ principal.first_name }} {{ principal.last_name }}
+            </div>
+            <div class="card-body">
+              <div>
+                <label class="text-muted fw-bold-500">HOD :</label>
+                <span class="fw-bold-600 text-dark fs-6 card-text">{{
+                  principal.email
+                }}</span>
+              </div>
+              <div>
+                <label class="text-muted fw-bold-500">Teacher :</label>
+                <span class="fw-bold-600 text-dark fs-6">{{
+                  principal.gender
+                }}</span>
+              </div>
+              <div>
+                <label class="text-muted fw-bold-500">Course :</label>
+                <span class="fw-bold-600 text-dark fs-6">{{
+                  principal.gender
+                }}</span>
+              </div>
+              <div>
+                <label class="text-muted fw-bold-500">Student Count:</label>
+                <span class="fw-bold-600 text-dark fs-6">{{
+                  principal.gender
+                }}</span>
+              </div>
+              <a href="#" class="btn btn-primary rounded-pill mt-4"
+                >Details <i class="ri-external-link-fill"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-4">
+      <div class="card-header">
+        <h2 class="text-primary text-gradient">College HOD Details</h2>
+        <p>
+          Details of User:
+          <span class="text-info fw-bold"
+            >{{ principal.first_name }} {{ principal.last_name }}</span
+          >
+        </p>
+      </div>
+      <div class="row mx-2">
+        <div
+          class="col-sm-6 col-lg-4 col-md-6 col-12"
+          v-for="item in 3"
+          :key="item"
+        >
+          <div class="card-body">
+            <div class="card mt-5 shadow">
+              <div
+                class="bg-image hover-overlay ripple d-flex mt-n5 justify-content-center z-index-5"
+                data-mdb-ripple-color="light"
+              >
+                <img
+                  src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
+                  class="img-fluid avatar avatar-xl shadow"
+                />
+                <a href="#!">
+                  <div
+                    class="mask"
+                    style="background-color: rgba(251, 251, 251, 0.15)"
+                  ></div>
+                </a>
+                <div
+                  class="d-flex flex-column justify-content-center align-content-start text-break"
+                >
+                  <div
+                    class="card-title fw-bold fs-5 text-primary text-gradient pt-3 ps-3"
+                  >
+                    {{ principal.first_name }} {{ principal.last_name }}
+                  </div>
+                </div>
+              </div>
+
               <div class="card-body">
-                <!-- <h5 class="card-title ">Card title</h5> -->
-                <div class="card-title fw-bold fs-5 text-primary text-gradient">
+                <!-- <div class="card-title fw-bold fs-5 text-primary text-gradient">
                   {{ principal.first_name }} {{ principal.last_name }}
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">HOD :</label>
-                  <span class="fw-bold-600 text-dark fs-6 card-text">{{
-                    principal.email
-                  }}</span>
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">Teacher :</label>
-                  <span class="fw-bold-600 text-dark fs-6">{{
-                    principal.gender
-                  }}</span>
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">Course :</label>
-                  <span class="fw-bold-600 text-dark fs-6">{{
-                    principal.gender
-                  }}</span>
-                </div>
+                </div> -->
+                <label class="text-muted fw-bold-500">Email :</label>
+                <span class="fw-bold-600 text-dark fs-6 card-text">{{
+                  principal.email
+                }}</span>
+                <label class="text-muted fw-bold-500">Gender :</label>
+                <span class="fw-bold-600 text-dark fs-6">{{
+                  principal.gender
+                }}</span>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp"
-                class="card-img-top"
-                alt="Palm Springs Road"
-              />
+        </div>
+      </div>
+    </div>
+    <div class="card mt-4">
+      <div class="card-header">
+        <h2 class="text-primary text-gradient">College Teacher Details</h2>
+        <p>
+          Details of User:
+          <span class="text-info fw-bold"
+            >{{ principal.first_name }} {{ principal.last_name }}</span
+          >
+        </p>
+      </div>
+      <div class="row mx-2">
+        <div
+          class="col-sm-6 col-lg-4 col-md-6 col-12"
+          v-for="item in 3"
+          :key="item"
+        >
+          <div class="card-body">
+            <div class="card shadow mt-5">
+              <div
+                class="bg-image hover-overlay ripple d-flex justify-content-center mt-n5 z-index-5"
+                data-mdb-ripple-color="light"
+              >
+                <img
+                  src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
+                  class="img-fluid avatar avatar-xl shadow"
+                />
+                <a href="#!">
+                  <div
+                    class="mask"
+                    style="background-color: rgba(251, 251, 251, 0.15)"
+                  ></div>
+                </a>
+                <div
+                  class="d-flex flex-column justify-content-center align-content-start text-break"
+                >
+                  <div
+                    class="card-title fw-bold fs-5 text-primary text-gradient pt-3 ps-3"
+                  >
+                    {{ principal.first_name }} {{ principal.last_name }}
+                  </div>
+                </div>
+              </div>
+
               <div class="card-body">
-                <div class="card-title fw-bold fs-5 text-primary text-gradient">
+                <!-- <div class="card-title fw-bold fs-5 text-primary text-gradient">
                   {{ principal.first_name }} {{ principal.last_name }}
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">HOD :</label>
-                  <span class="fw-bold-600 text-dark fs-6 card-text">{{
-                    principal.email
-                  }}</span>
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">Teacher :</label>
-                  <span class="fw-bold-600 text-dark fs-6">{{
-                    principal.gender
-                  }}</span>
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">Course :</label>
-                  <span class="fw-bold-600 text-dark fs-6">{{
-                    principal.gender
-                  }}</span>
-                </div>
+                </div> -->
+                <label class="text-muted fw-bold-500">Email :</label>
+                <span class="fw-bold-600 text-dark fs-6 card-text">{{
+                  principal.email
+                }}</span>
+                <label class="text-muted fw-bold-500">Gender :</label>
+                <span class="fw-bold-600 text-dark fs-6">{{
+                  principal.gender
+                }}</span>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp"
-                class="card-img-top"
-                alt="Los Angeles Skyscrapers"
-              />
-              <div class="card-body">
-                <div class="card-title fw-bold fs-5 text-primary text-gradient">
-                  {{ principal.first_name }} {{ principal.last_name }}
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">HOD :</label>
-                  <span class="fw-bold-600 text-dark fs-6 card-text">{{
-                    principal.email
-                  }}</span>
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">Teacher :</label>
-                  <span class="fw-bold-600 text-dark fs-6">{{
-                    principal.gender
-                  }}</span>
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">Course :</label>
-                  <span class="fw-bold-600 text-dark fs-6">{{
-                    principal.gender
-                  }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-4">
+      <div class="card-header">
+        <h2 class="text-primary text-gradient">College Student Details</h2>
+        <p>
+          Details of User:
+          <span class="text-info fw-bold"
+            >{{ principal.first_name }} {{ principal.last_name }}</span
+          >
+        </p>
+      </div>
+      <div class="row mx-2">
+        <div
+          class="col-sm-6 col-lg-4 col-md-6 col-12"
+          v-for="item in 3"
+          :key="item"
+        >
+          <div class="card-body">
+            <div class="card shadow mt-5">
+              <div
+                class="bg-image hover-overlay ripple d-flex justify-content-center mt-n5 z-index-5"
+                data-mdb-ripple-color="light"
+              >
+                <img
+                  src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
+                  class="img-fluid avatar avatar-xl shadow"
+                />
+                <a href="#!">
+                  <div
+                    class="mask"
+                    style="background-color: rgba(251, 251, 251, 0.15)"
+                  ></div>
+                </a>
+                <div
+                  class="d-flex flex-column justify-content-center align-content-start text-break"
+                >
+                  <div
+                    class="card-title fw-bold fs-5 text-primary text-gradient pt-3 ps-3"
+                  >
+                    {{ principal.first_name }} {{ principal.last_name }}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp"
-                class="card-img-top"
-                alt="Skyscrapers"
-              />
+
               <div class="card-body">
-                <div class="card-title fw-bold fs-5 text-primary text-gradient">
+                <!-- <div class="card-title fw-bold fs-5 text-primary text-gradient">
                   {{ principal.first_name }} {{ principal.last_name }}
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">HOD :</label>
-                  <span class="fw-bold-600 text-dark fs-6 card-text">{{
-                    principal.email
-                  }}</span>
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">Teacher :</label>
-                  <span class="fw-bold-600 text-dark fs-6">{{
-                    principal.gender
-                  }}</span>
-                </div>
-                <div>
-                  <label class="text-muted fw-bold-500">Course :</label>
-                  <span class="fw-bold-600 text-dark fs-6">{{
-                    principal.gender
-                  }}</span>
-                </div>
+                </div> -->
+                <label class="text-muted fw-bold-500">Email :</label>
+                <span class="fw-bold-600 text-dark fs-6 card-text">{{
+                  principal.email
+                }}</span>
+                <label class="text-muted fw-bold-500">Gender :</label>
+                <span class="fw-bold-600 text-dark fs-6">{{
+                  principal.gender
+                }}</span>
               </div>
             </div>
           </div>
@@ -449,8 +497,4 @@ export default {
 }
 </script>
 
-<style scoped>
-/* * {
-  border: 2px solid rebeccapurple;
-} */
-</style>
+<style></style>
