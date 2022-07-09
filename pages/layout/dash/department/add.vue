@@ -97,7 +97,10 @@
 
             <!-- Submit button -->
             <div class="d-flex justify-content-center">
-              <button type="submit" class="btn bg-gradient-primary text-white btn-rounded mb-4">
+              <button
+                type="submit"
+                class="btn bg-gradient-primary text-white btn-rounded mb-4"
+              >
                 Add Department
               </button>
             </div>
