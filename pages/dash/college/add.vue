@@ -2,8 +2,8 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h2>Add College</h2>
-        <p>Add a New College</p>
+        <h1 class="text-gradient text-primary d-inline-block">Add College</h1>
+        <h3 class="text-secondary text-capitalize">Add a New College</h3>
       </div>
 
       <div class="card-body">
