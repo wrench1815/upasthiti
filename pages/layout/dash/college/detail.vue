@@ -86,62 +86,45 @@
 
     <div class="card mt-4">
       <div class="card-header">
-        <h2 class="text-primary text-gradient">College Principal Details</h2>
-        <p>
-          Details of User:
-          <span class="text-info fw-bold"
-            >{{ principal.first_name }} {{ principal.last_name }}</span
-          >
-        </p>
+        <h2 class="text-primary text-gradient">College Principal</h2>
       </div>
-      <div class="card-body">
-        <div class="card shadow mt-5" style="width: 300px">
-          <div
-            class="bg-image hover-overlay ripple mt-n5 d-flex justify-content-center"
-            data-mdb-ripple-color="light"
-          >
-            <img
-              src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
-              class="img-fluid avatar avatar-xl shadow"
-            />
 
-            <a href="#!">
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div class="card border hover-shadow card-hover mt-5 mb-4 mx-4">
+            <div class="d-flex justify-content-start">
+              <img
+                src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
+                class="img-fluid avatar avatar-xl ms-4 mt-n4"
+              />
+
               <div
-                class="mask"
-                style="background-color: rgba(251, 251, 251, 0.15)"
-              ></div>
-            </a>
-            <div
-              class="d-flex flex-column justify-content-center align-content-start text-break"
-            >
-              <div
-                class="card-title fw-bold fs-5 text-primary text-gradient pt-3 ps-3"
+                class="d-flex flex-column justify-content-center align-content-start text-break"
               >
-                {{ principal.first_name }} {{ principal.last_name }}
+                <div
+                  class="card-title fw-bold fs-5 text-primary text-gradient pt-3 px-2"
+                >
+                  {{ principal.first_name }} {{ principal.last_name }}
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="card-body">
-            <!-- <div class="card-title fw-bold fs-5 text-primary text-gradient">
-              {{ principal.first_name }} {{ principal.last_name }}
-            </div> -->
-            <label class="text-muted fw-bold-500">Email :</label>
-            <span class="fw-bold-600 text-dark fs-6 card-text">{{
-              principal.email
-            }}</span>
-            <label class="text-muted fw-bold-500">Gender :</label>
-            <span class="fw-bold-600 text-dark fs-6">{{
-              principal.gender
-            }}</span>
+            <div class="card-body pt-2">
+              <label class="text-muted fw-bold">Email:</label>
+              <span class="text-dark fs-6">
+                {{ principal.email }}
+              </span>
+              <br />
+              <label class="text-muted fw-bold">Gender:</label>
+              <span class="text-dark fs-6">{{ principal.gender }}</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="card mt-4">
       <div class="card-header">
-        <h2 class="text-primary text-gradient">College Department Details</h2>
-        <p>Details of College Department</p>
+        <h2 class="text-primary text-gradient">College Departments</h2>
       </div>
       <div class="row mx-2">
         <div
@@ -188,13 +171,7 @@
     </div>
     <div class="card mt-4">
       <div class="card-header">
-        <h2 class="text-primary text-gradient">College HOD Details</h2>
-        <!-- <p>
-          Details of User:
-          <span class="text-info fw-bold"
-            >{{ principal.first_name }} {{ principal.last_name }}</span
-          >
-        </p> -->
+        <h2 class="text-primary text-gradient">College HODs</h2>
       </div>
       <div class="row gap-">
         <div
@@ -250,13 +227,7 @@
     </div>
     <div class="card mt-4">
       <div class="card-header">
-        <h2 class="text-primary text-gradient">College Teacher Details</h2>
-        <p>
-          Details of User:
-          <span class="text-info fw-bold"
-            >{{ principal.first_name }} {{ principal.last_name }}</span
-          >
-        </p>
+        <h2 class="text-primary text-gradient">College Teachers</h2>
       </div>
       <div class="row mx-2">
         <div
@@ -311,13 +282,7 @@
     </div>
     <div class="card mt-4">
       <div class="card-header">
-        <h2 class="text-primary text-gradient">College Student Details</h2>
-        <p>
-          Details of User:
-          <span class="text-info fw-bold"
-            >{{ principal.first_name }} {{ principal.last_name }}</span
-          >
-        </p>
+        <h2 class="text-primary text-gradient">College Students</h2>
       </div>
       <div class="row mx-2">
         <div
@@ -539,4 +504,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.card-hover div > img {
+  box-shadow: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.card-hover:hover div > img {
+  box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.16),
+    0 10px 20px -2px rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+}
+</style>
