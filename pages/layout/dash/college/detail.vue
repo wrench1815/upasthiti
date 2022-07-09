@@ -189,23 +189,23 @@
     <div class="card mt-4">
       <div class="card-header">
         <h2 class="text-primary text-gradient">College HOD Details</h2>
-        <p>
+        <!-- <p>
           Details of User:
           <span class="text-info fw-bold"
             >{{ principal.first_name }} {{ principal.last_name }}</span
           >
-        </p>
+        </p> -->
       </div>
-      <div class="row mx-2">
+      <div class="row gap-">
         <div
-          class="col-sm-6 col-lg-4 col-md-6 col-12"
-          v-for="item in 3"
-          :key="item"
+          class="col-lg-4 col-md-6 col-12"
+          v-for="item in hod.results"
+          :key="item.id"
         >
           <div class="card-body">
             <div class="card mt-5 shadow">
               <div
-                class="bg-image hover-overlay ripple d-flex mt-n5 justify-content-center z-index-5"
+                class="bg-image hover-overlay ripple d-flex mt-n5 mx-4 justify-content-start z-index-5"
                 data-mdb-ripple-color="light"
               >
                 <img
@@ -224,7 +224,7 @@
                   <div
                     class="card-title fw-bold fs-5 text-primary text-gradient pt-3 ps-3"
                   >
-                    {{ principal.first_name }} {{ principal.last_name }}
+                    {{ item.first_name }} {{ item.last_name }}
                   </div>
                 </div>
               </div>
@@ -235,11 +235,12 @@
                 </div> -->
                 <label class="text-muted fw-bold-500">Email :</label>
                 <span class="fw-bold-600 text-dark fs-6 card-text">{{
-                  principal.email
+                  item.email
                 }}</span>
+                <br />
                 <label class="text-muted fw-bold-500">Gender :</label>
                 <span class="fw-bold-600 text-dark fs-6">{{
-                  principal.gender
+                  item.gender
                 }}</span>
               </div>
             </div>
@@ -379,6 +380,7 @@ export default {
 
   data() {
     return {
+      hod: {},
       loading: true,
       error: true,
       principal: {
@@ -485,14 +487,54 @@ export default {
           })
         )
     },
+
+    async getHod() {
+      this.loading = true
+
+      await this.$api.user
+        .listHod()
+        .then((response) => {
+          this.hod = response.data
+          this.error = false
+        })
+        .catch((error) =>
+          this.$swal({
+            title: 'Error',
+            icon: 'error',
+            type: 'error',
+            text: `${
+              response.data.detail
+                ? error.response.data.detail
+                : 'An error has occured'
+            }`,
+            confirmButtonText: 'Refresh',
+            showCancelButton: true,
+            cancelButtonText: 'To Dash Home',
+            confirmButtonClass: 'btn btn-info',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.getHod()
+            } else if (result.isDismissed) {
+              this.$router.push('/dash')
+            }
+          })
+        )
+    },
   },
 
   mounted() {
-    this.getCollege().then(() => {
-      this.getPrincipal().then(() => {
-        if (!this.error) this.loading = false
+    this.getCollege()
+      .then(async () => {
+        await this.getPrincipal()
       })
-    })
+      .then(async () => {
+        await this.getHod()
+      })
+      .then(() => {
+        if (!this.error) {
+          this.loading = false
+        }
+      })
   },
 }
 </script>
