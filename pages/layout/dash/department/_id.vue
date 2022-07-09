@@ -99,10 +99,10 @@
             <!-- end:College -->
 
             <!-- Submit button -->
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-center">
               <button
                 type="submit"
-                class="btn btn-success fw-bold btn-rounded mb-4"
+                class="btn bg-gradient-success text-white fw-bold btn-rounded mb-4"
               >
                 Update Department
               </button>

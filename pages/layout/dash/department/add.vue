@@ -96,8 +96,8 @@
             <!-- end:College -->
 
             <!-- Submit button -->
-            <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-info btn-rounded mb-4">
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn bg-gradient-primary text-white btn-rounded mb-4">
                 Add Department
               </button>
             </div>
