@@ -39,7 +39,7 @@
                         ? user.profile_image
                         : defaultProfileImage
                     "
-                    class="avatar rounded-circle shadow-2-strong"
+                    class="avatar rounded-circle shadow-2-strong obj-fit-cover obj-pos-center"
                     v-lazy-load
                   />
                 </div>
