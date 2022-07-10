@@ -21,14 +21,19 @@
               <img
                 class="avatar avatar-lg rounded-circle obj-fit-cover shadow"
                 data-src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
-                :alt="`${user.first_name}'s profile image`"
+                :alt="`${
+                  isAuthenticated ? user.first_name : ''
+                }'s profile image`"
                 v-lazy-load
               />
               <div class="text-center text-break">
                 <h5 class="text-dark">
-                  {{ user.first_name }} {{ user.last_name }}
+                  {{ isAuthenticated ? user.first_name : '' }}
+                  {{ isAuthenticated ? user.last_name : '' }}
                 </h5>
-                <p class="pb-0 mb-0 text-muted">{{ user.email }}</p>
+                <p class="pb-0 mb-0 text-muted">
+                  {{ isAuthenticated ? user.email : '' }}
+                </p>
                 <div
                   class="d-flex justify-content-center align-items-center mt-2 mb-3"
                 >
@@ -112,6 +117,7 @@ export default {
     ...mapGetters({
       user: 'loggedInUser',
       role: 'loggedInUserRole',
+      isAuthenticated: 'isAuthenticated',
     }),
   },
 
