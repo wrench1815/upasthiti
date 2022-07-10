@@ -13,7 +13,7 @@
               :options="userFilters"
               v-model="selectedUserFilter"
               :clearable="false"
-              @option:selected="refreshUsers"
+              @option:selected="filterUser"
             >
             </v-select>
           </div>
@@ -22,8 +22,16 @@
         <Lazy-LoadersTable v-if="loading" />
         <Lazy-DashUserTable
           v-else
-          :users.sync="users"
+          :users.sync="users.results"
           :defaultProfileImage="defaultProfileImage"
+        />
+
+        <Lazy-UtilsPagination
+          class="mt-4"
+          v-if="!loading"
+          :pagination.sync="users.pagination"
+          @prevPage="onPaginated"
+          @nextPage="onPaginated"
         />
 
         <div class="d-flex justify-content-end mt-3">
@@ -47,6 +55,7 @@ export default {
 
   data() {
     return {
+      payload: {},
       users: [],
       defaultProfileImage: '',
       loading: true,
@@ -76,15 +85,15 @@ export default {
 
       // set user to fetch as per filter
       if (this.selectedUserFilter === 'All') {
-        requestUrl = this.$api.user.list()
+        requestUrl = this.$api.user.list(this.payload)
       } else if (this.selectedUserFilter === 'Admin') {
-        requestUrl = this.$api.user.listAdmin()
+        requestUrl = this.$api.user.listAdmin(this.payload)
       } else if (this.selectedUserFilter === 'Principal') {
-        requestUrl = this.$api.user.listPrincipal()
+        requestUrl = this.$api.user.listPrincipal(this.payload)
       } else if (this.selectedUserFilter === 'HOD') {
-        requestUrl = this.$api.user.listHod()
+        requestUrl = this.$api.user.listHod(this.payload)
       } else if (this.selectedUserFilter === 'Teacher') {
-        requestUrl = this.$api.user.listTeacher()
+        requestUrl = this.$api.user.listTeacher(this.payload)
       }
 
       const response = await requestUrl
@@ -107,7 +116,7 @@ export default {
             cancelButtonText: 'To Dash Home',
           }).then((result) => {
             if (result.isConfirmed) {
-              this.getUsers()
+              this.getUsers(this.payload)
             } else if (result.isDismissed) {
               this.$router.push('/dash')
             }
@@ -128,6 +137,19 @@ export default {
         this.defaultProfileImage = this.$config.defaultUserImage
         resolve()
       })
+    },
+
+    // on paginated
+    onPaginated(pageNum) {
+      this.payload.page = pageNum
+
+      this.refreshUsers()
+    },
+
+    // on filter
+    filterUser() {
+      this.payload = {}
+      this.refreshUsers()
     },
   },
 
