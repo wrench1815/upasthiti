@@ -2,8 +2,10 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h2>Add Department</h2>
-        <p>Add a New Department</p>
+        <h1 class="text-gradient text-primary d-inline-block">
+          Add Department
+        </h1>
+        <h3 class="text-secondary text-capitalize">Add a New Department</h3>
       </div>
       <div class="card-body">
         <!-- for Valdation -->
@@ -12,7 +14,7 @@
           <form @submit.prevent="handleSubmit(addDepartment)">
             <!-- start:Department Name -->
             <div class="row">
-              <div class="col-12 col-md-4">
+              <div class="col-12">
                 <label class="form-label" for="department_name"
                   >Department Name</label
                 >
@@ -41,7 +43,7 @@
 
             <!-- start:HoD -->
             <div class="row">
-              <div class="col-12 col-md-4">
+              <div class="col-12">
                 <label class="form-label" for="hod">HoD</label>
               </div>
               <div class="col">
@@ -68,7 +70,7 @@
 
             <!-- start:College -->
             <div class="row">
-              <div class="col-12 col-md-4">
+              <div class="col-12">
                 <label class="form-label" for="hod">College</label>
               </div>
               <div class="col">
@@ -94,8 +96,11 @@
             <!-- end:College -->
 
             <!-- Submit button -->
-            <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-info btn-rounded mb-4">
+            <div class="d-flex justify-content-center">
+              <button
+                type="submit"
+                class="btn bg-gradient-primary text-white btn-rounded mb-4"
+              >
                 Add Department
               </button>
             </div>
@@ -203,7 +208,7 @@ export default {
     async getHodList() {
       this.$api.user.listHod().then((response) => {
         // set first_name and last_name as label and id as value for v-select
-        this.hodList = response.data.map((hod) => {
+        this.hodList = response.data.results.map((hod) => {
           return {
             id: hod.id,
             label: `${hod.first_name} ${hod.last_name}`,
@@ -246,9 +251,6 @@ export default {
       })
       .then(() => {
         this.loading = false
-        document.querySelectorAll('.form-outline').forEach((formOutline) => {
-          new this.$mdb.Input(formOutline).init()
-        })
       })
   },
 }
