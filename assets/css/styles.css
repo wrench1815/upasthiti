@@ -680,3 +680,40 @@ auto: auto,
   content: '*';
   color: var(--mdb-danger);
 }
+
+/* add link icon at the end */
+.link:after {
+  font-family: 'remixicon' !important;
+  content: '\EEB7';
+}
+
+/* add mail send icon at the end */
+.email:after {
+  font-family: 'remixicon' !important;
+  content: '\EEFC';
+}
+
+/* animated underline on hover */
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+}
+
+.hover-underline-animation:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--mdb-primary);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+  content: '';
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
