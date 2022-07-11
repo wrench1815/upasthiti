@@ -28,8 +28,7 @@
               />
               <div class="text-center text-break">
                 <h5 class="text-dark">
-                  {{ isAuthenticated ? user.first_name : '' }}
-                  {{ isAuthenticated ? user.last_name : '' }}
+                  {{ isAuthenticated ? user.full_name : '' }}
                 </h5>
                 <p class="pb-0 mb-0 text-muted">
                   {{ isAuthenticated ? user.email : '' }}
