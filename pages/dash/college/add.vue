@@ -47,7 +47,7 @@
 
             <!-- start:Institute Principal -->
             <div class="row">
-              <div class="col-12 col-md-4">
+              <div class="col-12">
                 <label class="form-label" for="institute_principal"
                   >Principal</label
                 >
@@ -112,8 +112,11 @@
             <!-- end:Institute Email-->
 
             <!-- Submit button -->
-            <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-info btn-rounded mb-4">
+            <div class="d-flex justify-content-center">
+              <button
+                type="submit"
+                class="btn btn-rounded bg-gradient-primary text-white mb-4"
+              >
                 Add College
               </button>
             </div>
@@ -220,10 +223,10 @@ export default {
     async getPrincipals() {
       await this.$api.user.listPrincipal().then((response) => {
         // set first_name and last name as label and id as value for v-select
-        this.principalList = response.data.map((principal) => {
+        this.principalList = response.data.results.map((principal) => {
           return {
             id: principal.id,
-            label: `${principal.first_name} ${principal.last_name}`,
+            label: principal.full_name,
           }
         })
       })

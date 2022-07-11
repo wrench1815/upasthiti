@@ -2,11 +2,11 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h2>Edit College</h2>
-        <p>
-          Editing College:
+        <h1 class="text-gradient text-primary d-inline-block">College Edit</h1>
+        <h3 class="text-secondary text-capitalize">
+          Editing:
           <span class="text-info fw-bold">{{ college.institute_name }}</span>
-        </p>
+        </h3>
       </div>
 
       <div class="card-body">
@@ -50,7 +50,7 @@
 
             <!-- start:Institute Principal -->
             <div class="row">
-              <div class="col-12 col-md-4">
+              <div class="col-12">
                 <label class="form-label" for="institute_principal"
                   >Principal</label
                 >
@@ -115,10 +115,10 @@
             <!-- end:Institute Email-->
 
             <!-- Submit button -->
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-center">
               <button
                 type="submit"
-                class="btn btn-success fw-bolder btn-rounded mb-4"
+                class="btn btn-rounded bg-gradient-success text-white mb-4"
               >
                 Edit College
               </button>
@@ -226,10 +226,10 @@ export default {
     async getPrincipals() {
       await this.$api.user.listPrincipal().then((response) => {
         // set first_name and last name as label and id as value for select2
-        this.principalList = response.data.map((principal) => {
+        this.principalList = response.data.results.map((principal) => {
           return {
             id: principal.id,
-            label: `${principal.first_name} ${principal.last_name}`,
+            label: principal.full_name,
           }
         })
       })
@@ -280,7 +280,7 @@ export default {
         .then(() => {
           this.loading = false
         })
-        .finally(() => {
+        .then(() => {
           document.querySelectorAll('.form-outline').forEach((formOutline) => {
             new this.$mdb.Input(formOutline).init()
           })
