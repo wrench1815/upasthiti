@@ -38,7 +38,7 @@
                   class="d-flex justify-content-center align-items-center mt-2 mb-3"
                 >
                   <span
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs shadow-3-strong py-2 rounded-pill flex-wrap"
+                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs shadow-3-strong py-2 rounded-pill flex-wrap text-capitalize"
                     :class="roleClass"
                   >
                     <i :class="roleIcon"></i>
