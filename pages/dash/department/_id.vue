@@ -2,11 +2,13 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h2>Edit Department</h2>
-        <p>
-          Editing Department
+        <h1 class="text-gradient text-primary d-inline-block">
+          Department Edit
+        </h1>
+        <h3 class="text-secondary text-capitalize">
+          Editing:
           <span class="text-info fw-bold">{{ department.id }}</span>
-        </p>
+        </h3>
       </div>
       <div class="card-body">
         <!-- for Valdation -->
@@ -15,7 +17,7 @@
           <form @submit.prevent="handleSubmit(updateDepartment)">
             <!-- start:Department Name -->
             <div class="row">
-              <div class="col-12 col-md-4">
+              <div class="col-12">
                 <label class="form-label" for="department_name"
                   >Department Name</label
                 >
@@ -44,8 +46,8 @@
 
             <!-- start:HoD -->
             <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="hod">HoD</label>
+              <div class="col-12">
+                <label class="form-label" for="hod">HOD</label>
               </div>
               <div class="col">
                 <ValidationProvider
@@ -53,7 +55,7 @@
                   :rules="{ required: true }"
                 >
                   <v-select
-                    placeholder="Select HoD"
+                    placeholder="Select HOD"
                     :options="hodList"
                     v-model="department.hod"
                   ></v-select>
@@ -71,7 +73,7 @@
 
             <!-- start:College -->
             <div class="row">
-              <div class="col-12 col-md-4">
+              <div class="col-12">
                 <label class="form-label" for="hod">College</label>
               </div>
               <div class="col">
@@ -97,10 +99,10 @@
             <!-- end:College -->
 
             <!-- Submit button -->
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-center">
               <button
                 type="submit"
-                class="btn btn-success fw-bold btn-rounded mb-4"
+                class="btn btn-rounded bg-gradient-success text-white text-white mb-4"
               >
                 Update Department
               </button>
