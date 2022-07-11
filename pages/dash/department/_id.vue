@@ -10,7 +10,15 @@
           <span class="text-info fw-bold">{{ department.id }}</span>
         </h3>
       </div>
-      <div class="card-body">
+      <!-- Loader Form-->
+      <Lazy-LoadersForm
+        v-if="loading"
+        class="card-body"
+        :inputCount="3"
+        :btnCenter="true"
+      />
+
+      <div class="card-body" v-else>
         <!-- for Valdation -->
         <ValidationObserver v-slot="{ handleSubmit }">
           <!-- start:Department Edit Form -->
@@ -247,10 +255,10 @@ export default {
     async getHodList() {
       await this.$api.user.listHod().then((response) => {
         // set first_name and last_name as label and id as value for v-select
-        this.hodList = response.data.map((hod) => {
+        this.hodList = response.data.results.map((hod) => {
           return {
             id: hod.id,
-            label: `${hod.first_name} ${hod.last_name}`,
+            label: `${hod.full_name}`,
           }
         })
       })
@@ -312,10 +320,7 @@ export default {
           }
         })
       })
-      .finally(() => {
-        document.querySelectorAll('.form-outline').forEach((formOutline) => {
-          new this.$mdb.Input(formOutline).init()
-        })
+      .then(() => {
         this.loading = false
       })
   },
