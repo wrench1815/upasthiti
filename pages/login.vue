@@ -87,6 +87,7 @@
                   class="form-check-label ripple"
                   data-mdb-ripple-unbound="true"
                   data-mdb-ripple-radius="40"
+                  data-mdb-ripple-color="primary"
                   >Show Password</label
                 >
               </div>

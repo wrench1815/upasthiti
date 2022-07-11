@@ -56,18 +56,19 @@
               src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
               height="2rem"
               width="2rem"
-              :alt="`${loggedInUser.first_name}'s profile image`"
+              :alt="`${
+                isAuthenticated ? loggedInUser.short_name : ''
+              }'s profile image`"
             />
           </div>
           <div
             class="d-flex justify-content-center align-items-center text-clip ms-0 me-auto"
           >
             <p class="ms-0 me-auto mb-0 pb-0 text-clip fw-bold fs-6">
-              {{ loggedInUser.first_name }}
-              {{ loggedInUser.last_name }}
+              {{ isAuthenticated ? loggedInUser.full_name : '' }}
               <br class="p-0 m-0" />
               <span class="small text-muted text-clip">
-                {{ loggedInUser.email }}
+                {{ isAuthenticated ? loggedInUser.email : '' }}
               </span>
             </p>
           </div>
@@ -128,7 +129,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['loggedInUser']),
+    ...mapGetters(['isAuthenticated', 'loggedInUser']),
   },
 
   mounted() {

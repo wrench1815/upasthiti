@@ -2,20 +2,30 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h2>Edit Department</h2>
-        <p>
-          Editing Department
+        <h1 class="text-gradient text-primary d-inline-block">
+          Department Edit
+        </h1>
+        <h3 class="text-secondary text-capitalize">
+          Editing:
           <span class="text-info fw-bold">{{ department.id }}</span>
-        </p>
+        </h3>
       </div>
-      <div class="card-body">
+      <!-- Loader Form-->
+      <Lazy-LoadersForm
+        v-if="loading"
+        class="card-body"
+        :inputCount="3"
+        :btnCenter="true"
+      />
+
+      <div class="card-body" v-else>
         <!-- for Valdation -->
         <ValidationObserver v-slot="{ handleSubmit }">
           <!-- start:Department Edit Form -->
           <form @submit.prevent="handleSubmit(updateDepartment)">
             <!-- start:Department Name -->
             <div class="row">
-              <div class="col-12 col-md-4">
+              <div class="col-12">
                 <label class="form-label" for="department_name"
                   >Department Name</label
                 >
@@ -44,8 +54,8 @@
 
             <!-- start:HoD -->
             <div class="row">
-              <div class="col-12 col-md-4">
-                <label class="form-label" for="hod">HoD</label>
+              <div class="col-12">
+                <label class="form-label" for="hod">HOD</label>
               </div>
               <div class="col">
                 <ValidationProvider
@@ -53,7 +63,7 @@
                   :rules="{ required: true }"
                 >
                   <v-select
-                    placeholder="Select HoD"
+                    placeholder="Select HOD"
                     :options="hodList"
                     v-model="department.hod"
                   ></v-select>
@@ -71,7 +81,7 @@
 
             <!-- start:College -->
             <div class="row">
-              <div class="col-12 col-md-4">
+              <div class="col-12">
                 <label class="form-label" for="hod">College</label>
               </div>
               <div class="col">
@@ -97,10 +107,10 @@
             <!-- end:College -->
 
             <!-- Submit button -->
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-center">
               <button
                 type="submit"
-                class="btn btn-success fw-bold btn-rounded mb-4"
+                class="btn btn-rounded bg-gradient-success text-white text-white mb-4"
               >
                 Update Department
               </button>
@@ -245,10 +255,10 @@ export default {
     async getHodList() {
       await this.$api.user.listHod().then((response) => {
         // set first_name and last_name as label and id as value for v-select
-        this.hodList = response.data.map((hod) => {
+        this.hodList = response.data.results.map((hod) => {
           return {
             id: hod.id,
-            label: `${hod.first_name} ${hod.last_name}`,
+            label: `${hod.full_name}`,
           }
         })
       })
@@ -310,10 +320,7 @@ export default {
           }
         })
       })
-      .finally(() => {
-        document.querySelectorAll('.form-outline').forEach((formOutline) => {
-          new this.$mdb.Input(formOutline).init()
-        })
+      .then(() => {
         this.loading = false
       })
   },

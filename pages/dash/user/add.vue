@@ -11,7 +11,7 @@
         <Lazy-LoadersForm
           :inputCount="6"
           :btnEnd="true"
-          :btnColor="'info'"
+          :btnColor="'primary'"
           v-if="loading"
         />
 
@@ -42,6 +42,7 @@
                     data-mdb-ripple-radius="40"
                     data-mdb-ripple-unbound="true"
                     data-mdb-ripple-centered="true"
+                    data-mdb-ripple-color="primary"
                     data-mdb-toggle="tooltip"
                     data-mdb-placement="bottom"
                     title="Remove Profile Image"
@@ -54,6 +55,7 @@
                   <label
                     class="position-absolute top-100 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size ripple"
                     data-mdb-ripple-radius="40"
+                    data-mdb-ripple-color="primary"
                     data-mdb-ripple-unbound="true"
                     data-mdb-ripple-centered="true"
                     for="profileImage"
@@ -205,6 +207,7 @@
                 class="form-check-label ripple"
                 data-mdb-ripple-unbound="true"
                 data-mdb-ripple-radius="40"
+                data-mdb-ripple-color="primary"
                 for="showPassword"
                 >Show Password</label
               >
@@ -226,6 +229,7 @@
                       class="ripple"
                       data-mdb-ripple-unbound="true"
                       data-mdb-ripple-radius="40"
+                      data-mdb-ripple-color="primary"
                       role="button"
                       data-mdb-toggle="popover"
                       data-mdb-html="true"
@@ -246,6 +250,7 @@
                   class="form-check-label ripple"
                   data-mdb-ripple-unbound="true"
                   data-mdb-ripple-radius="40"
+                  data-mdb-ripple-color="primary"
                   for="admin"
                 >
                   <div
@@ -278,6 +283,7 @@
                   class="form-check-label ripple"
                   data-mdb-ripple-unbound="true"
                   data-mdb-ripple-radius="40"
+                  data-mdb-ripple-color="primary"
                   for="principal"
                 >
                   <div
@@ -310,6 +316,7 @@
                   class="form-check-label ripple"
                   data-mdb-ripple-unbound="true"
                   data-mdb-ripple-radius="40"
+                  data-mdb-ripple-color="primary"
                   for="hod"
                 >
                   <div
@@ -342,6 +349,7 @@
                   class="form-check-label ripple"
                   data-mdb-ripple-unbound="true"
                   data-mdb-ripple-radius="40"
+                  data-mdb-ripple-color="primary"
                   for="teacher"
                 >
                   <div
@@ -372,7 +380,7 @@
             <div class="d-flex justify-content-center">
               <button
                 type="submit"
-                class="btn bg-gradient-primary col- text-white btn-rounded my-4"
+                class="btn bg-gradient-primary text-white btn-rounded my-4"
               >
                 Add a new User
               </button>
@@ -386,8 +394,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   name: 'DashUserAdd',
   layout: 'dash',
@@ -666,7 +672,7 @@ export default {
       .then(() => {
         this.unsetLoading()
       })
-      .finally(() => {
+      .then(() => {
         // initialize form elements
         document.querySelectorAll('.form-outline').forEach((formOutline) => {
           new this.$mdb.Input(formOutline).init()

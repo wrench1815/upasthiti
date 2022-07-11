@@ -19,6 +19,27 @@
 export default {
   name: 'DashLayout',
   middleware: ['auth'],
+
+  methods: {
+    // check if changes in local storage, if so, logout
+    logoutAll() {
+      window.addEventListener('storage', (event) => {
+        if (event.storageArea != localStorage) return
+        if (event.key === 'auth._token.local') {
+          location.reload()
+        }
+      })
+    },
+  },
+
+  mounted() {
+    window.addEventListener('storage', (event) => {
+      if (event.storageArea != localStorage) return
+      if (event.key === 'auth._token.local') {
+        location.reload()
+      }
+    })
+  },
 }
 </script>
 

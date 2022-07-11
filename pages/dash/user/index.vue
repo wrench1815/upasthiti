@@ -53,6 +53,13 @@ export default {
   name: 'DashUserIndex',
   layout: 'dash',
 
+  watch: {
+    '$route.query'() {
+      this.payloadWatch()
+      this.refreshUsers()
+    },
+  },
+
   data() {
     return {
       payload: {},
@@ -102,25 +109,46 @@ export default {
           this.error = false
         })
         .catch((error) => {
-          this.$swal({
-            title: 'Error',
-            icon: 'error',
-            type: 'error',
-            html: `${
-              error.response.data.detail
-                ? error.response.data.detail
-                : 'Something went wrong'
-            }`,
-            confirmButtonText: 'Refresh',
-            showCancelButton: true,
-            cancelButtonText: 'To Dash Home',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.getUsers(this.payload)
-            } else if (result.isDismissed) {
-              this.$router.push('/dash')
-            }
-          })
+          if (error.response.status == 404) {
+            this.error = true
+            this.users = []
+            // show error
+            this.$swal({
+              title: '404',
+              icon: 'error',
+              type: 'error',
+              html: 'Page not Found',
+              confirmButtonText: 'Refresh',
+              showCancelButton: true,
+              cancelButtonText: 'To Dash Home',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.getUsers()
+              } else if (result.isDismissed) {
+                this.$router.push('/dash')
+              }
+            })
+          } else {
+            this.$swal({
+              title: 'Error',
+              icon: 'error',
+              type: 'error',
+              html: `${
+                error.response.data.detail
+                  ? error.response.data.detail
+                  : 'Something went wrong'
+              }`,
+              confirmButtonText: 'Refresh',
+              showCancelButton: true,
+              cancelButtonText: 'To Dash Home',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.getUsers()
+              } else if (result.isDismissed) {
+                this.$router.push('/dash')
+              }
+            })
+          }
         })
     },
 
@@ -132,9 +160,10 @@ export default {
 
     // set default profile image on mounted
     // env variables can only i read after mounted
-    async setdefaultProfileImage() {
+    async setDefaults() {
       return new Promise((resolve, reject) => {
         this.defaultProfileImage = this.$config.defaultUserImage
+        this.payload.page = this.$route.query.page
         resolve()
       })
     },
@@ -143,18 +172,35 @@ export default {
     onPaginated(pageNum) {
       this.payload.page = pageNum
 
-      this.refreshUsers()
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          page: pageNum,
+        },
+      })
     },
 
     // on filter
     filterUser() {
       this.payload = {}
+      this.$router.push({
+        path: this.$route.path,
+      })
       this.refreshUsers()
+    },
+
+    // watcher for route query
+    payloadWatch() {
+      if (this.$route.query.page) {
+        this.payload.page = this.$route.query.page
+      } else {
+        this.payload.page = '1'
+      }
     },
   },
 
   mounted() {
-    this.setdefaultProfileImage().then(() => {
+    this.setDefaults().then(() => {
       this.getUsers().then(() => {
         if (!this.error) {
           this.loading = false
