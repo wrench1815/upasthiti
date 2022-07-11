@@ -45,10 +45,15 @@
                 </div>
                 <!-- full name -->
                 <div class="ms-3">
-                  <p class="fw-bolder mb-1 text-primary">
-                    {{ user.first_name ? user.first_name : '----' }}
-                    {{ user.last_name ? user.last_name : '----' }}
-                  </p>
+                  <NuxtLink
+                    :to="`/dash/user/detail?id=${user.id}`"
+                    class="fw-bolder mb-1 text-primary"
+                  >
+                    <span class="hover-underline-animation">{{
+                      user.full_name ? user.full_name : '----'
+                    }}</span>
+                    <i class="ri-link"></i>
+                  </NuxtLink>
                 </div>
               </div>
             </td>
@@ -148,6 +153,12 @@
               <div
                 class="d-flex justify-content-center align-items-center gap-2"
               >
+                <!-- detail -->
+                <NuxtLink
+                  :to="`/dash/user/detail?id=${user.id}`"
+                  class="btn btn-floating bg-gradient-success text-white btn-sm d-flex justify-content-center align-items-center"
+                  ><i class="ri-eye-fill ri-lg"></i
+                ></NuxtLink>
                 <!-- edit -->
                 <NuxtLink
                   :to="`/dash/user/${user.id}`"
