@@ -120,6 +120,11 @@ export default {
           icon: 'ri-building-4-fill',
         },
         {
+          name: 'University',
+          url: '/dash/university',
+          icon: 'ri-building-4-fill',
+        },
+        {
           name: 'User',
           url: '/dash/user',
           icon: 'ri-user-3-fill',
