@@ -8,13 +8,8 @@
         </h3>
       </div>
       <div class="card-body">
-        <!-- <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashUserTable
-          v-else
-          :users.sync="users.results"
-          :defaultProfileImage="defaultProfileImage"
-        /> -->
-      </div>
+        <!-- <Lazy-LoadersTable v-if="loading" /> -->
+        <Lazy-DashUniversityTable/>
     </div>
   </div>
 </template>
@@ -24,16 +19,13 @@ export default {
   name: 'DashUniversityIndex',
   layout: 'dash',
 
-
-
-
   data() {
     return {
-      payload: {},
-      users: [],
-      defaultProfileImage: '',
-      loading: false,
-      error: true,
+      // payload: {},
+      // users: [],
+      // defaultProfileImage: '',
+      // loading: false,
+      // error: true,
       // userFilters: ['All', 'Admin', 'Principal', 'HOD', 'Teacher'],
       // selectedUserFilter: 'All',
     }
@@ -47,8 +39,6 @@ export default {
       },
     ])
   },
-
-
 
   //  mounted() {
   //     this.setDefaults().then(() => {
