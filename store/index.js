@@ -1,5 +1,6 @@
 export const state = () => ({
   role: '',
+  isDash: false,
 })
 
 // getters
@@ -29,5 +30,12 @@ export const getters = {
     } else {
       return null
     }
+  },
+}
+
+// mutations
+export const mutations = {
+  setDash(state, isDash) {
+    state.isDash = isDash
   },
 }
