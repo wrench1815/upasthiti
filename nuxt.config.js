@@ -26,6 +26,11 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
+  // Router: https://go.nuxtjs.dev/config-router
+  router: {
+    middleware: 'isDash'
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/mdb.js',
