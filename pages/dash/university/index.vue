@@ -9,7 +9,8 @@
       </div>
       <div class="card-body">
         <!-- <Lazy-LoadersTable v-if="loading" /> -->
-        <Lazy-DashUniversityTable/>
+        <Lazy-DashUniversityTable />
+      </div>
     </div>
   </div>
 </template>
