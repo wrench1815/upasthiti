@@ -16,10 +16,9 @@
           <h2 class="text-uppercase fw-bold text-danger">Oh no! error 400</h2>
           <h3 class="text-primary">Bad Request</h3>
           <!-- <span class="fs-5 mt-1">We are sorry.</span> -->
-          <span class="fs-6 mt-1 text-md-start text-center"
-            > Awwww.... you sent something I don't understand.
-             </span
-          >
+          <span class="fs-6 mt-1 text-md-start text-center">
+            Awwww.... you sent something I don't understand.
+          </span>
           <span class="fs-6 mt-1 text-center text-md-start"
             >Try going back to our homepage.</span
           >
