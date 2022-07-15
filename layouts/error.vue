@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <section class="container-fluid">
     <div
-      class="container py-5 my-4 card card-body rounded-9"
+      class="py-5 my-4 card card-body rounded-9"
       v-if="error.statusCode == 403"
     >
       <div class="row d-flex align-items-center justify-content-center h-100">
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div
-      class="container py-5 my-4 card card-body rounded-9"
+      class="py-5 my-4 card card-body rounded-9"
       v-else-if="error.statusCode == 404"
     >
       <div class="row d-flex align-items-center justify-content-center h-100">
@@ -69,7 +69,13 @@
         </div>
       </div>
     </div>
-    <div class="container py-5 my-4 card card-body rounded-9" v-else>error</div>
+    <div class="py-5 my-4 card card-body rounded-9" v-else>
+      <h2 class="text-danger fw-bold">Error</h2>
+      <div v-if="debug">
+        <h4 class="text-danger">Code: {{ error.statusCode }}</h4>
+        <p class="text-danger">{{ message }}</p>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -77,7 +83,17 @@
 export default {
   props: ['error'],
 
-  layout: ({ isDash }) => (isDash ? 'dash' : 'default'),
+  layout: () => ($nuxt.$store.state.isDash ? 'dash' : 'default'),
+
+  computed: {
+    message() {
+      return this.error.message || '<%= messages.client_error %>'
+    },
+
+    debug() {
+      return process.env.NODE_ENV === 'development'
+    },
+  },
 }
 </script>
 
