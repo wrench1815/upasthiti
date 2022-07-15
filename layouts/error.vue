@@ -76,7 +76,8 @@
 <script>
 export default {
   props: ['error'],
-  layout({ isDash })=> isDash ? 'dash' : 'default',
+
+  layout: ({ isDash }) => (isDash ? 'dash' : 'default'),
 }
 </script>
 
