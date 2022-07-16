@@ -91,6 +91,23 @@
           </div>
         </div>
         <!-- end:College Address -->
+
+        <!-- start:Affiliated University -->
+        <div class="row mb-3">
+          <div class="col-12 col-md-4 d-flex">
+            <label class="text-muted fw-bold-500">Affiliated University</label>
+          </div>
+          <div class="col d-flex">
+            <a
+              :href="college.affiliated_university"
+              target="_blank"
+              class="text-gradient text-primary"
+              >{{ college.affiliated_university }}
+              <i class="ri-external-link-fill"></i
+            ></a>
+          </div>
+        </div>
+        <!-- end:Affiliated University-->
       </div>
       <!-- end:College Info -->
     </div>
@@ -394,6 +411,7 @@ export default {
         institute_website: '',
         institute_mobile: '',
         institute_email: '',
+        affiliated_university: '',
       },
     }
   },

@@ -14,7 +14,10 @@
             Institute Address
           </th>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">
-            Email
+            Contact info
+          </th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">
+            University Name
           </th>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">
             Created On
@@ -64,7 +67,7 @@
           <td>
             <div class="d-flex justify-content-center align-items center">
               <div
-                class="badge bg-gradient-danger badge-fs shadow-3-strong py-2 rounded-pill px-3"
+                class="badge bg-gradient-warning badge-fs shadow-3-strong py-2 rounded-pill px-3"
               >
                 {{
                   college.institute_alias_name
@@ -86,13 +89,23 @@
           </td>
           <!-- end:College Alias -->
 
-          <!-- start:Institute Email -->
+          <!-- start:Institute Contact-info -->
           <td>
             <div class="text-dark mb-0">
               {{ college.institute_email ? college.institute_email : '----' }}
+              <br />
+              {{ college.institute_number ? college.institute_number : '----' }}
             </div>
           </td>
-          <!-- end:Institute Email -->
+          <!-- end:Institute Contact-info -->
+
+          <!-- start:Institute University Name-->
+          <td>
+            <div class="text-dark mb-0">
+              {{ college.university_name ? college.university_name : '----' }}
+            </div>
+          </td>
+          <!-- end:Institute University Name -->
 
           <!-- start:Created On -->
           <td>
