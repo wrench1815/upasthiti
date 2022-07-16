@@ -84,7 +84,7 @@
               }}
             </div>
           </td>
-          <!-- end:College Alias -->
+          <!-- end:College Address -->
 
           <!-- start:Institute Email -->
           <td>

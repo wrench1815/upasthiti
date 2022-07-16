@@ -10,6 +10,16 @@
       <div class="card-body">
         <!-- <Lazy-LoadersTable v-if="loading" /> -->
         <Lazy-DashUniversityTable />
+
+          <div class="d-flex justify-content-end mt-3">
+          <Lazy-LoadersButton v-if="loading" :rounded="true" />
+          <Lazy-UtilsLinkButton
+            v-if="!loading"
+            :rounded="true"
+            :link="'/dash/college/add'"
+            >Add new university</Lazy-UtilsLinkButton
+          >
+        </div>
       </div>
     </div>
   </div>
