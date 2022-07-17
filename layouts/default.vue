@@ -1,6 +1,8 @@
 <template>
   <div>
     <Lazy-NavBar />
+    <Lazy-NavBarProfile />
+
     <nuxt />
 
     <Lazy-Footer />
