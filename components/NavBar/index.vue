@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg navbar-light bg-white shadow-0 position-sticky top-0 z-index-5"
+    class="navbar navbar-expand-lg navbar-light bg-white shadow-0 position-sticky top-0 z-index-5 px-0 px-sm-3"
   >
     <!-- Container wrapper -->
     <div class="container-fluid">
@@ -11,7 +11,10 @@
           alt=""
         />
       </nuxt-link>
-      <nuxt-link class="nav-link text-dark fs-5" aria-current="page" to="/"
+      <nuxt-link
+        class="nav-link text-dark fs-5 px-2 px-sm-3"
+        aria-current="page"
+        to="/"
         >Upasthiti</nuxt-link
       >
 
@@ -27,22 +30,23 @@
               Log in
             </NuxtLink>
             <div v-if="isAuthenticated">
-              <li class="nav-item dropdown">
-                <button
-                  class="btn btn-white btn-floating shadow-none"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-mdb-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="ri-user-line fs-5 text-primary"></i>
-                </button>
-                <ul
-                  class="dropdown-menu ms-n5 dropdown-menu-postion dropdown-width"
+              <!-- <li class="nav-item "> -->
+              <button
+                class="btn btn-white btn-floating shadow-none"
+                type="button"
+                data-mdb-toggle="modal"
+                data-mdb-target="#smalldeviceprofileModal"
+              >
+                <i class="ri-user-line fs-5 text-primary"></i>
+              </button>
+              <!-- <ul
+                  class="dropdown-menu ms-n5 dropdown-width dropdown-menu-postion"
                   aria-labelledby="navbarDropdownMenuLink"
                 >
                   <li class="mt-3 mx-3">
-                    <h5 class="text-dark text-break text-center">Isha Guptadfghjkllkjhg</h5>
+                    <h5 class="text-dark text-break text-center">
+                      Isha Guptadfghjkllkjhg
+                    </h5>
                   </li>
                   <li class="mx-3">
                     <p class="pb-0 mb-0 text-break text-muted text-center">
@@ -83,8 +87,8 @@
                       <i class="ri-logout-circle-line text-danger"></i>Logout
                     </div>
                   </li>
-                </ul>
-              </li>
+                </ul> -->
+              <!-- </li> -->
             </div>
           </li>
         </ul>
@@ -93,19 +97,24 @@
 
       <!-- Toggle button -->
       <button
-        id="mainNavbarLeftAlignToggler"
-        class="navbar-toggler"
+        id="mainNavbarLeftoffcanvas"
+        class="navbar-toggler px-1"
         type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#mainNavbarLeftAlign"
-        aria-controls="mainNavbarLeftAlign"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        data-mdb-toggle="offcanvas"
+        data-mdb-target="#leftoffcanvas"
+        aria-controls="leftoffcanvas"
       >
-        <i class="ri-menu-fill "></i>
+        <i class="ri-menu-fill"></i>
       </button>
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="mainNavbarLeftAlign">
+
+      <div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="leftoffcanvas"
+        aria-labelledby="lelfoffcanvas"
+      >
         <ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <nuxt-link
@@ -138,7 +147,6 @@
           </li>
         </ul>
       </div>
-      <!-- Collapsible wrapper -->
 
       <!-- start:Action Button for large devices -->
       <div class="d-flex align-items-center ms-1 me-0 d-none d-lg-block">
@@ -155,9 +163,9 @@
               <img
                 class="avatar rounded-circle obj-fit-cover shadow"
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
-                alt=""
+                alt="user-profile"
                 data-mdb-toggle="modal"
-                data-mdb-target="#profileModal"
+                data-mdb-target="#largedeviceprofileModal"
               />
             </div>
             <!-- Modal -->
@@ -242,11 +250,10 @@ export default {
 </script>
 
 <style scoped>
-.dropdown-menu-postion {
-  position: absolute;
-  top: 4.5rem !important;
+.dropdown-width {
+  width: 13rem !important;
 }
-.dropdown-width{
-  width: 12rem !important;
+.badge-fs {
+  font-size: 0.9rem !important;
 }
 </style>

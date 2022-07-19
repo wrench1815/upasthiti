@@ -1,7 +1,7 @@
 <template>
   <div
-    class="modal fade"
-    id="largedeviceprofileModal"
+    class="modal"
+    id="smalldeviceprofileModal"
     tabindex="-1"
     aria-labelledby="profileModalLabel"
     aria-hidden="true"
@@ -12,14 +12,9 @@
           <div
             class="d-flex flex-column align-items-center justify-content-center gap-2"
           >
-            <img
-              class="avatar rounded-circle obj-fit-cover shadow"
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
-              alt=""
-            />
             <div class="text-center">
               <h5 class="text-dark text-break">Isha Gupta</h5>
-              <p class="pb-0 mb-0 text-muted text-break">isha@mail.com</p>
+              <p class="pb-0 mb-0 text-break text-muted">isha@mail.com</p>
               <div
                 class="d-flex justify-content-center align-items-center mt-2 mb-3"
               >
@@ -37,24 +32,20 @@
             <li class="nav-item">
               <NuxtLink
                 to="/"
-                class="nav-link  text-dark d-flex align-items-center gap-1"
+                class="nav-link text-dark d-flex align-items-center gap-1"
               >
                 <i class="ri-profile-line"></i>Edit Profile
               </NuxtLink>
             </li>
 
             <li class="nav-item">
-              <div
-                class="nav-link text-dark d-flex align-items-center gap-1"
-              >
+              <div class="nav-link text-dark d-flex align-items-center gap-1">
                 <i class="ri-dashboard-line"></i>Dash Board
               </div>
             </li>
 
             <li class="nav-item">
-              <div
-                class="nav-link  text-danger d-flex align-items-center gap-1"
-              >
+              <div class="nav-link text-danger d-flex align-items-center gap-1">
                 <i class="ri-logout-circle-line text-danger"></i>Logout
               </div>
             </li>
@@ -67,24 +58,24 @@
 
 <script>
 export default {
-  name: 'NavBarProfile',
+  name: 'NavbarMobileProfile',
 }
 </script>
 
 <style scoped>
 .modal .modal-right-top {
   position: absolute;
-  right: 2rem;
-  top: 4rem;
+  right: 0.8rem;
+  top: 4.5rem;
 }
 
 .modal-dialog-width {
-  width: 16rem;
+  width: 15rem;
 }
 .badge-fs {
   font-size: 0.9rem !important;
 }
-.nav-link:hover i{
+.nav-link:hover i {
   color: var(--mdb-primary);
 }
 .nav-link:hover {

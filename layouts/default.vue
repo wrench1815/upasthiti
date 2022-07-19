@@ -2,6 +2,7 @@
   <div>
     <Lazy-NavBar />
     <Lazy-NavBarProfile />
+    <Lazy-NavBarMobileProfile />
 
     <nuxt />
 
