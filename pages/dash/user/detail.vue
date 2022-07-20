@@ -164,13 +164,25 @@ export default {
     }
   },
 
+  created() {
+    this.$store.commit('breadCrumbs/addBreadCrumb', [
+      {
+        name: 'User',
+        url: '/dash/user',
+      },
+      {
+        name: 'detail',
+      },
+    ])
+  },
+
   methods: {
     // fetch user by id
     // populate user object with fetched data
     async getUser() {
-      this.loading = true
+      this.loading = await true
 
-      this.$api.user
+      await this.$api.user
         .retrieve(this.$route.query.id)
         .then((response) => {
           this.user = response.data
@@ -178,26 +190,31 @@ export default {
           this.error = false
         })
         .catch((error) => {
-          this.$swal({
-            title: 'Error',
-            icon: 'error',
-            type: 'error',
-            text: `${
-              error.response.data.detail
-                ? error.response.data.detail
-                : 'An error has occured'
-            }`,
-            confirmButtonText: 'Refresh',
-            showCancelButton: true,
-            cancelButtonText: 'To Dash Home',
-            confirmButtonClass: 'btn btn-info',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.getUser()
-            } else if (result.isDismissed) {
-              this.$router.push('/dash')
-            }
+          this.$nuxt.error({
+            statusCode: error.response.status,
+            message: error.response.data.message,
           })
+
+          // this.$swal({
+          //   title: 'Error',
+          //   icon: 'error',
+          //   type: 'error',
+          //   text: `${
+          //     error.response.data.detail
+          //       ? error.response.data.detail
+          //       : 'An error has occured'
+          //   }`,
+          //   confirmButtonText: 'Refresh',
+          //   showCancelButton: true,
+          //   cancelButtonText: 'To Dash Home',
+          //   confirmButtonClass: 'btn btn-info',
+          // }).then((result) => {
+          //   if (result.isConfirmed) {
+          //     this.getUser()
+          //   } else if (result.isDismissed) {
+          //     this.$router.push('/dash')
+          //   }
+          // })
         })
     },
 
@@ -213,9 +230,10 @@ export default {
   mounted() {
     this.getUser().then(() => {
       this.setDefaults().then(() => {
-        // if () {
+        if (!this.error) {
+          console.log('gonna set loading')
           this.loading = false
-        // }
+        }
       })
     })
   },
