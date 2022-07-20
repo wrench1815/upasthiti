@@ -5,29 +5,48 @@
       <div class="card-header">
         <h2 class="text-primary text-gradient">User Details</h2>
       </div>
+
+      <div class="card-body" v-if="loading">
+        <div v-for="item in 6" :key="item">
+          <div class="row placeholder-wave">
+            <div class="col-12 col-md-4 mb-2">
+              <span class="placeholder placeholder-sm w-100"></span>
+              <span class="placeholder placeholder-sm w-75"></span>
+            </div>
+            <div class="col">
+              <div class="mb-4">
+                <span class="placeholder placeholder-sm w-100"></span>
+                <span class="placeholder placeholder-sm w-75"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- start:User Info -->
-      <div class="card-body">
+      <div class="card-body" v-else>
         <!-- start:User Info Card -->
         <div
           class="mb-3 shadow-5 d-flex card-header gap-3 rounded-5 align-items-center flex-column flex-md-row"
         >
           <div>
             <img
-              v-lazy-load
               class="avatar avatar-xxl obj-fit-cover shadow-1-strong"
+              :data-src="
+                user.profile_image ? user.profile_image : defaultProfileImage
+              "
+              :alt="`${user.full_name}'s Profile Image`"
+              v-lazy-load
             />
           </div>
           <div
             class="d-flex flex-column justify-content-center align-content-start text-break"
           >
             <div class="fw-bold fs-5 text-primary text-gradient">
-              <!-- {{ college.institute_name }} -->
-              Name
+              {{ user.full_name ? user.full_name : '----' }}
             </div>
             <div class="text-muted small d-flex gap-1">
               <i class="ri-mail-fill text-primary text-gradient"></i>
-              <!-- {{ college.institute_email }} -->
-              Roll No
+              {{ user.email ? user.email : '----' }}
             </div>
             <div class="text-muted small d-flex gap-1">
               <i class="ri-phone-fill text-primary text-gradient"></i>
@@ -140,6 +159,8 @@ export default {
     return {
       user: {},
       loading: true,
+      defaultProfileImage: '',
+      error: true,
     }
   },
 
@@ -147,26 +168,55 @@ export default {
     // fetch user by id
     // populate user object with fetched data
     async getUser() {
+      this.loading = true
+
+      this.$api.user
+        .retrieve(this.$route.query.id)
+        .then((response) => {
+          this.user = response.data
+
+          this.error = false
+        })
+        .catch((error) => {
+          this.$swal({
+            title: 'Error',
+            icon: 'error',
+            type: 'error',
+            text: `${
+              error.response.data.detail
+                ? error.response.data.detail
+                : 'An error has occured'
+            }`,
+            confirmButtonText: 'Refresh',
+            showCancelButton: true,
+            cancelButtonText: 'To Dash Home',
+            confirmButtonClass: 'btn btn-info',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.getUser()
+            } else if (result.isDismissed) {
+              this.$router.push('/dash')
+            }
+          })
+        })
+    },
+
+    async setDefaults() {
       return new Promise((resolve, reject) => {
-        let id = this.$route.query.id
+        this.defaultProfileImage = this.$config.defaultUserImage
 
-        this.$api.user
-          .retrieve(id)
-          .then((resp) => {
-            this.user = resp.data
-
-            resolve()
-          })
-          .catch((err) => {
-            reject(err)
-          })
+        resolve()
       })
     },
   },
 
   mounted() {
     this.getUser().then(() => {
-      this.loading = false
+      this.setDefaults().then(() => {
+        // if () {
+          this.loading = false
+        // }
+      })
     })
   },
 }
