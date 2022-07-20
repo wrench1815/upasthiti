@@ -453,7 +453,7 @@ export default {
             icon: 'error',
             type: 'error',
             text: `${
-              response.data.detail
+              error.response.data.detail
                 ? error.response.data.detail
                 : 'An error has occured'
             }`,
