@@ -8,13 +8,17 @@
         </h3>
       </div>
       <div class="card-body">
-        <!-- <Lazy-LoadersTable v-if="loading" /> -->
-        <Lazy-DashUniversityTable />
+        <Lazy-LoadersTable v-if="loading" />
+        <Lazy-DashUniversityTable
+          v-else
+          :universities.sync="university.results"
+          @deletedUni="refreshUni"
+        />
 
-          <div class="d-flex justify-content-end mt-3">
+        <div class="d-flex justify-content-end mt-3">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
           <Lazy-UtilsLinkButton
-            v-if="!loading"
+            v-else
             :rounded="true"
             :link="'/dash/college/add'"
             >Add new university</Lazy-UtilsLinkButton
@@ -32,13 +36,8 @@ export default {
 
   data() {
     return {
-      // payload: {},
-      // users: [],
-      // defaultProfileImage: '',
-      // loading: false,
-      // error: true,
-      // userFilters: ['All', 'Admin', 'Principal', 'HOD', 'Teacher'],
-      // selectedUserFilter: 'All',
+      university: {},
+      loading: true,
     }
   },
 
@@ -51,15 +50,27 @@ export default {
     ])
   },
 
-  //  mounted() {
-  //     this.setDefaults().then(() => {
-  //       this.getUsers().then(() => {
-  //         if (!this.error) {
-  //           this.loading = false
-  //         }
-  //       })
-  //     })
-  //   },
+  methods: {
+    async getUniversity() {
+      this.loading = await true
+
+      await this.$api.university.list().then((resp) => {
+        this.university = resp.data
+      })
+    },
+
+    async refreshUni() {
+      this.getUniversity().then(() => {
+        this.loading = false
+      })
+    },
+  },
+
+  mounted() {
+    this.getUniversity().then(() => {
+      this.loading = false
+    })
+  },
 }
 </script>
 
