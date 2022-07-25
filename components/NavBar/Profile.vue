@@ -1,17 +1,19 @@
 <template>
   <div
-    class="offcanvas offcanvas-start border-0 offcanvas-width bg-transparent shadow-0 p-0 offcanvas-anim"
+    class="offcanvas offcanvas-pos border-0 offcanvas-width bg-transparent shadow-0 p-0 offcanvas-anim"
     tabindex="-1"
-    id="profileDownOffCanvas"
-    aria-labelledby="profileDownOffCanvasLabel"
+    id="profileOffCanvas"
+    aria-labelledby="profileOffCanvasLabel"
   >
-    <div class="offcanvas-body d-flex hide-scrollbar">
+    <div class="offcanvas-body m-1 p-2 d-flex hide-scrollbar">
       <div class=""></div>
-      <div class="bg-white rounded-5 shadow mt-auto position-relative">
+      <div
+        class="bg-white rounded-5 shadow mt-auto mt-lg-0 mb-lg-auto position-relative ms-lg-auto content-width"
+      >
         <!-- start:Profile Close Button -->
         <div class="position-absolute end-0 m-2">
           <button
-            id="closeProfileDownOffCanvasHide"
+            id="closeProfileOffCanvasHide"
             type="button"
             class="btn-close"
             data-mdb-dismiss="offcanvas"
@@ -114,7 +116,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'NavBarProfileDown',
+  name: 'NavBarProfile',
 
   data() {
     return {
@@ -141,14 +143,12 @@ export default {
       })
     },
 
-    async profileDownOffCanvas() {
+    async profileOffCanvas() {
       return new Promise((resolve, reject) => {
         if (
-          document
-            .querySelector('#profileDownOffCanvas')
-            .classList.contains('show')
+          document.querySelector('#profileOffCanvas').classList.contains('show')
         ) {
-          document.querySelector('#closeProfileDownOffCanvasHide').click()
+          document.querySelector('#closeProfileOffCanvasHide').click()
         }
 
         resolve()
@@ -156,18 +156,18 @@ export default {
     },
 
     async toEditProfile() {
-      this.profileDownOffCanvas().then(() => {
+      this.profileOffCanvas().then(() => {
         this.$router.push('/')
       })
     },
     async toDash() {
-      this.profileDownOffCanvas().then(() => {
+      this.profileOffCanvas().then(() => {
         this.$router.push('/dash')
       })
     },
 
     async logout() {
-      this.profileDownOffCanvas().then(() => {
+      this.profileOffCanvas().then(() => {
         this.$swal({
           title: 'Logging Out...',
           icon: 'info',
@@ -232,8 +232,29 @@ export default {
 </script>
 
 <style scoped>
+.content-width {
+  width: 15.688rem;
+}
+
+.offcanvas-pos {
+  top: 0;
+  left: 0;
+  width: 400px;
+}
+
 .offcanvas-anim {
   transform: translateY(100%);
+}
+
+@media (min-width: 992px) {
+  .offcanvas-pos {
+    right: 0;
+    left: unset;
+  }
+
+  .offcanvas-anim {
+    transform: translateY(-100%);
+  }
 }
 
 .offcanvas-width {
