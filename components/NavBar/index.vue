@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <nuxt-link to="/">
         <img
-          class="avatar rounded-circle obj-fit-cover border"
+          class="avatar rounded-circle obj-fit-cover shadow-2-strong"
           data-src="/favicon.png"
           alt="Site Logo"
           v-lazy-load
