@@ -1,6 +1,6 @@
 <template>
   <div
-    class="offcanvas offcanvas-start border-0 offcanvas-width bg-transparent shadow-0 p-0"
+    class="offcanvas offcanvas-start border-0 offcanvas-width bg-transparent shadow-0 p-0 offcanvas-anim"
     tabindex="-1"
     id="profileDownOffCanvas"
     aria-labelledby="profileDownOffCanvasLabel"
@@ -232,6 +232,14 @@ export default {
 </script>
 
 <style scoped>
+.offcanvas-anim {
+  transform: translateY(100%);
+}
+
+.offcanvas-width {
+  /* width: 16rem; */
+}
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
