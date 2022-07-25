@@ -1,14 +1,20 @@
 <template>
   <div>
+    <!-- navbar -->
     <Lazy-NavBar />
+
+    <!-- sidebar -->
     <Lazy-NavBarSideBar />
+
     <!-- profile modals -->
-    <Lazy-NavBarMobileProfile />
-    <Lazy-NavBarProfileDown />
+    <Lazy-NavBarProfile />
 
     <nuxt />
 
+    <!-- footer -->
     <Lazy-Footer />
+
+    <!-- to top util button -->
     <Lazy-UtilsToTop />
   </div>
 </template>

@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <nuxt-link to="/">
         <img
-          class="avatar avatar-s rounded-circle obj-fit-cover border"
+          class="avatar rounded-circle obj-fit-cover border"
           data-src="/favicon.png"
           alt="Site Logo"
           v-lazy-load
@@ -37,35 +37,7 @@
       </div>
       <!-- Collapsible wrapper -->
 
-      <!-- start:Action Button for md and lower devices -->
-      <div
-        class="d-flex align-items-center ms-1 me-0 d-none d-sm-block d-md-block d-lg-none"
-      >
-        <ul class="navbar-nav d-flex flex-row me-1">
-          <li class="nav-item">
-            <!-- <NuxtLink
-              v-if="!isAuthenticated"
-              class="btn btn-primary btn-rounded fw-bold"
-              to="/login"
-            >
-              Log in
-            </NuxtLink> -->
-            <div v-if="isAuthenticated">
-              <img
-                class="avatar avatar-size rounded-circle obj-fit-cover shadow"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
-                alt="user-profile"
-                data-mdb-toggle="modal"
-                data-mdb-target="#mainSiteProfile"
-              />
-            </div>
-            <!-- Modal -->
-          </li>
-        </ul>
-      </div>
-      <!-- end:Action Button for md and lower devices -->
-
-      <!-- Toggle button -->
+      <!-- start:OffCanvas Toggle button -->
       <button
         id="mainSiteNavOffCanvasToggler"
         class="navbar-toggler px-1"
@@ -78,11 +50,13 @@
       >
         <i class="ri-menu-fill link-primary ri-lg"></i>
       </button>
+      <!-- end:OffCanvas Toggle button -->
 
-      <!-- start:Action Button for large devices -->
+      <!-- start:Options for large devices -->
       <div class="d-flex align-items-center ms-1 me-0 d-none d-lg-block">
         <ul class="navbar-nav d-flex flex-row me-1 mb-2 mb-lg-0">
           <li class="nav-item me-3">
+            <!-- if not Authenticated -->
             <NuxtLink
               v-if="!isAuthenticated"
               class="btn btn-primary btn-rounded fw-bold"
@@ -90,20 +64,32 @@
             >
               Log in
             </NuxtLink>
+
+            <!-- if Authenticated-->
             <div v-if="isAuthenticated">
+              <!-- User Profile Image -->
               <img
-                class="avatar rounded-circle obj-fit-cover shadow"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+                class="avatar avatar-size rounded-circle obj-fit-cover shadow"
+                :data-src="
+                  loggedInUser.profile_image
+                    ? loggedInUser.profile_image
+                    : defaultProfileImage
+                "
                 alt="user-profile"
-                data-mdb-toggle="modal"
-                data-mdb-target="#largedeviceprofileModal"
+                id="profileOffCanvasToggle"
+                type="button"
+                aria-label="Toggle Profile"
+                data-mdb-toggle="offcanvas"
+                data-mdb-target="#profileOffCanvas"
+                aria-controls="profileOffCanvas"
+                v-lazy-load
               />
             </div>
             <!-- Modal -->
           </li>
         </ul>
       </div>
-      <!-- end:Action Button for large devices -->
+      <!-- end:Options for large devices -->
     </div>
     <!-- Container wrapper -->
   </nav>
@@ -117,7 +103,7 @@ export default {
 
   data() {
     return {
-      showLogin: true,
+      defaultProfileImage: '',
       menuItems: [
         {
           name: 'Home',
@@ -140,12 +126,20 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['isAuthenticated']),
+    ...mapGetters(['isAuthenticated', 'loggedInUser']),
   },
 
   methods: {
-    logout() {
-      this.$swal({
+    async setDefaults() {
+      return new Promise((resolve, reject) => {
+        this.defaultProfileImage = this.$config.defaultUserImage
+
+        resolve()
+      })
+    },
+
+    async logout() {
+      await this.$swal({
         title: 'Logging Out...',
         icon: 'info',
         text: 'Please wait...',
@@ -181,6 +175,10 @@ export default {
         },
       })
     },
+  },
+
+  mounted() {
+    this.setDefaults()
   },
 }
 </script>
