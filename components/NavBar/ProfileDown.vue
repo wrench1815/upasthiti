@@ -6,7 +6,7 @@
     aria-labelledby="profileModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-right-bottom modal-dialog-width">
+    <div class="modal-dialog modal-left-bottom modal-dialog-width">
       <div class="modal-content" v-if="isAuthenticated">
         <div
           class="btn-close position-absolute end-0 m-2"
@@ -199,10 +199,10 @@ export default {
 </script>
 
 <style scoped>
-.modal .modal-right-bottom {
+.modal .modal-left-bottom {
   position: absolute;
-  right: 0;
-  bottom: 4rem;
+  left: 0;
+  bottom: 0;
 }
 
 .modal-dialog-width {

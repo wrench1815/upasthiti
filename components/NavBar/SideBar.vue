@@ -164,7 +164,8 @@ export default {
 
 <style scoped>
 .offcanvas-width {
-  width: calc(100vw - 1rem) !important;
+  /* width: calc(100vw - 1rem) !important; */
+  width: 15.625rem;
 }
 
 .offcanvas-footer {
@@ -172,11 +173,11 @@ export default {
   min-height: 66px;
 }
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   .offcanvas-width {
     width: 15.625rem !important;
   }
-}
+} */
 
 .text-clip {
   overflow: hidden;

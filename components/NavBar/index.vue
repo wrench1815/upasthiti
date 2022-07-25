@@ -43,13 +43,13 @@
       >
         <ul class="navbar-nav d-flex flex-row me-1">
           <li class="nav-item">
-            <NuxtLink
+            <!-- <NuxtLink
               v-if="!isAuthenticated"
               class="btn btn-primary btn-rounded fw-bold"
               to="/login"
             >
               Log in
-            </NuxtLink>
+            </NuxtLink> -->
             <div v-if="isAuthenticated">
               <img
                 class="avatar avatar-size rounded-circle obj-fit-cover shadow"
