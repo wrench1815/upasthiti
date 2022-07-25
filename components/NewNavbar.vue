@@ -143,7 +143,6 @@
               />
             </div>
             <!-- Modal -->
-
           </li>
         </ul>
       </div>
@@ -224,6 +223,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

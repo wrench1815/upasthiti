@@ -1,8 +1,10 @@
 <template>
   <div>
     <Lazy-NavBar />
-    <Lazy-NavBarProfile />
+    <Lazy-NavBarSideBar />
+    <!-- profile modals -->
     <Lazy-NavBarMobileProfile />
+    <Lazy-NavBarProfileDown />
 
     <nuxt />
 
