@@ -7,7 +7,7 @@
     data-mdb-backdrop="true"
   >
     <!-- start:sidebar close -->
-    <div class="position-absolute end-0 m-2 d-md-none">
+    <div class="position-absolute end-0 m-2 d-sm-none">
       <button
         type="button"
         class="btn-close"
@@ -172,7 +172,7 @@ export default {
   min-height: 66px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 576px) {
   .offcanvas-width {
     width: 15.625rem !important;
   }

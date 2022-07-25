@@ -1,14 +1,15 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg navbar-light bg-white shadow-0 position-sticky top-0 z-index-5"
+    class="navbar navbar-expand-lg navbar-light bg-white shadow-0 position-sticky top-0 z-index-5 py-2"
   >
     <!-- Container wrapper -->
     <div class="container-fluid">
       <nuxt-link to="/">
         <img
-          class="avatar avatar-s rounded-circle obj-fit-cover"
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+          class="avatar avatar-s rounded-circle obj-fit-cover border"
+          data-src="/favicon.png"
           alt="Site Logo"
+          v-lazy-load
         />
       </nuxt-link>
       <nuxt-link
@@ -37,25 +38,27 @@
       <!-- Collapsible wrapper -->
 
       <!-- start:Action Button for md and lower devices -->
-      <div class="d-flex align-items-center ms-1 me-0 d-lg-none">
+      <div
+        class="d-flex align-items-center ms-1 me-0 d-none d-sm-block d-md-block d-lg-none"
+      >
         <ul class="navbar-nav d-flex flex-row me-1">
           <li class="nav-item">
-            <!-- <NuxtLink
+            <NuxtLink
               v-if="!isAuthenticated"
               class="btn btn-primary btn-rounded fw-bold"
               to="/login"
             >
               Log in
-            </NuxtLink> -->
-            <!-- <div v-if="isAuthenticated">
+            </NuxtLink>
+            <div v-if="isAuthenticated">
               <img
-                class="avatar avatar rounded-circle obj-fit-cover shadow"
+                class="avatar avatar-size rounded-circle obj-fit-cover shadow"
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
                 alt="user-profile"
                 data-mdb-toggle="modal"
                 data-mdb-target="#mainSiteProfile"
               />
-            </div> -->
+            </div>
             <!-- Modal -->
           </li>
         </ul>
@@ -183,6 +186,11 @@ export default {
 </script>
 
 <style scoped>
+.avatar-size {
+  height: 40px !important;
+  width: 40px !important;
+}
+
 .dropdown-width {
   width: 13rem !important;
 }
