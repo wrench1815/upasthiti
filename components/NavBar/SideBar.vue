@@ -35,7 +35,7 @@
     <!-- end:sidebar body -->
 
     <!-- start:sidebar footer for sm -->
-    <div class="offcanvas-footer w-100 px-3 py-2 d-md-none">
+    <div class="offcanvas-footer w-100 px-3 py-2 d-sm-none">
       <!-- start:if Authenticated -->
       <div
         class="d-flex justify-content-start align-items-center gap-2"
@@ -69,10 +69,13 @@
         <!-- start:profile modal toggler -->
         <div
           class="ms-auto me-0 mb-n2"
-          id="profileModalToggle"
-          data-mdb-toggle="modal"
-          data-mdb-target="#mainSiteProfileDown"
-          @click="closeMainSiteNavOffCanvas"
+          id="profileDownOffCanvasToggle"
+          type="button"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          data-mdb-toggle="offcanvas"
+          data-mdb-target="#profileDownOffCanvas"
+          aria-controls="profileDownOffCanvas"
         >
           <i class="ri-settings-2-line ri-xl rotate-center cog"></i>
         </div>

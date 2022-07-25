@@ -1,82 +1,110 @@
 <template>
   <div
-    class="modal fade"
-    id="mainSiteProfileDown"
+    class="offcanvas offcanvas-start border-0 offcanvas-width bg-transparent shadow-0 p-0"
     tabindex="-1"
-    aria-labelledby="profileModalLabel"
-    aria-hidden="true"
+    id="profileDownOffCanvas"
+    aria-labelledby="profileDownOffCanvasLabel"
   >
-    <div class="modal-dialog modal-left-bottom modal-dialog-width">
-      <div class="modal-content" v-if="isAuthenticated">
-        <div
-          class="btn-close position-absolute end-0 m-2"
-          data-mdb-toggle="modal"
-          data-mdb-target="#mainSiteProfileDown"
-          id="hideMainSiteProfileDown"
-        ></div>
-        <div class="modal-header justify-content-center">
-          <div
-            class="d-flex flex-column align-items-center justify-content-center gap-2"
-          >
-            <img
-              class="avatar rounded-circle obj-fit-cover shadow"
-              :data-src="
-                loggedInUser.profile_image
-                  ? loggedInUser.profile_image
-                  : defaultProfileImage
-              "
-              :alt="`${loggedInUser.full_name}'s profile Image`"
-              v-lazy-load
-            />
-            <div class="text-center">
-              <h5 class="text-dark text-break">{{ loggedInUser.full_name }}</h5>
-              <p class="pb-0 mb-0 text-muted text-break">
-                {{ loggedInUser.email }}
-              </p>
-              <div
-                class="d-flex justify-content-center align-items-center mt-2 mb-3"
-              >
-                <span
-                  class="d-flex justify-content-center align-items-center gap-2 badge badge-fs shadow-3-strong py-2 rounded-pill flex-wrap text-capitalize"
-                  :class="roleClass"
+    <div class="offcanvas-body d-flex hide-scrollbar">
+      <div class=""></div>
+      <div class="bg-white rounded-5 shadow mt-auto position-relative">
+        <!-- start:Profile Close Button -->
+        <div class="position-absolute end-0 m-2">
+          <button
+            id="closeProfileDownOffCanvasHide"
+            type="button"
+            class="btn-close"
+            data-mdb-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <!-- end:Profile Close Button -->
+
+        <!-- start:ifAuthenticated-->
+        <div v-if="isAuthenticated" class="my-3 mx-2">
+          <div class="justify-content-center">
+            <div
+              class="d-flex flex-column align-items-center justify-content-center gap-2"
+            >
+              <!-- start:profile image -->
+              <img
+                class="avatar rounded-circle obj-fit-cover shadow"
+                :data-src="
+                  loggedInUser.profile_image
+                    ? loggedInUser.profile_image
+                    : defaultProfileImage
+                "
+                :alt="`${loggedInUser.full_name}'s profile Image`"
+                v-lazy-load
+              />
+              <!-- end:profile image -->
+
+              <div class="text-center">
+                <!-- start:user full name -->
+                <h5 class="text-dark text-break">
+                  {{ loggedInUser.full_name }}
+                </h5>
+                <!-- end:user full name -->
+
+                <!-- start:user email -->
+                <p class="pb-0 mb-0 text-muted text-break">
+                  {{ loggedInUser.email }}
+                </p>
+                <!-- end:user email -->
+
+                <!-- start:user role -->
+                <div
+                  class="d-flex justify-content-center align-items-center mt-2 mb-3"
                 >
-                  <i :class="roleIcon"></i>
-                  {{ role }}
-                </span>
+                  <span
+                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs shadow-3-strong py-2 rounded-pill flex-wrap text-capitalize"
+                    :class="roleClass"
+                  >
+                    <i :class="roleIcon"></i>
+                    {{ role }}
+                  </span>
+                </div>
+                <!-- end:user role -->
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-body">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <NuxtLink
-                to="/"
-                class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
-              >
-                <i class="ri-profile-line"></i>Edit Profile
-              </NuxtLink>
-            </li>
+          <!-- start:nav links -->
+          <div>
+            <ul class="nav flex-column">
+              <!-- edit profile -->
+              <li class="nav-item">
+                <div
+                  class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
+                  @click="toEditProfile"
+                >
+                  <i class="ri-profile-line"></i>Edit Profile
+                </div>
+              </li>
 
-            <li class="nav-item">
-              <div
-                class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
-                @click="toDash"
-              >
-                <i class="ri-dashboard-line"></i>Dash
-              </div>
-            </li>
+              <!-- to dash -->
+              <li class="nav-item">
+                <div
+                  class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
+                  @click="toDash"
+                >
+                  <i class="ri-dashboard-line"></i>Dash
+                </div>
+              </li>
 
-            <li class="nav-item">
-              <div
-                class="nav-link logout rounded-4 text-danger pointer-pointer d-flex align-items-center gap-1"
-                @click="logout"
-              >
-                <i class="ri-logout-circle-line text-danger"></i>Logout
-              </div>
-            </li>
-          </ul>
+              <!-- logout -->
+              <li class="nav-item">
+                <div
+                  class="nav-link logout rounded-4 text-danger pointer-pointer d-flex align-items-center gap-1"
+                  @click="logout"
+                >
+                  <i class="ri-logout-circle-line text-danger"></i>Logout
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- end:nav links -->
         </div>
+        <!-- end:ifAuthenticated-->
       </div>
     </div>
   </div>
@@ -113,28 +141,33 @@ export default {
       })
     },
 
-    async closeMainSiteProfileDown() {
+    async profileDownOffCanvas() {
       return new Promise((resolve, reject) => {
         if (
           document
-            .querySelector('#mainSiteProfileDown')
+            .querySelector('#profileDownOffCanvas')
             .classList.contains('show')
         ) {
-          document.querySelector('#hideMainSiteProfileDown').click()
+          document.querySelector('#closeProfileDownOffCanvasHide').click()
         }
 
         resolve()
       })
     },
 
+    async toEditProfile() {
+      this.profileDownOffCanvas().then(() => {
+        this.$router.push('/')
+      })
+    },
     async toDash() {
-      this.closeMainSiteProfileDown().then(() => {
+      this.profileDownOffCanvas().then(() => {
         this.$router.push('/dash')
       })
     },
 
     async logout() {
-      this.closeMainSiteProfileDown().then(() => {
+      this.profileDownOffCanvas().then(() => {
         this.$swal({
           title: 'Logging Out...',
           icon: 'info',
@@ -199,14 +232,13 @@ export default {
 </script>
 
 <style scoped>
-.modal .modal-left-bottom {
-  position: absolute;
-  left: 0;
-  bottom: 0;
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-.modal-dialog-width {
-  width: 16rem;
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .badge-fs {
