@@ -15,12 +15,20 @@
           @deletedUni="refreshUni"
         />
 
+        <Lazy-UtilsPagination
+          class="mt-4"
+          v-if="!loading"
+          :pagination.sync="university.pagination"
+          @prevPage="onPaginated"
+          @nextPage="onPaginated"
+        />
+
         <div class="d-flex justify-content-end mt-3">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
           <Lazy-UtilsLinkButton
             v-else
             :rounded="true"
-            :link="'/dash/college/add'"
+            :link="'/dash/university/add'"
             >Add new university</Lazy-UtilsLinkButton
           >
         </div>
@@ -34,8 +42,17 @@ export default {
   name: 'DashUniversityIndex',
   layout: 'dash',
 
+  watch: {
+    '$route.query'() {
+      this.payloadWatch()
+      this.refreshUni()
+    },
+  },
+
   data() {
     return {
+      payload: {},
+      error: true,
       university: {},
       loading: true,
     }
@@ -51,17 +68,54 @@ export default {
   },
 
   methods: {
+    // watcher for route query
+    async payloadWatch() {
+      if (this.$route.query.page) {
+        this.payload.page = await this.$route.query.page
+      } else {
+        this.payload.page = await '1'
+      }
+    },
+
     async getUniversity() {
       this.loading = await true
 
-      await this.$api.university.list().then((resp) => {
-        this.university = resp.data
-      })
+      await this.$api.university
+        .list(this.payload)
+        .then((resp) => {
+          this.university = resp.data
+          this.error = false
+        })
+        .catch((err) => {
+          if (errr.response.status == 404) {
+            this.error = true
+            this.university = []
+
+            this.$nuxt.error({ statusCode: 404, message: 'Page not Found' })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong',
+            })
+          }
+        })
     },
 
     async refreshUni() {
-      this.getUniversity().then(() => {
+      await this.getUniversity().then(() => {
         this.loading = false
+      })
+    },
+
+    // on paginated
+    async onPaginated(pageNum) {
+      this.payload.page = await pageNum
+
+      await this.$router.push({
+        path: this.$route.path,
+        query: {
+          page: pageNum,
+        },
       })
     },
   },
