@@ -118,12 +118,28 @@ export default {
         },
       })
     },
+
+    // set default profile image on mounted
+    // env variables can only i read after mounted
+    async setDefaults() {
+      return new Promise((resolve, reject) => {
+        // this.defaultProfileImage = this.$config.defaultUserImage
+        this.payload.page = this.$route.query.page
+        resolve()
+      })
+    },
   },
 
   mounted() {
-    this.getUniversity().then(() => {
-      this.loading = false
-    })
+    this.setDefaults()
+      .then(() => {
+        this.getUniversity()
+      })
+      .then(() => {
+        if (!this.error) {
+          this.loading = false
+        }
+      })
   },
 }
 </script>
