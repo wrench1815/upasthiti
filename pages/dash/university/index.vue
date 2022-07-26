@@ -8,6 +8,19 @@
         </h3>
       </div>
       <div class="card-body">
+        <section class="d-flex justify-content-end">
+          <div class="w-10-rem mb-3">
+            <v-select
+              placeholder="Select Filter"
+              :options="districtsList"
+              v-model="selectedDistrict"
+              :clearable="false"
+              @option:selected="filterUni"
+            >
+            </v-select>
+          </div>
+        </section>
+
         <Lazy-LoadersTable v-if="loading" />
         <Lazy-DashUniversityTable
           v-else
@@ -38,6 +51,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'DashUniversityIndex',
   layout: 'dash',
@@ -51,11 +66,19 @@ export default {
 
   data() {
     return {
+      districtsList: [],
+      selectedDistrict: 'All',
       payload: {},
       error: true,
       university: {},
       loading: true,
     }
+  },
+
+  computed: {
+    ...mapGetters({
+      districts: 'listDistricts',
+    }),
   },
 
   created() {
@@ -68,6 +91,19 @@ export default {
   },
 
   methods: {
+    // on filter
+    filterUni() {
+      this.payload = {}
+
+      this.payload.district = this.selectedDistrict
+
+      this.$router.push({
+        path: this.$route.path,
+      })
+
+      this.refreshUni()
+    },
+
     // watcher for route query
     async payloadWatch() {
       if (this.$route.query.page) {
@@ -77,13 +113,20 @@ export default {
       }
     },
 
-    async getUniversity() {
-      this.loading = await true
+    getUniversity() {
+      this.loading = true
 
-      await this.$api.university
+      if (this.payload.district) {
+        if (this.payload.district == 'All') {
+          this.payload.district = ''
+        }
+      }
+
+      return this.$api.university
         .list(this.payload)
         .then((resp) => {
           this.university = resp.data
+
           this.error = false
         })
         .catch((err) => {
@@ -101,8 +144,9 @@ export default {
         })
     },
 
-    async refreshUni() {
-      await this.getUniversity().then(() => {
+    // refresh University
+    refreshUni() {
+      this.getUniversity().then(() => {
         this.loading = false
       })
     },
@@ -119,27 +163,23 @@ export default {
       })
     },
 
-    // set default profile image on mounted
     // env variables can only i read after mounted
     async setDefaults() {
-      return new Promise((resolve, reject) => {
-        // this.defaultProfileImage = this.$config.defaultUserImage
-        this.payload.page = this.$route.query.page
-        resolve()
-      })
+      // this.defaultProfileImage = this.$config.defaultUserImage
+      this.payload.page = await this.$route.query.page
     },
   },
 
   mounted() {
-    this.setDefaults()
-      .then(() => {
-        this.getUniversity()
-      })
-      .then(() => {
-        if (!this.error) {
-          this.loading = false
-        }
-      })
+    this.payload.page = this.$route.query.page
+    this.districtsList = ['All', ...this.districts]
+
+    this.getUniversity().then(() => {
+      if (!this.error) {
+        this.loading = false
+      }
+    })
+    // console.log(this.districts.filter((district) => district == 'Anantnag'))
   },
 }
 </script>
