@@ -717,3 +717,24 @@ auto: auto,
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+.hover-link {
+  color: #4f4f4f;
+}
+.hover-link:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0.06rem;
+  background-color: var(--mdb-primary);
+  transition: width 0.3s ease-in-out;
+}
+
+.hover-link:hover {
+  color: var(--mdb-primary);
+}
+
+.hover-link:hover::after {
+  width: 100%;
+  background-color: var(--mdb-primary);
+}
