@@ -8,8 +8,21 @@
         </h3>
       </div>
       <div class="card-body">
-        <section class="d-flex justify-content-end">
-          <div class="w-10-rem mb-3">
+        <section
+          class="d-flex align-items-center justify-content-center flex-wrap"
+        >
+          <!-- start:Search -->
+          <div class="me-auto mb-3">
+            <div
+              class="btn btn-floating bg-gradient-primary text-white btn-s d-flex justify-content-center align-items-center"
+            >
+              <i class="ri-search-line ri-lg"></i>
+            </div>
+          </div>
+          <!-- end:Search -->
+
+          <!-- start:District Filter -->
+          <div class="filter-width mb-3">
             <v-select
               placeholder="Select Filter"
               :options="districtsList"
@@ -17,20 +30,32 @@
               :clearable="false"
               @option:selected="filterUni"
             >
+              <!-- selected -->
+              <template #selected-option="{ label }">
+                <div
+                  class="d-flex justify-content-start align-items-center gap-1"
+                >
+                  <i
+                    class="text-primary text-gradient ri-filter-line mt-n1"
+                  ></i>
+                  <span>{{ label }}</span>
+                </div>
+              </template>
             </v-select>
           </div>
+          <!-- end:District Filter -->
         </section>
 
         <Lazy-LoadersTable v-if="loading" />
         <Lazy-DashUniversityTable
           v-else
           :universities.sync="university.results"
-          @deletedUni="refreshUni"
+          @deletedUni="deletedUni"
         />
 
         <Lazy-UtilsPagination
           class="mt-4"
-          v-if="!loading"
+          v-if="!loading && university.pagination.items != 0"
           :pagination.sync="university.pagination"
           @prevPage="onPaginated"
           @nextPage="onPaginated"
@@ -130,7 +155,7 @@ export default {
           this.error = false
         })
         .catch((err) => {
-          if (errr.response.status == 404) {
+          if (err.response.status == 404) {
             this.error = true
             this.university = []
 
@@ -144,6 +169,19 @@ export default {
         })
     },
 
+    // when University is deleted
+    deletedUni() {
+      if (this.university.results.length == 1) {
+        if (this.payload.page != 1) {
+          this.onPaginated(this.payload.page - 1)
+        } else {
+          this.onPaginated(1)
+        }
+      }
+
+      this.refreshUni()
+    },
+
     // refresh University
     refreshUni() {
       this.getUniversity().then(() => {
@@ -152,10 +190,10 @@ export default {
     },
 
     // on paginated
-    async onPaginated(pageNum) {
-      this.payload.page = await pageNum
+    onPaginated(pageNum) {
+      this.payload.page = pageNum
 
-      await this.$router.push({
+      this.$router.push({
         path: this.$route.path,
         query: {
           page: pageNum,
@@ -179,9 +217,12 @@ export default {
         this.loading = false
       }
     })
-    // console.log(this.districts.filter((district) => district == 'Anantnag'))
   },
 }
 </script>
 
-<style></style>
+<style scoped>
+.filter-width {
+  width: 10.5rem;
+}
+</style>
