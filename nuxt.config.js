@@ -176,6 +176,8 @@ export default {
 
     // default User Image
     defaultUserImage: process.env.DEFAULT_USER_IMAGE,
+    // default University Image
+    defaultUniversityImage: process.env.DEFAULT_UNIVERSITY_IMAGE,
   },
 
   // custom loading indicator
