@@ -337,7 +337,7 @@ export default {
     },
 
     // upload logo
-    // add new University
+    // Update University
     async editUniversity() {
       if (this.imageFile) {
         if (this.imageUploaded) {
@@ -352,7 +352,7 @@ export default {
       }
     },
 
-    // send data to server to create a new University
+    // send data to server to update University
     async updateUniversity() {
       try {
         this.$swal({
