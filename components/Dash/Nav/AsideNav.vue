@@ -122,7 +122,7 @@ export default {
         {
           name: 'University',
           url: '/dash/university',
-          icon: 'ri-building-4-fill',
+          icon: 'ri-bank-fill',
         },
         {
           name: 'User',
