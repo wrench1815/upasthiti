@@ -46,7 +46,15 @@
           <!-- end:District Filter -->
         </section>
         <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashCollegeTable v-else :colleges.sync="colleges" />
+        <Lazy-DashCollegeTable v-else :colleges.sync="colleges.results" />
+
+        <Lazy-UtilsPagination
+          class="mt-4"
+          v-if="!loading && colleges.pagination.items != 0"
+          :pagination.sync="colleges.pagination"
+          @prevPage="onPaginated"
+          @nextPage="onPaginated"
+        />
 
         <div class="d-flex justify-content-end mt-3">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
