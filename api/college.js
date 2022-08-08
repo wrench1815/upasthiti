@@ -1,6 +1,6 @@
 export default (axios) => ({
   // get college list
-  list: () => axios.get('/college/'),
+  list: (payload = {}) => axios.get('/college/', { params: payload }),
 
   // create college
   create: (college) => axios.post('/college/', college),

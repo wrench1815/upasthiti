@@ -8,20 +8,53 @@
         </h3>
       </div>
       <div class="card-body">
-        <!-- <section class="d-flex justify-content-end">
-          <div class="w-10-rem mb-3">
+        <section
+          class="d-flex align-items-center justify-content-center flex-wrap"
+        >
+          <!-- start:Search -->
+          <div class="me-auto mb-3">
+            <div
+              class="btn btn-floating bg-gradient-primary text-white btn-s d-flex justify-content-center align-items-center"
+            >
+              <i class="ri-search-line ri-lg"></i>
+            </div>
+          </div>
+          <!-- end:Search -->
+
+          <!-- start:District Filter -->
+          <div class="filter-width mb-3">
             <v-select
               placeholder="Select Filter"
-              :options="userFilters"
-              v-model="selectedUserFilter"
+              :options="districtsList"
+              v-model="selectedDistrict"
               :clearable="false"
-              @option:selected="refreshUsers"
+              @option:selected="filterCollege"
             >
+              <!-- selected -->
+              <template #selected-option="{ label }">
+                <div
+                  class="d-flex justify-content-start align-items-center gap-1"
+                >
+                  <i
+                    class="text-primary text-gradient ri-filter-line mt-n1"
+                  ></i>
+                  <span>{{ label }}</span>
+                </div>
+              </template>
             </v-select>
           </div>
-        </section> -->
+          <!-- end:District Filter -->
+        </section>
         <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashCollegeTable v-else :colleges.sync="colleges" />
+        <Lazy-DashCollegeTable v-else :colleges.sync="colleges.results" />
+
+        <Lazy-UtilsPagination
+          class="mt-4"
+          v-if="!loading && colleges.pagination.items != 0"
+          :pagination.sync="colleges.pagination"
+          @prevPage="onPaginated"
+          @nextPage="onPaginated"
+        />
 
         <div class="d-flex justify-content-end mt-3">
           <Lazy-LoadersButton v-if="loading" :rounded="true" />
@@ -38,9 +71,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'DashCollegeIndex',
   layout: 'dash',
+
+  watch: {
+    '$route.query'() {
+      this.payloadWatch()
+      this.refreshCollege()
+    },
+  },
 
   data() {
     return {
@@ -48,8 +90,16 @@ export default {
       loading: true,
       error: true,
       userFilters: ['All', 'Admin', 'Principal', 'HOD', 'Teacher'],
-      selectedUserFilter: 'All',
+      selectedDistrict: 'All',
+      districtsList: [],
+      payload: {},
     }
+  },
+
+  computed: {
+    ...mapGetters({
+      districts: 'listDistricts',
+    }),
   },
 
   created() {
@@ -62,51 +112,114 @@ export default {
   },
 
   methods: {
+    // on filter
+    filterCollege() {
+      this.payload = {}
+      this.payload.district = this.selectedDistrict
+      this.$router.push({
+        path: this.$route.path,
+      })
+      this.refreshCollege()
+    },
+
+    // watcher for route query
+    async payloadWatch() {
+      if (this.$route.query.page) {
+        this.payload.page = await this.$route.query.page
+      } else {
+        this.payload.page = await '1'
+      }
+    },
+
     async getColleges() {
       this.loading = true
 
-      const response = await this.$api.college
+      if (this.payload.district) {
+        if (this.payload.district == 'All') {
+          this.payload.district = ''
+        }
+      }
+
+      return this.$api.college
         .list()
         .then((response) => {
           this.colleges = response.data
+
           this.error = false
         })
         .catch((error) => {
-          this.$swal({
-            title: 'Error',
-            icon: 'error',
-            type: 'error',
-            html: `${
-              error.response.data.detail
-                ? error.response.data.detail
-                : 'Something went wrong'
-            }`,
-            confirmButtonText: 'Refresh',
-            showCancelButton: true,
-            cancelButtonText: 'To Dash Home',
-            confirmButtonClass: 'btn btn-info',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.getColleges()
-            } else if (result.isDismissed) {
-              this.$router.push('/dash')
-            }
-          })
+          if (err.response.status == 404) {
+            this.error = true
+            this.colleges = []
+
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'Page not Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong',
+            })
+          }
         })
+    },
+
+    // when College is deleted
+    deletedCollege() {
+      if (this.college.results.length == 1) {
+        if (this.payload.page != 1) {
+          this.onPaginated(this.payload.page - 1)
+        } else {
+          this.onPaginated(1)
+        }
+      }
+      this.refreshCollege()
+    },
+
+    // refresh College
+    refreshCollege() {
+      this.getColleges().then(() => {
+        this.loading = false
+      })
+    },
+
+    // on paginated
+    onPaginated(pageNum) {
+      this.payload.page = pageNum
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          page: pageNum,
+        },
+      })
     },
 
     dateFormat(date) {
       // return strf date
       return this.$moment(date).format('Do MMMM YYYY, h:mm:ss a')
     },
+
+    async setDefaults() {
+      this.payload.page = await this.$route.query.page
+    },
   },
 
   mounted() {
+    this.payload.page = this.$route.query.page
+    this.districtsList = ['All', ...this.districts]
+
     this.getColleges().finally(() => {
-      this.loading = false
+      if (!this.error) {
+        this.loading = false
+      }
     })
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.filter-width {
+  width: 10.5rem;
+}
+</style>

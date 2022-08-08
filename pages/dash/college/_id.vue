@@ -21,23 +21,69 @@
         <ValidationObserver v-slot="{ handleSubmit }" v-else>
           <!-- start:College Edit Form -->
           <form @submit.prevent="handleSubmit(editCollege)">
-            <!-- start:Institute name-->
+            <!-- start:Institute Logo-->
             <Lazy-DashInput
-              :label="'Name'"
-              :validationRules="{ required: true, min: 3 }"
-              :data.sync="college.institute_name"
-              :type="'text'"
+              :label="'Logo'"
+              :validationRules="{ required: true }"
+              :data.sync="college.institute_logo"
+              :type="'url'"
+              :icon="'ri-image-fill text-primary text-gradient'"
             />
+            <!-- end:Institute Logo-->
+
+            <!-- start:Institute name-->
+            <div class="form-outline mb-4">
+              <textarea
+                class="form-control"
+                id="textAreaExample"
+                rows="4"
+              ></textarea>
+
+              <label class="form-label required" for="textAreaExample"
+                ><i class="ri-font-size text-primary text-gradient"></i>
+                Name</label
+              >
+            </div>
             <!-- end:Institute name -->
 
             <!-- start:Institute Address -->
-            <Lazy-DashInput
-              :label="'Address'"
-              :validationRules="{ required: true, min: 3 }"
-              :data.sync="college.institute_address"
-              :type="'text'"
-            />
+            <div class="form-outline mb-4">
+              <textarea
+                class="form-control"
+                id="textAreaExample"
+                rows="4"
+              ></textarea>
+              <label class="form-label required" for="textAreaExample"
+                ><i class="ri-map-pin-2-fill text-primary text-gradient"></i>
+                Address</label
+              >
+            </div>
             <!-- end:Institute Address -->
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <!-- start:Mobile Number-->
+                <Lazy-DashInput
+                  :label="'Mobile Number'"
+                  :validationRules="{ required: true, min: 3, alpha: true }"
+                  :data.sync="college.mobile_number"
+                  :type="'text'"
+                  :icon="'ri-phone-fill'"
+                />
+                <!-- end:Mobile Number-->
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <!-- start:Email-->
+                <Lazy-DashInput
+                  :label="'Email'"
+                  :validationRules="{ required: true, min: 3, alpha: true }"
+                  :data.sync="college.email"
+                  :type="'text'"
+                  :icon="'ri-mail-fill'"
+                />
+                <!-- end:Email-->
+              </div>
+            </div>
 
             <!-- start:Institute Alias name -->
             <Lazy-DashInput
@@ -45,14 +91,16 @@
               :validationRules="{ required: true, min: 3 }"
               :data.sync="college.institute_alias_name"
               :type="'text'"
+              :icon="'ri-font-size'"
             />
             <!-- end:Institute Alias name -->
 
             <!-- start:Institute Principal -->
             <div class="row">
               <div class="col-12">
-                <label class="form-label" for="institute_principal"
-                  >Principal</label
+                <label class="form-label required" for="form7Example1"
+                  ><i class="ri-admin-fill text-primary text-gradient"></i>
+                  Principal</label
                 >
               </div>
               <div class="col">
@@ -78,14 +126,36 @@
             </div>
             <!-- end:Institute Principal-->
 
-            <!-- start:Institute Logo-->
-            <Lazy-DashInput
-              :label="'Logo'"
-              :validationRules="{ required: true }"
-              :data.sync="college.institute_logo"
-              :type="'url'"
-            />
-            <!-- end:Institute Logo-->
+            <!-- start:University -->
+            <div class="row">
+              <div class="col-12">
+                <label class="form-label required" for="form7Example1"
+                  ><i class="ri-government-fill text-primary text-gradient"></i>
+                  University</label
+                >
+              </div>
+              <div class="col">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :rules="{ required: true }"
+                >
+                  <v-select
+                    id="colleges"
+                    placeholder="Select University"
+                    :options="UniversityList"
+                    v-model="college.university"
+                  ></v-select>
+                  <!-- Validation Errors -->
+                  <div
+                    class="text-danger transition-all-ease-out-sine"
+                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                  >
+                    {{ errors[0] }}
+                  </div>
+                </ValidationProvider>
+              </div>
+            </div>
+            <!-- end:University-->
 
             <!-- start:Institute Website-->
             <Lazy-DashInput
@@ -93,26 +163,9 @@
               :validationRules="{ required: true }"
               :data.sync="college.institute_website"
               :type="'url'"
+              :icon="'ri-global-fill'"
             />
             <!-- end:Institute website -->
-
-            <!-- start:Institute Mobile-->
-            <Lazy-DashInput
-              :label="'Mobile'"
-              :validationRules="{ required: true }"
-              :data.sync="college.institute_mobile"
-              :type="'tel'"
-            />
-            <!-- end:Institute Mobile -->
-
-            <!-- start:Institute Email-->
-            <Lazy-DashInput
-              :label="'Email'"
-              :validationRules="{ required: true }"
-              :data.sync="college.institute_email"
-              :type="'email'"
-            />
-            <!-- end:Institute Email-->
 
             <!-- Submit button -->
             <div class="d-flex justify-content-center">
