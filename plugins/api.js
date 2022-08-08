@@ -2,6 +2,7 @@ import User from '@/api/user'
 import College from '@/api/college'
 import Department from '~/api/department'
 import Image from '~/api/image'
+import University from '~/api/university'
 
 export default (context, inject) => {
   // Initialize API factories
@@ -17,6 +18,9 @@ export default (context, inject) => {
 
     // image factory
     image: Image(context.$axios),
+
+    // university factory
+    university: University(context.$axios),
   }
 
   // Inject $api

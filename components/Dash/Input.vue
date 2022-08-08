@@ -11,13 +11,13 @@
           @keyup="$emit('update:data', inputData)"
         />
         <label class="form-label" :for="randomUUID">
-          <div class="d-flex justify-content-center gap-1 required">
+          <div class="d-flex justify-content-center gap-1">
             <i
+              v-if="icon"
               class="text-primary text-gradient d-block-inline"
               :class="[icon, iconClasses]"
             ></i>
-            <span>{{ label }}</span>
-            <!-- <span class="text-danger">*</span> -->
+            <span :class="{ required: isRequired }">{{ label }}</span>
           </div>
         </label>
       </div>
