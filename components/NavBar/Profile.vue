@@ -232,6 +232,10 @@ export default {
 </script>
 
 <style scoped>
+.offcanvas.show {
+  transform: none !important;
+}
+
 .content-width {
   width: 15.688rem;
 }
