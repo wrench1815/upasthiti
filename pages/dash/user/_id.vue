@@ -326,7 +326,7 @@
                 type="submit"
                 class="btn bg-gradient-success text-white btn-rounded my-4"
               >
-               Update User
+                Update User
               </button>
             </div>
           </form>
