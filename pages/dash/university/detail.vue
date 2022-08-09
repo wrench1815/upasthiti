@@ -6,7 +6,13 @@
         <h2 class="text-primary text-gradient">University Details</h2>
       </div>
 
-      <div class="card-body" v-if="loading">Loading...</div>
+      <!-- Start:Loading -->
+      <div class="card-body" v-if="loading">
+        <div v-for="item in 5" class="mb-3" :key="item">
+          <Lazy-LoadersText size="sm" para />
+        </div>
+      </div>
+      <!-- End:Loading -->
 
       <!-- start:University Info -->
       <div class="card-body" v-else>
@@ -83,13 +89,17 @@
           </div>
           <div class="col d-flex">
             <a
+              v-if="university.website"
               :href="university.website"
               target="_blank"
-              class="text-gradient text-primary"
+              class="text-gradient text-primary text-break"
             >
-              {{ university.website }}
-              <i class="ri-external-link-fill"></i
-            ></a>
+              <span class="better-underline">
+                {{ university.website }}
+              </span>
+              <i class="ri-external-link-fill"></i>
+            </a>
+            <span v-else class="text-primary fw-bold">N/A</span>
           </div>
         </div>
         <!-- end:University Website -->
@@ -113,8 +123,8 @@
             <label class="text-muted fw-bold-500">College Count</label>
           </div>
           <div class="col d-flex">
-            <span class="fw-bold-600 fs-6">
-              {{ university.college_count }}
+            <span class="fw-bold text-primary fs-6">
+              {{ university.college_affiliated_count }}
             </span>
           </div>
         </div>
@@ -126,7 +136,6 @@
 </template>
 
 <script>
-import university from '~/api/university'
 export default {
   name: 'DashUniversityDetail',
   layout: 'dash',

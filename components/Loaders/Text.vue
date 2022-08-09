@@ -4,7 +4,7 @@
       <span
         class="col-7 placeholder"
         :class="{
-          'placeholder-sm': size == 'zs',
+          'placeholder-sm': size == 'xs',
           'placeholder-sm': size == 'sm',
           '': size == 'md',
           'placeholder-lg': size == 'lg',
@@ -13,7 +13,7 @@
       <span
         class="col-3 placeholder"
         :class="{
-          'placeholder-sm': size == 'zs',
+          'placeholder-sm': size == 'xs',
           'placeholder-sm': size == 'sm',
           '': size == 'md',
           'placeholder-lg': size == 'lg',
@@ -22,7 +22,7 @@
       <span
         class="col-3 placeholder"
         :class="{
-          'placeholder-sm': size == 'zs',
+          'placeholder-sm': size == 'xs',
           'placeholder-sm': size == 'sm',
           '': size == 'md',
           'placeholder-lg': size == 'lg',
@@ -31,7 +31,7 @@
       <span
         class="col-5 placeholder"
         :class="{
-          'placeholder-sm': size == 'zs',
+          'placeholder-sm': size == 'xs',
           'placeholder-sm': size == 'sm',
           '': size == 'md',
           'placeholder-lg': size == 'lg',
@@ -40,7 +40,7 @@
       <span
         class="col-4 placeholder"
         :class="{
-          'placeholder-sm': size == 'zs',
+          'placeholder-sm': size == 'xs',
           'placeholder-sm': size == 'sm',
           '': size == 'md',
           'placeholder-lg': size == 'lg',
@@ -49,7 +49,7 @@
       <span
         class="col-6 placeholder"
         :class="{
-          'placeholder-sm': size == 'zs',
+          'placeholder-sm': size == 'xs',
           'placeholder-sm': size == 'sm',
           '': size == 'md',
           'placeholder-lg': size == 'lg',
@@ -58,7 +58,7 @@
       <span
         class="col-12 placeholder"
         :class="{
-          'placeholder-sm': size == 'zs',
+          'placeholder-sm': size == 'xs',
           'placeholder-sm': size == 'sm',
           '': size == 'md',
           'placeholder-lg': size == 'lg',
@@ -67,7 +67,7 @@
       <span
         class="col-2 placeholder"
         :class="{
-          'placeholder-sm': size == 'zs',
+          'placeholder-sm': size == 'xs',
           'placeholder-sm': size == 'sm',
           '': size == 'md',
           'placeholder-lg': size == 'lg',
