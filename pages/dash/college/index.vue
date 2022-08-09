@@ -318,12 +318,14 @@ export default {
 
     this.uniPayload.page = 1
     this.getUni()
-
-    this.getColleges().finally(() => {
-      if (!this.error) {
-        this.loading = false
-      }
-    })
+      .then(() => {
+        return this.getColleges()
+      })
+      .then(() => {
+        if (!this.error) {
+          this.loading = false
+        }
+      })
   },
 }
 </script>
