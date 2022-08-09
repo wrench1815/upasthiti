@@ -4,8 +4,13 @@
     <!-- Grid container -->
     <div class="container p-4">
       <section class="mb-4">
-        <i>Logo</i>
-        <h3 class="fw-bold text-primary">Upasthiti</h3>
+        <img
+          class="avatar avatar- rounded-circle obj-fit-cover shadow-2-strong"
+          data-src="/favicon.png"
+          alt="user-profile"
+          v-lazy-load
+        />
+        <h3 class="fw-bold text-primary mt-2">Upasthiti</h3>
       </section>
       <section class="">
         <!--Grid row-->

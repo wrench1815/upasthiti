@@ -22,6 +22,7 @@ export const state = () => ({
     'Srinagar',
     'Udhampur',
   ],
+  isDash: false,
 })
 
 // getters
@@ -55,5 +56,12 @@ export const getters = {
 
   listDistricts(state) {
     return state.districts
+  },
+}
+
+// mutations
+export const mutations = {
+  setDash(state, isDash) {
+    state.isDash = isDash
   },
 }
