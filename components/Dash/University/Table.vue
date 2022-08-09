@@ -53,10 +53,15 @@
                 <!-- Name -->
                 <div class="ms-3">
                   <NuxtLink
-                    to="/"
-                    class="fw-bold mb-1 text-primary hover-underline-animation"
+                    :to="`/dash/university/detail?id=${uni.id}`"
+                    class="fw-bold mb-1 text-primary w-10-rem text-wrap d-inline-block"
                   >
-                    <span>{{ uni.name ? uni.name : '----' }}</span>
+                    <span class="d-inline">
+                      <span class="better-underline">
+                        {{ uni.name ? uni.name : '----' }}
+                      </span>
+                      <span class="link"></span>
+                    </span>
                   </NuxtLink>
                 </div>
               </div>
