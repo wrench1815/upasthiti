@@ -2,3 +2,57 @@
 .form-outline .form-control:focus {
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.21) !important;
 }
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+/* * {
+  scrollbar-width: auto;
+  scrollbar-color: var(--mdb-primary) #ffffff;
+} */
+
+/* Chrome, Edge, and Safari */
+/* *::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--mdb-primary);
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+} */
+
+/* customize scrollbar css */
+*::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+*::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  /* border: 1px #787878 solid; */
+  border-radius: 10px;
+  /* -webkit-box-shadow: 0 0 6px #c8c8c8 inset; */
+  /* box-shadow: 0 0 6px #c8c8c8 inset; */
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--mdb-primary);
+  /* border: 1px solid #000000; */
+  border-radius: 16px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--mdb-primary);
+  /* border: 1px solid #333333; */
+}
+*::-webkit-scrollbar-thumb:active {
+  background-color: var(--mdb-primary);
+  /* border: 1px solid #333333; */
+}
+
+* {
+  scrollbar-gutter: unset;
+}

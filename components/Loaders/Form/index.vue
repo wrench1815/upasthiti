@@ -1,9 +1,10 @@
 <template>
   <div>
+    <Lazy-LoadersImage class="mb-4" v-if="showImage" />
     <Lazy-LoadersFormInput v-for="item in inputCount" :key="item" />
 
     <div
-      class="d-flex"
+      class="d-flex placeholder-wave"
       :class="{
         'justify-content-start': btnStart,
         'justify-content-end': btnEnd,
@@ -11,7 +12,6 @@
       }"
     >
       <button
-        type="submit"
         class="btn btn-rounded mb-4 px-5 placeholder"
         :class="`btn-${btnColor}`"
       ></button>
@@ -43,6 +43,10 @@ export default {
     btnColor: {
       type: String,
       default: 'primary',
+    },
+    showImage: {
+      type: Boolean,
+      default: false,
     },
   },
 }

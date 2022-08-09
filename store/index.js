@@ -1,5 +1,27 @@
 export const state = () => ({
   role: '',
+  districts: [
+    'Anantnag',
+    'Bandipore',
+    'Baramulla',
+    'Budgam',
+    'Doda',
+    'Ganderbal',
+    'Jammu',
+    'Kathua',
+    'Kishtwar',
+    'Kulgam',
+    'Kupwara',
+    'Poonch',
+    'Pulwama',
+    'Rajouri',
+    'Ramban',
+    'Reasi',
+    'Samba',
+    'Shopian',
+    'Srinagar',
+    'Udhampur',
+  ],
   isDash: false,
 })
 
@@ -30,6 +52,10 @@ export const getters = {
     } else {
       return null
     }
+  },
+
+  listDistricts(state) {
+    return state.districts
   },
 }
 

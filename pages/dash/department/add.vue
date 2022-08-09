@@ -15,7 +15,7 @@
             <!-- start:Department Name -->
             <div class="row">
               <div class="col-12">
-                <label class="form-label" for="department_name"
+                <label class="form-label required" for="department_name"
                   >Department Name</label
                 >
               </div>
@@ -44,7 +44,7 @@
             <!-- start:HoD -->
             <div class="row">
               <div class="col-12">
-                <label class="form-label" for="hod">HoD</label>
+                <label class="form-label required" for="hod">HoD</label>
               </div>
               <div class="col">
                 <ValidationProvider
@@ -71,7 +71,7 @@
             <!-- start:College -->
             <div class="row">
               <div class="col-12">
-                <label class="form-label" for="hod">College</label>
+                <label class="form-label required" for="hod">College</label>
               </div>
               <div class="col">
                 <ValidationProvider

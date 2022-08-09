@@ -273,7 +273,7 @@
                     }"
                   >
                     <i class="ri-user-star-fill"></i>
-                    HoD
+                    HOD
                   </div>
                 </label>
                 <input
@@ -324,9 +324,9 @@
             <div class="d-flex justify-content-center">
               <button
                 type="submit"
-                class="btn bg-gradient-info text-white btn-rounded my-4"
+                class="btn bg-gradient-success text-white btn-rounded my-4"
               >
-                Add a new User
+                Update User
               </button>
             </div>
           </form>

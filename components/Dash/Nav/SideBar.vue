@@ -8,7 +8,7 @@
   >
     <div class="offcanvas-body">
       <ul class="nav flex-column">
-        <li class="nav-item" v-for="items in menuItems">
+        <li class="nav-item" v-for="(items, index) in menuItems" :key="index">
           <NuxtLink
             class="nav-link my-1 border-start border-2 text-dark border-primary"
             exact-active-class="fw-bol bg-primary text-white rounded-5"
@@ -47,6 +47,11 @@ export default {
           name: 'Department',
           url: '/dash/department',
           icon: 'ri-building-4-fill',
+        },
+        {
+          name: 'University',
+          url: '/dash/university',
+          icon: 'ri-bank-fill',
         },
         {
           name: 'User',
