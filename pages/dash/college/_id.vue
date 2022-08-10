@@ -325,15 +325,12 @@ export default {
       if (this.imageFile) {
         if (this.imageUploaded) {
           this.addNewCollege()
-          console.log(this.college)
         } else {
           this.uploadLogo().then(() => {
-            console.log(this.college)
             this.addNewCollege()
           })
         }
       } else {
-        console.log(this.college)
         this.addNewCollege()
       }
     },
