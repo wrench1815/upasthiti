@@ -1,21 +1,30 @@
 <template>
   <div class="container-fluid my-4">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="text-primary text-gradient">College Details</h2>
-      </div>
-       <!-- Start:Loading -->
-      <div class="card-body" v-if="loading">
+    <!-- Start:Loading -->
+    <!-- <div class="card" v-if="loading">
+      <div class="card-body">
         <div v-for="item in 5" class="mb-3" :key="item">
           <Lazy-LoadersText size="sm" para />
         </div>
       </div>
-      <!-- End:Loading -->
+    </div> -->
+    <!-- End:Loading -->
+
+    <!-- start:College Detail -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="text-primary text-gradient">College Details</h2>
+      </div>
+
+      <div class="card-body" v-if="loading">
+        <Lazy-LoadersDetailCard />
+      </div>
+
       <!-- start:College Info -->
-      <div class="card-body">
+      <div class="card-body" v-else>
         <!-- start:College Info Card -->
         <div
-          class="mb-3 shadow-5 d-flex card-header gap-3 rounded-5 align-items-center flex-column flex-md-row bg-primary t"
+          class="mb-3 shadow-3-strong d-flex card-header gap-3 rounded-5 align-items-center flex-column flex-md-row bg-light"
         >
           <div>
             <img
@@ -26,17 +35,17 @@
             />
           </div>
           <div
-            class="d-flex flex-column justify-content-center align-content-start text-break "
+            class="d-flex flex-column justify-content-center align-content-start text-break"
           >
-            <div class="fw-bold fs-5 text-light text-gradient">
+            <div class="fw-bold fs-5 text-primary text-gradient">
               {{ college.name }}
             </div>
-            <div class="text-muted small text-light d-flex gap-1">
-              <i class="ri-mail-fill  text-gradient"></i>
+            <div class="text-muted small d-flex gap-1">
+              <i class="ri-mail-fill text-primary text-gradient"></i>
               {{ college.email }}
             </div>
             <div class="text-muted small d-flex gap-1">
-              <i class="ri-phone-fill text-light text-gradient"></i>
+              <i class="ri-phone-fill text-primary text-gradient"></i>
               {{ college.mobile }}
             </div>
           </div>
@@ -46,7 +55,7 @@
         <!-- start:College Alias -->
         <div class="row mb-3">
           <div class="col-12 col-md-4 mt-lg-4 mt-sm-4 d-flex">
-            <label class="text-muted  fw-bold-500">Alias</label>
+            <label class="text-muted fw-bold-500">Alias</label>
           </div>
           <div class="col d-flex mt-lg-4 mt-sm-4">
             <span class="fw-bold-600 fs-6">{{ college.alias_name }}</span>
@@ -60,11 +69,9 @@
             <label class="text-muted fw-bold-500">Principal</label>
           </div>
           <div class="col d-flex">
-            <span class="fw-bold-600 fs-6"
-              >
-              {{ college.principal.name}}
-               </span
-            >
+            <span class="fw-bold-600 fs-6">
+              {{ college.principal.full_name }}
+            </span>
           </div>
         </div>
         <!-- end:College Principal -->
@@ -115,6 +122,7 @@
       </div>
       <!-- end:College Info -->
     </div>
+    <!-- end:College Detail -->
 
     <!-- start: Principal Info -->
     <div class="card mt-4">
@@ -122,7 +130,13 @@
         <h2 class="text-primary text-gradient">Principal</h2>
       </div>
 
-      <div class="row">
+      <!-- Start:Loading -->
+      <div class="card-body" v-if="loading">
+        <Lazy-LoadersDetailCard />
+      </div>
+      <!-- End:Loading -->
+
+      <div class="row" v-else>
         <div class="col-md-6 col-12">
           <div class="card border hover-shadow card-hover mt-5 mb-4 mx-4">
             <div class="d-flex justify-content-start">
@@ -137,7 +151,7 @@
                 <div
                   class="card-title fw-bold fs-5 text-primary text-gradient pt-3 px-2"
                 >
-                  {{ college.principal.name }}
+                  {{ college.principal.full_name }}
                 </div>
               </div>
             </div>
@@ -150,7 +164,7 @@
               <label class="text-muted fw-bold">Gender:</label>
               <span class="text-dark fs-6">
                 <!-- {{ principal.gender }} -->
-                </span>
+              </span>
             </div>
           </div>
         </div>
@@ -163,7 +177,12 @@
       <div class="card-header">
         <h2 class="text-primary text-gradient">College Departments</h2>
       </div>
-      <div class="row mx-2">
+
+      <div class="card-body" v-if="loading">
+        <Lazy-LoadersDetailCard />
+      </div>
+
+      <div class="row mx-2" v-else>
         <div
           class="col-sm-6 col-lg-4 col-md-6 col-12"
           v-for="item in 3"
