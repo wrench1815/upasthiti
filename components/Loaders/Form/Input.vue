@@ -22,7 +22,6 @@ export default {
       // return col-md-6 or col-md-12 randomly
       const val = [6, 12]
       const random = Math.floor(Math.random() * val.length)
-      console.log(random)
       if (val[random] == 12) {
         return 'col-md-12'
       } else {
