@@ -106,7 +106,7 @@ extend('url', {
       value
     )
   },
-  message: 'This field must be a URL.', 
+  message: 'This field must be a URL.',
 })
 
 Vue.component('ValidationProvider', ValidationProvider)

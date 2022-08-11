@@ -47,7 +47,7 @@
 
 <script>
 export default {
-  name:'DashCollegeDetailCard3',
+  name: 'DashCollegeDetailCard3',
 }
 </script>
 
