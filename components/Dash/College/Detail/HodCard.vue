@@ -12,12 +12,6 @@
             class="img-fluid avatar avatar-xl shadow"
             v-lazy-load
           />
-          <!-- <a href="#!">
-            <div
-              class="mask"
-              style="background-color: rgba(251, 251, 251, 0.15)"
-            ></div>
-          </a> -->
         </div>
         <div class="card-body">
           <div class="card-title fw-bold fs-5 text-primary text-gradient">

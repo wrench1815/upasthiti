@@ -39,7 +39,7 @@
           {{ isCollege ? college.mobile : college.university.phone_number }}
         </div>
         <div class="text-muted small d-flex gap-1" v-if="isUniversity">
-          <i class="ri-phone-fill text-primary text-gradient"></i>
+          <i class="ri-pin-distance-fill text-primary text-gradient"></i>
           {{ college.university.district }}
         </div>
       </div>
