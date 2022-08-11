@@ -324,7 +324,7 @@
             <div class="d-flex justify-content-center">
               <button
                 type="submit"
-                class="btn bg-gradient-success text-white btn-rounded my-4"
+                class="btn bg-gradient-info text-white btn-rounded my-4"
               >
                 Update User
               </button>

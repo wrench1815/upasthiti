@@ -159,25 +159,6 @@
                     :options="districtList"
                     v-model="university.district"
                   >
-                    <!-- for options -->
-                    <!-- <template #option="{ label, icon }">
-                  <div
-                    class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
-                  >
-                    <i :class="icon"></i>
-                    <span>{{ label }}</span>
-                  </div>
-                </template> -->
-
-                    <!-- for selected option -->
-                    <!-- <template #selected-option="{ label, icon }">
-                  <div
-                    class="d-flex justify-content-start align-items-center gap-1"
-                  >
-                    <i class="text-primary text-gradient" :class="icon"></i>
-                    <span>{{ label }}</span>
-                  </div>
-                </template> -->
                   </v-select>
                   <!-- Validation Errors -->
                   <div
@@ -304,6 +285,7 @@ export default {
             const formData = new FormData()
             formData.append('image', this.imageFile)
             formData.append('folder', 'university_logo')
+            formData.append('public_id', this.university.logo_public_id)
             this.$api.image
               .upload(formData)
               .then((response) => {
@@ -507,11 +489,13 @@ export default {
   },
 
   mounted() {
-    // this.assignDefaultValues()
-
     this.retrieveUniversity().then(() => {
       if (!this.error) {
         this.loading = false
+
+        document.querySelectorAll('.form-outline').forEach((formOutline) => {
+          new this.$mdb.Input(formOutline).init()
+        })
       }
     })
   },

@@ -149,25 +149,6 @@
                     :options="districtList"
                     v-model="university.district"
                   >
-                    <!-- for options -->
-                    <!-- <template #option="{ label, icon }">
-                  <div
-                    class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
-                  >
-                    <i :class="icon"></i>
-                    <span>{{ label }}</span>
-                  </div>
-                </template> -->
-
-                    <!-- for selected option -->
-                    <!-- <template #selected-option="{ label, icon }">
-                  <div
-                    class="d-flex justify-content-start align-items-center gap-1"
-                  >
-                    <i class="text-primary text-gradient" :class="icon"></i>
-                    <span>{{ label }}</span>
-                  </div>
-                </template> -->
                   </v-select>
                   <!-- Validation Errors -->
                   <div
@@ -342,15 +323,12 @@ export default {
       if (this.imageFile) {
         if (this.imageUploaded) {
           this.addNewUniversity()
-          console.log(this.university)
         } else {
           this.uploadLogo().then(() => {
-            console.log(this.university)
             this.addNewUniversity()
           })
         }
       } else {
-        console.log(this.university)
         this.addNewUniversity()
       }
     },
@@ -358,22 +336,6 @@ export default {
     // send data to server to create a new University
     async addNewUniversity() {
       try {
-        // const university = {
-        //   profile_image: this.user.profile_image,
-        //   profile_image_public_id: this.user.profile_image_public_id,
-        //   first_name: this.user.first_name,
-        //   last_name: this.user.last_name,
-        //   email: this.user.email,
-        //   gender: this.user.gender.label,
-        //   password: this.user.password,
-        //   confirm_password: this.user.password,
-        //   is_active: this.user.is_active,
-        //   is_admin: this.user.is_admin,
-        //   is_principal: this.user.is_principal,
-        //   is_hod: this.user.is_hod,
-        //   is_teacher: this.user.is_teacher,
-        // }
-
         this.$swal({
           title: 'Adding University',
           icon: 'info',
@@ -382,13 +344,11 @@ export default {
           didOpen: () => {
             this.$swal.showLoading()
 
-            const response = this.$api.university
+            this.$api.university
               .create(this.university)
               .then(() => {
                 this.$swal.hideLoading()
                 this.$swal.close()
-
-                let timerInterval
 
                 this.$swal({
                   title: 'Success',

@@ -55,4 +55,5 @@
 
 * {
   scrollbar-gutter: unset;
+  scrollbar-color: var(--mdb-primary) transparent;
 }

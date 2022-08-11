@@ -183,6 +183,8 @@ export default {
     defaultUserImage: process.env.DEFAULT_USER_IMAGE,
     // default University Image
     defaultUniversityImage: process.env.DEFAULT_UNIVERSITY_IMAGE,
+    // default College Image
+    defaultCollegeImage: process.env.DEFAULT_COLLEGE_IMAGE,
   },
 
   // custom loading indicator
