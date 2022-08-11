@@ -13,7 +13,7 @@
           :btnColor="'primary'"
           showImage
           btnCenter
-          v-if="loading"
+          v-if="loading.main"
         />
 
         <!-- if not loading -->
@@ -239,7 +239,19 @@
                       v-model="college.principal"
                       label="full_name"
                       :selectable="(option) => !option.administrated_college"
+                      :loading="loading.paginatePrincipal"
                     >
+                      <!-- spinner -->
+                      <template #spinner="{ loading }">
+                        <div
+                          v-if="loading"
+                          class="vs__spinner"
+                          style="border-left-color: var(--mdb-primary)"
+                        >
+                          loading...
+                        </div>
+                      </template>
+
                       <!-- options -->
                       <template #option="{ full_name, profile_image }">
                         <div
@@ -321,7 +333,19 @@
                       :options="universityList.results"
                       v-model="college.university"
                       label="alias"
+                      :loading="loading.paginateUni"
                     >
+                      <!-- spinner -->
+                      <template #spinner="{ loading }">
+                        <div
+                          v-if="loading"
+                          class="vs__spinner"
+                          style="border-left-color: var(--mdb-primary)"
+                        >
+                          loading...
+                        </div>
+                      </template>
+
                       <!-- options -->
                       <template #option="{ alias, logo }">
                         <div
@@ -422,7 +446,11 @@ export default {
 
   data() {
     return {
-      loading: true,
+      loading: {
+        main: true,
+        paginateUni: true,
+        paginatePrincipal: true,
+      },
       error: true,
       imageFile: '',
       imageUploaded: false,
@@ -667,6 +695,7 @@ export default {
     // fetch principals for select
     async getPrincipals() {
       this.disablePrincipalBtns = true
+      this.loading.paginatePrincipal = true
 
       return this.$api.user
         .listPrincipal(this.principalPayload)
@@ -674,6 +703,7 @@ export default {
           this.principalList = response.data
 
           this.disablePrincipalBtns = false
+          this.loading.paginatePrincipal = false
         })
     },
 
@@ -698,11 +728,13 @@ export default {
     // fetch universities for select
     async getUniversities() {
       this.disableUniBtns = true
+      this.loading.paginateUni = true
 
       return this.$api.university.list(this.uniPayload).then((response) => {
         this.universityList = response.data
 
         this.disableUniBtns = false
+        this.loading.paginateUni = false
       })
     },
 
@@ -733,7 +765,7 @@ export default {
         return this.getPrincipals()
       })
       .then(() => {
-        this.loading = false
+        this.loading.main = false
 
         document.querySelectorAll('.form-outline').forEach((formOutline) => {
           new this.$mdb.Input(formOutline).init()
