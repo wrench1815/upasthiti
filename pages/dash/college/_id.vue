@@ -16,8 +16,8 @@
       <div class="card-body">
         <Lazy-LoadersForm
           :inputCount="6"
-          :btnEnd="true"
           :btnColor="'info'"
+          btnCenter
           v-if="loading.main"
         />
 
