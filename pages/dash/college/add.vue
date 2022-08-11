@@ -10,9 +10,9 @@
         <!-- if loading -->
         <Lazy-LoadersForm
           :inputCount="6"
-          :btnEnd="true"
-          :btnColor="'info'"
+          :btnColor="'primary'"
           showImage
+          btnCenter
           v-if="loading"
         />
 
