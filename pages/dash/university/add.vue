@@ -149,25 +149,6 @@
                     :options="districtList"
                     v-model="university.district"
                   >
-                    <!-- for options -->
-                    <!-- <template #option="{ label, icon }">
-                  <div
-                    class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
-                  >
-                    <i :class="icon"></i>
-                    <span>{{ label }}</span>
-                  </div>
-                </template> -->
-
-                    <!-- for selected option -->
-                    <!-- <template #selected-option="{ label, icon }">
-                  <div
-                    class="d-flex justify-content-start align-items-center gap-1"
-                  >
-                    <i class="text-primary text-gradient" :class="icon"></i>
-                    <span>{{ label }}</span>
-                  </div>
-                </template> -->
                   </v-select>
                   <!-- Validation Errors -->
                   <div
