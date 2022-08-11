@@ -15,10 +15,19 @@
         class="d-flex flex-column justify-content-center align-content-start text-break"
       >
         <div class="fw-bold fs-5 text-primary text-gradient">
-          <NuxtLink :to="detailPath" class="fw-bolder mb-1 text-primary">
-            <span class="better-underline"> </span>
+          <div class="fw-bolder mb-1 text-primary" v-if="isCollege">
+            {{ college.name ? college.name : '----' }}
+          </div>
+
+          <NuxtLink
+            :to="`/dash/university/detail?id=${college.university.id}`"
+            class="fw-bolder mb-1 text-primary"
+            v-else
+          >
+            <span class="better-underline">
+              {{ isCollege ? college.name : college.university.name }}
+            </span>
             <i class="ri-link"></i>
-            {{ isCollege ? college.name : college.university.name }}
           </NuxtLink>
         </div>
         <div class="text-muted small d-flex gap-1">
@@ -39,7 +48,6 @@
 </template>
 
 <script>
-import { required } from 'vee-validate/dist/rules'
 export default {
   name: 'DashCollegeDetailCard1',
 
@@ -55,17 +63,6 @@ export default {
     isUniversity: {
       type: Boolean,
       default: false,
-    },
-  },
-
-  computed: {
-    detailPath() {
-      // return path to detail page for college or university
-      if (this.isCollege) {
-        return `/dash/college/detail?id=${this.college.id}`
-      } else {
-        return `/dash/university/detail?id=${this.college.university.id}`
-      }
     },
   },
 }

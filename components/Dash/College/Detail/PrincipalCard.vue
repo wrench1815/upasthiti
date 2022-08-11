@@ -5,7 +5,7 @@
         <img
           :data-src="principal.profile_image"
           :alt="`${principal.short_name}'s profile image`"
-          class="img-fluid avatar avatar-xl ms-4 mt-n4"
+          class="img-fluid avatar avatar-xl ms-4 mt-n4 bg-white"
           v-lazy-load
         />
 
@@ -28,14 +28,14 @@
         </div>
       </div>
       <div class="card-body pt-2">
-        <label class="text-muted ">Email:</label>
+        <label class="text-muted">Email:</label>
         <span class="text-dark fs-6">
           {{ principal.email }}
         </span>
         <br />
-        <label class="text-muted ">Mobile:</label>
+        <label class="text-muted">Mobile:</label>
         <span class="text-dark fs-6">
-          {{ principal.mobile? principal.mobile : '----'  }}
+          {{ principal.mobile ? principal.mobile : '----' }}
         </span>
       </div>
     </div>
