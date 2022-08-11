@@ -6,9 +6,9 @@
     <div
       class="d-flex placeholder-wave"
       :class="{
-        'justify-content-start': btnStart,
         'justify-content-end': btnEnd,
         'justify-content-center': btnCenter,
+        'justify-content-start': btnStart,
       }"
     >
       <button
