@@ -238,6 +238,7 @@
                       :options="principalList.results"
                       v-model="college.principal"
                       label="full_name"
+                      :selectable="(option) => !option.administrated_college"
                     >
                       <!-- options -->
                       <template #option="{ full_name, profile_image }">
