@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
       <span
-        class="card-title fs-5 px-4 rounded-pill text-white"
+        class="card-title fs-5 px-4 py-1 fw-bold rounded-pill text-white"
         :class="headingColor"
         >{{ headingText }}</span
       >

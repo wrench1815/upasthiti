@@ -56,7 +56,6 @@
           <h4 class="text-center mt-4 mb-2 text-dark">Download Reports</h4>
           <p class="text-center">
             Download attendance report as a spreadsheet.
-
           </p>
         </div>
       </div>

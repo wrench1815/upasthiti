@@ -2,7 +2,7 @@
   <div>
     <header class="container-fluid my-5">
       <div class="row">
-        <div class="col-md-6 col-lg-6 col-12 my-2 ps-md-5 ">
+        <div class="col-md-6 col-lg-6 col-12 my-2 ps-md-5">
           <img
             data-src="~/assets/svg/attendance1.svg"
             class="img-fluid ps-md-5"
