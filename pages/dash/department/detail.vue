@@ -20,10 +20,10 @@
 
         <!-- start:HOD-->
         <div class="mt-5">
-          <h3 class="text-primary text-gradient">HOD</h3>
+          <h4 class="text-primary text-gradient">HOD</h4>
         </div>
         <div class="row">
-          <div class="col-md-6 col-12">
+          <div class="col-lg-4 col-md-6 col-12">
             <!-- start:HOD  Info Card -->
             <Lazy-DashDepartmentDetailHodCard :hod="department.hod" />
 
@@ -35,11 +35,14 @@
 
         <!-- start:College-->
         <div class="mt-5 mb-4">
-          <h3 class="text-primary text-gradient">College</h3>
+          <h4 class="text-primary text-gradient">College</h4>
         </div>
 
         <!-- start:College  Info Card -->
-        <Lazy-DashDepartmentDetailCard1 :department="department" isCollege />
+        <Lazy-DashDepartmentDetailCard1
+          :college="department.college"
+          isCollege
+        />
         <!-- end:College Info Card -->
 
         <!-- end:College-->
