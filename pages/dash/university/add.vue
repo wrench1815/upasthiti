@@ -99,7 +99,10 @@
                   rows="4"
                   v-model="university.name"
                 ></textarea>
-                <label class="form-label required">Name</label>
+                 <label class="form-label required">
+                  <i class="ri-font-size text-primary text-gradient"></i>
+                  <span>Name</span>
+                </label>
               </div>
               <!-- Valdation Errors -->
               <div
@@ -125,7 +128,10 @@
                   rows="4"
                   v-model="university.address"
                 ></textarea>
-                <label class="form-label required">Address</label>
+               <label class="form-label required">
+                  <i class="ri-map-pin-2-fill text-primary text-gradient"></i>
+                  <span>Address</span>
+                </label>
               </div>
               <!-- Valdation Errors -->
               <div
@@ -167,6 +173,7 @@
                   :validationRules="{ required: true, min: 3, max: 10 }"
                   :data.sync="university.alias"
                   :type="'text'"
+                  :icon="'ri-font-size'"
                   isRequired
                 />
                 <!-- end:university Alias name -->
@@ -181,6 +188,7 @@
                   :validationRules="{ required: true, email: true }"
                   :data.sync="university.email"
                   :type="'email'"
+                  :icon="'ri-mail-fill'"
                   isRequired
                 />
                 <!-- end:University Email -->
@@ -192,6 +200,7 @@
                   :validationRules="{ required: true, min: 10, max: 13 }"
                   :data.sync="university.phone_number"
                   :type="'tel'"
+                  :icon="'ri-phone-fill'"
                   isRequired
                 />
                 <!-- end:University Phone -->
@@ -204,6 +213,7 @@
               :validationRules="{ required: true, min: 3 }"
               :data.sync="university.vice_chancelor"
               :type="'text'"
+              :icon="'ri-user-voice-fill'"
               isRequired
             />
             <!-- end:university Vice Chancellor -->
