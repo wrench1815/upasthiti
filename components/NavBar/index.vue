@@ -115,7 +115,7 @@ export default {
         },
         {
           name: 'Privacy Policy',
-          url: '/privacy',
+          url: '/privacy-policy',
         },
         {
           name: 'Contact Us',

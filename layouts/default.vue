@@ -16,6 +16,9 @@
 
     <!-- to top util button -->
     <Lazy-UtilsToTop />
+
+    <!-- Privacy Policy Util -->
+    <Lazy-UtilsPrivacyPolicy />
   </div>
 </template>
 
