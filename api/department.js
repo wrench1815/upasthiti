@@ -1,6 +1,6 @@
 export default (axios) => ({
   // get department list
-  list: () => axios.get('/department/'),
+  list: (payload = {}) => axios.get('/department/', { params: payload }),
 
   // create department
   create: (department) => axios.post('/department/', department),
