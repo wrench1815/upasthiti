@@ -109,7 +109,7 @@
                   rows="4"
                   v-model="university.name"
                 ></textarea>
-               <label class="form-label required">
+                <label class="form-label required">
                   <i class="ri-font-size text-primary text-gradient"></i>
                   <span>Name</span>
                 </label>
@@ -183,7 +183,7 @@
                   :validationRules="{ required: true, min: 3, max: 10 }"
                   :data.sync="university.alias"
                   :type="'text'"
-                   :icon="'ri-font-size'"
+                  :icon="'ri-font-size'"
                   isRequired
                 />
                 <!-- end:university Alias name -->
@@ -198,7 +198,7 @@
                   :validationRules="{ required: true, email: true }"
                   :data.sync="university.email"
                   :type="'email'"
-                   :icon="'ri-mail-fill'"
+                  :icon="'ri-mail-fill'"
                   isRequired
                 />
                 <!-- end:University Email -->
@@ -210,7 +210,7 @@
                   :validationRules="{ required: true, min: 10, max: 13 }"
                   :data.sync="university.phone_number"
                   :type="'tel'"
-                   :icon="'ri-phone-fill'"
+                  :icon="'ri-phone-fill'"
                   isRequired
                 />
                 <!-- end:University Phone -->

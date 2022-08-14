@@ -99,7 +99,7 @@
                   rows="4"
                   v-model="university.name"
                 ></textarea>
-                 <label class="form-label required">
+                <label class="form-label required">
                   <i class="ri-font-size text-primary text-gradient"></i>
                   <span>Name</span>
                 </label>
@@ -128,7 +128,7 @@
                   rows="4"
                   v-model="university.address"
                 ></textarea>
-               <label class="form-label required">
+                <label class="form-label required">
                   <i class="ri-map-pin-2-fill text-primary text-gradient"></i>
                   <span>Address</span>
                 </label>
