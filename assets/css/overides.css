@@ -57,3 +57,8 @@
   scrollbar-gutter: unset;
   scrollbar-color: var(--mdb-primary) transparent;
 }
+
+/* override animation for all pages */
+* {
+  transition: all 0.3s ease-in-out;
+}
