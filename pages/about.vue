@@ -32,7 +32,7 @@
           alt="aboutpage image"
         />
       </div>
-      <div class="row container my-4">
+      <div class="row my-4">
         <div class="col-md-4 col-12">
           <h3
             class="text-primary fw-bold d-flex justify-content-center align-items-center h-100"
@@ -91,7 +91,7 @@
           </div>
         </div>
       </div>
-      <div class="row container my-3">
+      <div class="row my-3">
         <div class="col-md-4 col-12">
           <h3
             class="text-primary fw-bold d-flex justify-content-center align-items-center h-100"
@@ -158,187 +158,44 @@
       </div>
       <div class="my-4">
         <h3 class="text-center text-primary fw-bold">Meet our Developer</h3>
-        <div class="row mt-4 gy-3">
-          <div class="col-xl-4 col-md-6 col-12">
-            <div class="card p-3">
-              <div class="row">
-                <div
-                  class="col-lg-4 col-md-3 col-sm-4 col-12 text-center text-sm-start"
-                >
-                  <img
-                    class="avatar avatar-xxl obj-fit-cover shadow-1-strong avatar-height"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
-                    alt=""
-                    v-lazy-load
-                  />
-                </div>
-                <div
-                  class="col-lg-8 col-md-7 col-sm-8 col-12 text-center text-sm-start"
-                >
-                  <div
-                    class="fw-bold fs-5 text-primary text-gradient text-capitalize"
-                  >
-                    Ridhima Jain
-                  </div>
-                  <div class="fs-6 text-secondary">Frontend Developer</div>
-
-                  <div
-                    class="text-muted small d-flex gap-1 justify-content-center justify-content-sm-start"
-                  >
-                    <i class="ri-mail-fill text-primary text-gradient"></i>
-                    <a href="mailto:ridhimajain862@gmail.com">
-                      <span class="text-dark text-break better-underline">
-                        ridhimajain862@gmail.com</span
-                      >
-                    </a>
-                  </div>
-                  <div
-                    class="text-muted small d-flex gap-1 justify-content-center justify-content-sm-start"
-                  >
-                    <i class="ri-github-fill text-primary text-gradient"></i>
-                    <a target="_blank" href="https://github.com/Ridhima10">
-                      <span class="text-dark better-underline">Ridhima10</span>
-                    </a>
-                  </div>
-                  <div
-                    class="text-muted small d-flex gap-1 justify-content-center justify-content-sm-start"
-                  >
-                    <i
-                      class="ri-linkedin-box-fill text-primary text-gradient"
-                    ></i>
-                    <a
-                      target="_blank"
-                      href="https://www.linkedin.com/in/ridhima-jain-96829a212/"
-                    >
-                      <span class="text-dark better-underline">
-                        Ridhima Jain</span
-                      >
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4 col-md-6 col-12">
-            <div class="card p-3">
-              <div class="row">
-                <div
-                  class="col-lg-4 col-md-5 col-sm-4 col-12 text-center text-sm-start"
-                >
-                  <img
-                    class="avatar avatar-xxl obj-fit-cover shadow-1-strong avatar-height"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
-                    alt=""
-                    v-lazy-load
-                  />
-                </div>
-                <div
-                  class="col-lg-8 col-md-7 col-sm-8 col-12 text-center text-sm-start"
-                >
-                  <div
-                    class="fw-bold fs-5 text-primary text-gradient text-capitalize"
-                  >
-                    Hardeep Kumar
-                  </div>
-                  <div class="fs-6 text-secondary">Backend Developer</div>
-
-                  <div
-                    class="text-muted small d-flex gap-1 justify-content-center justify-content-sm-start"
-                  >
-                    <i class="ri-mail-fill text-primary text-gradient"></i>
-                    <a href="mailto:hardeepkumar1815@gmail.com">
-                      <span class="text-dark text-break better-underline">
-                        hardeepkumar1815@gmail.com</span
-                      >
-                    </a>
-                  </div>
-                  <div
-                    class="text-muted small d-flex gap-1 justify-content-center justify-content-sm-start"
-                  >
-                    <i class="ri-github-fill text-primary text-gradient"></i>
-                    <a target="_blank" href="https://github.com/wrench1815">
-                      <span class="text-dark better-underline">wrench1815</span>
-                    </a>
-                  </div>
-                  <div
-                    class="text-muted small d-flex gap-1 justify-content-center justify-content-sm-start"
-                  >
-                    <i
-                      class="ri-linkedin-box-fill text-primary text-gradient"
-                    ></i>
-                    <a
-                      target="_blank"
-                      href="https://www.linkedin.com/in/hardeep-kumar1815/"
-                    >
-                      <span class="text-dark better-underline"
-                        >Hardeep Kumar</span
-                      >
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="row g-3">
+          <div class="col-lg-4 col-md-6 col-12">
+            <Lazy-AboutDevCard
+              image="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+              name="Ridhima Jain"
+              role="Frontend Developer"
+              email="ridhimajain862@gmail.com"
+              githubUsername="Ridhima10"
+              githubName="Ridhima10"
+              linkedinUsername="ridhima-jain-96829a212"
+              linkedinName="Ridhima Jain"
+            />
           </div>
 
-          <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-12 mx-auto">
-            <div class="card p-3">
-              <div class="row">
-                <div
-                  class="col-lg-4 col-md-5 col-sm-4 col-12 text-center text-sm-start"
-                >
-                  <img
-                    class="avatar avatar-xxl obj-fit-cover shadow-1-strong avatar-height"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
-                    alt=""
-                    v-lazy-load
-                  />
-                </div>
-                <div
-                  class="col-lg-8 col-md-7 col-sm-8 col-12 text-center text-sm-start"
-                >
-                  <div
-                    class="fw-bold fs-5 text-primary text-gradient text-capitalize"
-                  >
-                    Isha Gupta
-                  </div>
-                  <div class="fs-6 text-secondary">Frontend Developer</div>
+          <div class="col-lg-4 col-md-6 col-12">
+            <Lazy-AboutDevCard
+              image="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+              name="Hardeep Kumar"
+              role="Backend Developer"
+              email="hardeepkumar1815@gmail.com"
+              githubUsername="wrench1815"
+              githubName="wrench1815"
+              linkedinUsername="hardeep-kumar1815"
+              linkedinName="Hardeep Kumar"
+            />
+          </div>
 
-                  <div
-                    class="text-muted small d-flex gap-1 justify-content-center justify-content-sm-start"
-                  >
-                    <i class="ri-mail-fill text-primary text-gradient"></i>
-                    <a href="mailto:ishagupta1021@gmail.com">
-                      <span class="text-dark text-break better-underline"
-                        >ishagupta1021@gmail.com</span
-                      >
-                    </a>
-                  </div>
-                  <div
-                    class="text-muted small d-flex gap-1 justify-content-center justify-content-sm-start"
-                  >
-                    <i class="ri-github-fill text-primary text-gradient"></i>
-                    <a target="_blank" href="https://github.com/ishagupta2110">
-                      <span class="text-dark better-underline"
-                        >ishagupta2110</span
-                      >
-                    </a>
-                  </div>
-                  <div
-                    class="text-muted small d-flex gap-1 justify-content-center justify-content-sm-start"
-                  >
-                    <i
-                      class="ri-linkedin-box-fill text-primary text-gradient"
-                    ></i>
-                    <a
-                      target="_blank"
-                      href="https://www.linkedin.com/in/isha-gupta-188843214/"
-                    >
-                      <span class="text-dark better-underline">Isha Gupta</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-lg-4 col-md-6 col-12 mx-auto">
+            <Lazy-AboutDevCard
+              image="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+              name="Isha Gupta"
+              role="Frontend Developer"
+              email="ishagupta1021@gmail.com"
+              githubUsername="ishagupta2110"
+              githubName="ishagupta2110"
+              linkedinUsername="isha-gupta-188843214"
+              linkedinName="Isha Gupta"
+            />
           </div>
         </div>
       </div>
@@ -383,10 +240,6 @@ export default {
     rotate: 159deg;
     left: 2%;
     height: 8%;
-  }
-
-  .avatar-height {
-    height: 100% !important;
   }
 }
 </style>
