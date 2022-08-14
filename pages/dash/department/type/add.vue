@@ -2,8 +2,12 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h2>Add Department Type</h2>
-        <p>Add a New Department Type</p>
+        <h1 class="text-gradient text-primary d-inline-block">
+          Add Department Type
+        </h1>
+        <h3 class="text-secondary text-capitalize">
+          Add a New Department Type
+        </h3>
       </div>
       <div class="card-body">
         <Lazy-LoadersForm :btnEnd="true" :btnColor="'info'" v-if="loading" />
@@ -18,12 +22,14 @@
               :validationRules="{ required: true, min: 3, capitalize: true }"
               :data.sync="departmentType.department_name"
               :type="'text'"
+              :icon="'ri-hotel-fill'"
+              isRequired
             />
             <!-- end:Department Name -->
 
             <!-- Submit button -->
-            <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-info btn-rounded mb-4">
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary btn-rounded mb-4">
                 Add Department Type
               </button>
             </div>
