@@ -8,28 +8,111 @@
         </h3>
       </div>
       <div class="card-body">
-        <!-- <section class="d-flex justify-content-end">
-          <div class="w-10-rem mb-3">
+        <section
+          class="d-flex align-items-center justify-content-center flex-wrap"
+          v-if="!loading.main"
+        >
+          <!-- start:Search -->
+          <div class="me-auto mb-3">
+            <div
+              class="btn btn-floating bg-gradient-primary text-white btn-s d-flex justify-content-center align-items-center"
+            >
+              <i class="ri-search-line ri-lg"></i>
+            </div>
+          </div>
+          <!-- end:Search -->
+
+          <!-- start:College Filter -->
+          <div class="college-filter-width mb-3 me-0 ms-sm-0 ms-auto">
             <v-select
               placeholder="Select Filter"
-              :options="userFilters"
-              v-model="selectedUserFilter"
+              :options="collegeList.results"
+              v-model="selectedCollege"
               :clearable="false"
-              @option:selected="refreshUsers"
+              label="alias_name"
+              @option:selected="filterDepartment"
+              :loading="loading.paginateCollege"
             >
+              <!-- spinner -->
+              <template #spinner="{ loading }">
+                <div
+                  v-if="loading"
+                  class="vs__spinner"
+                  style="border-left-color: var(--mdb-primary)"
+                >
+                  loading...
+                </div>
+              </template>
+
+              <!-- options -->
+              <template #option="{ alias_name }">
+                <div
+                  class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                >
+                  <span>{{ alias_name }}</span>
+                </div>
+              </template>
+
+              <!-- selected -->
+              <template #selected-option="{ alias_name }">
+                <div
+                  class="d-flex justify-content-start align-items-center gap-1"
+                >
+                  <i
+                    class="text-primary text-gradient ri-government-fill mt-n1"
+                  ></i>
+                  <span>{{ alias_name }}</span>
+                </div>
+              </template>
+
+              <!-- footer for pagination -->
+              <li
+                slot="list-footer"
+                class="d-flex gap-2 justify-content-center align-items-center my-2"
+                v-if="collegeList.pagination.count > 1"
+              >
+                <!-- previous button -->
+                <button
+                  class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                  :disabled="
+                    disableCollegeBtns || !collegeList.pagination.previous
+                  "
+                  @click="collegePaginatePrev"
+                  data-mdb-ripple-color="primary"
+                >
+                  <i class="ri-arrow-left-s-line"></i>
+                </button>
+
+                <!-- next button -->
+                <button
+                  class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                  :disabled="disableCollegeBtns || !collegeList.pagination.next"
+                  @click="collegePaginateNext"
+                  data-mdb-ripple-color="primary"
+                >
+                  <i class="ri-arrow-right-s-line"></i>
+                </button>
+              </li>
             </v-select>
           </div>
-        </section> -->
-        <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashDepartmentTable v-else :departments.sync="departments" />
+          <!-- end:College Filter -->
+        </section>
+
+        <LoadersTable v-if="loading.main" />
+        <DashDepartmentTable v-else :departments.sync="departments.results" />
+
+        <Lazy-UtilsPagination
+          class="mt-4"
+          v-if="!loading.main && departments.pagination.items != 0"
+          :pagination.sync="departments.pagination"
+          @prevPage="onPaginated"
+          @nextPage="onPaginated"
+        />
 
         <div class="d-flex justify-content-end mt-3">
-          <Lazy-LoadersButton v-if="loading" :rounded="true" />
-          <Lazy-UtilsLinkButton
-            v-else
-            :rounded="true"
-            :link="'/dash/department/add'"
-            >Add new Department</Lazy-UtilsLinkButton
+          <LoadersButton v-if="loading.main" :rounded="true" />
+          <UtilsLinkButton v-else :rounded="true" :link="'/dash/department/add'"
+            >Add new Department</UtilsLinkButton
           >
         </div>
       </div>
@@ -42,13 +125,25 @@ export default {
   name: 'DashDepartmentIndex',
   layout: 'dash',
 
+  watch: {
+    '$route.query'() {
+      this.payloadWatch()
+      this.refreshDepartment()
+    },
+  },
+
   data() {
     return {
-      departments: [],
-      loading: true,
+      loading: { main: true, paginateCollege: true },
       error: true,
-      userFilters: ['All', 'Admin', 'Principal', 'HOD', 'Teacher'],
-      selectedUserFilter: 'All',
+      departments: {},
+      payload: {},
+
+      // college filter
+      collegeList: { pagination: { count: 0 } },
+      selectedCollege: { alias_name: 'All' },
+      collegePayload: {},
+      disableCollegeBtns: true,
     }
   },
 
@@ -62,54 +157,134 @@ export default {
   },
 
   methods: {
+    // fetch list of departments
     async getDepartments() {
-      this.loading = true
-      let requestUrl = this.$api.department.list()
+      this.loading.main = true
 
-      const response = await requestUrl
-        .then(
-          (response) => (
-            (this.departments = response.data), (this.error = false)
-          )
-        )
-        .catch((error) => {
-          this.$swal({
-            title: 'Error',
-            icon: 'error',
-            type: 'error',
-            html: `${
-              error.response.data.detail
-                ? error.response.data.detail
-                : 'Something went wrong'
-            }`,
-            confirmButtonText: 'Refresh',
-            showCancelButton: true,
-            cancelButtonText: 'To Dash Home',
-            confirmButtonClass: 'btn btn-info',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.getDepartments()
-            } else if (result.isDismissed) {
-              this.$router.push('/dash')
-            }
-          })
+      if (this.payload.college) {
+        if (this.payload.college == 'All') {
+          this.payload.college = undefined
+        }
+      }
+
+      return this.$api.department
+        .list(this.payload)
+        .then((response) => {
+          this.departments = response.data
+
+          this.error = false
+        })
+        .catch((err) => {
+          if (err.response.status == 404) {
+            this.error = true
+            this.departments = []
+
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'Page not Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong',
+            })
+          }
         })
     },
 
-    refreshDepartments() {
-      this.loading = true
-      this.getDepartments().then(() => (this.loading = false))
+    filterDepartment() {
+      this.payload = {}
+
+      this.payload.college = this.selectedCollege.id
+
+      this.$router.push({
+        path: this.$route.path,
+      })
+
+      this.refreshDepartment()
+    },
+
+    // watcher for route query
+    async payloadWatch() {
+      if (this.$route.query.page) {
+        this.payload.page = await this.$route.query.page
+      } else {
+        this.payload.page = await '1'
+      }
+    },
+
+    refreshDepartment() {
+      this.getDepartments().then(() => {
+        this.loading.main = false
+      })
+    },
+
+    // on paginated
+    onPaginated(pageNum) {
+      this.payload.page = pageNum
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          page: pageNum,
+        },
+      })
+    },
+
+    // fetch college list for filter
+    async fetchCollegeList() {
+      this.disableCollegeBtns = true
+      this.loading.paginateCollege = true
+
+      return this.$api.college.list(this.collegePayload).then((res) => {
+        this.collegeList = res.data
+
+        // append a new option for All at start
+        this.collegeList.results.unshift({
+          id: 'All',
+          alias_name: 'All',
+        })
+
+        this.disableCollegeBtns = false
+        this.loading.paginateCollege = false
+      })
+    },
+
+    // on College filter next
+    collegePaginateNext() {
+      if (this.collegeList.pagination.next) {
+        this.collegePayload.page = this.collegePayload.page + 1
+        this.fetchCollegeList()
+      }
+    },
+
+    // on College filter previous
+    collegePaginatePrev() {
+      if (this.collegeList.pagination.previous) {
+        this.collegePayload.page = this.collegePayload.page - 1
+        this.fetchCollegeList()
+      }
     },
   },
 
   mounted() {
-    this.getDepartments().finally(() => {
+    this.payload.page = this.$route.query.page
+    this.collegePayload.page = 1
+
+    this.getDepartments().then(() => {
       if (!this.error) {
-        this.loading = false
+        this.loading.main = false
       }
+    })
+
+    this.fetchCollegeList().then(() => {
+      this.loading.paginateCollege = false
     })
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.college-filter-width {
+  width: 11.5rem;
+}
+</style>
