@@ -27,9 +27,10 @@
           </p>
         </div>
         <img
-          src="~/assets/svg/aboutpage.svg"
+          data-src="~/assets/svg/aboutpage.svg"
           class="img-fluid p-sm-2 p-md-2 p-xl-5"
           alt="aboutpage image"
+          v-lazy-load
         />
       </div>
       <div class="row my-4">
