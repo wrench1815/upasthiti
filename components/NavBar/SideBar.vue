@@ -21,12 +21,12 @@
     <div class="offcanvas-body">
       <ul class="nav flex-column">
         <!-- start:menu items list -->
-        <li class="nav-item" v-for="items in menuItems">
+        <li class="nav-item" v-for="(item, index) in menuItems" :key="index">
           <NuxtLink
             class="nav-link my-1 pb-0 link-dark hover-underline-animation"
             exact-active-class="text-primary underline-active"
-            :to="items.url"
-            >{{ items.name }}</NuxtLink
+            :to="item.url"
+            >{{ item.name }}</NuxtLink
           >
         </li>
         <!-- end:menu items list -->
@@ -117,7 +117,7 @@ export default {
         },
         {
           name: 'Privacy Policy',
-          url: '/privacy',
+          url: '/privacy-policy',
         },
         {
           name: 'Contact Us',
