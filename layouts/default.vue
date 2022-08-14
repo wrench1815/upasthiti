@@ -17,8 +17,8 @@
     <!-- to top util button -->
     <Lazy-UtilsToTop />
 
-    <!-- privacy policy component -->
-    <Lazy-PrivacyPolicyComponent />
+    <!-- Privacy Policy Util -->
+    <Lazy-UtilsPrivacyPolicy />
   </div>
 </template>
 
