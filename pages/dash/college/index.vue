@@ -46,7 +46,7 @@
                 <div
                   class="d-flex justify-content-start align-items-center gap-1"
                 >
-                  <i class="text-primary text-gradient ri-bank-line mt-n1"></i>
+                  <i class="text-primary text-gradient ri-bank-fill mt-n1"></i>
                   <span>{{ alias }}</span>
                 </div>
               </template>
