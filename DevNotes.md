@@ -146,7 +146,7 @@ This file is no keep note of various things that devs would need help while work
 - Address:
 
   ```html
-  <i class="ri-map-pin-2"></i>
+  <i class="ri-map-pin-2-fill"></i>
   ```
 
 - District:
@@ -177,6 +177,11 @@ This file is no keep note of various things that devs would need help while work
 
 ```html
 <i class="ri-lock-2-fill"></i>
+```
+-Message:
+
+```html
+<i class="ri-question-answer-fill"></i>
 ```
 
 -Logo/profile Picture:
