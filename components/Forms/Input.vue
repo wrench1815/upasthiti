@@ -1,5 +1,5 @@
 <template>
-  <div class="form-outline ">
+  <div class="form-outline">
     <input :type="inputtype" :id="idname" class="form-control" />
     <label class="form-label" :for="idname">
       <div class="d-flex justify-content-center gap-1">
