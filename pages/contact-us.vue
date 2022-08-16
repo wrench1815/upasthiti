@@ -8,23 +8,23 @@
             <div
               class="card bg-gradient-primary p-2 h-card mt-n5 ms-3 shadow position-relative z-index-0 overflow-hidden"
             >
-              <div class="card bg-gradient-primary shadow-none p-2">
+              <div class="card bg-danger shadow p-3">
                 <div>
-                  <h2 class="text-white">Get In Touch</h2>
-                  <p class="text-dark ms-2">
+                  <h2 class="text-white fw-bold">Get In Touch</h2>
+                  <p class="text-white">
                     Fill up the form. Our friendly team is always here to help
                     you.
                   </p>
-                  <div class="text-muted small d-flex mt-lg-5 mt-2 mx-3">
+                  <div class="text-muted small d-flex mt-lg-4 mt-2">
                     <i class="ri-mail-line text-white fs-3"></i>
-                    <span class="text-white fs-3 ms-2">Chat to Us</span>
+                    <span class="text-white fs-3 ms-2 fw-bold">Chat to Us</span>
                   </div>
-                  <div class="ms-4">
-                    <p class="text-dark">
+                  <div class="">
+                    <p class="text-white">
                       Our friendly team is always here to chat with you.
                     </p>
                     <a href="mailto:upasthiti.app@gmail.com">
-                      <span class="text-white text-break better-underline ms-3">
+                      <span class="text-white text-break better-underline">
                         upasthiti.app@gmail.com
                         <i class="ri-external-link-fill text-whitw"></i>
                       </span>
@@ -32,20 +32,20 @@
                   </div>
                 </div>
               </div>
-              <img src="~/assets/svg/blob_1.svg" alt="" class="img-test" />
+
+              <!-- <img src="~/assets/svg/blob_1.svg" alt="" class="img-test" /> -->
               <img src="~/assets/svg/circle.svg" alt="" class="circle" />
-              <div class="position-absolute dots-artifact">
-                <img
-                  src="~/assets/images/circle_with_dots.png"
-                  alt=""
-                  class="dots"
-                />
+              <div class="position-absolute chat-artifact">
+                <i class="ri-message-2-fill ri-4x text-white chat"></i>
               </div>
               <div class="position-absolute mail-artifact">
                 <i class="ri-mail-fill ri-4x text-white mail"></i>
               </div>
               <div class="position-absolute plane-artifact">
                 <i class="ri-send-plane-fill text-white ri-5x plane"></i>
+              </div>
+              <div class="position-absolute phone-artifact">
+                <i class="ri-phone-fill text-white ri-4x phone"></i>
               </div>
             </div>
           </div>
@@ -54,7 +54,7 @@
           <!-- Start : Right Side of Page -->
           <div class="col-lg-8 col-md-6 col-12">
             <div class="mt-3 p-3">
-              <h1 class="text-primary">We' love to hear from you</h1>
+              <h1 class="text-primary fw-bold">We'd love to hear from you</h1>
               <ValidationObserver v-slot="{ handleSubmit }">
                 <!-- Start : Contact Form -->
                 <form
@@ -95,7 +95,7 @@
                       <Lazy-DashInput
                         :label="'Email'"
                         :validationRules="{ required: true, email: true }"
-                        :data.sync="message.lastName"
+                        :data.sync="message.email"
                         :type="'email'"
                         :icon="'ri-mail-fill'"
                         isRequired
@@ -103,6 +103,7 @@
                     </div>
                   </div>
                   <!-- End : Email  -->
+
                   <!-- Start : Address  -->
                   <div class="row">
                     <div class="col-12">
@@ -137,6 +138,7 @@
                     </div>
                   </div>
                   <!-- End : Address -->
+
                   <!-- Start : District -->
                   <div class="row">
                     <div class="col-12">
@@ -161,6 +163,7 @@
                     </div>
                   </div>
                   <!-- End : District -->
+
                   <!-- Start : Message -->
                   <div class="row">
                     <div class="col-12">
@@ -195,13 +198,14 @@
                     </div>
                   </div>
                   <!-- End : Message -->
+
                   <!-- Start : Submit button -->
                   <div class="d-flex justify-content-center">
                     <button
                       type="submit"
-                      class="btn bg-gradient-primary text-white btn-rounded col-md-4 col-8"
+                      class="btn bg-gradient-primary text-white btn-rounded col-md- col-"
                     >
-                      Send
+                      Send a Quote
                     </button>
                   </div>
                   <!-- End : Submit button -->
@@ -233,7 +237,6 @@ export default {
         district: '',
         message: '',
       },
-
       districtList: [],
     }
   },
@@ -245,13 +248,81 @@ export default {
   },
 
   methods: {
-    sendMessage() {
-      console.log(this.message)
+    async sendMessage() {
+      try {
+        const contact = {
+          first_name: this.message.firstName,
+          last_name: this.message.lastName,
+          email: this.message.email,
+          address: this.message.address,
+          contact_district: this.message.district,
+          message: this.message.message,
+        }
+
+        this.$swal({
+          title: 'Sending Quote',
+          icon: 'info',
+          type: 'info',
+          text: 'Please wait while we are sending your Quote',
+          didOpen: () => {
+            this.$swal.showLoading()
+
+            this.$api.contact
+              .create(contact)
+              .then(() => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                this.$swal({
+                  title: 'Success',
+                  icon: 'success',
+                  type: 'success',
+                  html: `Your Quote was recieved successfully.<br/>We'll Contact you Shortly.`,
+                  timer: 4000,
+                  timerProgressBar: true,
+
+                  didOpen: () => {
+                    this.$swal.showLoading()
+                  },
+                }).then(() => {
+                  this.message.firstName = ''
+                  this.message.lastName = ''
+                  this.message.email = ''
+                  this.message.address = ''
+                  this.message.district = ''
+                  this.message.message = ''
+
+                  this.$emit('input', this.message.firstName)
+                  this.$emit('input', this.message.lastName)
+                  this.$emit('input', this.message.email)
+                })
+              })
+              .catch((err) => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                this.$swal({
+                  title: 'Error',
+                  icon: 'error',
+                  type: 'error',
+                  html: `Failed to send your Quote.`,
+                })
+              })
+          },
+        })
+      } catch (e) {
+        this.$swal({
+          title: 'Error',
+          icon: 'error',
+          type: 'error',
+          html: `Failed to send your Quote.<br/>Try Again`,
+        })
+      }
     },
   },
 
   mounted() {
-    this.districtList = [...this.districts, 'None of the Above']
+    this.districtList = [...this.districts, 'None Specified']
 
     // initialize form elements
     document.querySelectorAll('.form-outline').forEach((formOutline) => {
@@ -267,20 +338,32 @@ export default {
     linear-gradient(var(--mdb-white), var(--mdb-white)) !important;
 }
 
-@media (min-width: 767px) {
+@media (min-width: 768px) {
   .h-card {
     height: 100% !important;
   }
+
+  .circle {
+    bottom: -30% !important;
+    right: -55% !important;
+    /* left: -5%; */
+  }
 }
 
-.img-test {
-  position: absolute;
-  bottom: -4%;
-  right: -5%;
-  left: -5%;
-  z-index: -2;
-  width: 110%;
-  /* right: -50%; */
+@media (min-width: 1200px) {
+  .circle {
+    bottom: -35% !important;
+    right: -60% !important;
+    /* left: -5%; */
+  }
+}
+
+@media (min-width: 1400px) {
+  .circle {
+    bottom: -35% !important;
+    right: -60% !important;
+    /* left: -5%; */
+  }
 }
 
 .circle {
@@ -321,14 +404,31 @@ export default {
   /* transform: rotate(5deg); */
 }
 
-.dots-artifact {
+.phone-artifact {
+  bottom: 35%;
+  left: 60%;
+  z-index: -1;
+  transform: rotate(261deg);
+}
+
+.phone {
+  text-shadow: 1px 0 var(--mdb-danger), -1px 0 var(--mdb-danger),
+    0 1px var(--mdb-danger), 0 -1px var(--mdb-danger), 1px 1px var(--mdb-danger),
+    -1px -1px var(--mdb-danger), -1px 1px var(--mdb-danger),
+    1px -1px var(--mdb-danger), -25px 0px 10px var(--mdb-light);
+}
+
+.chat-artifact {
   bottom: 34%;
-  left: 2%;
+  left: 5%;
   z-index: -1;
   /* transform: rotate(20deg); */
 }
 
-.dots {
-  height: 5rem;
+.chat {
+  text-shadow: 1px 0 var(--mdb-dark), -1px 0 var(--mdb-dark),
+    0 1px var(--mdb-dark), 0 -1px var(--mdb-dark), 1px 1px var(--mdb-dark),
+    -1px -1px var(--mdb-dark), 1px -1px var(--mdb-dark),
+    -1px 1px var(--mdb-dark), 20px 20px 10px var(--mdb-light);
 }
 </style>
