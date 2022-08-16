@@ -9,41 +9,55 @@
               class="card bg-gradient-primary p-2 h-card mt-n5 ms-3 shadow position-relative z-index-0 overflow-hidden"
             >
               <div class="card bg-danger shadow p-3">
+                <!-- start:Card Top -->
                 <div>
                   <h2 class="text-white fw-bold">Get In Touch</h2>
+
                   <p class="text-white">
                     Fill up the form. Our friendly team is always here to help
                     you.
                   </p>
+
                   <div class="text-muted small d-flex mt-lg-4 mt-2">
                     <i class="ri-mail-line text-white fs-3"></i>
                     <span class="text-white fs-3 ms-2 fw-bold">Chat to Us</span>
                   </div>
-                  <div class="">
+
+                  <div>
                     <p class="text-white">
                       Our friendly team is always here to chat with you.
                     </p>
-                    <a href="mailto:upasthiti.app@gmail.com">
-                      <span class="text-white text-break better-underline">
+
+                    <a
+                      href="mailto:upasthiti.app@gmail.com"
+                      class="d-inline-block"
+                    >
+                      <span
+                        class="text-white text-break d-inline better-underline"
+                      >
                         upasthiti.app@gmail.com
-                        <i class="ri-external-link-fill text-whitw"></i>
                       </span>
+                      <i class="ri-external-link-fill text-white"></i>
                     </a>
                   </div>
                 </div>
+                <!-- start:Card Top -->
               </div>
 
-              <!-- <img src="~/assets/svg/blob_1.svg" alt="" class="img-test" /> -->
               <img src="~/assets/svg/circle.svg" alt="" class="circle" />
+
               <div class="position-absolute chat-artifact">
                 <i class="ri-message-2-fill ri-4x text-white chat"></i>
               </div>
+
               <div class="position-absolute mail-artifact">
                 <i class="ri-mail-fill ri-4x text-white mail"></i>
               </div>
+
               <div class="position-absolute plane-artifact">
                 <i class="ri-send-plane-fill text-white ri-5x plane"></i>
               </div>
+
               <div class="position-absolute phone-artifact">
                 <i class="ri-phone-fill text-white ri-4x phone"></i>
               </div>
@@ -72,6 +86,7 @@
                         :type="'text'"
                         :icon="'ri-user-fill'"
                         isRequired
+                        :key="key.fs"
                       />
                     </div>
                     <!-- End : First Name -->
@@ -84,11 +99,13 @@
                         :type="'text'"
                         :icon="'ri-user-fill'"
                         isRequired
+                        :key="key.ls"
                       />
                     </div>
                     <!-- End : Last Name -->
                   </div>
                   <!-- End : Name -->
+
                   <!-- Start : Email -->
                   <div class="row">
                     <div class="col-12">
@@ -99,6 +116,7 @@
                         :type="'email'"
                         :icon="'ri-mail-fill'"
                         isRequired
+                        :key="key.email"
                       />
                     </div>
                   </div>
@@ -113,6 +131,7 @@
                           required: true,
                           min: 5,
                         }"
+                        :key="key.addr"
                       >
                         <div class="form-outline">
                           <textarea
@@ -145,6 +164,7 @@
                       <ValidationProvider
                         v-slot="{ errors }"
                         :rules="{ required: true }"
+                        :key="key.dist"
                       >
                         <v-select
                           placeholder="Select District"
@@ -173,6 +193,7 @@
                           required: true,
                           min: 10,
                         }"
+                        :key="key.msg"
                       >
                         <div class="form-outline">
                           <textarea
@@ -238,6 +259,14 @@ export default {
         message: '',
       },
       districtList: [],
+      key: {
+        fs: this.uuidGenerator(),
+        ls: this.uuidGenerator(),
+        email: this.uuidGenerator(),
+        addr: this.uuidGenerator(),
+        dist: this.uuidGenerator(),
+        msg: this.uuidGenerator(),
+      },
     }
   },
 
@@ -248,6 +277,19 @@ export default {
   },
 
   methods: {
+    uuidGenerator() {
+      // Generate uuid and return it
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+        /[xy]/g,
+        function (c) {
+          var r = (Math.random() * 16) | 0,
+            v = c == 'x' ? r : (r & 0x3) | 0x8
+          return v.toString(16)
+        }
+      )
+    },
+
+    // send message
     async sendMessage() {
       try {
         const contact = {
@@ -285,16 +327,23 @@ export default {
                     this.$swal.showLoading()
                   },
                 }).then(() => {
-                  this.message.firstName = ''
-                  this.message.lastName = ''
-                  this.message.email = ''
-                  this.message.address = ''
-                  this.message.district = ''
-                  this.message.message = ''
+                  this.message = {
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    address: '',
+                    district: '',
+                    message: '',
+                  }
 
-                  this.$emit('input', this.message.firstName)
-                  this.$emit('input', this.message.lastName)
-                  this.$emit('input', this.message.email)
+                  this.key = {
+                    fs: this.uuidGenerator(),
+                    ls: this.uuidGenerator(),
+                    email: this.uuidGenerator(),
+                    addr: this.uuidGenerator(),
+                    dist: this.uuidGenerator(),
+                    msg: this.uuidGenerator(),
+                  }
                 })
               })
               .catch((err) => {
@@ -346,7 +395,6 @@ export default {
   .circle {
     bottom: -30% !important;
     right: -55% !important;
-    /* left: -5%; */
   }
 }
 
@@ -354,7 +402,6 @@ export default {
   .circle {
     bottom: -35% !important;
     right: -60% !important;
-    /* left: -5%; */
   }
 }
 
@@ -362,7 +409,6 @@ export default {
   .circle {
     bottom: -35% !important;
     right: -60% !important;
-    /* left: -5%; */
   }
 }
 
@@ -370,7 +416,7 @@ export default {
   position: absolute;
   bottom: -35%;
   right: -60%;
-  /* left: -5%; */
+
   z-index: -3;
   width: 100%;
 }
@@ -401,7 +447,6 @@ export default {
   bottom: 15%;
   left: 20%;
   z-index: -1;
-  /* transform: rotate(5deg); */
 }
 
 .phone-artifact {
@@ -422,7 +467,6 @@ export default {
   bottom: 34%;
   left: 5%;
   z-index: -1;
-  /* transform: rotate(20deg); */
 }
 
 .chat {
