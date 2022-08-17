@@ -138,7 +138,7 @@ export default {
         requestUrl = this.$api.user.listTeacher(this.payload)
       }
 
-      const response = await requestUrl
+      await requestUrl
         .then((response) => {
           this.users = response.data
           this.error = false
@@ -147,41 +147,15 @@ export default {
           if (error.response.status == 404) {
             this.error = true
             this.users = []
-            // show error
-            this.$swal({
-              title: '404',
-              icon: 'error',
-              type: 'error',
-              html: 'Page not Found',
-              confirmButtonText: 'Refresh',
-              showCancelButton: true,
-              cancelButtonText: 'To Dash Home',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.getUsers()
-              } else if (result.isDismissed) {
-                this.$router.push('/dash')
-              }
+
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'Page not Found',
             })
           } else {
-            this.$swal({
-              title: 'Error',
-              icon: 'error',
-              type: 'error',
-              html: `${
-                error.response.data.detail
-                  ? error.response.data.detail
-                  : 'Something went wrong'
-              }`,
-              confirmButtonText: 'Refresh',
-              showCancelButton: true,
-              cancelButtonText: 'To Dash Home',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.getUsers()
-              } else if (result.isDismissed) {
-                this.$router.push('/dash')
-              }
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong',
             })
           }
         })
