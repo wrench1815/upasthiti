@@ -109,44 +109,124 @@
               </div>
             </div>
 
-            <!-- start:Email -->
-            <Lazy-DashInput
-              :label="'Email'"
-              :validationRules="{ required: true, email: true }"
-              :data.sync="user.email"
-              :type="'text'"
-              :icon="'ri-mail-fill'"
-            />
-            <!-- end:Email -->
+            <div class="row">
+              <!-- start:Email -->
+              <div class="col-md-6 col-12">
+                <Lazy-DashInput
+                  :label="'Email'"
+                  :validationRules="{ required: true, email: true }"
+                  :data.sync="user.email"
+                  :type="'text'"
+                  :icon="'ri-mail-fill'"
+                />
+              </div>
+              <!-- end:Email -->
 
-            <!-- start:Gender -->
-            <ValidationProvider v-slot="{ errors }" :rules="{ required: true }">
-              <v-select
-                placeholder="Select Gender"
-                :options="genderList"
-                v-model="user.gender"
-              >
-                <!-- for options -->
-                <template #option="{ label, icon }">
-                  <div
-                    class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
-                  >
-                    <i :class="icon"></i>
-                    <span>{{ label }}</span>
-                  </div>
-                </template>
+              <!-- start:mobile -->
+              <div class="col">
+                <Lazy-DashInput
+                  :label="'Mobile'"
+                  :validationRules="{
+                    required: true,
+                    min: 10,
+                    max: 13,
+                    phone: true,
+                  }"
+                  :data.sync="user.mobile"
+                  :type="'tel'"
+                  :icon="'ri-phone-fill'"
+                  isRequired
+                />
+              </div>
+              <!-- end:mobile -->
+            </div>
 
-                <!-- for selected option -->
-                <template #selected-option="{ label, icon }">
-                  <div
-                    class="d-flex justify-content-start align-items-center gap-1"
+            <div class="row">
+              <!-- start:Gender -->
+              <div class="col-md-6 col-12">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :rules="{ required: true }"
+                >
+                  <v-select
+                    placeholder="Select Gender"
+                    :options="genderList"
+                    v-model="user.gender"
                   >
-                    <i class="text-primary text-gradient" :class="icon"></i>
-                    <span>{{ label }}</span>
+                    <!-- for options -->
+                    <template #option="{ label, icon }">
+                      <div
+                        class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                      >
+                        <i :class="icon"></i>
+                        <span>{{ label }}</span>
+                      </div>
+                    </template>
+                    <!-- for selected option -->
+                    <template #selected-option="{ label, icon }">
+                      <div
+                        class="d-flex justify-content-start align-items-center gap-1"
+                      >
+                        <i class="text-primary text-gradient" :class="icon"></i>
+                        <span>{{ label }}</span>
+                      </div>
+                    </template>
+                  </v-select>
+                  <!-- Validation Errors -->
+                  <div
+                    class="text-danger transition-all-ease-out-sine"
+                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                  >
+                    {{ errors[0] }}
                   </div>
-                </template>
-              </v-select>
-              <!-- Validation Errors -->
+                </ValidationProvider>
+              </div>
+              <!-- end:Gender -->
+
+              <!-- start:District -->
+              <div class="col">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :rules="{ required: true }"
+                >
+                  <v-select
+                    placeholder="Select District"
+                    :options="districtList"
+                    v-model="user.district"
+                  >
+                  </v-select>
+                  <!-- Validation Errors -->
+                  <div
+                    class="text-danger transition-all-ease-out-sine"
+                    :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                  >
+                    {{ errors[0] }}
+                  </div>
+                </ValidationProvider>
+              </div>
+              <!-- end:District-->
+            </div>
+
+            <!-- start:Address -->
+            <ValidationProvider
+              v-slot="{ errors }"
+              :rules="{
+                required: true,
+                min: 5,
+              }"
+            >
+              <div class="form-outline">
+                <textarea
+                  class="form-control"
+                  rows="4"
+                  v-model="user.address"
+                ></textarea>
+                <label class="form-label required">
+                  <i class="ri-map-pin-2-fill text-primary text-gradient"></i>
+                  <span>Address</span>
+                </label>
+              </div>
+              <!-- Valdation Errors -->
               <div
                 class="text-danger transition-all-ease-out-sine"
                 :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
@@ -154,7 +234,7 @@
                 {{ errors[0] }}
               </div>
             </ValidationProvider>
-            <!-- end:Gender -->
+            <!-- end:Address -->
 
             <!-- start:Password -->
             <ValidationProvider
@@ -394,6 +474,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'DashUserAdd',
   layout: 'dash',
@@ -426,6 +508,9 @@ export default {
         last_name: '',
         email: '',
         gender: '',
+        mobile: '',
+        district: '',
+        address: '',
         is_admin: false,
         is_principal: false,
         is_hod: false,
@@ -445,6 +530,12 @@ export default {
         name: 'Add',
       },
     ])
+  },
+
+  computed: {
+    ...mapGetters({
+      districtList: 'listDistricts',
+    }),
   },
 
   methods: {
@@ -516,6 +607,9 @@ export default {
           last_name: this.user.last_name,
           email: this.user.email,
           gender: this.user.gender.label,
+          district: this.user.district,
+          address: this.user.address,
+          mobile: this.user.mobile,
           password: this.user.password,
           confirm_password: this.user.password,
           is_active: this.user.is_active,
@@ -533,7 +627,7 @@ export default {
           didOpen: () => {
             this.$swal.showLoading()
 
-            const response = this.$api.user
+            this.$api.user
               .create(user)
               .then(() => {
                 this.$swal.hideLoading()

@@ -5,339 +5,417 @@
         <h1 class="text-gradient text-primary d-inline-block">User Edit</h1>
         <h3 class="text-secondary text-capitalize">
           Editing:
-          <span class="text-gradient text-info fw-bold"
-            >{{ user.first_name }} {{ user.last_name }}</span
-          >
+          <transition name="fade-x" mode="out-in">
+            <span class="text-info fw-bold" v-if="loading">
+              <lazy-LoadersText :length="2" size="xs" />
+              <lazy-LoadersText :length="1" size="xs" />
+            </span>
+            <span class="text-info fw-bold" v-else>{{ user.full_name }}</span>
+          </transition>
         </h3>
       </div>
+
       <div class="card-body">
-        <Lazy-LoadersForm
-          :inputCount="6"
-          :btnEnd="true"
-          :btnColor="'info'"
-          v-if="loading"
-        />
-
-        <!-- for Valdation -->
-        <ValidationObserver v-slot="{ handleSubmit }" v-else>
-          <!-- start:User Edit Form -->
-          <form @submit.prevent="handleSubmit(updateUser)">
-            <!-- start:Profile Image -->
-            <div class="row mb-4">
-              <div class="col-12">
-                <label class="form-label">
-                  <div class="d-flex justify-content-center gap-1">
-                    <i
-                      class="ri-image-fill text-primary text-gradient d-block-inline"
-                    ></i>
-                    <span> Profile Image </span>
-                  </div>
-                </label>
-              </div>
-              <div class="col-12">
-                <div
-                  class="position-relative rounded-5 shadow-2-strong profile-image-size bg-size-cover bg-pos-center"
-                  :lazy-background="user.profile_image"
-                >
-                  <!-- profile image, reset -->
-                  <span
-                    class="position-absolute top-0 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size ripple"
-                    data-mdb-ripple-radius="40"
-                    data-mdb-ripple-unbound="true"
-                    data-mdb-ripple-centered="true"
-                    data-mdb-ripple-color="primary"
-                    data-mdb-toggle="tooltip"
-                    data-mdb-placement="bottom"
-                    title="Remove Profile Image"
-                    @click="removeProfileImage"
-                  >
-                    <i class="ri-close-line text-danger"></i>
-                  </span>
-
-                  <!-- profile image, select -->
-                  <label
-                    class="position-absolute top-100 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size ripple"
-                    data-mdb-ripple-radius="40"
-                    data-mdb-ripple-color="primary"
-                    data-mdb-ripple-unbound="true"
-                    data-mdb-ripple-centered="true"
-                    for="profileImage"
-                    data-mdb-toggle="tooltip"
-                    data-mdb-placement="bottom"
-                    title="Select Profile Image"
-                  >
-                    <i class="ri-pencil-fill text-primary"></i>
+        <transition name="scale-in" mode="out-in">
+          <Lazy-LoadersForm
+            :inputCount="6"
+            :btnCenter="true"
+            :btnColor="'info'"
+            v-if="loading"
+          />
+          <!-- for Valdation -->
+          <ValidationObserver v-slot="{ handleSubmit }" v-else>
+            <!-- start:User Edit Form -->
+            <form @submit.prevent="handleSubmit(updateUser)">
+              <!-- start:Profile Image -->
+              <div class="row mb-4">
+                <div class="col-12">
+                  <label class="form-label">
+                    <div class="d-flex justify-content-center gap-1">
+                      <i
+                        class="ri-image-fill text-primary text-gradient d-block-inline"
+                      ></i>
+                      <span> Profile Image </span>
+                    </div>
                   </label>
                 </div>
-
-                <!-- file input, hidden -->
-                <input
-                  type="file"
-                  accept="image/jpeg, image/png, image/jpg"
-                  class="form-control d-none"
-                  id="profileImage"
-                  @change="handleProfileImage"
-                />
-              </div>
-              <div class="col-12">
-                <div class="mt-3 profile-help-text text-black-50">
-                  Allowed file types: png, jpg, jpeg.
-                </div>
-              </div>
-            </div>
-            <!-- end:Profile Image -->
-
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-12">
-                <!-- start:First Name -->
-                <Lazy-DashInput
-                  :label="'First Name'"
-                  :validationRules="{ required: true, min: 3, alpha: true }"
-                  :data.sync="user.first_name"
-                  :type="'text'"
-                  :icon="'ri-user-fill'"
-                />
-                <!-- end:First Name -->
-              </div>
-              <div class="col-lg-6 col-md-6 col-12">
-                <!-- start:Last Name -->
-                <Lazy-DashInput
-                  :label="'Last Name'"
-                  :validationRules="{ required: true, min: 3, alpha: true }"
-                  :data.sync="user.last_name"
-                  :type="'text'"
-                  :icon="'ri-user-fill'"
-                />
-                <!-- end:Last Name -->
-              </div>
-            </div>
-
-            <!-- start:Email -->
-            <Lazy-DashInput
-              :label="'Email'"
-              :validationRules="{ required: true, email: true }"
-              :data.sync="user.email"
-              :type="'text'"
-              :icon="'ri-mail-fill'"
-            />
-            <!-- end:Email -->
-
-            <!-- start:Gender -->
-            <ValidationProvider v-slot="{ errors }" :rules="{ required: true }">
-              <v-select
-                placeholder="Select Gender"
-                :options="genderList"
-                v-model="user.gender"
-              >
-                <!-- for options -->
-                <template #option="{ label, icon }">
+                <div class="col-12">
                   <div
-                    class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                    class="position-relative rounded-5 shadow-2-strong profile-image-size bg-size-cover bg-pos-center"
+                    :lazy-background="user.profile_image"
                   >
-                    <i :class="icon"></i>
-                    <span>{{ label }}</span>
-                  </div>
-                </template>
-
-                <!-- for selected option -->
-                <template #selected-option="{ label, icon }">
-                  <div
-                    class="d-flex justify-content-start align-items-center gap-1"
-                  >
-                    <i class="text-primary text-gradient" :class="icon"></i>
-                    <span>{{ label }}</span>
-                  </div>
-                </template>
-              </v-select>
-              <!-- Validation Errors -->
-              <div
-                class="text-danger transition-all-ease-out-sine"
-                :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-              >
-                {{ errors[0] }}
-              </div>
-            </ValidationProvider>
-            <!-- end:Gender -->
-
-            <!-- start:Role Checkbox -->
-            <div class="row justify-content-center g-3 pb-4">
-              <div class="col-12">
-                <label class="form-label">
-                  <div class="d-flex justify-content-center gap-1">
-                    <i
-                      class="ri-user-4-fill text-primary text-gradient d-block-inline"
-                    ></i>
-                    <span> Roles </span>
-                    <a
-                      tabindex="0"
-                      class="ripple"
+                    <!-- profile image, reset -->
+                    <span
+                      class="position-absolute top-0 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size ripple"
+                      data-mdb-ripple-radius="40"
                       data-mdb-ripple-unbound="true"
+                      data-mdb-ripple-centered="true"
+                      data-mdb-ripple-color="primary"
+                      data-mdb-toggle="tooltip"
+                      data-mdb-placement="bottom"
+                      title="Remove Profile Image"
+                      @click="removeProfileImage"
+                    >
+                      <i class="ri-close-line text-danger"></i>
+                    </span>
+                    <!-- profile image, select -->
+                    <label
+                      class="position-absolute top-100 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size ripple"
                       data-mdb-ripple-radius="40"
                       data-mdb-ripple-color="primary"
-                      role="button"
-                      data-mdb-toggle="popover"
-                      data-mdb-html="true"
-                      data-mdb-trigger="focus"
-                      data-mdb-content="Select a role to assign to the user.<br/>Can be multiple."
+                      data-mdb-ripple-unbound="true"
+                      data-mdb-ripple-centered="true"
+                      for="profileImage"
+                      data-mdb-toggle="tooltip"
+                      data-mdb-placement="bottom"
+                      title="Select Profile Image"
                     >
-                      <i class="ri-information-line text-danger"></i>
-                    </a>
+                      <i class="ri-pencil-fill text-primary"></i>
+                    </label>
                   </div>
-                </label>
+                  <!-- file input, hidden -->
+                  <input
+                    type="file"
+                    accept="image/jpeg, image/png, image/jpg"
+                    class="form-control d-none"
+                    id="profileImage"
+                    @change="handleProfileImage"
+                  />
+                </div>
+                <div class="col-12">
+                  <div class="mt-3 profile-help-text text-black-50">
+                    Allowed file types: png, jpg, jpeg.
+                  </div>
+                </div>
               </div>
-
-              <!-- start:Admin Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="admin"
-                >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-danger shadow-3-strong text-white':
-                        user.is_admin,
-                      'border-danger text-danger text-gradient bg-white fw-bolder':
-                        !user.is_admin,
+              <!-- end:Profile Image -->
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-12">
+                  <!-- start:First Name -->
+                  <Lazy-DashInput
+                    :label="'First Name'"
+                    :validationRules="{ required: true, min: 3, alpha: true }"
+                    :data.sync="user.first_name"
+                    :type="'text'"
+                    :icon="'ri-user-fill'"
+                  />
+                  <!-- end:First Name -->
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                  <!-- start:Last Name -->
+                  <Lazy-DashInput
+                    :label="'Last Name'"
+                    :validationRules="{ required: true, min: 3, alpha: true }"
+                    :data.sync="user.last_name"
+                    :type="'text'"
+                    :icon="'ri-user-fill'"
+                  />
+                  <!-- end:Last Name -->
+                </div>
+              </div>
+              <div class="row">
+                <!-- start:Email -->
+                <div class="col-md-6 col-12">
+                  <Lazy-DashInput
+                    :label="'Email'"
+                    :validationRules="{ required: true, email: true }"
+                    :data.sync="user.email"
+                    :type="'text'"
+                    :icon="'ri-mail-fill'"
+                  />
+                </div>
+                <!-- end:Email -->
+                <!-- start:mobile -->
+                <div class="col">
+                  <Lazy-DashInput
+                    :label="'Mobile'"
+                    :validationRules="{
+                      required: true,
+                      min: 10,
+                      max: 13,
+                      phone: true,
                     }"
-                  >
-                    <i class="ri-shield-user-fill"></i>
-                    <span>Admin</span>
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="admin"
-                  v-model="user.is_admin"
-                />
+                    :data.sync="user.mobile"
+                    :type="'tel'"
+                    :icon="'ri-phone-fill'"
+                    isRequired
+                  />
+                </div>
+                <!-- end:mobile -->
               </div>
-              <!-- end:Admin Check -->
-
-              <!-- start:Principal Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
+              <div class="row">
+                <!-- start:Gender -->
+                <div class="col-md-6 col-12">
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    :rules="{ required: true }"
+                  >
+                    <v-select
+                      placeholder="Select Gender"
+                      :options="genderList"
+                      v-model="user.gender"
+                    >
+                      <!-- for options -->
+                      <template #option="{ label, icon }">
+                        <div
+                          class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                        >
+                          <i :class="icon"></i>
+                          <span>{{ label }}</span>
+                        </div>
+                      </template>
+                      <!-- for selected option -->
+                      <template #selected-option="{ label, icon }">
+                        <div
+                          class="d-flex justify-content-start align-items-center gap-1"
+                        >
+                          <i
+                            class="text-primary text-gradient"
+                            :class="icon"
+                          ></i>
+                          <span>{{ label }}</span>
+                        </div>
+                      </template>
+                    </v-select>
+                    <!-- Validation Errors -->
+                    <div
+                      class="text-danger transition-all-ease-out-sine"
+                      :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                    >
+                      {{ errors[0] }}
+                    </div>
+                  </ValidationProvider>
+                </div>
+                <!-- end:Gender -->
+                <!-- start:District -->
+                <div class="col">
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    :rules="{ required: true }"
+                  >
+                    <v-select
+                      placeholder="Select District"
+                      :options="districtList"
+                      v-model="user.district"
+                    >
+                    </v-select>
+                    <!-- Validation Errors -->
+                    <div
+                      class="text-danger transition-all-ease-out-sine"
+                      :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                    >
+                      {{ errors[0] }}
+                    </div>
+                  </ValidationProvider>
+                </div>
+                <!-- end:District-->
+              </div>
+              <!-- start:Address -->
+              <ValidationProvider
+                v-slot="{ errors }"
+                :rules="{
+                  required: true,
+                  min: 5,
+                }"
               >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="principal"
+                <div class="form-outline">
+                  <textarea
+                    class="form-control"
+                    rows="4"
+                    v-model="user.address"
+                  ></textarea>
+                  <label class="form-label required">
+                    <i class="ri-map-pin-2-fill text-primary text-gradient"></i>
+                    <span>Address</span>
+                  </label>
+                </div>
+                <!-- Valdation Errors -->
+                <div
+                  class="text-danger transition-all-ease-out-sine"
+                  :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
                 >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-info text-white shadow-3-strong':
-                        user.is_principal,
-                      'border-info text-info text-gradient bg-white fw-bolder':
-                        !user.is_principal,
-                    }"
-                  >
-                    <i class="ri-admin-fill"></i>
-                    Principal
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="principal"
-                  v-model="user.is_principal"
-                />
-              </div>
-              <!-- end:Principal Check -->
-
-              <!-- start:HOD Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="hod"
+                  {{ errors[0] }}
+                </div>
+              </ValidationProvider>
+              <!-- end:Address -->
+              <!-- start:Role Checkbox -->
+              <div class="row justify-content-center g-3 pb-4">
+                <div class="col-12">
+                  <label class="form-label">
+                    <div class="d-flex justify-content-center gap-1">
+                      <i
+                        class="ri-user-4-fill text-primary text-gradient d-block-inline"
+                      ></i>
+                      <span> Roles </span>
+                      <a
+                        tabindex="0"
+                        class="ripple"
+                        data-mdb-ripple-unbound="true"
+                        data-mdb-ripple-radius="40"
+                        data-mdb-ripple-color="primary"
+                        role="button"
+                        data-mdb-toggle="popover"
+                        data-mdb-html="true"
+                        data-mdb-trigger="focus"
+                        data-mdb-content="Select a role to assign to the user.<br/>Can be multiple."
+                      >
+                        <i class="ri-information-line text-danger"></i>
+                      </a>
+                    </div>
+                  </label>
+                </div>
+                <!-- start:Admin Check -->
+                <div
+                  class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
                 >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-primary text-white shadow-3-strong':
-                        user.is_hod,
-                      'border-primary text-primary text-gradient bg-white fw-bolder':
-                        !user.is_hod,
-                    }"
+                  <label
+                    class="form-check-label ripple"
+                    data-mdb-ripple-unbound="true"
+                    data-mdb-ripple-radius="40"
+                    data-mdb-ripple-color="primary"
+                    for="admin"
                   >
-                    <i class="ri-user-star-fill"></i>
-                    HOD
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="hod"
-                  v-model="user.is_hod"
-                />
-              </div>
-              <!-- end:HOD Check -->
-
-              <!-- start:Teacher Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="teacher"
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
+                      :class="{
+                        'border-transparent bg-gradient-danger shadow-3-strong text-white':
+                          user.is_admin,
+                        'border-danger text-danger text-gradient bg-white fw-bolder':
+                          !user.is_admin,
+                      }"
+                    >
+                      <i class="ri-shield-user-fill"></i>
+                      <span>Admin</span>
+                    </div>
+                  </label>
+                  <input
+                    class="form-check-input me-2 d-none"
+                    type="checkbox"
+                    id="admin"
+                    v-model="user.is_admin"
+                  />
+                </div>
+                <!-- end:Admin Check -->
+                <!-- start:Principal Check -->
+                <div
+                  class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
                 >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-warning text-white shadow-3-strong':
-                        user.is_teacher,
-                      'border-warning text-warning text-gradient bg-white fw-bolder':
-                        !user.is_teacher,
-                    }"
+                  <label
+                    class="form-check-label ripple"
+                    data-mdb-ripple-unbound="true"
+                    data-mdb-ripple-radius="40"
+                    data-mdb-ripple-color="primary"
+                    for="principal"
                   >
-                    <i class="ri-user-2-fill"></i>
-                    Teacher
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="teacher"
-                  v-model="user.is_teacher"
-                />
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
+                      :class="{
+                        'border-transparent bg-gradient-info text-white shadow-3-strong':
+                          user.is_principal,
+                        'border-info text-info text-gradient bg-white fw-bolder':
+                          !user.is_principal,
+                      }"
+                    >
+                      <i class="ri-admin-fill"></i>
+                      Principal
+                    </div>
+                  </label>
+                  <input
+                    class="form-check-input me-2 d-none"
+                    type="checkbox"
+                    id="principal"
+                    v-model="user.is_principal"
+                  />
+                </div>
+                <!-- end:Principal Check -->
+                <!-- start:HOD Check -->
+                <div
+                  class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
+                >
+                  <label
+                    class="form-check-label ripple"
+                    data-mdb-ripple-unbound="true"
+                    data-mdb-ripple-radius="40"
+                    data-mdb-ripple-color="primary"
+                    for="hod"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
+                      :class="{
+                        'border-transparent bg-gradient-primary text-white shadow-3-strong':
+                          user.is_hod,
+                        'border-primary text-primary text-gradient bg-white fw-bolder':
+                          !user.is_hod,
+                      }"
+                    >
+                      <i class="ri-user-star-fill"></i>
+                      HOD
+                    </div>
+                  </label>
+                  <input
+                    class="form-check-input me-2 d-none"
+                    type="checkbox"
+                    id="hod"
+                    v-model="user.is_hod"
+                  />
+                </div>
+                <!-- end:HOD Check -->
+                <!-- start:Teacher Check -->
+                <div
+                  class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
+                >
+                  <label
+                    class="form-check-label ripple"
+                    data-mdb-ripple-unbound="true"
+                    data-mdb-ripple-radius="40"
+                    data-mdb-ripple-color="primary"
+                    for="teacher"
+                  >
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
+                      :class="{
+                        'border-transparent bg-gradient-warning text-white shadow-3-strong':
+                          user.is_teacher,
+                        'border-warning text-warning text-gradient bg-white fw-bolder':
+                          !user.is_teacher,
+                      }"
+                    >
+                      <i class="ri-user-2-fill"></i>
+                      Teacher
+                    </div>
+                  </label>
+                  <input
+                    class="form-check-input me-2 d-none"
+                    type="checkbox"
+                    id="teacher"
+                    v-model="user.is_teacher"
+                  />
+                </div>
+                <!-- end:Teacher Check -->
               </div>
-              <!-- end:Teacher Check -->
-            </div>
-            <!-- end:Role Checkbox -->
+              <!-- end:Role Checkbox -->
 
-            <!-- Submit button -->
-            <div class="d-flex justify-content-center">
-              <button
-                type="submit"
-                class="btn bg-gradient-info text-white btn-rounded my-4"
-              >
-                Update User
-              </button>
-            </div>
-          </form>
-          <!-- End:User Edit Form -->
-        </ValidationObserver>
+              <!-- Submit button -->
+              <div class="d-flex justify-content-center">
+                <button
+                  type="submit"
+                  class="btn bg-gradient-info text-white btn-rounded my-4"
+                >
+                  Update User
+                </button>
+              </div>
+            </form>
+            <!-- End:User Edit Form -->
+          </ValidationObserver>
+        </transition>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'DashUserDetail',
   layout: 'dash',
@@ -369,6 +447,9 @@ export default {
         last_name: '',
         email: '',
         gender: '',
+        mobile: '',
+        district: '',
+        address: '',
         is_admin: false,
         is_principal: false,
         is_hod: false,
@@ -387,6 +468,12 @@ export default {
         name: 'Edit',
       },
     ])
+  },
+
+  computed: {
+    ...mapGetters({
+      districtList: 'listDistricts',
+    }),
   },
 
   methods: {
@@ -434,41 +521,39 @@ export default {
         })
       })
     },
+
     async fetchUser() {
       this.loading = true
 
-      const response = await this.$api.user
+      await this.$api.user
         .retrieve(this.$route.params.id)
         .then((response) => {
           this.user = response.data
-          this.user.date_added = this.$moment(this.date_added).format(
-            'Do MMMM YYYY, h:mm:ss a'
-          )
+
+          // find gender in genderList and assign it to user.gender
+          this.genderList.forEach((ele) => {
+            if (ele.label == this.user.gender) {
+              this.user.gender = ele
+            }
+          })
 
           this.error = false
         })
-        .catch((error) =>
-          this.$swal({
-            title: 'Error',
-            icon: 'error',
-            type: 'error',
-            text: `${
-              response.data.detail
-                ? error.response.data.detail
-                : 'An error has occured'
-            }`,
-            confirmButtonText: 'Refresh',
-            showCancelButton: true,
-            cancelButtonText: 'To Dash Home',
-            confirmButtonClass: 'btn btn-info',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.fetchUser()
-            } else if (result.isDismissed) {
-              this.$router.push('/dash')
-            }
-          })
-        )
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.error = true
+
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'User not Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong',
+            })
+          }
+        })
     },
 
     // update user Data
@@ -500,6 +585,9 @@ export default {
           last_name: this.user.last_name,
           email: this.user.email,
           gender: this.user.gender.label,
+          district: this.user.district,
+          address: this.user.address,
+          mobile: this.user.mobile,
           is_active: this.user.is_active,
           is_admin: this.user.is_admin,
           is_principal: this.user.is_principal,
@@ -515,7 +603,7 @@ export default {
           didOpen: () => {
             this.$swal.showLoading()
 
-            const response = this.$api.user
+            this.$api.user
               .update(this.$route.params.id, user)
               .then(() => {
                 this.$swal.hideLoading()
@@ -632,11 +720,10 @@ export default {
   },
 
   mounted() {
-    this.fetchUser()
-      .then(() => {
+    this.fetchUser().then(() => {
+      if (!this.error) {
         this.loading = false
-      })
-      .then(() => {
+
         // initialize form elements
         document.querySelectorAll('.form-outline').forEach((formOutline) => {
           new this.$mdb.Input(formOutline).init()
@@ -655,7 +742,8 @@ export default {
           .forEach((tooltip) => {
             new this.$mdb.Tooltip(tooltip)
           })
-      })
+      }
+    })
   },
 }
 </script>
