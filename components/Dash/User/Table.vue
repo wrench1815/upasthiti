@@ -68,10 +68,16 @@
             <td>
               <div class="text-dark mb-0">
                 <!-- email -->
-                <div>{{ user.email ? user.email : '----' }}</div>
+                <div class="d-flex justify-content-start gap-1">
+                  <i class="ri-mail-fill text-primary fs-6"></i
+                  >{{ user.email ? user.email : '----' }}
+                </div>
 
                 <!-- mobile -->
-                <div>{{ user.mobile ? user.mobile : '----' }}</div>
+                <div class="d-flex justify-content-start gap-1">
+                  <i class="ri-phone-fill text-primary fs-6"></i
+                  >{{ user.mobile ? user.mobile : '----' }}
+                </div>
               </div>
             </td>
             <!-- end:email -->
