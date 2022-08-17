@@ -6,7 +6,21 @@
         <h3 class="text-secondary text-capitalize">lists all Registerd User</h3>
       </div>
       <div class="card-body">
-        <section class="d-flex justify-content-end">
+        <!-- start:filters and search -->
+        <section
+          class="d-flex align-items-center justify-content-center flex-wrap"
+        >
+          <!-- start:Search -->
+          <div class="me-auto mb-3">
+            <div
+              class="btn btn-floating bg-gradient-primary text-white btn-s d-flex justify-content-center align-items-center"
+            >
+              <i class="ri-search-line ri-lg"></i>
+            </div>
+          </div>
+          <!-- end:Search -->
+
+          <!-- start:Role Filter -->
           <div class="w-10-rem mb-3">
             <v-select
               placeholder="Select Filter"
@@ -15,33 +29,54 @@
               :clearable="false"
               @option:selected="filterUser"
             >
+              <!-- selected -->
+              <template #selected-option="{ label }">
+                <div
+                  class="d-flex justify-content-start align-items-center gap-1"
+                >
+                  <i
+                    class="text-primary text-gradient ri-filter-line mt-n1"
+                  ></i>
+                  <span>{{ label }}</span>
+                </div>
+              </template>
             </v-select>
           </div>
+          <!-- end:Role Filter -->
         </section>
+        <!-- end:filters and search -->
 
-        <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashUserTable
-          v-else
-          :users.sync="users.results"
-          :defaultProfileImage="defaultProfileImage"
-        />
+        <transition name="scale-in" mode="out-in">
+          <Lazy-LoadersTable v-if="loading" />
 
-        <Lazy-UtilsPagination
-          class="mt-4"
-          v-if="!loading"
-          :pagination.sync="users.pagination"
-          @prevPage="onPaginated"
-          @nextPage="onPaginated"
-        />
+          <Lazy-DashUserTable
+            v-else
+            :users.sync="users.results"
+            :defaultProfileImage="defaultProfileImage"
+          />
+        </transition>
+
+        <transition name="scale-in" mode="out-in">
+          <Lazy-UtilsPagination
+            class="mt-4"
+            v-if="!loading"
+            :pagination.sync="users.pagination"
+            @prevPage="onPaginated"
+            @nextPage="onPaginated"
+          />
+        </transition>
 
         <div class="d-flex justify-content-end mt-3">
-          <Lazy-LoadersButton v-if="loading" :rounded="true" />
-          <Lazy-UtilsLinkButton
-            v-if="!loading"
-            :rounded="true"
-            :link="'/dash/user/add'"
-            >Add new User</Lazy-UtilsLinkButton
-          >
+          <transition name="scale-in" mode="out-in">
+            <Lazy-LoadersButton v-if="loading" :rounded="true" />
+
+            <Lazy-UtilsLinkButton
+              v-if="!loading"
+              :rounded="true"
+              :link="'/dash/user/add'"
+              >Add new User</Lazy-UtilsLinkButton
+            >
+          </transition>
         </div>
       </div>
     </div>
