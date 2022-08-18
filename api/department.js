@@ -15,7 +15,8 @@ export default (axios) => ({
   destroy: (id) => axios.delete(`/department/${id}/`),
 
   // list department types
-  typeList: () => axios.get('/department-type/'),
+  typeList: (payload = {}) =>
+    axios.get('/department-type/', { params: payload }),
 
   // create department type
   typeCreate: (depType) => axios.post('/department-type/', depType),
