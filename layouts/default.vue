@@ -1,10 +1,24 @@
 <template>
   <div>
+    <!-- navbar -->
     <Lazy-NavBar />
+
+    <!-- sidebar -->
+    <Lazy-NavBarSideBar />
+
+    <!-- profile modals -->
+    <Lazy-NavBarProfile />
+
     <nuxt />
 
+    <!-- footer -->
     <Lazy-Footer />
+
+    <!-- to top util button -->
     <Lazy-UtilsToTop />
+
+    <!-- Privacy Policy Util -->
+    <Lazy-UtilsPrivacyPolicy />
   </div>
 </template>
 

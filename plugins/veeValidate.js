@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import { extend, ValidationProvider, ValidationObserver } from 'vee-validate'
-import { required, email, min, max, alpha } from 'vee-validate/dist/rules'
+import {
+  required,
+  email,
+  min,
+  max,
+  alpha,
+  numeric,
+} from 'vee-validate/dist/rules'
 
 extend('required', {
   ...required,
@@ -25,6 +32,11 @@ extend('max', {
 extend('alpha', {
   ...alpha,
   message: 'This field must be alphabetic.',
+})
+
+extend('numeric', {
+  ...numeric,
+  message: 'This field must be numeric.',
 })
 
 // must have atleast 1 special character
@@ -69,6 +81,32 @@ extend('capitalize', {
     return /^[A-Z\s]+$/.test(value)
   },
   message: 'This field must be all Capitalized.',
+})
+
+// all letters must be capitalized except numbers
+extend('capitalizeOrNum', {
+  validate: (value) => {
+    return /^[A-Z0-9\s]+$/.test(value)
+  },
+  message: 'This field must be all Capitalized and can have numbers only.',
+})
+
+// must be a phone number with allowed symbol +
+extend('phone', {
+  validate: (value) => {
+    return /^[0-9+]+$/.test(value)
+  },
+  message: 'This field must be a Phone Number.',
+})
+
+// must be a url and start with either http://, https:// or www.
+extend('url', {
+  validate: (value) => {
+    return /^(http:\/\/|https:\/\/|www\.)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(
+      value
+    )
+  },
+  message: 'This field must be a URL.',
 })
 
 Vue.component('ValidationProvider', ValidationProvider)

@@ -6,9 +6,12 @@
         <tr>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">Name</th>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">
-            Email
+            Contact
           </th>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">Role</th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">
+            Address
+          </th>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">
             Date Added
           </th>
@@ -39,7 +42,7 @@
                         ? user.profile_image
                         : defaultProfileImage
                     "
-                    class="avatar rounded-circle shadow-2-strong obj-fit-cover obj-pos-center"
+                    class="avatar rounded-circle shadow obj-fit-cover obj-pos-center"
                     v-lazy-load
                   />
                 </div>
@@ -47,12 +50,14 @@
                 <div class="ms-3">
                   <NuxtLink
                     :to="`/dash/user/detail?id=${user.id}`"
-                    class="fw-bolder mb-1 text-primary"
+                    class="fw-bolder mb-1 text-primary w-10-rem d-inline-block"
                   >
-                    <span class="hover-underline-animation">{{
-                      user.full_name ? user.full_name : '----'
-                    }}</span>
-                    <i class="ri-link"></i>
+                    <span>
+                      <span class="better-underline d-inline">{{
+                        user.full_name ? user.full_name : '----'
+                      }}</span>
+                      <span class="link"></span>
+                    </span>
                   </NuxtLink>
                 </div>
               </div>
@@ -62,7 +67,17 @@
             <!-- start:email -->
             <td>
               <div class="text-dark mb-0">
-                {{ user.email ? user.email : '----' }}
+                <!-- email -->
+                <div class="d-flex justify-content-start gap-1">
+                  <i class="ri-mail-fill text-primary fs-6"></i
+                  >{{ user.email ? user.email : '----' }}
+                </div>
+
+                <!-- mobile -->
+                <div class="d-flex justify-content-start gap-1">
+                  <i class="ri-phone-fill text-primary fs-6"></i
+                  >{{ user.mobile ? user.mobile : '----' }}
+                </div>
               </div>
             </td>
             <!-- end:email -->
@@ -136,6 +151,14 @@
               </div>
             </td>
             <!-- end:Roles -->
+
+            <!-- start:Address -->
+            <td>
+              <p class="text-dark mb-0 text-wrap w-10-rem">
+                {{ user.address ? user.address : '----' }}
+              </p>
+            </td>
+            <!-- end:Address -->
 
             <!-- start:Date Added -->
             <td>

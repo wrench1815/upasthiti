@@ -9,8 +9,13 @@
       <Lazy-DashNavProfile />
 
       <nuxt />
-      <Lazy-UtilsToTop />
       <Lazy-DashFooter />
+
+      <!-- to top button -->
+      <Lazy-UtilsToTop />
+
+      <!-- Privacy Policy Util -->
+      <Lazy-UtilsPrivacyPolicy />
     </main>
   </div>
 </template>

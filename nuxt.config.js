@@ -20,7 +20,7 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -83,6 +83,9 @@ export default {
         loadingClass: 'isLoading',
         loadedClass: 'isLoaded',
         appendClass: 'lazyLoad',
+
+        // Default image must be in the static folder
+        defaultImage: '/white.png',
       },
     ],
   ],
@@ -181,6 +184,10 @@ export default {
 
     // default User Image
     defaultUserImage: process.env.DEFAULT_USER_IMAGE,
+    // default University Image
+    defaultUniversityImage: process.env.DEFAULT_UNIVERSITY_IMAGE,
+    // default College Image
+    defaultCollegeImage: process.env.DEFAULT_COLLEGE_IMAGE,
   },
 
   // custom loading indicator

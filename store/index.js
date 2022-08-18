@@ -1,6 +1,29 @@
 export const state = () => ({
   role: '',
+  districts: [
+    'Anantnag',
+    'Bandipore',
+    'Baramulla',
+    'Budgam',
+    'Doda',
+    'Ganderbal',
+    'Jammu',
+    'Kathua',
+    'Kishtwar',
+    'Kulgam',
+    'Kupwara',
+    'Poonch',
+    'Pulwama',
+    'Rajouri',
+    'Ramban',
+    'Reasi',
+    'Samba',
+    'Shopian',
+    'Srinagar',
+    'Udhampur',
+  ],
   isDash: false,
+  privacyAccepted: false,
 })
 
 // getters
@@ -31,11 +54,28 @@ export const getters = {
       return null
     }
   },
+
+  listDistricts(state) {
+    return state.districts
+  },
+
+  isPrivacyAccepted(state) {
+    return state.privacyAccepted
+  },
 }
 
 // mutations
 export const mutations = {
   setDash(state, isDash) {
     state.isDash = isDash
+  },
+
+  acceptPrivacy(state) {
+    localStorage.setItem('privacyAccepted', true)
+    state.privacyAccepted = localStorage.getItem('privacyAccepted')
+  },
+
+  statusPrivacy(state) {
+    state.privacyAccepted = localStorage.getItem('privacyAccepted')
   },
 }
