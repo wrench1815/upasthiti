@@ -356,8 +356,6 @@ export default {
                 this.$swal.hideLoading()
                 this.$swal.close()
 
-                let timerInterval
-
                 this.$swal({
                   title: 'Success',
                   icon: 'success',
@@ -396,10 +394,6 @@ export default {
 
     // get list of HODs of College
     async getHodList() {
-      // this.hodPayload = {
-      //   college: this.department.college.id,
-      //   exclude_college: this.department.college.id,
-      // }
       this.hodPayload.college = this.department.college.id
       this.hodPayload.exclude_college = this.department.college.id
 
@@ -477,14 +471,13 @@ export default {
         .catch((err) => {
           this.error = true
 
+          this.loading.college = true
+          this.collegeList = {
+            pagination: {
+              count: 0,
+            },
+          }
           if (err.response.status == 404) {
-            this.loading.college = true
-            this.collegeList = {
-              pagination: {
-                count: 0,
-              },
-            }
-
             this.$nuxt.error({
               statusCode: 404,
               message: 'Page not Found',
