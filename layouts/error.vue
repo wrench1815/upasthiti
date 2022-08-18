@@ -244,6 +244,17 @@ export default {
       return process.env.NODE_ENV === 'development'
     },
   },
+
+  created() {
+    // if layout is dash, set error to null
+    if (this.$nuxt.layoutName == 'dash') {
+      this.$store.commit('breadCrumbs/addBreadCrumb', [
+        {
+          name: 'Error',
+        },
+      ])
+    }
+  },
 }
 </script>
 
