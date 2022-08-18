@@ -35,7 +35,7 @@
               <div class="col-12">
                 <div
                   class="position-relative rounded-5 shadow-2-strong logo-size bg-size-cover bg-pos-center"
-                  :lazy-background="university.logo"
+                  :style="`background-image: url(${university.logo})`"
                 >
                   <!-- university logo, reset -->
                   <span

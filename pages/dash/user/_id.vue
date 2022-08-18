@@ -42,7 +42,7 @@
                 <div class="col-12">
                   <div
                     class="position-relative rounded-5 shadow-2-strong profile-image-size bg-size-cover bg-pos-center"
-                    :lazy-background="user.profile_image"
+                    :style="`background-image: url(${user.profile_image})`"
                   >
                     <!-- profile image, reset -->
                     <span
