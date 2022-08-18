@@ -45,6 +45,15 @@
             </span>
           </div>
           <!-- end:Mobile -->
+
+          <!-- start:District -->
+          <div>
+            <label class="text-muted fw-bold-500">District:</label>
+            <span class="fw-bold-600 text-dark fs-6">
+              {{ district }}
+            </span>
+          </div>
+          <!-- end:District -->
         </div>
       </div>
     </div>
@@ -79,6 +88,10 @@ export default {
 
     mobile() {
       return this.hod.mobile ? this.hod.mobile : '----'
+    },
+
+    district() {
+      return this.hod.district ? this.hod.district : '----'
     },
   },
 }
