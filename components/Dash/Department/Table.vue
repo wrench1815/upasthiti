@@ -125,13 +125,21 @@
             <!-- start:Actions -->
             <td>
               <div
-                class="d-flex justify-content-center justify-content-lg-start align-items-center gap-2"
+                class="d-flex justify-content-center align-items-center gap-2"
               >
+                <!-- detail -->
+                <NuxtLink
+                  :to="`/dash/department/detail?id=${department.id}`"
+                  class="btn btn-floating bg-gradient-success text-white btn-sm d-flex justify-content-center align-items-center"
+                  ><i class="ri-eye-fill ri-lg"></i
+                ></NuxtLink>
+                <!-- edit -->
                 <NuxtLink
                   :to="`/dash/department/${department.id}`"
                   class="btn btn-floating bg-gradient-info text-white btn-sm d-flex justify-content-center align-items-center"
                   ><i class="ri-edit-2-fill ri-lg"></i
                 ></NuxtLink>
+                <!-- destroy -->
                 <a
                   @click="deleteDepartment(department.id)"
                   class="btn btn-floating bg-gradient-danger text-white btn-sm d-flex justify-content-center align-items-center"
