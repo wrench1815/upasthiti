@@ -67,7 +67,7 @@
 
                 <!-- Name -->
                 <div class="ms-3">
-                  <p class="fw-bold mb-1 text-dark text-nowrap">
+                  <p class="fw-bold mb-0 text-dark text-nowrap">
                     {{
                       department.hod.full_name
                         ? department.hod.full_name
@@ -81,8 +81,31 @@
 
             <!-- start:Department College -->
             <td>
-              <div class="text-dark mb-0 w-10-rem text-wrap">
-                {{ department.college ? department.college.name : '----' }}
+              <div class="d-flex align-items-center">
+                <!-- Logo -->
+                <div class="avatar rounded-circle">
+                  <img
+                    :data-src="`${department.college.logo}`"
+                    class="avatar rounded-circle obj-pos-center obj-fit-cover shadow"
+                    :alt="`${department.college.name}'s logo`"
+                    v-lazy-load
+                  />
+                </div>
+
+                <!-- Name -->
+                <div class="ms-3">
+                  <div
+                    class="fw-bold mb-0 text-dark w-10-rem text-wrap d-inline-block"
+                  >
+                    <span class="d-inline">
+                      {{
+                        department.college.name
+                          ? department.college.name
+                          : '----'
+                      }}
+                    </span>
+                  </div>
+                </div>
               </div>
             </td>
             <!-- end:Department College -->
@@ -102,13 +125,21 @@
             <!-- start:Actions -->
             <td>
               <div
-                class="d-flex justify-content-center justify-content-lg-start align-items-center gap-2"
+                class="d-flex justify-content-center align-items-center gap-2"
               >
+                <!-- detail -->
+                <NuxtLink
+                  :to="`/dash/department/detail?id=${department.id}`"
+                  class="btn btn-floating bg-gradient-success text-white btn-sm d-flex justify-content-center align-items-center"
+                  ><i class="ri-eye-fill ri-lg"></i
+                ></NuxtLink>
+                <!-- edit -->
                 <NuxtLink
                   :to="`/dash/department/${department.id}`"
                   class="btn btn-floating bg-gradient-info text-white btn-sm d-flex justify-content-center align-items-center"
                   ><i class="ri-edit-2-fill ri-lg"></i
                 ></NuxtLink>
+                <!-- destroy -->
                 <a
                   @click="deleteDepartment(department.id)"
                   class="btn btn-floating bg-gradient-danger text-white btn-sm d-flex justify-content-center align-items-center"

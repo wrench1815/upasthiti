@@ -83,6 +83,9 @@ export default {
         loadingClass: 'isLoading',
         loadedClass: 'isLoaded',
         appendClass: 'lazyLoad',
+
+        // Default image must be in the static folder
+        defaultImage: '/white.png',
       },
     ],
   ],

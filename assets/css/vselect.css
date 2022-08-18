@@ -80,3 +80,8 @@
 .vs__dropdown-menu {
   --vs-border-width: 0.125rem !important;
 }
+
+/* disable transition for options */
+.vs__dropdown-menu * {
+  transition: none !important;
+}
