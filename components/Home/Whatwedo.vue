@@ -8,7 +8,7 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12 d-flex flex-column">
           <img
             data-src="~/assets/svg/take_attendance.svg"
-            class="img-fluid ps-md-5 justify-content-center vh-25"
+            class="img-fluid vh-25"
             alt="download attendance"
             v-lazy-load
           />
@@ -21,7 +21,7 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12 d-flex flex-column">
           <img
             data-src="~/assets/svg/view.svg"
-            class="img-fluid ps-md-5 justify-content-center vh-25"
+            class="img-fluid vh-25"
             alt="download attendance"
             v-lazy-load
           />
@@ -35,7 +35,7 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12 d-flex flex-column">
           <img
             data-src="~/assets/svg/reports.svg"
-            class="img-fluid ps-md-5 justify-content-center vh-25"
+            class="img-fluid vh-25"
             alt="download attendance"
             v-lazy-load
           />
@@ -49,7 +49,7 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-12 d-flex flex-column">
           <img
             data-src="~/assets/svg/download.svg"
-            class="img-fluid ps-md-5 justify-content-center vh-25"
+            class="img-fluid vh-25"
             alt="download attendance"
             v-lazy-load
           />
