@@ -88,6 +88,9 @@ export default {
         defaultImage: '/white.png',
       },
     ],
+
+    // nuxt-precompress: https://github.com/frenchrabbit/nuxt-precompress
+    'nuxt-precompress',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
