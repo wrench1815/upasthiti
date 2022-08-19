@@ -10,8 +10,8 @@
       >
         <img
           class="avatar obj-fit-cover rounded-circle shadow-3-strong"
-          data-src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
-          alt=""
+          data-src="/favicon.png"
+          alt="Site Logo"
           v-lazy-load
         />
         <h4 class="align-self-end">Upasthiti</h4>
@@ -52,13 +52,16 @@
         >
           <div>
             <img
-              class="avatar avatar- rounded-circle obj-fit-cover shadow"
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+              class="avatar rounded-circle obj-fit-cover shadow"
+              :data-src="
+                isAuthenticated ? loggedInUser.profile_image : userDefaultImage
+              "
               height="2rem"
               width="2rem"
               :alt="`${
                 isAuthenticated ? loggedInUser.short_name : ''
               }'s profile image`"
+              v-lazy-load
             />
           </div>
           <div
@@ -107,7 +110,7 @@ export default {
         {
           name: 'College',
           url: '/dash/college',
-          icon: 'ri-building-fill',
+          icon: 'ri-government-fill',
         },
         {
           name: 'Department Type',
@@ -135,6 +138,9 @@ export default {
 
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
+    userDefaultImage() {
+      return this.$config.defaultUserImage
+    },
   },
 
   mounted() {

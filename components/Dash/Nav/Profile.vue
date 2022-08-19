@@ -20,7 +20,9 @@
             >
               <img
                 class="avatar avatar-lg rounded-circle obj-fit-cover shadow"
-                data-src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+                :data-src="
+                  isAuthenticated ? user.profile_image : userDefaultImage
+                "
                 :alt="`${
                   isAuthenticated ? user.first_name : ''
                 }'s profile image`"
@@ -55,7 +57,7 @@
                   to="/dash/user"
                   class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
                 >
-                  <i class="ri-profile-line"></i>Profile
+                  <i class="ri-profile-fill"></i>Profile
                 </NuxtLink>
               </li>
               <!-- end:Profile -->
@@ -66,7 +68,7 @@
                   class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
                   @click="toMainSite"
                 >
-                  <i class="ri-home-2-line"></i>Main Site
+                  <i class="ri-home-2-fill"></i>Main Site
                 </div>
               </li>
               <!-- end:Main Site -->
@@ -118,6 +120,9 @@ export default {
       role: 'loggedInUserRole',
       isAuthenticated: 'isAuthenticated',
     }),
+    userDefaultImage() {
+      return this.$config.defaultUserImage
+    },
   },
 
   methods: {
