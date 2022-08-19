@@ -23,130 +23,102 @@
         </div>
       </div>
       <!-- start:User Info -->
-      <div class="card-body" v-else>
+      <div class="card-body">
         <!-- start:User Info Card -->
-        <div
-          class="mb-3 shadow-5 d-flex card-header gap-3 rounded-5 align-items-center flex-column flex-md-row"
-        >
-          <div>
-            <img
-              class="avatar avatar-xxl obj-fit-cover shadow-1-strong"
-              :data-src="
-                user.profile_image ? user.profile_image : defaultProfileImage
-              "
-              :alt="`${user.full_name}'s Profile Image`"
-              v-lazy-load
-            />
-          </div>
-          <div
-            class="d-flex flex-column justify-content-center align-content-start text-break"
-          >
-            <div class="fw-bold fs-5 text-primary text-gradient">
-              {{ user.full_name ? user.full_name : '----' }}
-            </div>
-            <div class="text-muted small d-flex gap-1">
-              <i class="ri-mail-fill text-primary text-gradient"></i>
-              {{ user.email ? user.email : '----' }}
-            </div>
-            <div class="text-muted small d-flex gap-1">
-              <i class="ri-phone-fill text-primary text-gradient"></i>
-              <!-- {{ college.institute_mobile }} -->
-              Role
-            </div>
-          </div>
-        </div>
+        <Lazy-DashUserDetailUCard />
         <!-- end:user Info Card -->
-
-        <!-- start:College Alias -->
-        <div class="row mb-3">
-          <div class="col-12 col-md-4 mt-lg-4 mt-sm-4 d-flex">
-            <label class="text-muted fw-bold-500">Institute Alias</label>
-          </div>
-          <div class="col d-flex mt-lg-4 mt-sm-4">
-            <span class="fw-bold-600 fs-6">
-              <!-- {{
-              college.institute_alias_name
-            }} -->
-            </span>
-          </div>
-        </div>
-        <!-- end:College Alias -->
-
-        <!-- start:College Principal  -->
-        <div class="row mb-3">
-          <div class="col-12 col-md-4 d-flex">
-            <label class="text-muted fw-bold-500">Institute Principal</label>
-          </div>
-          <div class="col d-flex">
-            <span class="fw-bold-600 fs-6">
-              <!-- {{ principal.first_name }} {{ principal.last_name }} -->
-            </span>
-          </div>
-        </div>
-        <!-- end:College Principal -->
-
-        <!-- start:College Website -->
-        <div class="row mb-3">
-          <div class="col-12 col-md-4 d-flex">
-            <label class="text-muted fw-bold-500">Institute Website</label>
-          </div>
-          <div class="col d-flex">
-            <!-- <a
-              :href="college.institute_website"
-              target="_blank"
-              class="text-gradient text-primary"
-              >
-              {{ college.institute_website }}
-              <i class="ri-external-link-fill"></i
-            ></a> -->
-          </div>
-        </div>
-        <!-- end:College Website -->
-
-        <!-- start:College Address -->
-        <div class="row mb-3">
-          <div class="col-12 col-md-4 d-flex">
-            <label class="text-muted fw-bold-500">Institute Address</label>
-          </div>
-          <div class="col d-flex">
-            <span class="fw-bold-600 fs-6">
-              <!-- {{
-              college.institute_address
-            }} -->
-            </span>
-          </div>
-        </div>
-        <!-- end:College Address -->
       </div>
       <!-- end:User Info -->
     </div>
-    <!-- start:College -->
+    <!-- start:Principal -->
     <div class="card mt-4">
       <div class="card-header">
-        <h2 class="text-primary text-gradient">College</h2>
+        <h2 class="text-primary text-gradient">Principal</h2>
       </div>
-
-      <h1 class="d-flex justify-content-center">To-Do</h1>
+      <!-- <DashUserDetailCard /> -->
+      <div class="card-body">
+        <!-- start:Principal Card -->
+        <div class="row">
+          <div
+            class="col-sm-6 col-lg-6 col-md-6 col-12"
+            v-for="item in 1"
+            :key="item"
+          >
+            <Lazy-DashUserDetailPrincipalCard />
+          </div>
+        </div>
+        <!-- end:Principal Card -->
+        <!-- start:College Card -->
+        <h3 class="text-primary text-gradient mt-5 mb-4">College</h3>
+        <Lazy-DashUserDetailCollegeCard />
+        <!-- end:College Card -->
+      </div>
     </div>
-    <!-- end:College  -->
-    <!-- start:Department -->
+    <!-- end:Principal  -->
+    <!-- start:HOD -->
     <div class="card mt-4">
       <div class="card-header">
-        <h2 class="text-primary text-gradient">Department</h2>
+        <h2 class="text-primary text-gradient">HOD</h2>
       </div>
-
-      <h1 class="d-flex justify-content-center">To-Do</h1>
+      <div class="card-body">
+        <!-- start:HOD info Card -->
+        <div class="row">
+          <div
+            class="col-sm-6 col-lg-6 col-md-6 col-12"
+            v-for="item in 1"
+            :key="item"
+          >
+            <Lazy-DashUserDetailHodCard />
+          </div>
+        </div>
+        <!-- end:HOD info Card -->
+        <!-- start:College Card -->
+        <h3 class="text-primary text-gradient mt-5 mb-4">College</h3>
+        <Lazy-DashUserDetailCollegeCard />
+        <!-- end:College Card -->
+      </div>
+      <div class="row mx-2">
+        <div
+          class="col-sm-6 col-lg-4 col-md-6 col-12"
+          v-for="item in 1"
+          :key="item"
+        >
+          <h3 class="text-primary text-gradient mt-5 mb-4">Department</h3>
+          <Lazy-DashUserDetailDeptCard />
+        </div>
+      </div>
     </div>
-    <!-- end:Department  -->
-    <!-- start:Classes -->
+    <!-- end:HOD -->
+    <!-- start:Teacher-->
     <div class="card mt-4">
       <div class="card-header">
-        <h2 class="text-primary text-gradient">Classes</h2>
+        <h2 class="text-primary text-gradient">Teacher</h2>
       </div>
+      <div class="card-body">
+        <!-- start:Teacher info Card -->
 
-      <h1 class="d-flex justify-content-center">To-Do</h1>
+        <div class="row">
+          <div
+            class="col-sm-6 col-lg-6 col-md-6 col-12"
+            v-for="item in 1"
+            :key="item"
+          >
+            <Lazy-DashUserDetailHodCard />
+          </div>
+        </div>
+        <!-- end:Teacher info Card -->
+        <!-- start:College Card -->
+        <h3 class="text-primary text-gradient mt-5 mb-4">College</h3>
+        <Lazy-DashUserDetailCollegeCard />
+        <!-- end:College Card -->
+        <!-- start:Course Card -->
+        <div>
+          <h3>Course To-do</h3>
+        </div>
+        <!-- end:Course Card -->
+      </div>
     </div>
-    <!-- end:Classes-->
+    <!-- end:Teacher -->
   </section>
 </template>
 
