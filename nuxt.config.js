@@ -54,6 +54,9 @@ export default {
 
     // @nuxtjs/web-vitals: https://github.com/nuxt-community/web-vitals-module
     '@nuxtjs/web-vitals',
+
+    // nuxt-webpack-optimisations: https://github.com/harlan-zw/nuxt-webpack-optimisations
+    'nuxt-webpack-optimisations',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -88,6 +91,12 @@ export default {
         defaultImage: '/white.png',
       },
     ],
+
+    // nuxt-precompress: https://github.com/frenchrabbit/nuxt-precompress
+    'nuxt-precompress',
+
+    // '@nuxtjs/sitemap': https://sitemap.nuxtjs.org
+    '@nuxtjs/sitemap',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -169,11 +178,21 @@ export default {
     disabled: false,
   },
 
+  webpackOptimisations: {
+    features: {
+      // enable risky optimisations in dev only
+      hardSourcePlugin: process.env.NODE_ENV === 'development',
+      parallelPlugin: process.env.NODE_ENV === 'development',
+    },
+  },
+
+  sitemap: {
+    hostname: process.env.BASE_URL,
+    exclude: ['/dash/**', '/login'],
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    parallel: process.env.NODE_ENV == 'development',
-    hardSource: process.env.NODE_ENV == 'development',
-    cache: process.env.NODE_ENV == 'development',
     transpile: ['vee-validate/dist/rules'],
   },
 
