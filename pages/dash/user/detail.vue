@@ -22,11 +22,49 @@
           </div>
         </div>
       </div>
+
       <!-- start:User Info -->
       <div class="card-body">
         <!-- start:User Info Card -->
-        <Lazy-DashUserDetailUCard />
+        <Lazy-DashUserDetailUCard :user="user" />
         <!-- end:user Info Card -->
+
+        <section>
+          <!-- start:User District -->
+          <div class="row mb-3">
+            <div class="col-12 col-md-4 mt-lg-4 mt-sm-4 d-flex">
+              <label class="text-muted fw-bold-500">District</label>
+            </div>
+            <div class="col d-flex mt-lg-4 mt-sm-4">
+              <span class="fw-bold-600 fs-6">{{ user.district }}</span>
+            </div>
+          </div>
+          <!-- end:User District -->
+
+          <!-- start:User Address -->
+          <div class="row mb-3">
+            <div class="col-12 col-md-4 d-flex">
+              <label class="text-muted fw-bold-500"> Address</label>
+            </div>
+            <div class="col d-flex">
+              <span class="fw-bold-600 fs-6">{{ user.address }}</span>
+            </div>
+          </div>
+          <!-- end:User Address -->
+
+          <!-- start:User Gender -->
+          <div class="row mb-3">
+            <div class="col-12 col-md-4 d-flex">
+              <label class="text-muted fw-bold-500">Gender</label>
+            </div>
+            <div class="col d-flex">
+              <span class="fw-bold-600 fs-6">
+                <i :class="genderIcon"></i> {{ user.gender }}</span
+              >
+            </div>
+          </div>
+          <!-- end:User Gender -->
+        </section>
       </div>
       <!-- end:User Info -->
     </div>
@@ -55,6 +93,7 @@
       </div>
     </div>
     <!-- end:Principal  -->
+
     <!-- start:HOD -->
     <div class="card mt-4">
       <div class="card-header">
@@ -72,11 +111,13 @@
           </div>
         </div>
         <!-- end:HOD info Card -->
+
         <!-- start:College Card -->
         <h3 class="text-primary text-gradient mt-5 mb-4">College</h3>
         <Lazy-DashUserDetailCollegeCard />
         <!-- end:College Card -->
       </div>
+
       <div class="row mx-2">
         <div
           class="col-sm-6 col-lg-4 col-md-6 col-12"
@@ -89,6 +130,7 @@
       </div>
     </div>
     <!-- end:HOD -->
+
     <!-- start:Teacher-->
     <div class="card mt-4">
       <div class="card-header">
@@ -107,10 +149,12 @@
           </div>
         </div>
         <!-- end:Teacher info Card -->
+
         <!-- start:College Card -->
         <h3 class="text-primary text-gradient mt-5 mb-4">College</h3>
         <Lazy-DashUserDetailCollegeCard />
         <!-- end:College Card -->
+
         <!-- start:Course Card -->
         <div>
           <h3>Course To-do</h3>
@@ -131,7 +175,7 @@ export default {
     return {
       user: {},
       loading: true,
-      defaultProfileImage: '',
+
       error: true,
     }
   },
@@ -148,13 +192,27 @@ export default {
     ])
   },
 
+  computed: {
+    genderIcon(gen) {
+      if (gen == 'Male') {
+        // if Male
+        return 'ri-men-fill'
+      } else if (gen == 'Female') {
+        // if Female
+        return 'ri-women-fill'
+      } else {
+        // if unspecified
+        return 'ri-genderless-fill'
+      }
+    },
+  },
+
   methods: {
     // fetch user by id
-    // populate user object with fetched data
     async getUser() {
-      this.loading = await true
+      this.loading = true
 
-      await this.$api.user
+      return this.$api.user
         .retrieve(this.$route.query.id)
         .then((response) => {
           this.user = response.data
@@ -162,51 +220,28 @@ export default {
           this.error = false
         })
         .catch((error) => {
-          this.$nuxt.error({
-            statusCode: error.response.status,
-            message: error.response.data.message,
-          })
+          this.error = true
 
-          // this.$swal({
-          //   title: 'Error',
-          //   icon: 'error',
-          //   type: 'error',
-          //   text: `${
-          //     error.response.data.detail
-          //       ? error.response.data.detail
-          //       : 'An error has occured'
-          //   }`,
-          //   confirmButtonText: 'Refresh',
-          //   showCancelButton: true,
-          //   cancelButtonText: 'To Dash Home',
-          //   confirmButtonClass: 'btn btn-info',
-          // }).then((result) => {
-          //   if (result.isConfirmed) {
-          //     this.getUser()
-          //   } else if (result.isDismissed) {
-          //     this.$router.push('/dash')
-          //   }
-          // })
+          if (error.response.status == 404) {
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'User not found.',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went wrong.',
+            })
+          }
         })
-    },
-
-    async setDefaults() {
-      return new Promise((resolve, reject) => {
-        this.defaultProfileImage = this.$config.defaultUserImage
-
-        resolve()
-      })
     },
   },
 
   mounted() {
     this.getUser().then(() => {
-      this.setDefaults().then(() => {
-        if (!this.error) {
-          console.log('gonna set loading')
-          this.loading = false
-        }
-      })
+      if (!this.error) {
+        this.loading = false
+      }
     })
   },
 }
