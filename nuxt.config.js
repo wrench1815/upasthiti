@@ -94,6 +94,9 @@ export default {
 
     // nuxt-precompress: https://github.com/frenchrabbit/nuxt-precompress
     'nuxt-precompress',
+
+    // '@nuxtjs/sitemap': https://sitemap.nuxtjs.org
+    '@nuxtjs/sitemap',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -181,6 +184,11 @@ export default {
       hardSourcePlugin: process.env.NODE_ENV === 'development',
       parallelPlugin: process.env.NODE_ENV === 'development',
     },
+  },
+
+  sitemap: {
+    hostname: process.env.BASE_URL,
+    exclude: ['/dash/**', '/login'],
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
