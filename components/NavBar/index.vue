@@ -23,7 +23,7 @@
       <div class="collapse navbar-collapse">
         <!-- start:mid links -->
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-          <li class="nav-item" v-for="item in menuItems">
+          <li class="nav-item" v-for="(item, index) in menuItems" :key="index">
             <nuxt-link
               class="nav-link hover-underline-animation"
               aria-current="page"
