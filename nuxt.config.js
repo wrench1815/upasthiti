@@ -54,6 +54,9 @@ export default {
 
     // @nuxtjs/web-vitals: https://github.com/nuxt-community/web-vitals-module
     '@nuxtjs/web-vitals',
+
+    // nuxt-webpack-optimisations: https://github.com/harlan-zw/nuxt-webpack-optimisations
+    'nuxt-webpack-optimisations',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -172,11 +175,16 @@ export default {
     disabled: false,
   },
 
+  webpackOptimisations: {
+    features: {
+      // enable risky optimisations in dev only
+      hardSourcePlugin: process.env.NODE_ENV === 'development',
+      parallelPlugin: process.env.NODE_ENV === 'development',
+    },
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    parallel: process.env.NODE_ENV == 'development',
-    hardSource: process.env.NODE_ENV == 'development',
-    cache: process.env.NODE_ENV == 'development',
     transpile: ['vee-validate/dist/rules'],
   },
 
