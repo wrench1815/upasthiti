@@ -1,0 +1,406 @@
+{
+  "about-dev-card/image": {
+    "type": "string"
+  },
+  "AboutDevCard/image": {
+    "type": "string"
+  },
+  "about-dev-card/name": {
+    "type": "string"
+  },
+  "AboutDevCard/name": {
+    "type": "string"
+  },
+  "about-dev-card/role": {
+    "type": "string"
+  },
+  "AboutDevCard/role": {
+    "type": "string"
+  },
+  "about-dev-card/email": {
+    "type": "string"
+  },
+  "AboutDevCard/email": {
+    "type": "string"
+  },
+  "about-dev-card/githubUsername": {
+    "type": "string"
+  },
+  "AboutDevCard/githubUsername": {
+    "type": "string"
+  },
+  "about-dev-card/githubName": {
+    "type": "string"
+  },
+  "AboutDevCard/githubName": {
+    "type": "string"
+  },
+  "about-dev-card/linkedinUsername": {
+    "type": "string"
+  },
+  "AboutDevCard/linkedinUsername": {
+    "type": "string"
+  },
+  "about-dev-card/linkedinName": {
+    "type": "string"
+  },
+  "AboutDevCard/linkedinName": {
+    "type": "string"
+  },
+  "dash-college-detail-card-1/college": {
+    "type": "object"
+  },
+  "DashCollegeDetailCard1/college": {
+    "type": "object"
+  },
+  "dash-college-detail-card-1/isCollege": {
+    "type": "boolean"
+  },
+  "DashCollegeDetailCard1/isCollege": {
+    "type": "boolean"
+  },
+  "dash-college-detail-card-1/isUniversity": {
+    "type": "boolean"
+  },
+  "DashCollegeDetailCard1/isUniversity": {
+    "type": "boolean"
+  },
+  "dash-college-detail-hod-card/hod": {
+    "type": "object"
+  },
+  "DashCollegeDetailHodCard/hod": {
+    "type": "object"
+  },
+  "dash-college-detail-principal-card/principal": {
+    "type": "object"
+  },
+  "DashCollegeDetailPrincipalCard/principal": {
+    "type": "object"
+  },
+  "dash-college-table/colleges": {
+    "type": "array"
+  },
+  "DashCollegeTable/colleges": {
+    "type": "array"
+  },
+  "dash-department-detail-card-1/department": {
+    "type": "object"
+  },
+  "DashDepartmentDetailCard1/department": {
+    "type": "object"
+  },
+  "dash-department-detail-card-1/isDepartment": {
+    "type": "boolean"
+  },
+  "DashDepartmentDetailCard1/isDepartment": {
+    "type": "boolean"
+  },
+  "dash-department-detail-card-1/college": {
+    "type": "object"
+  },
+  "DashDepartmentDetailCard1/college": {
+    "type": "object"
+  },
+  "dash-department-detail-card-1/isCollege": {
+    "type": "boolean"
+  },
+  "DashDepartmentDetailCard1/isCollege": {
+    "type": "boolean"
+  },
+  "dash-department-detail-hod-card/hod": {
+    "type": "object"
+  },
+  "DashDepartmentDetailHodCard/hod": {
+    "type": "object"
+  },
+  "dash-department-table/departments": {
+    "type": "array"
+  },
+  "DashDepartmentTable/departments": {
+    "type": "array"
+  },
+  "dash-department-type-table/departmentTypes": {
+    "type": "array"
+  },
+  "DashDepartmentTypeTable/departmentTypes": {
+    "type": "array"
+  },
+  "dash-input/label": {
+    "type": "string"
+  },
+  "DashInput/label": {
+    "type": "string"
+  },
+  "dash-input/validationRules": {
+    "type": "object"
+  },
+  "DashInput/validationRules": {
+    "type": "object"
+  },
+  "dash-input/data": {
+    "type": ""
+  },
+  "DashInput/data": {
+    "type": ""
+  },
+  "dash-input/type": {
+    "type": "string"
+  },
+  "DashInput/type": {
+    "type": "string"
+  },
+  "dash-input/icon": {
+    "type": "string"
+  },
+  "DashInput/icon": {
+    "type": "string"
+  },
+  "dash-input/iconClasses": {
+    "type": "string"
+  },
+  "DashInput/iconClasses": {
+    "type": "string"
+  },
+  "dash-input/isRequired": {
+    "type": "boolean"
+  },
+  "DashInput/isRequired": {
+    "type": "boolean"
+  },
+  "dash-input-alt/label": {
+    "type": "string"
+  },
+  "DashInputAlt/label": {
+    "type": "string"
+  },
+  "dash-input-alt/validationRules": {
+    "type": "object"
+  },
+  "DashInputAlt/validationRules": {
+    "type": "object"
+  },
+  "dash-input-alt/data": {
+    "type": ""
+  },
+  "DashInputAlt/data": {
+    "type": ""
+  },
+  "dash-input-alt/type": {
+    "type": "string"
+  },
+  "DashInputAlt/type": {
+    "type": "string"
+  },
+  "dash-university-table/universities": {
+    "type": "array"
+  },
+  "DashUniversityTable/universities": {
+    "type": "array"
+  },
+  "dash-user-detail-college-card/college": {
+    "type": "object"
+  },
+  "DashUserDetailCollegeCard/college": {
+    "type": "object"
+  },
+  "user-detail-dept/uId": {
+    "type": "number"
+  },
+  "UserDetailDept/uId": {
+    "type": "number"
+  },
+  "dash-user-detail-dept-card/dept": {
+    "type": "object"
+  },
+  "DashUserDetailDeptCard/dept": {
+    "type": "object"
+  },
+  "dash-user-detail-u-card/user": {
+    "type": "object"
+  },
+  "DashUserDetailUCard/user": {
+    "type": "object"
+  },
+  "dash-user-table/users": {
+    "type": "array"
+  },
+  "DashUserTable/users": {
+    "type": "array"
+  },
+  "dash-user-table/defaultProfileImage": {
+    "type": "string"
+  },
+  "DashUserTable/defaultProfileImage": {
+    "type": "string"
+  },
+  "forms-input/inputtype": {
+    "type": "string"
+  },
+  "FormsInput/inputtype": {
+    "type": "string"
+  },
+  "forms-input/idname": {
+    "type": "string"
+  },
+  "FormsInput/idname": {
+    "type": "string"
+  },
+  "forms-input/label": {
+    "type": "string"
+  },
+  "FormsInput/label": {
+    "type": "string"
+  },
+  "forms-input/icon": {
+    "type": "string"
+  },
+  "FormsInput/icon": {
+    "type": "string"
+  },
+  "forms-text-area/idname": {
+    "type": "string"
+  },
+  "FormsTextArea/idname": {
+    "type": "string"
+  },
+  "forms-text-area/label": {
+    "type": "string"
+  },
+  "FormsTextArea/label": {
+    "type": "string"
+  },
+  "forms-text-area/icon": {
+    "type": "string"
+  },
+  "FormsTextArea/icon": {
+    "type": "string"
+  },
+  "home-feature-card/headingColor": {
+    "type": "string"
+  },
+  "HomeFeatureCard/headingColor": {
+    "type": "string"
+  },
+  "home-feature-card/headingText": {
+    "type": "string"
+  },
+  "HomeFeatureCard/headingText": {
+    "type": "string"
+  },
+  "home-feature-card/paraText": {
+    "type": "string"
+  },
+  "HomeFeatureCard/paraText": {
+    "type": "string"
+  },
+  "loaders-button/btnColor": {
+    "type": "string"
+  },
+  "LoadersButton/btnColor": {
+    "type": "string"
+  },
+  "loaders-button/rounded": {
+    "type": "boolean"
+  },
+  "LoadersButton/rounded": {
+    "type": "boolean"
+  },
+  "loaders-detail-user-dept-card/count": {
+    "type": "number"
+  },
+  "LoadersDetailUserDeptCard/count": {
+    "type": "number"
+  },
+  "loaders-form-index/inputCount": {
+    "type": "number"
+  },
+  "LoadersFormIndex/inputCount": {
+    "type": "number"
+  },
+  "loaders-form-index/btnStart": {
+    "type": "boolean"
+  },
+  "LoadersFormIndex/btnStart": {
+    "type": "boolean"
+  },
+  "loaders-form-index/btnEnd": {
+    "type": "boolean"
+  },
+  "LoadersFormIndex/btnEnd": {
+    "type": "boolean"
+  },
+  "loaders-form-index/btnCenter": {
+    "type": "boolean"
+  },
+  "LoadersFormIndex/btnCenter": {
+    "type": "boolean"
+  },
+  "loaders-form-index/btnColor": {
+    "type": "string"
+  },
+  "LoadersFormIndex/btnColor": {
+    "type": "string"
+  },
+  "loaders-form-index/showImage": {
+    "type": "boolean"
+  },
+  "LoadersFormIndex/showImage": {
+    "type": "boolean"
+  },
+  "loaders-text/para": {
+    "type": "boolean"
+  },
+  "LoadersText/para": {
+    "type": "boolean"
+  },
+  "loaders-text/length": {
+    "type": "number"
+  },
+  "LoadersText/length": {
+    "type": "number"
+  },
+  "loaders-text/size": {
+    "type": "string"
+  },
+  "LoadersText/size": {
+    "type": "string"
+  },
+  "link-button/link": {
+    "type": "string"
+  },
+  "LinkButton/link": {
+    "type": "string"
+  },
+  "link-button/rounded": {
+    "type": "boolean"
+  },
+  "LinkButton/rounded": {
+    "type": "boolean"
+  },
+  "link-button/color": {
+    "type": "string"
+  },
+  "LinkButton/color": {
+    "type": "string"
+  },
+  "utils-no-data/message": {
+    "type": "string"
+  },
+  "UtilsNoData/message": {
+    "type": "string"
+  },
+  "utils-pagination/pagination": {
+    "type": "object"
+  },
+  "UtilsPagination/pagination": {
+    "type": "object"
+  },
+  "wiz-user-add/userRole": {
+    "type": "string",
+    "description": "The user type to be created\n\nallowed values: 'admin', 'principal', 'hod', 'teacher'"
+  },
+  "WizUserAdd/userRole": {
+    "type": "string",
+    "description": "The user type to be created\n\nallowed values: 'admin', 'principal', 'hod', 'teacher'"
+  }
+}
