@@ -36,7 +36,7 @@ export default {
         {
           name: 'College',
           url: '/dash/college',
-          icon: 'ri-building-fill',
+          icon: 'ri-government-fill',
         },
         {
           name: 'Department Type',

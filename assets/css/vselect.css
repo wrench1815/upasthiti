@@ -44,7 +44,7 @@
   --vs-dropdown-color: #0009 !important;
   --vs-dropdown-z-index: 1000;
   --vs-dropdown-min-width: 160px;
-  --vs-dropdown-max-height: 350px;
+  --vs-dropdown-max-height: 400px !important;
   --vs-dropdown-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.21);
 
   /* Options */
@@ -79,6 +79,7 @@
 }
 .vs__dropdown-menu {
   --vs-border-width: 0.125rem !important;
+  z-index: 0 !important;
 }
 
 /* disable transition for options */

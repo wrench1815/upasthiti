@@ -51,16 +51,14 @@ This file is no keep note of various things that devs would need help while work
   <i class="ri-user-2-fill"></i>
   ```
 
-- User-fill:
+- Default User:
 
   ```html
-  <i class="ri-user-fill"></i>
+  <i class="ri-user-3-fill"></i>
   ```
 
-- User-line:
-
   ```html
-  <i class="ri-user-line"></i>
+  <i class="ri-user-3-line"></i>
   ```
 
 - Vice-Chancellor:
@@ -249,10 +247,22 @@ This file is no keep note of various things that devs would need help while work
 <i class="ri-profile-line"></i>
 ```
 
+```html
+<i class="ri-profile-fill"></i>
+```
+
+```html
+<i class="ri-profile-fill"></i>
+```
+
 -Home:
 
 ```html
 <i class="ri-home-2-line"></i>
+```
+
+```html
+<i class="ri-home-2-fill"></i>
 ```
 
 -Logout:

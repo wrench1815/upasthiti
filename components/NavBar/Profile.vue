@@ -79,7 +79,7 @@
                   class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
                   @click="toEditProfile"
                 >
-                  <i class="ri-profile-line"></i>Edit Profile
+                  <i class="ri-profile-fill"></i>Edit Profile
                 </div>
               </li>
 
@@ -89,7 +89,7 @@
                   class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
                   @click="toDash"
                 >
-                  <i class="ri-dashboard-line"></i>Dash
+                  <i class="ri-dashboard-fill"></i>Dash
                 </div>
               </li>
 
