@@ -2,7 +2,7 @@
   <div>
     <div class="card my-4 shadow">
       <div class="card-header fw-bold fs-5 bg-primary text-white">
-        <!-- {{ principal.first_name }} {{ principal.last_name }} -->
+        {{ dept.name ? dept.name : '----' }}
       </div>
       <div class="card-body">
         <div>
@@ -37,9 +37,11 @@
                 }} -->
           </span>
         </div>
-        <a href="#" class="btn btn-primary rounded-pill mt-4"
-          >Details <i class="ri-external-link-fill"></i
-        ></a>
+        <NuxtLink
+          :to="`/dash/department/detail?id=${dept.id}`"
+          class="btn btn-primary rounded-pill mt-4"
+          >Details <i class="ri-link"></i
+        ></NuxtLink>
       </div>
     </div>
   </div>
@@ -48,6 +50,13 @@
 <script>
 export default {
   name: 'DashUserDetailDeptCard',
+
+  props: {
+    dept: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 

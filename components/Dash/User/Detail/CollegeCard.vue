@@ -2,37 +2,51 @@
   <div
     class="mb-3 shadow-3-strong d-flex card-header gap-3 rounded-5 align-items-center flex-column flex-md-row bg-light"
   >
+    <!-- logo -->
     <div>
-      <!-- <img
+      <img
         class="avatar avatar-xxl obj-fit-cover shadow-1-strong"
-        :data-src="
-          user.profile_image ? user.profile_image : defaultProfileImage
-        "
-        :alt="`${user.full_name}'s Profile Image`"
+        :data-src="college.logo ? college.logo : defaultCollegeImage"
+        :alt="`${college.name}'s Logo`"
         v-lazy-load
-      /> -->
-      <img class="avatar avatar-xxl obj-fit-cover shadow-1-strong" alt="" />
+      />
     </div>
+
     <div
       class="d-flex flex-column justify-content-center align-content-start text-break"
     >
+      <!-- name -->
       <div class="fw-bold fs-5 text-primary text-gradient">
-        <!-- {{ user.full_name ? user.full_name : '----' }} -->College name
+        <!-- start:College Link -->
+        <NuxtLink
+          :to="`/dash/college/detail?id=${college.id}`"
+          class="fw-bolder mb-1 text-primary"
+        >
+          <!-- College Name -->
+          <span class="better-underline">
+            {{ college.name ? college.name : '----' }}
+          </span>
+          <i class="ri-link"></i>
+        </NuxtLink>
+        <!-- end:College Link -->
       </div>
+
+      <!-- email -->
       <div class="text-muted small d-flex gap-1">
         <i class="ri-mail-fill text-primary text-gradient"></i>
-        <!-- {{ user.email ? user.email : '----' }} -->
-        Email
+        {{ college.email ? college.email : '----' }}
       </div>
-      <div class="text-muted small d-flex gap-1">
-        <i class="ri-phone-fill text-primary text-gradient"></i>
 
-        Mobile
+      <!-- mobile -->
+      <div class="text-muted small d-flex gap-1">
+        <i class="ri-phone-fill text-primary text-gradient"></i
+        >{{ college.mobile ? college.mobile : '----' }}
       </div>
+
+      <!-- district -->
       <div class="text-muted small d-flex gap-1">
         <i class="ri-pin-distance-fill text-primary text-gradient"></i>
-
-        District
+        {{ college.district ? college.district : '----' }}
       </div>
     </div>
   </div>
@@ -41,6 +55,19 @@
 <script>
 export default {
   name: 'DashUserDetailCollegeCard',
+
+  props: {
+    college: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  computed: {
+    defaultCollegeImage() {
+      return this.$config.defaultCollegeImage
+    },
+  },
 }
 </script>
 
