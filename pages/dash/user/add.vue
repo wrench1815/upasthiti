@@ -93,6 +93,7 @@
                   :data.sync="user.first_name"
                   :type="'text'"
                   :icon="'ri-user-fill'"
+                  isRequired
                 />
                 <!-- end:First Name -->
               </div>
@@ -104,6 +105,7 @@
                   :data.sync="user.last_name"
                   :type="'text'"
                   :icon="'ri-user-fill'"
+                  isRequired
                 />
                 <!-- end:Last Name -->
               </div>
@@ -118,6 +120,7 @@
                   :data.sync="user.email"
                   :type="'text'"
                   :icon="'ri-mail-fill'"
+                  isRequired
                 />
               </div>
               <!-- end:Email -->
@@ -262,7 +265,7 @@
                     <i
                       class="ri-lock-2-fill text-primary text-gradient d-block-inline"
                     ></i>
-                    <span> Password </span>
+                    <span class="required">Password</span>
                   </div>
                 </label>
               </div>
