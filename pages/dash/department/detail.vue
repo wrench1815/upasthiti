@@ -8,7 +8,7 @@
 
       <!-- Start:Loading -->
       <div class="card-body" v-if="loading">
-        <Lazy-LoadersDetailCard />
+        <Lazy-LoadersDetailDepartmentCard />
       </div>
       <!-- End:Loading -->
 
