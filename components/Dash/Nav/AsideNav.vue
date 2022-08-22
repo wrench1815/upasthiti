@@ -113,6 +113,11 @@ export default {
           icon: 'ri-government-fill',
         },
         {
+          name: 'Course',
+          url: '/dash/course',
+          icon: 'ri-book-mark-fill',
+        },
+        {
           name: 'Department Type',
           url: '/dash/department/type',
           icon: 'ri-hotel-fill',
