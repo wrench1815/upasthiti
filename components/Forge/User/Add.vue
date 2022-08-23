@@ -242,65 +242,6 @@
             </ValidationProvider>
             <!-- end:Address -->
 
-            <!-- start:Password -->
-            <ValidationProvider
-              v-slot="{ errors }"
-              :rules="{
-                required: true,
-                min: 6,
-                max: 16,
-                passwordNumber: true,
-                passwordUpper: true,
-                passwordLower: true,
-                passwordSpecial: true,
-              }"
-            >
-              <div class="form-outline">
-                <input
-                  :type="showPassword ? 'text' : 'password'"
-                  id="password"
-                  name="password"
-                  class="form-control mb-0"
-                  v-model="user.password"
-                />
-                <label class="form-label" for="password">
-                  <div class="d-flex justify-content-center gap-1">
-                    <i
-                      class="ri-lock-2-fill text-primary text-gradient d-block-inline"
-                    ></i>
-                    <span class="required">Password</span>
-                  </div>
-                </label>
-              </div>
-              <!-- Valdation Errors -->
-              <div
-                class="text-danger transition-all-ease-out-sine"
-                :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-              >
-                {{ errors[0] }}
-              </div>
-            </ValidationProvider>
-
-            <!-- start:Show Password -->
-            <div class="form-check mb-4">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="showPassword"
-                v-model="showPassword"
-              />
-              <label
-                class="form-check-label ripple"
-                data-mdb-ripple-unbound="true"
-                data-mdb-ripple-radius="40"
-                data-mdb-ripple-color="primary"
-                for="showPassword"
-                >Show Password</label
-              >
-            </div>
-            <!-- end:Show Password -->
-            <!-- end:Password -->
-
             <!-- Submit button -->
             <div class="d-flex justify-content-center">
               <button
@@ -322,7 +263,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'WizUserAdd',
+  name: 'ForgeUserAdd',
   layout: 'dash',
 
   data() {
@@ -357,7 +298,7 @@ export default {
         district: '',
         address: '',
         is_admin: false,
-        is_principal: true,
+        is_principal: false,
         is_hod: false,
         is_teacher: false,
         password: '',
@@ -367,7 +308,7 @@ export default {
 
   props: {
     /**
-     * The user type to be created
+     * The user type to be Forged
      *
      * allowed values: 'admin', 'principal', 'hod', 'teacher'
      */
@@ -381,6 +322,7 @@ export default {
     ...mapGetters({
       districtList: 'listDistricts',
     }),
+
     userType() {
       if (this.userRole == 'admin') {
         this.user.is_admin = true
@@ -470,8 +412,6 @@ export default {
           district: this.user.district,
           address: this.user.address,
           mobile: this.user.mobile,
-          password: this.user.password,
-          confirm_password: this.user.password,
           is_active: this.user.is_active,
           is_admin: this.user.is_admin,
           is_principal: this.user.is_principal,
@@ -489,7 +429,7 @@ export default {
 
             this.$api.user
               .create(user)
-              .then(() => {
+              .then((res) => {
                 this.$swal.hideLoading()
                 this.$swal.close()
 
@@ -505,7 +445,7 @@ export default {
                     this.$swal.showLoading()
                   },
                 }).then(() => {
-                  this.$emit('userCreated', this.user)
+                  this.$emit('userForged', res.data)
                 })
               })
               .catch((err) => {

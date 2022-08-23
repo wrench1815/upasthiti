@@ -64,6 +64,25 @@ export default {
       },
     ])
   },
+
+  data() {
+    return {
+      test: {
+        id: 23,
+        name: 'dwwdwdww',
+        address: 'dwdwdww',
+        district: 'Anantnag',
+        alias_name: 'HEGE',
+        logo: 'https://res.cloudinary.com/upasthiti/image/upload/v1660038680/defaults/college-default.png',
+        logo_public_id: '',
+        website: 'http://efef.fefe',
+        mobile: '32222233222',
+        email: 'wdw@fty.jtyrjy',
+        university: 11,
+        principal: null,
+      },
+    }
+  },
 }
 </script>
 
