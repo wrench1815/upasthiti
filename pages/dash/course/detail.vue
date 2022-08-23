@@ -15,7 +15,7 @@
       <!-- start:course Info -->
       <div class="card-body" v-else>
         <!-- start:course Info Card -->
-        <Lazy-DashCourseDetailCard :course="course" isCourse/>
+        <Lazy-DashCourseDetailCard :course="course" isCourse />
         <!-- end:course Info Card -->
 
         <!-- start: University -->
