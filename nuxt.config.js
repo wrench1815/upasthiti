@@ -159,6 +159,7 @@ export default {
     allowOutsideClick: false,
     allowEscapeKey: false,
     buttonsStyling: false,
+    scrollbarPadding: false,
     customClass: {
       confirmButton: 'btn btn-success btn-rounded fw-bolder mx-2',
       cancelButton: 'btn btn-danger btn-rounded fw-bolder mx-2',
