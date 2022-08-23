@@ -12,79 +12,79 @@
           class="d-flex align-items-center justify-content-center flex-wrap"
           v-if="!loading.main"
         >
-        <!-- start:Search -->
-        <div class="me-auto mb-3">
-          <div
-            class="btn btn-floating bg-gradient-primary text-white btn-s d-flex justify-content-center align-items-center"
-          >
-            <i class="ri-search-line ri-lg"></i>
-          </div>
-        </div>
-        <!-- end:Search -->
-
-        <!-- start:University Filter -->
-        <div class="uni-filter-width mb-3 me-0 ms-auto">
-          <v-select
-            placeholder="Select Filter"
-            :options="uniList.results"
-            v-model="selectedUni"
-            :clearable="false"
-            label="alias"
-            @option:selected="filterCollege"
-          >
-            <!-- options -->
-            <template #option="{ alias }">
-              <div
-                class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
-              >
-                <span>{{ alias }}</span>
-              </div>
-            </template>
-
-            <!-- selected -->
-            <template #selected-option="{ alias }">
-              <div
-                class="d-flex justify-content-start align-items-center gap-1"
-              >
-                <i class="text-primary text-gradient ri-bank-fill mt-n1"></i>
-                <span>{{ alias }}</span>
-              </div>
-            </template>
-
-            <!-- footer for pagination -->
-            <li
-              slot="list-footer"
-              class="d-flex gap-2 justify-content-center align-items-center my-2"
-              v-if="uniList.pagination.count > 1"
+          <!-- start:Search -->
+          <div class="me-auto mb-3">
+            <div
+              class="btn btn-floating bg-gradient-primary text-white btn-s d-flex justify-content-center align-items-center"
             >
-              <!-- previous button -->
-              <button
-                class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
-                :disabled="disableUniBtns || !uniList.pagination.previous"
-                @click="uniPaginatePrev"
-                data-mdb-ripple-color="primary"
-              >
-                <i class="ri-arrow-left-s-line"></i>
-              </button>
+              <i class="ri-search-line ri-lg"></i>
+            </div>
+          </div>
+          <!-- end:Search -->
 
-              <!-- next button -->
-              <button
-                class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
-                :disabled="disableUniBtns || !uniList.pagination.next"
-                @click="uniPaginateNext"
-                data-mdb-ripple-color="primary"
+          <!-- start:University Filter -->
+          <div class="uni-filter-width mb-3 me-0 ms-auto">
+            <v-select
+              placeholder="Select Filter"
+              :options="uniList.results"
+              v-model="selectedUni"
+              :clearable="false"
+              label="alias"
+              @option:selected="filterCollege"
+            >
+              <!-- options -->
+              <template #option="{ alias }">
+                <div
+                  class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                >
+                  <span>{{ alias }}</span>
+                </div>
+              </template>
+
+              <!-- selected -->
+              <template #selected-option="{ alias }">
+                <div
+                  class="d-flex justify-content-start align-items-center gap-1"
+                >
+                  <i class="text-primary text-gradient ri-bank-fill mt-n1"></i>
+                  <span>{{ alias }}</span>
+                </div>
+              </template>
+
+              <!-- footer for pagination -->
+              <li
+                slot="list-footer"
+                class="d-flex gap-2 justify-content-center align-items-center my-2"
+                v-if="uniList.pagination.count > 1"
               >
-                <i class="ri-arrow-right-s-line"></i>
-              </button>
-            </li>
-          </v-select>
-        </div>
-        <!-- end:University Filter -->
-        <!-- </section> -->
+                <!-- previous button -->
+                <button
+                  class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                  :disabled="disableUniBtns || !uniList.pagination.previous"
+                  @click="uniPaginatePrev"
+                  data-mdb-ripple-color="primary"
+                >
+                  <i class="ri-arrow-left-s-line"></i>
+                </button>
+
+                <!-- next button -->
+                <button
+                  class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                  :disabled="disableUniBtns || !uniList.pagination.next"
+                  @click="uniPaginateNext"
+                  data-mdb-ripple-color="primary"
+                >
+                  <i class="ri-arrow-right-s-line"></i>
+                </button>
+              </li>
+            </v-select>
+          </div>
+          <!-- end:University Filter -->
+        </section>
 
         <LoadersTable v-if="loading.main" />
         <!-- <DashCourseTable  :courses.sync="courses.results" /> -->
-        <Lazy-DashCourseTable />
+        <Lazy-DashCourseTable v-else />
 
         <Lazy-UtilsPagination
           class="mt-4"
@@ -96,7 +96,7 @@
 
         <div class="d-flex justify-content-end mt-3">
           <LoadersButton v-if="loading.main" :rounded="true" />
-          <UtilsLinkButton :rounded="true" :link="'/dash/course/add'"
+          <UtilsLinkButton :rounded="true" :link="'/dash/course/add'" v-else
             >Add new Course</UtilsLinkButton
           >
         </div>
@@ -116,12 +116,11 @@ export default {
     },
   },
 
- data() {
+  data() {
     return {
       // colleges: [],
       loading: {
-        main:true,
-
+        main: true,
       },
       error: true,
       // userFilters: ['All', 'Admin', 'Principal', 'HOD', 'Teacher'],
@@ -144,7 +143,7 @@ export default {
     ])
   },
 
-   methods: {
+  methods: {
     // on filter
     filterCourse() {
       this.payload = {}
@@ -169,7 +168,7 @@ export default {
     },
 
     async getCourse() {
-      this.loading = true
+      this.loading.main = true
 
       // if (this.payload.district) {
       //   if (this.payload.district == 'All') {
@@ -193,7 +192,7 @@ export default {
         .catch((err) => {
           if (err.response.status == 404) {
             this.error = true
-            this.course= []
+            this.course = []
 
             this.$nuxt.error({
               statusCode: 404,
@@ -223,7 +222,7 @@ export default {
     // refresh Course
     refreshCourse() {
       this.getCourse().then(() => {
-        this.loading = false
+        this.loading.main = false
       })
     },
 
@@ -236,15 +235,6 @@ export default {
           page: pageNum,
         },
       })
-    },
-
-    dateFormat(date) {
-      // return strf date
-      return this.$moment(date).format('Do MMMM YYYY, h:mm:ss a')
-    },
-
-    async setDefaults() {
-      this.payload.page = await this.$route.query.page
     },
 
     // fetch University data for filter
@@ -286,13 +276,14 @@ export default {
     // this.districtsList = ['All', ...this.districts]
 
     this.uniPayload.page = 1
+
     this.getUni()
       .then(() => {
         return this.getCourse()
       })
       .then(() => {
         if (!this.error) {
-          this.loading = false
+          this.loading.main = false
         }
       })
   },
