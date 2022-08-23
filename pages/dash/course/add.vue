@@ -55,6 +55,23 @@
               </div>
               <!-- end:Course Code -->
 
+              <!-- start:Is Practical -->
+              <div class="row">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input mb-4"
+                      type="checkbox"
+                      value=""
+                    />
+                    <label class="form-check-label required">
+                      Is Practical
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <!-- end:Is Practical-->
+
               <!--Start:University -->
               <div class="col-12">
                 <label class="form-label required"
