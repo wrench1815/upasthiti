@@ -1,9 +1,11 @@
 <template>
-  <div class="container-fluid my-4">
+  <div>
     <div class="card">
       <div class="card-header">
-        <h1 class="text-gradient text-primary d-inline-block">Add User</h1>
-        <h3 class="text-secondary text-capitalize">Add a New User</h3>
+        <h1 class="text-gradient text-primary d-inline-block">
+          Add {{ userType }}
+        </h1>
+        <h3 class="text-secondary text-capitalize">Add a New {{ userType }}</h3>
       </div>
 
       <div class="card-body">
@@ -97,6 +99,7 @@
                 />
                 <!-- end:First Name -->
               </div>
+
               <div class="col-lg-6 col-md-6 col-12">
                 <!-- start:Last Name -->
                 <Lazy-DashInput
@@ -298,174 +301,13 @@
             <!-- end:Show Password -->
             <!-- end:Password -->
 
-            <!-- start:Role Checkbox -->
-            <div class="row justify-content-center g-3 pb-4">
-              <div class="col-12">
-                <label class="form-label">
-                  <div class="d-flex justify-content-center gap-1">
-                    <i
-                      class="ri-user-4-fill text-primary text-gradient d-block-inline"
-                    ></i>
-                    <span> Roles </span>
-                    <a
-                      tabindex="0"
-                      class="ripple"
-                      data-mdb-ripple-unbound="true"
-                      data-mdb-ripple-radius="40"
-                      data-mdb-ripple-color="primary"
-                      role="button"
-                      data-mdb-toggle="popover"
-                      data-mdb-html="true"
-                      data-mdb-trigger="focus"
-                      data-mdb-content="Select a role to assign to the user.<br/>Can be multiple."
-                    >
-                      <i class="ri-information-line text-danger"></i>
-                    </a>
-                  </div>
-                </label>
-              </div>
-
-              <!-- start:Admin Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="admin"
-                >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-danger shadow-3-strong text-white':
-                        user.is_admin,
-                      'border-danger text-danger text-gradient bg-white fw-bolder':
-                        !user.is_admin,
-                    }"
-                  >
-                    <i class="ri-shield-user-fill"></i>
-                    <span>Admin</span>
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="admin"
-                  v-model="user.is_admin"
-                />
-              </div>
-              <!-- end:Admin Check -->
-
-              <!-- start:Principal Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="principal"
-                >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-info text-white shadow-3-strong':
-                        user.is_principal,
-                      'border-info text-info text-gradient bg-white fw-bolder':
-                        !user.is_principal,
-                    }"
-                  >
-                    <i class="ri-admin-fill"></i>
-                    Principal
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="principal"
-                  v-model="user.is_principal"
-                />
-              </div>
-              <!-- end:Principal Check -->
-
-              <!-- start:HOD Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="hod"
-                >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-primary text-white shadow-3-strong':
-                        user.is_hod,
-                      'border-primary text-primary text-gradient bg-white fw-bolder':
-                        !user.is_hod,
-                    }"
-                  >
-                    <i class="ri-user-star-fill"></i>
-                    HoD
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="hod"
-                  v-model="user.is_hod"
-                />
-              </div>
-              <!-- end:HOD Check -->
-
-              <!-- start:Teacher Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="teacher"
-                >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-warning text-white shadow-3-strong':
-                        user.is_teacher,
-                      'border-warning text-warning text-gradient bg-white fw-bolder':
-                        !user.is_teacher,
-                    }"
-                  >
-                    <i class="ri-user-2-fill"></i>
-                    Teacher
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="teacher"
-                  v-model="user.is_teacher"
-                />
-              </div>
-              <!-- end:Teacher Check -->
-            </div>
-            <!-- end:Role Checkbox -->
-
             <!-- Submit button -->
             <div class="d-flex justify-content-center">
               <button
                 type="submit"
                 class="btn bg-gradient-primary text-white btn-rounded my-4"
               >
-                Add a new User
+                Add a new {{ userType }}
               </button>
             </div>
           </form>
@@ -480,7 +322,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'DashUserAdd',
+  name: 'WizUserAdd',
   layout: 'dash',
 
   data() {
@@ -515,7 +357,7 @@ export default {
         district: '',
         address: '',
         is_admin: false,
-        is_principal: false,
+        is_principal: true,
         is_hod: false,
         is_teacher: false,
         password: '',
@@ -523,22 +365,37 @@ export default {
     }
   },
 
-  created() {
-    this.$store.commit('breadCrumbs/addBreadCrumb', [
-      {
-        name: 'User',
-        url: '/dash/user',
-      },
-      {
-        name: 'Add',
-      },
-    ])
+  props: {
+    /**
+     * The user type to be created
+     *
+     * allowed values: 'admin', 'principal', 'hod', 'teacher'
+     */
+    userRole: {
+      type: String,
+      required: true,
+    },
   },
 
   computed: {
     ...mapGetters({
       districtList: 'listDistricts',
     }),
+    userType() {
+      if (this.userRole == 'admin') {
+        this.user.is_admin = true
+        return 'Admin'
+      } else if (this.userRole == 'principal') {
+        this.user.is_principal = true
+        return 'Principal'
+      } else if (this.userRole == 'hod') {
+        this.user.is_hod = true
+        return 'HOD'
+      } else if (this.userRole == 'teacher') {
+        this.user.is_teacher = true
+        return 'Teacher'
+      }
+    },
   },
 
   methods: {
@@ -623,10 +480,10 @@ export default {
         }
 
         this.$swal({
-          title: 'Adding User',
+          title: `Adding ${this.userType}`,
           icon: 'info',
           type: 'info',
-          text: 'Please wait while we are Adding a New User',
+          text: `Please wait while we are Adding a New ${this.userType}`,
           didOpen: () => {
             this.$swal.showLoading()
 
@@ -636,20 +493,20 @@ export default {
                 this.$swal.hideLoading()
                 this.$swal.close()
 
-                let timerInterval
-
                 this.$swal({
                   title: 'Success',
                   icon: 'success',
                   type: 'success',
-                  text: 'User has been added Successfully',
+                  text: `${this.userType} has been added Successfully`,
                   timer: 2000,
                   timerProgressBar: true,
 
                   didOpen: () => {
                     this.$swal.showLoading()
                   },
-                }).then(() => this.$router.push('/dash/user'))
+                }).then(() => {
+                  this.$emit('userCreated', this.user)
+                })
               })
               .catch((err) => {
                 this.$swal.hideLoading()
@@ -659,7 +516,7 @@ export default {
                   title: 'Error',
                   icon: 'error',
                   type: 'error',
-                  html: `Failed to Add User.`,
+                  html: `Failed to Add ${this.userType}.`,
                 })
               })
           },
@@ -669,7 +526,7 @@ export default {
           title: 'Error',
           icon: 'error',
           type: 'error',
-          html: `Failed to Add User.<br/>Try Again`,
+          html: `Failed to Add ${this.userType}.<br/>Try Again`,
         })
       }
     },

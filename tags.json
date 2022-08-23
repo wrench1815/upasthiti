@@ -1,0 +1,712 @@
+{
+  "about-dev-card": {
+    "attributes": [
+      "image",
+      "name",
+      "role",
+      "email",
+      "githubUsername",
+      "githubName",
+      "linkedinUsername",
+      "linkedinName"
+    ],
+    "description": ""
+  },
+  "AboutDevCard": {
+    "attributes": [
+      "image",
+      "name",
+      "role",
+      "email",
+      "githubUsername",
+      "githubName",
+      "linkedinUsername",
+      "linkedinName"
+    ],
+    "description": ""
+  },
+  "college-fields": {
+    "attributes": [],
+    "description": ""
+  },
+  "CollegeFields": {
+    "attributes": [],
+    "description": ""
+  },
+  "course-field": {
+    "attributes": [],
+    "description": ""
+  },
+  "CourseField": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-college-detail-card-1": {
+    "attributes": [
+      "college",
+      "isCollege",
+      "isUniversity"
+    ],
+    "description": ""
+  },
+  "DashCollegeDetailCard1": {
+    "attributes": [
+      "college",
+      "isCollege",
+      "isUniversity"
+    ],
+    "description": ""
+  },
+  "dash-college-detail-card-3": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashCollegeDetailCard3": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-college-detail-hod-card": {
+    "attributes": [
+      "hod"
+    ],
+    "description": ""
+  },
+  "DashCollegeDetailHodCard": {
+    "attributes": [
+      "hod"
+    ],
+    "description": ""
+  },
+  "dash-college-detail-principal-card": {
+    "attributes": [
+      "principal"
+    ],
+    "description": ""
+  },
+  "DashCollegeDetailPrincipalCard": {
+    "attributes": [
+      "principal"
+    ],
+    "description": ""
+  },
+  "dash-college-table": {
+    "attributes": [
+      "colleges"
+    ],
+    "description": ""
+  },
+  "DashCollegeTable": {
+    "attributes": [
+      "colleges"
+    ],
+    "description": ""
+  },
+  "dash-department-detail-card-1": {
+    "attributes": [
+      "department",
+      "isDepartment",
+      "college",
+      "isCollege"
+    ],
+    "description": ""
+  },
+  "DashDepartmentDetailCard1": {
+    "attributes": [
+      "department",
+      "isDepartment",
+      "college",
+      "isCollege"
+    ],
+    "description": ""
+  },
+  "dash-department-detail-hod-card": {
+    "attributes": [
+      "hod"
+    ],
+    "description": ""
+  },
+  "DashDepartmentDetailHodCard": {
+    "attributes": [
+      "hod"
+    ],
+    "description": ""
+  },
+  "dash-department-table": {
+    "attributes": [
+      "departments"
+    ],
+    "description": ""
+  },
+  "DashDepartmentTable": {
+    "attributes": [
+      "departments"
+    ],
+    "description": ""
+  },
+  "dash-department-type-table": {
+    "attributes": [
+      "departmentTypes"
+    ],
+    "description": ""
+  },
+  "DashDepartmentTypeTable": {
+    "attributes": [
+      "departmentTypes"
+    ],
+    "description": ""
+  },
+  "dash-footer": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashFooter": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-input": {
+    "attributes": [
+      "label",
+      "validationRules",
+      "data",
+      "type",
+      "icon",
+      "iconClasses",
+      "isRequired"
+    ],
+    "description": ""
+  },
+  "DashInput": {
+    "attributes": [
+      "label",
+      "validationRules",
+      "data",
+      "type",
+      "icon",
+      "iconClasses",
+      "isRequired"
+    ],
+    "description": ""
+  },
+  "dash-input-alt": {
+    "attributes": [
+      "label",
+      "validationRules",
+      "data",
+      "type"
+    ],
+    "description": ""
+  },
+  "DashInputAlt": {
+    "attributes": [
+      "label",
+      "validationRules",
+      "data",
+      "type"
+    ],
+    "description": ""
+  },
+  "dash-aside-nav": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashAsideNav": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-nav-profile": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashNavProfile": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-nav-right-links": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashNavRightLinks": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-nav-side-bar": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashNavSideBar": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-nav-tool-bar": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashNavToolBar": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-nav": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashNav": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-university-table": {
+    "attributes": [
+      "universities"
+    ],
+    "description": ""
+  },
+  "DashUniversityTable": {
+    "attributes": [
+      "universities"
+    ],
+    "description": ""
+  },
+  "dash-user-detail-college-card": {
+    "attributes": [
+      "college"
+    ],
+    "description": ""
+  },
+  "DashUserDetailCollegeCard": {
+    "attributes": [
+      "college"
+    ],
+    "description": ""
+  },
+  "user-detail-dept": {
+    "attributes": [
+      "uId"
+    ],
+    "description": ""
+  },
+  "UserDetailDept": {
+    "attributes": [
+      "uId"
+    ],
+    "description": ""
+  },
+  "dash-user-detail-dept-card": {
+    "attributes": [
+      "dept"
+    ],
+    "description": ""
+  },
+  "DashUserDetailDeptCard": {
+    "attributes": [
+      "dept"
+    ],
+    "description": ""
+  },
+  "dash-user-detail-hod-card": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashUserDetailHodCard": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-user-detail-principal-card": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashUserDetailPrincipalCard": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-user-detail-u-card": {
+    "attributes": [
+      "user"
+    ],
+    "description": ""
+  },
+  "DashUserDetailUCard": {
+    "attributes": [
+      "user"
+    ],
+    "description": ""
+  },
+  "dash-user-table": {
+    "attributes": [
+      "users",
+      "defaultProfileImage"
+    ],
+    "description": ""
+  },
+  "DashUserTable": {
+    "attributes": [
+      "users",
+      "defaultProfileImage"
+    ],
+    "description": ""
+  },
+  "department-field": {
+    "attributes": [],
+    "description": ""
+  },
+  "DepartmentField": {
+    "attributes": [],
+    "description": ""
+  },
+  "footer": {
+    "attributes": [],
+    "description": ""
+  },
+  "Footer": {
+    "attributes": [],
+    "description": ""
+  },
+  "forms-input": {
+    "attributes": [
+      "inputtype",
+      "idname",
+      "label",
+      "icon"
+    ],
+    "description": ""
+  },
+  "FormsInput": {
+    "attributes": [
+      "inputtype",
+      "idname",
+      "label",
+      "icon"
+    ],
+    "description": ""
+  },
+  "forms-text-area": {
+    "attributes": [
+      "idname",
+      "label",
+      "icon"
+    ],
+    "description": ""
+  },
+  "FormsTextArea": {
+    "attributes": [
+      "idname",
+      "label",
+      "icon"
+    ],
+    "description": ""
+  },
+  "home-feature-card": {
+    "attributes": [
+      "headingColor",
+      "headingText",
+      "paraText"
+    ],
+    "description": ""
+  },
+  "HomeFeatureCard": {
+    "attributes": [
+      "headingColor",
+      "headingText",
+      "paraText"
+    ],
+    "description": ""
+  },
+  "home-feature-index": {
+    "attributes": [],
+    "description": ""
+  },
+  "HomeFeatureIndex": {
+    "attributes": [],
+    "description": ""
+  },
+  "home-header": {
+    "attributes": [],
+    "description": ""
+  },
+  "HomeHeader": {
+    "attributes": [],
+    "description": ""
+  },
+  "home-whatwedo": {
+    "attributes": [],
+    "description": ""
+  },
+  "HomeWhatwedo": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-aside-nav-profile-modal": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersAsideNavProfileModal": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-aside-nav-profile-index": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersAsideNavProfileIndex": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-button": {
+    "attributes": [
+      "btnColor",
+      "rounded"
+    ],
+    "description": ""
+  },
+  "LoadersButton": {
+    "attributes": [
+      "btnColor",
+      "rounded"
+    ],
+    "description": ""
+  },
+  "loaders-detail-department-card": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersDetailDepartmentCard": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-detail-user-card": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersDetailUserCard": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-detail-user-college-card": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersDetailUserCollegeCard": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-detail-user-dept-card": {
+    "attributes": [
+      "count"
+    ],
+    "description": ""
+  },
+  "LoadersDetailUserDeptCard": {
+    "attributes": [
+      "count"
+    ],
+    "description": ""
+  },
+  "loaders-form-input": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersFormInput": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-form-index": {
+    "attributes": [
+      "inputCount",
+      "btnStart",
+      "btnEnd",
+      "btnCenter",
+      "btnColor",
+      "showImage"
+    ],
+    "description": ""
+  },
+  "LoadersFormIndex": {
+    "attributes": [
+      "inputCount",
+      "btnStart",
+      "btnEnd",
+      "btnCenter",
+      "btnColor",
+      "showImage"
+    ],
+    "description": ""
+  },
+  "loaders-image": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersImage": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-table": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersTable": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-text": {
+    "attributes": [
+      "para",
+      "length",
+      "size"
+    ],
+    "description": ""
+  },
+  "LoadersText": {
+    "attributes": [
+      "para",
+      "length",
+      "size"
+    ],
+    "description": ""
+  },
+  "navbar-mobile-profile": {
+    "attributes": [],
+    "description": ""
+  },
+  "NavbarMobileProfile": {
+    "attributes": [],
+    "description": ""
+  },
+  "nav-bar-profile": {
+    "attributes": [],
+    "description": ""
+  },
+  "NavBarProfile": {
+    "attributes": [],
+    "description": ""
+  },
+  "nav-bar-side-bar": {
+    "attributes": [],
+    "description": ""
+  },
+  "NavBarSideBar": {
+    "attributes": [],
+    "description": ""
+  },
+  "new-nav-bar": {
+    "attributes": [],
+    "description": ""
+  },
+  "NewNavBar": {
+    "attributes": [],
+    "description": ""
+  },
+  "nuxt-logo": {
+    "attributes": [],
+    "description": ""
+  },
+  "NuxtLogo": {
+    "attributes": [],
+    "description": ""
+  },
+  "nav-bar": {
+    "attributes": [],
+    "description": ""
+  },
+  "NavBar": {
+    "attributes": [],
+    "description": ""
+  },
+  "student-field": {
+    "attributes": [],
+    "description": ""
+  },
+  "StudentField": {
+    "attributes": [],
+    "description": ""
+  },
+  "teacher-field": {
+    "attributes": [],
+    "description": ""
+  },
+  "TeacherField": {
+    "attributes": [],
+    "description": ""
+  },
+  "tutorial": {
+    "attributes": [],
+    "description": ""
+  },
+  "Tutorial": {
+    "attributes": [],
+    "description": ""
+  },
+  "tutorial-second": {
+    "attributes": [],
+    "description": ""
+  },
+  "TutorialSecond": {
+    "attributes": [],
+    "description": ""
+  },
+  "link-button": {
+    "attributes": [
+      "link",
+      "rounded",
+      "color"
+    ],
+    "description": ""
+  },
+  "LinkButton": {
+    "attributes": [
+      "link",
+      "rounded",
+      "color"
+    ],
+    "description": ""
+  },
+  "utils-no-data": {
+    "attributes": [
+      "message"
+    ],
+    "description": ""
+  },
+  "UtilsNoData": {
+    "attributes": [
+      "message"
+    ],
+    "description": ""
+  },
+  "utils-pagination": {
+    "attributes": [
+      "pagination"
+    ],
+    "description": ""
+  },
+  "UtilsPagination": {
+    "attributes": [
+      "pagination"
+    ],
+    "description": ""
+  },
+  "utils-privacy-policy": {
+    "attributes": [],
+    "description": ""
+  },
+  "UtilsPrivacyPolicy": {
+    "attributes": [],
+    "description": ""
+  },
+  "to-top": {
+    "attributes": [],
+    "description": ""
+  },
+  "ToTop": {
+    "attributes": [],
+    "description": ""
+  },
+  "wiz-user-add": {
+    "attributes": [
+      "userRole"
+    ],
+    "description": ""
+  },
+  "WizUserAdd": {
+    "attributes": [
+      "userRole"
+    ],
+    "description": ""
+  }
+}

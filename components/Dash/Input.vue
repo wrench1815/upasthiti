@@ -51,7 +51,7 @@ export default {
     },
     validationRules: {
       type: Object,
-      default: { required: true },
+      default: () => ({ required: true }),
     },
     data: {
       required: true,
