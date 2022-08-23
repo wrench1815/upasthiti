@@ -359,6 +359,42 @@
     "attributes": [],
     "description": ""
   },
+  "dash-college-add": {
+    "attributes": [
+      "collegePrincipal"
+    ],
+    "description": ""
+  },
+  "DashCollegeAdd": {
+    "attributes": [
+      "collegePrincipal"
+    ],
+    "description": ""
+  },
+  "wiz-user-add": {
+    "attributes": [
+      "userRole"
+    ],
+    "description": ""
+  },
+  "WizUserAdd": {
+    "attributes": [
+      "userRole"
+    ],
+    "description": ""
+  },
+  "wiz-user-card": {
+    "attributes": [
+      "user"
+    ],
+    "description": ""
+  },
+  "WizUserCard": {
+    "attributes": [
+      "user"
+    ],
+    "description": ""
+  },
   "forms-input": {
     "attributes": [
       "inputtype",
@@ -695,18 +731,6 @@
   },
   "ToTop": {
     "attributes": [],
-    "description": ""
-  },
-  "wiz-user-add": {
-    "attributes": [
-      "userRole"
-    ],
-    "description": ""
-  },
-  "WizUserAdd": {
-    "attributes": [
-      "userRole"
-    ],
     "description": ""
   }
 }

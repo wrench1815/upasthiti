@@ -34,6 +34,11 @@ export default {
           icon: 'ri-dashboard-fill',
         },
         {
+          name: 'Forge',
+          url: '/dash/forge',
+          icon: 'ri-lightbulb-flash-fill',
+        },
+        {
           name: 'College',
           url: '/dash/college',
           icon: 'ri-government-fill',

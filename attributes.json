@@ -233,6 +233,28 @@
   "DashUserTable/defaultProfileImage": {
     "type": "string"
   },
+  "dash-college-add/collegePrincipal": {
+    "type": "object",
+    "description": "The Principal to assign the College to"
+  },
+  "DashCollegeAdd/collegePrincipal": {
+    "type": "object",
+    "description": "The Principal to assign the College to"
+  },
+  "wiz-user-add/userRole": {
+    "type": "string",
+    "description": "The user type to be Forged\n\nallowed values: 'admin', 'principal', 'hod', 'teacher'"
+  },
+  "WizUserAdd/userRole": {
+    "type": "string",
+    "description": "The user type to be Forged\n\nallowed values: 'admin', 'principal', 'hod', 'teacher'"
+  },
+  "wiz-user-card/user": {
+    "type": "object"
+  },
+  "WizUserCard/user": {
+    "type": "object"
+  },
   "forms-input/inputtype": {
     "type": "string"
   },
@@ -394,13 +416,5 @@
   },
   "UtilsPagination/pagination": {
     "type": "object"
-  },
-  "wiz-user-add/userRole": {
-    "type": "string",
-    "description": "The user type to be created\n\nallowed values: 'admin', 'principal', 'hod', 'teacher'"
-  },
-  "WizUserAdd/userRole": {
-    "type": "string",
-    "description": "The user type to be created\n\nallowed values: 'admin', 'principal', 'hod', 'teacher'"
   }
 }
