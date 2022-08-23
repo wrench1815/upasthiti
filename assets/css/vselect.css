@@ -79,7 +79,7 @@
 }
 .vs__dropdown-menu {
   --vs-border-width: 0.125rem !important;
-  z-index: 2 !important;
+  z-index: 4 !important;
 }
 
 /* disable transition for options */
