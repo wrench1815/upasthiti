@@ -30,7 +30,7 @@
               v-model="selectedUni"
               :clearable="false"
               label="alias"
-              @option:selected="filterCollege"
+              @option:selected="filterCourse"
             >
               <!-- options -->
               <template #option="{ alias }">
@@ -84,7 +84,7 @@
 
         <LoadersTable v-if="loading.main" />
         <!-- <DashCourseTable  :courses.sync="courses.results" /> -->
-        <Lazy-DashCourseTable v-else />
+        <Lazy-DashCourseTable :courses.sync="course.results" v-else />
 
         <Lazy-UtilsPagination
           class="mt-4"
@@ -123,9 +123,7 @@ export default {
         main: true,
       },
       error: true,
-      // userFilters: ['All', 'Admin', 'Principal', 'HOD', 'Teacher'],
-      // selectedDistrict: 'All',
-      // districtsList: [],
+      course: {},
       payload: {},
       uniList: {},
       uniPayload: {},
@@ -170,12 +168,6 @@ export default {
     async getCourse() {
       this.loading.main = true
 
-      // if (this.payload.district) {
-      //   if (this.payload.district == 'All') {
-      //     this.payload.district = undefined
-      //   }
-      // }
-
       if (this.payload.university) {
         if (this.payload.university == 'All') {
           this.payload.university = undefined
@@ -192,7 +184,7 @@ export default {
         .catch((err) => {
           if (err.response.status == 404) {
             this.error = true
-            this.course = []
+            this.course = {}
 
             this.$nuxt.error({
               statusCode: 404,

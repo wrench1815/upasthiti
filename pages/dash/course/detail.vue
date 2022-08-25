@@ -18,13 +18,45 @@
         <Lazy-DashCourseDetailCard :course="course" isCourse />
         <!-- end:course Info Card -->
 
+        <section>
+          <!-- start:Code -->
+          <div class="row mb-3">
+            <div class="col-12 col-md-4 mt-lg-4 mt-sm-4 d-flex">
+              <label class="text-muted fw-bold-500">Code</label>
+            </div>
+            <div class="col d-flex mt-lg-4 mt-sm-4">
+              <span class="fw-bold-600 fs-6">{{
+                course.code ? course.code : '----'
+              }}</span>
+            </div>
+          </div>
+          <!-- end:Code -->
+
+          <!-- start:is Practical -->
+          <div class="row mb-3">
+            <div class="col-12 col-md-4 d-flex">
+              <label class="text-muted fw-bold-500">Is Practical</label>
+            </div>
+            <div class="col d-flex">
+              <span class="fw-bold-600 fs-6">
+                <i
+                  class="ri-checkbox-circle-fill text-success ri-lg"
+                  v-if="course.is_practical"
+                ></i>
+                <i class="ri-close-circle-fill text-danger ri-lg" v-else></i>
+              </span>
+            </div>
+          </div>
+          <!-- end:Is Practical -->
+        </section>
+
         <!-- start: University -->
         <div class="mt-5 mb-4">
           <h3 class="text-primary text-gradient">University</h3>
         </div>
 
         <!-- start: University  Info Card -->
-        <Lazy-DashCourseDetailUniCard />
+        <Lazy-DashCourseDetailUniCard :university="course.university" />
         <!-- end: University  Info Card -->
 
         <!-- end: University-->
@@ -42,11 +74,9 @@ export default {
 
   data() {
     return {
-      // hod: {},
-      // loading: true,
-      // error: true,
-      // department: {},
-      // college: {},
+      loading: true,
+      error: true,
+      course: {},
     }
   },
 
@@ -63,47 +93,36 @@ export default {
   },
 
   methods: {
-    // async getDepartment() {
-    //   let id = this.$route.query.id
-    //   return this.$api.department
-    //     .retrieve(id)
-    //     .then((response) => {
-    //       this.department = response.data
-    //     })
-    //     .catch((err) => {
-    //       if (err.response.status == 404) {
-    //         this.$nuxt.error({
-    //           statusCode: 404,
-    //           message: 'Department does not Exist',
-    //         })
-    //       } else {
-    //         this.$nuxt.error({
-    //           statusCode: 400,
-    //           message: 'Something went Wrong',
-    //         })
-    //       }
-    //     })
-    // },
+    async getCourse() {
+      let id = this.$route.query.id
+
+      return this.$api.course
+        .retrieve(id)
+        .then((response) => {
+          this.course = response.data
+        })
+        .catch((err) => {
+          if (err.response.status == 404) {
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'Course does not Exist',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong',
+            })
+          }
+        })
+    },
   },
 
   mounted() {
-    // this.getDepartment().then(() => {
-    //   this.loading = false
-    // })
+    this.getCourse().then(() => {
+      this.loading = false
+    })
   },
 }
 </script>
 
-<style scoped>
-.card-hover div > img {
-  box-shadow: none;
-  transition: all 0.3s ease-in-out;
-}
-
-.card-hover:hover div > img {
-  box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.16),
-    0 10px 20px -2px rgba(0, 0, 0, 0.1);
-  transform: scale(1.1);
-  transition: all 0.3s ease-in-out;
-}
-</style>
+<style></style>

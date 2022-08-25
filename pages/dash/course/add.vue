@@ -60,11 +60,12 @@
                 <div class="col">
                   <div class="form-check">
                     <input
+                      id="is_practical"
                       class="form-check-input mb-4"
                       type="checkbox"
-                      value=""
+                      v-model="course.is_practical"
                     />
-                    <label class="form-check-label required">
+                    <label class="form-check-label" for="is_practical">
                       Is Practical
                     </label>
                   </div>
@@ -197,6 +198,7 @@ export default {
       course: {
         title: '',
         code: '',
+        is_practical: false,
         university: '',
       },
 
@@ -220,6 +222,62 @@ export default {
   },
 
   methods: {
+    // send course data to server to create a new course
+    async addCourse() {
+      try {
+        let course = this.course
+        course.university = course.university.id
+
+        this.$swal({
+          title: 'Adding Course',
+          icon: 'info',
+          type: 'info',
+          text: 'Please wait while we are Adding a New Course',
+          didOpen: () => {
+            this.$swal.showLoading()
+
+            this.$api.course
+              .create(course)
+              .then(() => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                this.$swal({
+                  title: 'Success',
+                  icon: 'success',
+                  type: 'success',
+                  text: 'Course has been added Successfully',
+                  timer: 2000,
+                  timerProgressBar: true,
+
+                  didOpen: () => {
+                    this.$swal.showLoading()
+                  },
+                }).then(() => this.$router.push('/dash/course'))
+              })
+              .catch((err) => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                this.$swal({
+                  title: 'Error',
+                  icon: 'error',
+                  type: 'error',
+                  html: `Failed to Add Course.`,
+                })
+              })
+          },
+        })
+      } catch (e) {
+        this.$swal({
+          title: 'Error',
+          icon: 'error',
+          type: 'error',
+          html: `Failed to Add Course.<br/>Try Again`,
+        })
+      }
+    },
+
     // fetch universities for select
     async getUniversities() {
       this.disableUniBtns = true

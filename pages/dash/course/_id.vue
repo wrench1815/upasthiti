@@ -28,7 +28,7 @@
           <!-- for Valdation -->
           <ValidationObserver v-slot="{ handleSubmit }" v-else>
             <!-- start:Course Add Form -->
-            <form @submit.prevent="handleSubmit(addCourse)">
+            <form @submit.prevent="handleSubmit(updateCourse)">
               <div class="row">
                 <!-- start:Course Title -->
                 <div class="col">
@@ -71,11 +71,12 @@
                 <div class="col">
                   <div class="form-check">
                     <input
+                      id="is_practical"
                       class="form-check-input mb-4"
                       type="checkbox"
-                      value=""
+                      v-model="course.is_practical"
                     />
-                    <label class="form-check-label required">
+                    <label class="form-check-label" for="is_practical">
                       Is Practical
                     </label>
                   </div>
@@ -205,11 +206,7 @@ export default {
         paginateUni: true,
       },
 
-      course: {
-        title: '',
-        code: '',
-        university: '',
-      },
+      course: {},
 
       // universty related
       disableUniBtns: true,
@@ -231,6 +228,91 @@ export default {
   },
 
   methods: {
+    // send course data to server to Edit the course
+    async updateCourse() {
+      try {
+        let course = this.course
+        course.university = course.university.id
+
+        this.$swal({
+          title: 'Updating Course',
+          icon: 'info',
+          type: 'info',
+          text: 'Please wait while we are Updating the Course',
+          didOpen: () => {
+            this.$swal.showLoading()
+
+            this.$api.course
+              .update(course.id, course)
+              .then(() => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                this.$swal({
+                  title: 'Success',
+                  icon: 'success',
+                  type: 'success',
+                  text: 'Course has been updated Successfully',
+                  timer: 2000,
+                  timerProgressBar: true,
+
+                  didOpen: () => {
+                    this.$swal.showLoading()
+                  },
+                }).then(() => this.$router.push('/dash/course'))
+              })
+              .catch((err) => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                this.$swal({
+                  title: 'Error',
+                  icon: 'error',
+                  type: 'error',
+                  html: `Failed to Update Course.`,
+                })
+              })
+          },
+        })
+      } catch (e) {
+        this.$swal({
+          title: 'Error',
+          icon: 'error',
+          type: 'error',
+          html: `Failed to Update Course.<br/>Try Again`,
+        })
+      }
+    },
+
+    // retrieve course
+    async retrieveCourse() {
+      this.loading.main = true
+
+      return this.$api.course
+        .retrieve(this.$route.params.id)
+        .then((response) => {
+          this.course = response.data
+
+          this.error = false
+        })
+        .catch((err) => {
+          if (err.response.status == 404) {
+            this.error = true
+            this.course = {}
+
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'No Course Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong',
+            })
+          }
+        })
+    },
+
     // fetch universities for select
     async getUniversities() {
       this.disableUniBtns = true
@@ -264,13 +346,17 @@ export default {
   mounted() {
     this.uniPayload.page = 1
 
-    this.getUniversities().then(() => {
-      this.loading.main = false
-
-      document.querySelectorAll('.form-outline').forEach((formOutline) => {
-        new this.$mdb.Input(formOutline).init()
+    this.getUniversities()
+      .then(() => {
+        return this.retrieveCourse()
       })
-    })
+      .then(() => {
+        this.loading.main = false
+
+        document.querySelectorAll('.form-outline').forEach((formOutline) => {
+          new this.$mdb.Input(formOutline).init()
+        })
+      })
   },
 }
 </script>
