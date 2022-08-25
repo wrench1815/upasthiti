@@ -1,40 +1,60 @@
 <template>
-  <div>
-    <!-- start:Profile Modal -->
-    <div
-      class="modal fade"
-      id="profileModal"
-      tabindex="-1"
-      aria-labelledby="profileModalLabel"
-      aria-hidden="true"
-    >
+  <div
+    class="offcanvas offcanvas-pos border-0 offcanvas-width bg-transparent shadow-0 p-0 offcanvas-anim"
+    tabindex="-1"
+    id="profileOffCanvas"
+    aria-labelledby="profileOffCanvasLabel"
+  >
+    <div class="offcanvas-body m-1 p-2 d-flex hide-scrollbar">
+      <div class=""></div>
       <div
-        class="modal-dialog modal-side modal-bottom-left modal-dialog-width shadow"
+        class="bg-white rounded-5 shadow mt-auto mt-lg- mb-lg-aut position-relative ms-lg-aut content-width"
       >
-        <div class="modal-content">
-          <div class="modal-header justify-content-center pb-0">
-            <LoadersAsideNavProfileModal v-if="loading" />
+        <!-- start:Profile Close Button -->
+        <div class="position-absolute end-0 m-2">
+          <button
+            id="closeProfileOffCanvasHide"
+            type="button"
+            class="btn-close"
+            data-mdb-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <!-- end:Profile Close Button -->
+
+        <!-- start:ifAuthenticated-->
+        <div v-if="isAuthenticated" class="my-3 mx-2">
+          <div class="justify-content-center">
             <div
               class="d-flex flex-column align-items-center justify-content-center gap-2"
-              v-else
             >
+              <!-- start:profile image -->
               <img
-                class="avatar avatar-lg rounded-circle obj-fit-cover shadow"
+                class="avatar rounded-circle obj-fit-cover shadow"
                 :data-src="
-                  isAuthenticated ? user.profile_image : userDefaultImage
+                  loggedInUser.profile_image
+                    ? loggedInUser.profile_image
+                    : defaultProfileImage
                 "
-                :alt="`${
-                  isAuthenticated ? user.first_name : ''
-                }'s profile image`"
+                :alt="`${loggedInUser.full_name}'s profile Image`"
                 v-lazy-load
               />
-              <div class="text-center text-break">
-                <h5 class="text-dark">
-                  {{ isAuthenticated ? user.full_name : '' }}
+              <!-- end:profile image -->
+
+              <div class="text-center">
+                <!-- start:user full name -->
+                <h5 class="text-dark text-break">
+                  {{ loggedInUser.full_name }}
                 </h5>
-                <p class="pb-0 mb-0 text-muted">
-                  {{ isAuthenticated ? user.email : '' }}
+                <!-- end:user full name -->
+
+                <!-- start:user email -->
+                <p class="pb-0 mb-0 text-muted text-break">
+                  {{ loggedInUser.email }}
                 </p>
+                <!-- end:user email -->
+
+                <!-- start:user role -->
                 <div
                   class="d-flex justify-content-center align-items-center mt-2 mb-3"
                 >
@@ -46,49 +66,49 @@
                     {{ role }}
                   </span>
                 </div>
+                <!-- end:user role -->
               </div>
             </div>
           </div>
-          <div class="modal-body">
+          <!-- start:nav links -->
+          <div>
             <ul class="nav flex-column">
-              <!-- start:Profile -->
-              <li class="nav-item">
-                <NuxtLink
-                  to="/dash/user"
-                  class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
-                >
-                  <i class="ri-profile-fill"></i>Profile
-                </NuxtLink>
-              </li>
-              <!-- end:Profile -->
-
-              <!-- start:Main Site -->
+              <!-- edit profile -->
               <li class="nav-item">
                 <div
                   class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
-                  @click="toMainSite"
+                  @click="toEditProfile"
                 >
-                  <i class="ri-home-2-fill"></i>Main Site
+                  <i class="ri-profile-fill"></i>Edit Profile
                 </div>
               </li>
-              <!-- end:Main Site -->
 
-              <!-- start:Logout -->
+              <!-- to home -->
               <li class="nav-item">
                 <div
-                  class="nav-link rounded-4 text-danger pointer-pointer d-flex align-items-center gap-1"
+                  class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
+                  @click="toHome"
+                >
+                  <i class="ri-home-2-fill"></i>Home
+                </div>
+              </li>
+
+              <!-- logout -->
+              <li class="nav-item">
+                <div
+                  class="nav-link logout rounded-4 text-danger pointer-pointer d-flex align-items-center gap-1"
                   @click="logout"
                 >
                   <i class="ri-logout-circle-line text-danger"></i>Logout
                 </div>
               </li>
-              <!-- end:Logout -->
             </ul>
           </div>
+          <!-- end:nav links -->
         </div>
+        <!-- end:ifAuthenticated-->
       </div>
     </div>
-    <!-- end:Profile Modal -->
   </div>
 </template>
 
@@ -96,90 +116,94 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'DashNavProfile',
+  name: 'NavBarProfile',
 
   data() {
     return {
-      roleClass: '',
+      defaultProfileImage: '',
       roleIcon: '',
-      loading: true,
+      roleClass: '',
     }
-  },
-
-  watch: {
-    $route() {
-      if (document.querySelector('#profileModal').classList.contains('show')) {
-        document.querySelector('#profileModalToggle').click()
-      }
-    },
   },
 
   computed: {
     ...mapGetters({
-      user: 'loggedInUser',
-      role: 'loggedInUserRole',
       isAuthenticated: 'isAuthenticated',
+      loggedInUser: 'loggedInUser',
+      role: 'loggedInUserRole',
     }),
-    userDefaultImage() {
-      return this.$config.defaultUserImage
-    },
   },
 
   methods: {
-    async logout() {
-      if (document.querySelector('#profileModal').classList.contains('show')) {
-        await document.querySelector('#profileModalToggle').click()
-      }
+    async setDefaults() {
+      return new Promise((resolve, reject) => {
+        this.defaultProfileImage = this.$config.defaultUserImage
 
-      await this.$swal({
-        title: 'Logging Out...',
-        icon: 'info',
-        text: 'Please wait...',
-        didOpen: () => {
-          this.$swal.showLoading()
-
-          this.$auth
-            .logout()
-            .then(() => {
-              this.$swal.hideLoading()
-              this.$swal.close()
-
-              this.$swal({
-                title: 'Logged Out!',
-                type: 'success',
-                icon: 'success',
-                text: 'You have been logged Out.',
-                showConfirmButton: false,
-                timer: 1500,
-                timerProgressBar: true,
-              })
-            })
-            .catch((err) => {
-              this.$swal.hideLoading()
-              this.$swal.close()
-              this.$swal({
-                title: 'Error!',
-                type: 'error',
-                icon: 'error',
-                html: `Failed to Log out.<br/>Try Again.`,
-              })
-            })
-        },
+        resolve()
       })
     },
 
-    async toMainSite() {
-      try {
+    async profileOffCanvas() {
+      return new Promise((resolve, reject) => {
         if (
-          document.querySelector('#profileModal').classList.contains('show')
+          document.querySelector('#profileOffCanvas').classList.contains('show')
         ) {
-          await document.querySelector('#profileModalToggle').click()
+          document.querySelector('#closeProfileOffCanvasHide').click()
         }
-      } catch (error) {
-        await document.querySelector('#profileModalToggle').click()
-      } finally {
+
+        resolve()
+      })
+    },
+
+    async toEditProfile() {
+      this.profileOffCanvas().then(() => {
+        this.$router.push('/dash/profile')
+      })
+    },
+    async toHome() {
+      this.profileOffCanvas().then(() => {
         this.$router.push('/')
-      }
+      })
+    },
+
+    async logout() {
+      this.profileOffCanvas().then(() => {
+        this.$swal({
+          title: 'Logging Out...',
+          icon: 'info',
+          text: 'Please wait...',
+          didOpen: () => {
+            this.$swal.showLoading()
+
+            this.$auth
+              .logout()
+              .then(() => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                this.$swal({
+                  title: 'Logged Out!',
+                  type: 'success',
+                  icon: 'success',
+                  text: 'You have been logged Out.',
+                  showConfirmButton: false,
+                  timer: 1500,
+                  timerProgressBar: true,
+                })
+              })
+              .catch((err) => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+                this.$swal({
+                  title: 'Error!',
+                  type: 'error',
+                  icon: 'error',
+                  html: `Failed to Log out.<br/>Try Again.`,
+                })
+              })
+          },
+        })
+      })
     },
 
     async setRoleClass() {
@@ -200,26 +224,47 @@ export default {
   },
 
   mounted() {
-    this.setRoleClass().then(() => (this.loading = false))
+    this.setDefaults().then(() => {
+      this.setRoleClass()
+    })
   },
 }
 </script>
 
 <style scoped>
-.modal .modal-side {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  margin: 0;
+.offcanvas.show {
+  transform: none !important;
 }
 
-.modal .modal-dialog.modal-bottom-left {
-  bottom: 10px;
-  left: 10px;
+.content-width {
+  width: 15.688rem;
 }
 
-.modal-dialog-width {
-  width: 17rem;
+.offcanvas-pos {
+  top: 0;
+  left: 0;
+  width: 400px;
+}
+
+.offcanvas-anim {
+  transform: translateY(100%);
+}
+
+/* .offcanvas-width {
+  width: 16rem;
+} */
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.badge-fs {
+  font-size: 0.9rem !important;
 }
 
 .nav-link {
@@ -236,7 +281,8 @@ export default {
   color: var(--mdb-primary);
 }
 
-.badge-fs {
-  font-size: 0.9rem !important;
+.nav-link:hover.logout {
+  border-left: 2px solid var(--mdb-danger) !important;
+  background-color: rgba(var(--mdb-danger-rgb), 0.2);
 }
 </style>

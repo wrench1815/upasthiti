@@ -157,7 +157,7 @@ export default {
 
     async toEditProfile() {
       this.profileOffCanvas().then(() => {
-        this.$router.push('/')
+        this.$router.push('/dash/profile')
       })
     },
     async toDash() {
@@ -261,9 +261,9 @@ export default {
   }
 }
 
-.offcanvas-width {
-  /* width: 16rem; */
-}
+/* .offcanvas-width {
+  width: 16rem;
+} */
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
