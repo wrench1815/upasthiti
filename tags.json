@@ -101,6 +101,42 @@
     ],
     "description": ""
   },
+  "dash-course-detail-card": {
+    "attributes": [
+      "course"
+    ],
+    "description": ""
+  },
+  "DashCourseDetailCard": {
+    "attributes": [
+      "course"
+    ],
+    "description": ""
+  },
+  "dash-course-detail-uni-card": {
+    "attributes": [
+      "university"
+    ],
+    "description": ""
+  },
+  "DashCourseDetailUniCard": {
+    "attributes": [
+      "university"
+    ],
+    "description": ""
+  },
+  "dash-course-table": {
+    "attributes": [
+      "courses"
+    ],
+    "description": ""
+  },
+  "DashCourseTable": {
+    "attributes": [
+      "courses"
+    ],
+    "description": ""
+  },
   "dash-department-detail-card-1": {
     "attributes": [
       "department",
@@ -253,6 +289,22 @@
     "attributes": [],
     "description": ""
   },
+  "dash-profile-edit": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashProfileEdit": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-profile-view": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashProfileView": {
+    "attributes": [],
+    "description": ""
+  },
   "dash-university-table": {
     "attributes": [
       "universities"
@@ -371,25 +423,49 @@
     ],
     "description": ""
   },
-  "wiz-user-add": {
+  "forge-college-card": {
+    "attributes": [
+      "college"
+    ],
+    "description": ""
+  },
+  "ForgeCollegeCard": {
+    "attributes": [
+      "college"
+    ],
+    "description": ""
+  },
+  "forge-college-info-card": {
+    "attributes": [
+      "data"
+    ],
+    "description": ""
+  },
+  "ForgeCollegeInfoCard": {
+    "attributes": [
+      "data"
+    ],
+    "description": ""
+  },
+  "forge-user-add": {
     "attributes": [
       "userRole"
     ],
     "description": ""
   },
-  "WizUserAdd": {
+  "ForgeUserAdd": {
     "attributes": [
       "userRole"
     ],
     "description": ""
   },
-  "wiz-user-card": {
+  "forge-user-card": {
     "attributes": [
       "user"
     ],
     "description": ""
   },
-  "WizUserCard": {
+  "ForgeUserCard": {
     "attributes": [
       "user"
     ],

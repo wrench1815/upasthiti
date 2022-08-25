@@ -1,9 +1,8 @@
 <template>
   <section>
     <transition name="scale-in" mode="out-in">
-      <div v-if="loading">
-        <LoadersDetailCard />
-      </div>
+      <LoadersDetailUserCard v-if="loading" />
+
       <div v-else>
         <div
           class="card bg-light shadow-3-strong p-3 d-flex gap-4 rounded-5 align-items-center flex-column flex-sm-row"

@@ -78,9 +78,13 @@
           <!-- start:Profile Modal Toggle -->
           <div
             class="ms-auto me-0 mb-n2"
-            id="profileModalToggle"
-            data-mdb-toggle="modal"
-            data-mdb-target="#profileModal"
+            id="profileOffCanvasToggle"
+            type="button"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            data-mdb-toggle="offcanvas"
+            data-mdb-target="#profileOffCanvas"
+            aria-controls="profileOffCanvas"
           >
             <i class="ri-settings-2-line ri-xl rotate-center cog"></i>
           </div>

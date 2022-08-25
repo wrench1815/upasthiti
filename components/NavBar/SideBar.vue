@@ -44,7 +44,7 @@
         <!-- start:logged in user profile image -->
         <div>
           <img
-            class="avatar avatar rounded-circle obj-fit-cover shadow"
+            class="avatar rounded-circle obj-fit-cover shadow"
             :data-src="
               isAuthenticated && loggedInUser.profile_image
                 ? loggedInUser.profile_image
