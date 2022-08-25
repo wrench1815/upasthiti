@@ -26,7 +26,7 @@
           <!-- for Valdation -->
           <ValidationObserver v-slot="{ handleSubmit }" v-else>
             <!-- start:User Edit Form -->
-            <form @submit.prevent="handleSubmit(updateUser)">
+            <form @submit.prevent="handleSubmit(updateUserData)">
               <!-- start:Profile Image -->
               <div class="row mb-4">
                 <div class="col-12">
