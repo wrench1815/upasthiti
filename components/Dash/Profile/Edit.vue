@@ -288,8 +288,6 @@ export default {
     }
   },
 
-
-
   computed: {
     ...mapGetters({
       districtList: 'listDistricts',
