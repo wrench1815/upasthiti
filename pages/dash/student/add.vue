@@ -2,23 +2,23 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h1 class="text-gradient text-primary d-inline-block">Add User</h1>
-        <h3 class="text-secondary text-capitalize">Add a New User</h3>
+        <h1 class="text-gradient text-primary d-inline-block">Add Student</h1>
+        <h3 class="text-secondary text-capitalize">Add a New Student</h3>
       </div>
 
       <div class="card-body">
         <!-- placeholder-->
-        <Lazy-LoadersForm
+        <!-- <Lazy-LoadersForm
           :inputCount="6"
           :btnEnd="true"
           :btnColor="'primary'"
           v-if="loading"
-        />
+        /> -->
 
         <!-- for Valdation -->
-        <ValidationObserver v-slot="{ handleSubmit }" v-else>
-          <!-- start:User Add Form -->
-          <form @submit.prevent="handleSubmit(addUser)">
+        <ValidationObserver v-slot="{ handleSubmit }">
+          <!-- start:Student Edit Form -->
+          <form @submit.prevent="handleSubmit(addStudent)">
             <!-- start:Profile Image -->
             <div class="row mb-4">
               <div class="col-12">
@@ -34,7 +34,7 @@
               <div class="col-12">
                 <div
                   class="position-relative rounded-5 shadow-2-strong profile-image-size bg-size-cover bg-pos-center"
-                  :style="`background-image: url(${user.profile_image})`"
+                  :style="`background-image: url(${student.profile_image})`"
                 >
                   <!-- profile image, reset -->
                   <span
@@ -90,7 +90,7 @@
                 <Lazy-DashInput
                   :label="'First Name'"
                   :validationRules="{ required: true, min: 3, alpha: true }"
-                  :data.sync="user.first_name"
+                  :data.sync="student.first_name"
                   :type="'text'"
                   :icon="'ri-user-fill'"
                   isRequired
@@ -102,7 +102,7 @@
                 <Lazy-DashInput
                   :label="'Last Name'"
                   :validationRules="{ required: true, min: 3, alpha: true }"
-                  :data.sync="user.last_name"
+                  :data.sync="student.last_name"
                   :type="'text'"
                   :icon="'ri-user-fill'"
                   isRequired
@@ -117,7 +117,7 @@
                 <Lazy-DashInput
                   :label="'Email'"
                   :validationRules="{ required: true, email: true }"
-                  :data.sync="user.email"
+                  :data.sync="student.email"
                   :type="'text'"
                   :icon="'ri-mail-fill'"
                   isRequired
@@ -135,7 +135,7 @@
                     max: 13,
                     phone: true,
                   }"
-                  :data.sync="user.mobile"
+                  :data.sync="student.mobile"
                   :type="'tel'"
                   :icon="'ri-phone-fill'"
                   isRequired
@@ -154,7 +154,7 @@
                   <v-select
                     placeholder="Select Gender"
                     :options="genderList"
-                    v-model="user.gender"
+                    v-model="student.gender"
                   >
                     <!-- for options -->
                     <template #option="{ label, icon }">
@@ -195,7 +195,7 @@
                   <v-select
                     placeholder="Select District"
                     :options="districtList"
-                    v-model="user.district"
+                    v-model="student.district"
                   >
                   </v-select>
                   <!-- Validation Errors -->
@@ -222,7 +222,7 @@
                 <textarea
                   class="form-control"
                   rows="4"
-                  v-model="user.address"
+                  v-model="student.address"
                 ></textarea>
                 <label class="form-label required">
                   <i class="ri-map-pin-2-fill text-primary text-gradient"></i>
@@ -240,7 +240,7 @@
             <!-- end:Address -->
 
             <!-- start:Password -->
-            <ValidationProvider
+            <!-- <ValidationProvider
               v-slot="{ errors }"
               :rules="{
                 required: true,
@@ -258,7 +258,7 @@
                   id="password"
                   name="password"
                   class="form-control mb-0"
-                  v-model="user.password"
+                  v-model="student.password"
                 />
                 <label class="form-label" for="password">
                   <div class="d-flex justify-content-center gap-1">
@@ -269,17 +269,17 @@
                   </div>
                 </label>
               </div>
-              <!-- Valdation Errors -->
-              <div
+              Valdation Errors
+               <div
                 class="text-danger transition-all-ease-out-sine"
                 :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
               >
                 {{ errors[0] }}
               </div>
-            </ValidationProvider>
+            </ValidationProvider> -->
 
             <!-- start:Show Password -->
-            <div class="form-check mb-4">
+            <!-- <div class="form-check mb-4">
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -294,170 +294,9 @@
                 for="showPassword"
                 >Show Password</label
               >
-            </div>
+            </div> -->
             <!-- end:Show Password -->
             <!-- end:Password -->
-
-            <!-- start:Role Checkbox -->
-            <div class="row justify-content-center g-3 pb-4">
-              <div class="col-12">
-                <label class="form-label">
-                  <div class="d-flex justify-content-center gap-1">
-                    <i
-                      class="ri-user-4-fill text-primary text-gradient d-block-inline"
-                    ></i>
-                    <span> Roles </span>
-                    <a
-                      tabindex="0"
-                      class="ripple"
-                      data-mdb-ripple-unbound="true"
-                      data-mdb-ripple-radius="40"
-                      data-mdb-ripple-color="primary"
-                      role="button"
-                      data-mdb-toggle="popover"
-                      data-mdb-html="true"
-                      data-mdb-trigger="focus"
-                      data-mdb-content="Select a role to assign to the user.<br/>Can be multiple."
-                    >
-                      <i class="ri-information-line text-danger"></i>
-                    </a>
-                  </div>
-                </label>
-              </div>
-
-              <!-- start:Admin Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="admin"
-                >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-danger shadow-3-strong text-white':
-                        user.is_admin,
-                      'border-danger text-danger text-gradient bg-white fw-bolder':
-                        !user.is_admin,
-                    }"
-                  >
-                    <i class="ri-shield-user-fill"></i>
-                    <span>Admin</span>
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="admin"
-                  v-model="user.is_admin"
-                />
-              </div>
-              <!-- end:Admin Check -->
-
-              <!-- start:Principal Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="principal"
-                >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-info text-white shadow-3-strong':
-                        user.is_principal,
-                      'border-info text-info text-gradient bg-white fw-bolder':
-                        !user.is_principal,
-                    }"
-                  >
-                    <i class="ri-admin-fill"></i>
-                    Principal
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="principal"
-                  v-model="user.is_principal"
-                />
-              </div>
-              <!-- end:Principal Check -->
-
-              <!-- start:HOD Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="hod"
-                >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-primary text-white shadow-3-strong':
-                        user.is_hod,
-                      'border-primary text-primary text-gradient bg-white fw-bolder':
-                        !user.is_hod,
-                    }"
-                  >
-                    <i class="ri-user-star-fill"></i>
-                    HoD
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="hod"
-                  v-model="user.is_hod"
-                />
-              </div>
-              <!-- end:HOD Check -->
-
-              <!-- start:Teacher Check -->
-              <div
-                class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
-              >
-                <label
-                  class="form-check-label ripple"
-                  data-mdb-ripple-unbound="true"
-                  data-mdb-ripple-radius="40"
-                  data-mdb-ripple-color="primary"
-                  for="teacher"
-                >
-                  <div
-                    class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                    :class="{
-                      'border-transparent bg-gradient-warning text-white shadow-3-strong':
-                        user.is_teacher,
-                      'border-warning text-warning text-gradient bg-white fw-bolder':
-                        !user.is_teacher,
-                    }"
-                  >
-                    <i class="ri-user-2-fill"></i>
-                    Teacher
-                  </div>
-                </label>
-                <input
-                  class="form-check-input me-2 d-none"
-                  type="checkbox"
-                  id="teacher"
-                  v-model="user.is_teacher"
-                />
-              </div>
-              <!-- end:Teacher Check -->
-            </div>
-            <!-- end:Role Checkbox -->
 
             <!-- Submit button -->
             <div class="d-flex justify-content-center">
@@ -465,11 +304,11 @@
                 type="submit"
                 class="btn bg-gradient-primary text-white btn-rounded my-4"
               >
-                Add a new User
+                Add a new Student
               </button>
             </div>
           </form>
-          <!-- End:User Edit Form -->
+          <!-- End:Student Add Form -->
         </ValidationObserver>
       </div>
     </div>
@@ -480,7 +319,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'DashUserAdd',
+  name: 'DashStudentAdd',
   layout: 'dash',
 
   data() {
@@ -501,24 +340,28 @@ export default {
           icon: 'ri-genderless-fill',
         },
       ],
-      showPassword: false,
+
       imageFile: '',
       imageUploaded: false,
-      user: {
+      student: {
         profile_image: '',
-        profile_image_public_id: '',
-        first_name: '',
-        last_name: '',
+        id: '',
+        student_first_name: '',
+        student_last_name: '',
+        class_rollno: '',
         email: '',
-        gender: '',
-        mobile: '',
+        phone_no: '',
         district: '',
         address: '',
-        is_admin: false,
-        is_principal: false,
-        is_hod: false,
-        is_teacher: false,
-        password: '',
+        courses: '',
+        department: '',
+        attendance: '',
+        // gender: '',
+        // is_admin: false,
+        // is_principal: false,
+        // is_hod: false,
+        // is_teacher: false,
+        // password: '',
       },
     }
   },
@@ -526,8 +369,8 @@ export default {
   created() {
     this.$store.commit('breadCrumbs/addBreadCrumb', [
       {
-        name: 'User',
-        url: '/dash/user',
+        name: 'Student',
+        url: '/dash/student',
       },
       {
         name: 'Add',
@@ -558,8 +401,8 @@ export default {
             this.$api.image
               .upload(formData)
               .then((response) => {
-                this.user.profile_image = response.data.image_url
-                this.user.profile_image_public_id = response.data.public_id
+                this.student.profile_image = response.data.image_url
+                this.student.id = response.data.id
                 this.imageUploaded = true
 
                 this.$swal.hideLoading()
@@ -586,52 +429,55 @@ export default {
       })
     },
 
-    // add a new user
-    async addUser() {
+    // add a new student
+    async addStudent() {
       if (this.imageFile) {
         if (this.imageUploaded) {
-          this.addNewUser()
+          this.addNewStudent()
         } else {
           this.uploadProfile().then(() => {
-            this.addNewUser()
+            this.addNewStudent()
           })
         }
       } else {
-        this.addNewUser()
+        this.addNewStudent()
       }
     },
 
-    async addNewUser() {
+    async addNewStudent() {
       try {
         const user = {
-          profile_image: this.user.profile_image,
-          profile_image_public_id: this.user.profile_image_public_id,
-          first_name: this.user.first_name,
-          last_name: this.user.last_name,
-          email: this.user.email,
-          gender: this.user.gender.label,
-          district: this.user.district,
-          address: this.user.address,
-          mobile: this.user.mobile,
-          password: this.user.password,
-          confirm_password: this.user.password,
-          is_active: this.user.is_active,
-          is_admin: this.user.is_admin,
-          is_principal: this.user.is_principal,
-          is_hod: this.user.is_hod,
-          is_teacher: this.user.is_teacher,
+          profile_image: this.student.profile_image,
+          id: this.student.id,
+          student_first_name: this.student_first_name,
+          student_last_name: this.student_last_name,
+          email: this.student.email,
+          // gender: this.student.gender.label,
+          district: this.student.district,
+          address: this.student.address,
+          mobile: this.student.mobile,
+          courses: this.student.courses,
+          department: this.student.department,
+          attendance: this.student.attendance,
+          // password: this.user.password,
+          // confirm_password: this.user.password,
+          // is_active: this.user.is_active,
+          // is_admin: this.user.is_admin,
+          // is_principal: this.user.is_principal,
+          // is_hod: this.user.is_hod,
+          // is_teacher: this.user.is_teacher,
         }
 
         this.$swal({
-          title: 'Adding User',
+          title: 'Adding Student',
           icon: 'info',
           type: 'info',
-          text: 'Please wait while we are Adding a New User',
+          text: 'Please wait while we are Adding a New Student',
           didOpen: () => {
             this.$swal.showLoading()
 
-            this.$api.user
-              .create(user)
+            this.$api.student
+              .create(student)
               .then(() => {
                 this.$swal.hideLoading()
                 this.$swal.close()
@@ -642,14 +488,14 @@ export default {
                   title: 'Success',
                   icon: 'success',
                   type: 'success',
-                  text: 'User has been added Successfully',
+                  text: 'Student has been added Successfully',
                   timer: 2000,
                   timerProgressBar: true,
 
                   didOpen: () => {
                     this.$swal.showLoading()
                   },
-                }).then(() => this.$router.push('/dash/user'))
+                }).then(() => this.$router.push('/dash/student'))
               })
               .catch((err) => {
                 this.$swal.hideLoading()
@@ -659,7 +505,7 @@ export default {
                   title: 'Error',
                   icon: 'error',
                   type: 'error',
-                  html: `Failed to Add User.`,
+                  html: `Failed to Add Student.`,
                 })
               })
           },
@@ -669,16 +515,16 @@ export default {
           title: 'Error',
           icon: 'error',
           type: 'error',
-          html: `Failed to Add User.<br/>Try Again`,
+          html: `Failed to Add Student.<br/>Try Again`,
         })
       }
     },
 
     // assign default Values to the user object
-    async assignUserValues() {
+    async assignStudentValues() {
       return new Promise((resolve, reject) => {
         // get default image from config
-        this.user.profile_image = this.$config.defaultUserImage
+        this.student.profile_image = this.$config.defaultStudentImage
 
         resolve()
       })
@@ -695,7 +541,7 @@ export default {
     // reset user.profile_image to default image
     async removeProfileImage() {
       return new Promise((resolve, reject) => {
-        this.user.profile_image = this.$config.defaultUserImage
+        this.student.profile_image = this.$config.defaultStudentImage
         this.imageFile = ''
         this.imageUploaded = false
         resolve()
@@ -759,13 +605,13 @@ export default {
 
       this.imageFile = await imageFile
       const imageData = await readData(imageFile)
-      this.user.profile_image = await imageData
+      this.student.profile_image = await imageData
       e.target.value = ''
     },
   },
 
   mounted() {
-    this.assignUserValues()
+    this.assignStudentValues()
       .then(() => {
         this.unsetLoading()
       })
