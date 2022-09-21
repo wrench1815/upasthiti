@@ -9,7 +9,9 @@
         data-mdb-ripple-color="light"
         @click="prevPage"
       >
-        <span class="d-flex justify-content-center align-items-center p-1 px-2">
+        <span
+          class="d-flex justify-content-center align-items-center p-1 px-2 no-transition"
+        >
           <i class="ri-arrow-left-s-line"></i>
         </span>
       </li>
@@ -18,9 +20,7 @@
 
     <!-- start:paging -->
     <ul class="d-flex gap-2 list-unstyled mb-0">
-      <li
-        class="d-flex flex-row rounded-5 bg-light borde border- border-primar text-primar fw-bol"
-      >
+      <li class="d-flex flex-row rounded-5 bg-light">
         <span
           class="d-flex justify-content-center align-items-center p-1 px-2"
           >{{ this.pagination.current }}</span
@@ -43,7 +43,9 @@
         data-mdb-ripple-color="light"
         @click="nextPage"
       >
-        <span class="d-flex justify-content-center align-items-center p-1 px-2">
+        <span
+          class="d-flex justify-content-center align-items-center p-1 px-2 no-transition"
+        >
           <i class="ri-arrow-right-s-line"></i>
         </span>
       </li>
@@ -92,7 +94,6 @@ export default {
 <style scoped>
 .hover-item {
   background-color: var(--mdb-white) !important;
-  color: var(--mdb-secondary) !important;
   border-color: var(--mdb-secondary) !important;
   height: 2.2rem;
   width: 2.2rem;
@@ -100,7 +101,13 @@ export default {
 
 .hover-item:hover {
   background-color: var(--mdb-primary) !important;
-  color: var(--mdb-white) !important;
   border-color: var(--mdb-primary) !important;
+}
+
+.hover-item > * {
+  color: var(--mdb-secondary) !important;
+}
+.hover-item:hover > * {
+  color: var(--mdb-white) !important;
 }
 </style>
