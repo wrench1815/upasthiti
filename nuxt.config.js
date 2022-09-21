@@ -88,7 +88,7 @@ export default {
         appendClass: 'lazyLoad',
 
         // Default image must be in the static folder
-        defaultImage: '/white.png',
+        defaultImage: '/cover.png',
       },
     ],
 
