@@ -251,40 +251,6 @@
   "DashUserTable/defaultProfileImage": {
     "type": "string"
   },
-  "dash-college-add/collegePrincipal": {
-    "type": "object",
-    "description": "The Principal to assign the College to"
-  },
-  "DashCollegeAdd/collegePrincipal": {
-    "type": "object",
-    "description": "The Principal to assign the College to"
-  },
-  "forge-college-card/college": {
-    "type": "object"
-  },
-  "ForgeCollegeCard/college": {
-    "type": "object"
-  },
-  "forge-college-info-card/data": {
-    "type": "object"
-  },
-  "ForgeCollegeInfoCard/data": {
-    "type": "object"
-  },
-  "forge-user-add/userRole": {
-    "type": "string",
-    "description": "The user type to be Forged\n\nallowed values: 'admin', 'principal', 'hod', 'teacher'"
-  },
-  "ForgeUserAdd/userRole": {
-    "type": "string",
-    "description": "The user type to be Forged\n\nallowed values: 'admin', 'principal', 'hod', 'teacher'"
-  },
-  "forge-user-card/user": {
-    "type": "object"
-  },
-  "ForgeUserCard/user": {
-    "type": "object"
-  },
   "forms-input/inputtype": {
     "type": "string"
   },
