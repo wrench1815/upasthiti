@@ -4,11 +4,17 @@
       <thead class="align-middle bg-primary text-white">
         <tr>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">
-            Roll No.
+            University Roll No.
+          </th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">
+            Class Roll No.
           </th>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">Name</th>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">
             Contact
+          </th>
+          <th scope="col" class="fw-bolder text-uppercase text-nowrap">
+            Address Block
           </th>
           <th scope="col" class="fw-bolder text-uppercase text-nowrap">
             Created on
@@ -19,18 +25,38 @@
         </tr>
       </thead>
       <tbody>
-        <!-- start:no users -->
-        <!-- <tr v-if="users.length == 0">
+        <!-- start:no students -->
+        <tr v-if="students.length == 0">
           <td colspan="6" class="bg-white">
-            <UtilsNoData class="mx-auto" message="No Users found" />
+            <UtilsNoData class="mx-auto" message="No Students found" />
           </td>
-        </tr> -->
-        <!-- end:no users -->
+        </tr>
+        <!-- end:no students -->
 
-        <!-- start:has users -->
+        <!-- start:has Students -->
         <template>
-          <tr v-for="student in 6" :key="student">
-            <!-- start:Roll no. -->
+          <tr v-for="student in students" :key="student.id">
+            <!-- start:University Roll no. -->
+            <td>
+              <div class="d-flex align-items-center">
+                <NuxtLink
+                  :to="`/dash/student/detail?id=${student.id}`"
+                  class="fw-bolder mb-1 text-primary w-10-rem d-inline-block"
+                >
+                  <span>
+                    <span class="better-underline d-inline">{{
+                      student.university_rollno
+                        ? student.university_rollno
+                        : '----'
+                    }}</span>
+                    <span class="link"></span>
+                  </span>
+                </NuxtLink>
+              </div>
+            </td>
+            <!-- end:University Roll no. -->
+
+            <!-- start:class Roll no. -->
             <td>
               <div class="d-flex align-items-center">
                 <p class="fw-bold mb-0 text-dark text-nowrap">
@@ -38,12 +64,12 @@
                 </p>
               </div>
             </td>
-            <!-- end:Roll no. -->
+            <!-- end:class Roll no. -->
 
             <!-- start:name -->
             <td>
               <div class="d-flex align-items-center">
-                <div class="avatar rounded-circle">
+                <div class="avatar rounded-circle shadow">
                   <!-- profile image -->
                   <img
                     :data-src="
@@ -62,12 +88,12 @@
                     class="fw-bolder mb-1 text-primary w-10-rem d-inline-block"
                   >
                     <span>
-                      <span class="better-underline d-inline">{{
-                        student.first_name ? student.first_name : '----'
-                      }}</span>
-                      <span class="better-underline d-inline">{{
-                        student.last_name ? student.last_name : '----'
-                      }}</span>
+                      <span class="better-underline d-inline"
+                        >{{ student.first_name ? student.first_name : '----' }}
+                        {{
+                          student.last_name ? student.last_name : '----'
+                        }}</span
+                      >
                       <span class="link"></span>
                     </span>
                   </NuxtLink>
@@ -76,7 +102,7 @@
             </td>
             <!-- end:name -->
 
-            <!-- start:Contact Us -->
+            <!-- start:Contact -->
             <td>
               <div class="text-dark mb-0">
                 <!-- email -->
@@ -89,12 +115,32 @@
                 <!-- mobile -->
                 <div class="d-flex justify-content-start gap-1">
                   <i class="ri-phone-fill text-primary fs-6"></i
-                  >{{ student.phone_no ? student.phone_no : '----' }}
+                  >{{ student.mobile ? student.mobile : '----' }}
                 </div>
                 <!-- mobile -->
               </div>
             </td>
-            <!-- end:Contact Us -->
+            <!-- end:Contact -->
+
+            <!-- start:Address -->
+            <td>
+              <div class="text-dark mb-0">
+                <!-- Address -->
+                <div class="d-flex justify-content-start gap-1">
+                  <i class="ri-map-pin-2-fill text-primary fs-6"></i
+                  >{{ student.address ? student.address : '----' }}
+                </div>
+                <!-- Address -->
+
+                <!-- District -->
+                <div class="d-flex justify-content-start gap-1">
+                  <i class="ri-pin-distance-fill text-primary fs-6"></i
+                  >{{ student.district ? student.district : '----' }}
+                </div>
+                <!-- District -->
+              </div>
+            </td>
+            <!-- end:Address -->
 
             <!-- start:Date Created -->
             <td>
@@ -136,7 +182,7 @@
             <!-- end:Actions -->
           </tr>
         </template>
-        <!-- end:course -->
+        <!-- end:has Students -->
       </tbody>
     </table>
   </div>
@@ -145,17 +191,20 @@
 <script>
 export default {
   name: 'DashStudentTable',
+
   props: {
-    student: {
+    students: {
       type: Array,
       required: true,
     },
   },
+
   computed: {
-    // defaultteacherProfileImage() {
-    //   return this.$config.defaultUserImage
-    // },
+    defaultProfileImage() {
+      return this.$config.defaultUserImage
+    },
   },
+
   methods: {
     // deleteCourse(id) {
     //   this.$swal({

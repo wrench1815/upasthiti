@@ -83,25 +83,29 @@
         <!-- </section> -->
 
         <!-- <LoadersTable v-if="loading.main" /> -->
+        <transition name="scale-in" mode="out-in">
+          <LoadersTable v-if="loading.main" />
+          <DashStudentTable v-else :students.sync="students.results" />
+        </transition>
 
-        <Lazy-DashStudentTable />
-
-        <!-- <Lazy-UtilsPagination
-          class="mt-4"
-          v-if="!loading.main && course.pagination.items != 0"
-          :pagination.sync="course.pagination"
-          @prevPage="onPaginated"
-          @nextPage="onPaginated"
-        /> -->
+        <transition name="scale-in" mode="out-in">
+          <Lazy-UtilsPagination
+            class="mt-4"
+            v-if="!loading.main && students.pagination.items != 0"
+            :pagination.sync="students.pagination"
+            @prevPage="onPaginated"
+            @nextPage="onPaginated"
+          />
+        </transition>
 
         <div class="d-flex justify-content-end mt-3">
-          <!-- <LoadersButton v-if="loading.main" :rounded="true" /> -->
-          <!-- <UtilsLinkButton :rounded="true" :link="'/dash/student/add'" v-else
-            >Add new Student</UtilsLinkButton
-          > -->
-          <UtilsLinkButton :rounded="true" :link="'/dash/student/add'"
-            >Add new Student</UtilsLinkButton
-          >
+          <transition name="scale-in" mode="out-in">
+            <Lazy-LoadersButton v-if="loading.main" :rounded="true" />
+
+            <UtilsLinkButton :rounded="true" :link="'/dash/student/add'" v-else
+              >Add new Student</UtilsLinkButton
+            >
+          </transition>
         </div>
       </div>
     </div>
@@ -113,6 +117,13 @@ export default {
   name: 'DashStudentIndex',
   layout: 'dash',
 
+  watch: {
+    '$route.query'() {
+      this.payloadWatch()
+      this.refreshStudents()
+    },
+  },
+
   data() {
     return {
       loading: {
@@ -120,13 +131,16 @@ export default {
       },
       error: true,
 
-      // payload: {},
+      students: {},
+
+      payload: {},
       // uniList: {},
       // uniPayload: {},
       // disableUniBtns: true,
       // selectedUni: { alias: 'All' },
     }
   },
+
   created() {
     this.$store.commit('breadCrumbs/addBreadCrumb', [
       {
@@ -135,23 +149,98 @@ export default {
       },
     ])
   },
-  // methods: {
 
-  // },
-  // mounted() {
-  //   this.payload.page = this.$route.query.page
+  methods: {
+    // watcher for route query
+    async payloadWatch() {
+      if (this.$route.query.page) {
+        this.payload.page = await this.$route.query.page
+      } else {
+        this.payload.page = await '1'
+      }
+    },
 
-  //   this.uniPayload.page = 1
-  //   this.getUni()
-  //     .then(() => {
-  //       return this.getCourse()
-  //     })
-  //     .then(() => {
-  //       if (!this.error) {
-  //         this.loading.main = false
-  //       }
-  //     })
-  // },
+    async getStudents() {
+      this.loading.main = true
+
+      // if (this.payload.district) {
+      //   if (this.payload.district == 'All') {
+      //     this.payload.district = undefined
+      //   }
+      // }
+
+      // if (this.payload.university) {
+      //   if (this.payload.university == 'All') {
+      //     this.payload.university = undefined
+      //   }
+      // }
+
+      return this.$api.student
+        .list(this.payload)
+        .then((response) => {
+          this.students = response.data
+
+          this.error = false
+        })
+        .catch((err) => {
+          if (err.response.status == 404) {
+            this.error = true
+            this.students = {}
+
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'Page not Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong',
+            })
+          }
+        })
+    },
+
+    // on paginated
+    onPaginated(pageNum) {
+      this.payload.page = pageNum
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          page: pageNum,
+        },
+      })
+    },
+
+    // refresh Students
+    refreshStudents() {
+      this.getStudents().then(() => {
+        this.loading.main = false
+      })
+    },
+
+    // when Student is deleted
+    deletedStudent() {
+      if (this.students.results.length == 1) {
+        if (this.payload.page != 1) {
+          this.onPaginated(this.payload.page - 1)
+        } else {
+          this.onPaginated(1)
+        }
+      }
+      this.refreshStudents()
+    },
+  },
+
+  mounted() {
+    this.payload.page = this.$route.query.page
+    this.payload.size = 1
+
+    this.getStudents().then(() => {
+      if (!this.error) {
+        this.loading.main = false
+      }
+    })
+  },
 }
 </script>
 <style scoped>
