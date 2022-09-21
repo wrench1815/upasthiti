@@ -576,7 +576,7 @@ export default {
                   title: 'Error',
                   type: 'error',
                   icon: 'error',
-                  text: 'Something went wrong while uploading your Profile Image.',
+                  text: 'Something went wrong while uploading the Profile Image.',
                 })
 
                 reject()
