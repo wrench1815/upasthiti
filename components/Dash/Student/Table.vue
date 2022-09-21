@@ -124,7 +124,7 @@
 
             <!-- start:Address -->
             <td>
-              <div class="text-dark mb-0">
+              <div class="text-dark mb-0 w-10-rem">
                 <!-- Address -->
                 <div class="d-flex justify-content-start gap-1">
                   <i class="ri-map-pin-2-fill text-primary fs-6"></i
@@ -260,9 +260,6 @@ export default {
 </script>
 
 <style scoped>
-.badge-fs {
-  font-size: 0.9rem !important;
-}
 table th:first-child {
   border-radius: 10px 0 0 10px !important;
 }
