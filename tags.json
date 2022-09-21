@@ -411,66 +411,6 @@
     "attributes": [],
     "description": ""
   },
-  "dash-college-add": {
-    "attributes": [
-      "collegePrincipal"
-    ],
-    "description": ""
-  },
-  "DashCollegeAdd": {
-    "attributes": [
-      "collegePrincipal"
-    ],
-    "description": ""
-  },
-  "forge-college-card": {
-    "attributes": [
-      "college"
-    ],
-    "description": ""
-  },
-  "ForgeCollegeCard": {
-    "attributes": [
-      "college"
-    ],
-    "description": ""
-  },
-  "forge-college-info-card": {
-    "attributes": [
-      "data"
-    ],
-    "description": ""
-  },
-  "ForgeCollegeInfoCard": {
-    "attributes": [
-      "data"
-    ],
-    "description": ""
-  },
-  "forge-user-add": {
-    "attributes": [
-      "userRole"
-    ],
-    "description": ""
-  },
-  "ForgeUserAdd": {
-    "attributes": [
-      "userRole"
-    ],
-    "description": ""
-  },
-  "forge-user-card": {
-    "attributes": [
-      "user"
-    ],
-    "description": ""
-  },
-  "ForgeUserCard": {
-    "attributes": [
-      "user"
-    ],
-    "description": ""
-  },
   "forms-input": {
     "attributes": [
       "inputtype",
