@@ -253,6 +253,30 @@
     "attributes": [],
     "description": ""
   },
+  "dash-student-detail-u-card": {
+    "attributes": [
+      "student"
+    ],
+    "description": ""
+  },
+  "DashStudentDetailUCard": {
+    "attributes": [
+      "student"
+    ],
+    "description": ""
+  },
+  "dash-student-table": {
+    "attributes": [
+      "students"
+    ],
+    "description": ""
+  },
+  "DashStudentTable": {
+    "attributes": [
+      "students"
+    ],
+    "description": ""
+  },
   "dash-university-table": {
     "attributes": [
       "universities"
