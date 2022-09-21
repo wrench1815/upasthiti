@@ -85,7 +85,11 @@
         <!-- <LoadersTable v-if="loading.main" /> -->
         <transition name="scale-in" mode="out-in">
           <LoadersTable v-if="loading.main" />
-          <DashStudentTable v-else :students.sync="students.results" />
+          <DashStudentTable
+            v-else
+            :students.sync="students.results"
+            @update:students="deletedStudent()"
+          />
         </transition>
 
         <transition name="scale-in" mode="out-in">
@@ -134,10 +138,6 @@ export default {
       students: {},
 
       payload: {},
-      // uniList: {},
-      // uniPayload: {},
-      // disableUniBtns: true,
-      // selectedUni: { alias: 'All' },
     }
   },
 
@@ -220,13 +220,14 @@ export default {
 
     // when Student is deleted
     deletedStudent() {
-      if (this.students.results.length == 1) {
+      if (this.students.results.length == 0) {
         if (this.payload.page != 1) {
           this.onPaginated(this.payload.page - 1)
         } else {
           this.onPaginated(1)
         }
       }
+
       this.refreshStudents()
     },
   },

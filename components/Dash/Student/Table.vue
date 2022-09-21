@@ -161,19 +161,19 @@
               >
                 <!-- detail -->
                 <NuxtLink
-                  :to="`/dash/student/detail?id=${student}`"
+                  :to="`/dash/student/detail?id=${student.id}`"
                   class="btn btn-floating bg-gradient-success text-white btn-sm d-flex justify-content-center align-items-center"
                   ><i class="ri-eye-fill ri-lg"></i
                 ></NuxtLink>
                 <!-- edit -->
                 <NuxtLink
-                  :to="`/dash/student/${student}`"
+                  :to="`/dash/student/${student.id}`"
                   class="btn btn-floating bg-gradient-info text-white btn-sm d-flex justify-content-center align-items-center"
                   ><i class="ri-edit-2-fill ri-lg"></i
                 ></NuxtLink>
                 <!-- destroy -->
                 <a
-                  @click="deleteStudent(student)"
+                  @click="deleteStudent(student.id)"
                   class="btn btn-floating bg-gradient-danger text-white btn-sm d-flex justify-content-center align-items-center"
                   ><i class="ri-delete-bin-fill ri-lg"></i>
                 </a>
@@ -206,55 +206,55 @@ export default {
   },
 
   methods: {
-    // deleteCourse(id) {
-    //   this.$swal({
-    //     title: 'Are you sure?',
-    //     text: 'You will not be able to recover this Course!',
-    //     icon: 'warning',
-    //     type: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonText: 'Yes, delete it!',
-    //     cancelButtonText: 'No, keep it',
-    //   }).then((result) => {
-    //     if (result.isConfirmed) {
-    //       this.$swal({
-    //         title: 'Processing...',
-    //         text: 'Please wait a moment while we are deleting the Course',
-    //         icon: 'info',
-    //         type: 'info',
-    //         didOpen: () => {
-    //           this.$swal.showLoading()
-    //           this.$api.course
-    //             .destroy(id)
-    //             .then(() => {
-    //               this.$swal.hideLoading()
-    //               this.$swal.close()
-    //               this.$swal({
-    //                 title: 'Deleted!',
-    //                 text: 'Course has been deleted.',
-    //                 icon: 'success',
-    //                 type: 'success',
-    //               }).then(() => {
-    //                 let courseList = this.courses.filter(
-    //                   (course) => course.id !== id
-    //                 )
-    //                 this.$emit('update:courses', courseList)
-    //               })
-    //             })
-    //             .catch((err) => {
-    //               this.$swal.close()
-    //               this.$swal({
-    //                 title: 'Error',
-    //                 text: err.response.data.detail,
-    //                 icon: 'error',
-    //                 type: 'error',
-    //               })
-    //             })
-    //         },
-    //       })
-    //     }
-    //   })
-    // },
+    deleteStudent(id) {
+      this.$swal({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this Student!',
+        icon: 'warning',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, keep it',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$swal({
+            title: 'Processing...',
+            text: 'Please wait a moment while we are deleting the Student',
+            icon: 'info',
+            type: 'info',
+            didOpen: () => {
+              this.$swal.showLoading()
+              this.$api.student
+                .destroy(id)
+                .then(() => {
+                  this.$swal.hideLoading()
+                  this.$swal.close()
+                  this.$swal({
+                    title: 'Deleted!',
+                    text: 'Student has been deleted.',
+                    icon: 'success',
+                    type: 'success',
+                  }).then(() => {
+                    let studentList = this.students.filter(
+                      (student) => student.id !== id
+                    )
+                    this.$emit('update:students', studentList)
+                  })
+                })
+                .catch((err) => {
+                  this.$swal.close()
+                  this.$swal({
+                    title: 'Error',
+                    text: err.response.data.detail,
+                    icon: 'error',
+                    type: 'error',
+                  })
+                })
+            },
+          })
+        }
+      })
+    },
   },
 }
 </script>
