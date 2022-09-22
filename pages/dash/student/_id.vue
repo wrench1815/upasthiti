@@ -9,7 +9,9 @@
             <lazy-LoadersText :length="2" size="xs" />
             <lazy-LoadersText :length="1" size="xs" />
           </span>
-          <span class="text-info fw-bold" v-else>{{ student.first_name }}</span>
+          <span class="text-info fw-bold" v-else>{{
+            student.university_rollno
+          }}</span>
         </h3>
       </div>
 
