@@ -1,26 +1,17 @@
 <template>
-  <div>
-    <div class="card">
-      <div class="card-header">
-        <h1 class="text-gradient text-primary d-inline-block">
-          Add {{ userType }}
-        </h1>
-        <h3 class="text-secondary text-capitalize">Add a New {{ userType }}</h3>
-      </div>
-
-      <div class="card-body">
-        <!-- placeholder-->
+  <div class="container-flui my-">
+    <div class="card-body mx-0 px-0">
+      <transition name="scale-in" mode="out-in">
         <Lazy-LoadersForm
           :inputCount="6"
-          :btnEnd="true"
-          :btnColor="'primary'"
+          :btnCenter="true"
+          :btnColor="'info'"
           v-if="loading"
         />
-
         <!-- for Valdation -->
         <ValidationObserver v-slot="{ handleSubmit }" v-else>
           <!-- start:User Edit Form -->
-          <form @submit.prevent="handleSubmit(addUser)">
+          <form @submit.prevent="handleSubmit(updateUserData)">
             <!-- start:Profile Image -->
             <div class="row mb-4">
               <div class="col-12">
@@ -52,7 +43,6 @@
                   >
                     <i class="ri-close-line text-danger"></i>
                   </span>
-
                   <!-- profile image, select -->
                   <label
                     class="position-absolute top-100 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size ripple"
@@ -68,7 +58,6 @@
                     <i class="ri-pencil-fill text-primary"></i>
                   </label>
                 </div>
-
                 <!-- file input, hidden -->
                 <input
                   type="file"
@@ -85,7 +74,6 @@
               </div>
             </div>
             <!-- end:Profile Image -->
-
             <div class="row">
               <div class="col-lg-6 col-md-6 col-12">
                 <!-- start:First Name -->
@@ -200,6 +188,17 @@
                     :options="districtList"
                     v-model="user.district"
                   >
+                    <!-- for selected option -->
+                    <template #selected-option="{ label }">
+                      <div
+                        class="d-flex justify-content-start align-items-center gap-1"
+                      >
+                        <i
+                          class="text-primary text-gradient ri-pin-distance-fill"
+                        ></i>
+                        <span>{{ label }}</span>
+                      </div>
+                    </template>
                   </v-select>
                   <!-- Validation Errors -->
                   <div
@@ -212,7 +211,6 @@
               </div>
               <!-- end:District-->
             </div>
-
             <!-- start:Address -->
             <ValidationProvider
               v-slot="{ errors }"
@@ -242,78 +240,19 @@
             </ValidationProvider>
             <!-- end:Address -->
 
-            <!-- start:Password -->
-            <ValidationProvider
-              v-slot="{ errors }"
-              :rules="{
-                required: true,
-                min: 6,
-                max: 16,
-                passwordNumber: true,
-                passwordUpper: true,
-                passwordLower: true,
-                passwordSpecial: true,
-              }"
-            >
-              <div class="form-outline">
-                <input
-                  :type="showPassword ? 'text' : 'password'"
-                  id="password"
-                  name="password"
-                  class="form-control mb-0"
-                  v-model="user.password"
-                />
-                <label class="form-label" for="password">
-                  <div class="d-flex justify-content-center gap-1">
-                    <i
-                      class="ri-lock-2-fill text-primary text-gradient d-block-inline"
-                    ></i>
-                    <span class="required">Password</span>
-                  </div>
-                </label>
-              </div>
-              <!-- Valdation Errors -->
-              <div
-                class="text-danger transition-all-ease-out-sine"
-                :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
-              >
-                {{ errors[0] }}
-              </div>
-            </ValidationProvider>
-
-            <!-- start:Show Password -->
-            <div class="form-check mb-4">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="showPassword"
-                v-model="showPassword"
-              />
-              <label
-                class="form-check-label ripple"
-                data-mdb-ripple-unbound="true"
-                data-mdb-ripple-radius="40"
-                data-mdb-ripple-color="primary"
-                for="showPassword"
-                >Show Password</label
-              >
-            </div>
-            <!-- end:Show Password -->
-            <!-- end:Password -->
-
             <!-- Submit button -->
             <div class="d-flex justify-content-center">
               <button
                 type="submit"
-                class="btn bg-gradient-primary text-white btn-rounded my-4"
+                class="btn bg-gradient-info text-white btn-rounded"
               >
-                Add a new {{ userType }}
+                Update Profile
               </button>
             </div>
           </form>
           <!-- End:User Edit Form -->
         </ValidationObserver>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -322,7 +261,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'WizUserAdd',
+  name: 'DashProfileEdit',
   layout: 'dash',
 
   data() {
@@ -343,59 +282,16 @@ export default {
           icon: 'ri-genderless-fill',
         },
       ],
-      showPassword: false,
       imageFile: '',
       imageUploaded: false,
-      user: {
-        profile_image: '',
-        profile_image_public_id: '',
-        first_name: '',
-        last_name: '',
-        email: '',
-        gender: '',
-        mobile: '',
-        district: '',
-        address: '',
-        is_admin: false,
-        is_principal: true,
-        is_hod: false,
-        is_teacher: false,
-        password: '',
-      },
+      user: {},
     }
-  },
-
-  props: {
-    /**
-     * The user type to be created
-     *
-     * allowed values: 'admin', 'principal', 'hod', 'teacher'
-     */
-    userRole: {
-      type: String,
-      required: true,
-    },
   },
 
   computed: {
     ...mapGetters({
       districtList: 'listDistricts',
     }),
-    userType() {
-      if (this.userRole == 'admin') {
-        this.user.is_admin = true
-        return 'Admin'
-      } else if (this.userRole == 'principal') {
-        this.user.is_principal = true
-        return 'Principal'
-      } else if (this.userRole == 'hod') {
-        this.user.is_hod = true
-        return 'HOD'
-      } else if (this.userRole == 'teacher') {
-        this.user.is_teacher = true
-        return 'Teacher'
-      }
-    },
   },
 
   methods: {
@@ -412,6 +308,7 @@ export default {
             const formData = new FormData()
             formData.append('image', this.imageFile)
             formData.append('folder', 'profile_image')
+            formData.append('public_id', this.user.profile_image_public_id)
             this.$api.image
               .upload(formData)
               .then((response) => {
@@ -443,22 +340,61 @@ export default {
       })
     },
 
-    // add a new user
-    async addUser() {
+    async fetchUser() {
+      this.loading = true
+
+      await this.$api.user
+        .me()
+        .then((response) => {
+          this.user = response.data
+
+          // find gender in genderList and assign it to user.gender
+          this.genderList.forEach((ele) => {
+            if (ele.label == this.user.gender) {
+              this.user.gender = ele
+            }
+          })
+
+          this.error = false
+        })
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.error = true
+
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'User not Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong',
+            })
+          }
+        })
+    },
+
+    // update user Data
+    // first check if image is uploaded or not
+    // if not then first upload it then update the user data
+    // if image is uploaded then update the user data
+    // else run fallback case
+    async updateUserData() {
       if (this.imageFile) {
         if (this.imageUploaded) {
-          this.addNewUser()
+          this.updateUser()
         } else {
           this.uploadProfile().then(() => {
-            this.addNewUser()
+            this.updateUser()
           })
         }
       } else {
-        this.addNewUser()
+        this.updateUser()
       }
     },
 
-    async addNewUser() {
+    // update user
+    async updateUser() {
       try {
         const user = {
           profile_image: this.user.profile_image,
@@ -470,8 +406,6 @@ export default {
           district: this.user.district,
           address: this.user.address,
           mobile: this.user.mobile,
-          password: this.user.password,
-          confirm_password: this.user.password,
           is_active: this.user.is_active,
           is_admin: this.user.is_admin,
           is_principal: this.user.is_principal,
@@ -480,24 +414,26 @@ export default {
         }
 
         this.$swal({
-          title: `Adding ${this.userType}`,
+          title: 'Updating Profile',
           icon: 'info',
           type: 'info',
-          text: `Please wait while we are Adding a New ${this.userType}`,
+          text: 'Please wait while we are updating your Profile',
           didOpen: () => {
             this.$swal.showLoading()
 
             this.$api.user
-              .create(user)
+              .update(this.user.id, user)
               .then(() => {
                 this.$swal.hideLoading()
                 this.$swal.close()
 
+                let timerInterval
+
                 this.$swal({
-                  title: 'Success',
+                  title: 'Update Successful',
                   icon: 'success',
                   type: 'success',
-                  text: `${this.userType} has been added Successfully`,
+                  text: 'Profile has been updated Successfully',
                   timer: 2000,
                   timerProgressBar: true,
 
@@ -505,7 +441,8 @@ export default {
                     this.$swal.showLoading()
                   },
                 }).then(() => {
-                  this.$emit('userCreated', this.user)
+                  this.$auth.fetchUser()
+                  this.$emit('profileUpdated', 'view')
                 })
               })
               .catch((err) => {
@@ -516,37 +453,19 @@ export default {
                   title: 'Error',
                   icon: 'error',
                   type: 'error',
-                  html: `Failed to Add ${this.userType}.`,
+                  html: `Failed to Update your profile.`,
                 })
               })
           },
         })
-      } catch (e) {
+      } catch (error) {
         this.$swal({
           title: 'Error',
           icon: 'error',
           type: 'error',
-          html: `Failed to Add ${this.userType}.<br/>Try Again`,
+          html: `Failed to update your Profile.<br/>Try Again`,
         })
       }
-    },
-
-    // assign default Values to the user object
-    async assignUserValues() {
-      return new Promise((resolve, reject) => {
-        // get default image from config
-        this.user.profile_image = this.$config.defaultUserImage
-
-        resolve()
-      })
-    },
-
-    // unset loading
-    async unsetLoading() {
-      return new Promise((resolve, reject) => {
-        this.loading = false
-        resolve()
-      })
     },
 
     // reset user.profile_image to default image
@@ -622,11 +541,10 @@ export default {
   },
 
   mounted() {
-    this.assignUserValues()
-      .then(() => {
-        this.unsetLoading()
-      })
-      .then(() => {
+    this.fetchUser().then(() => {
+      if (!this.error) {
+        this.loading = false
+
         // initialize form elements
         document.querySelectorAll('.form-outline').forEach((formOutline) => {
           new this.$mdb.Input(formOutline).init()
@@ -645,7 +563,8 @@ export default {
           .forEach((tooltip) => {
             new this.$mdb.Tooltip(tooltip)
           })
-      })
+      }
+    })
   },
 }
 </script>

@@ -83,6 +83,24 @@
   "DashCollegeTable/colleges": {
     "type": "array"
   },
+  "dash-course-detail-card/course": {
+    "type": "object"
+  },
+  "DashCourseDetailCard/course": {
+    "type": "object"
+  },
+  "dash-course-detail-uni-card/university": {
+    "type": "object"
+  },
+  "DashCourseDetailUniCard/university": {
+    "type": "object"
+  },
+  "dash-course-table/courses": {
+    "type": "array"
+  },
+  "DashCourseTable/courses": {
+    "type": "array"
+  },
   "dash-department-detail-card-1/department": {
     "type": "object"
   },
@@ -406,13 +424,5 @@
   },
   "UtilsPagination/pagination": {
     "type": "object"
-  },
-  "wiz-user-add/userRole": {
-    "type": "string",
-    "description": "The user type to be created\n\nallowed values: 'admin', 'principal', 'hod', 'teacher'"
-  },
-  "WizUserAdd/userRole": {
-    "type": "string",
-    "description": "The user type to be created\n\nallowed values: 'admin', 'principal', 'hod', 'teacher'"
   }
 }

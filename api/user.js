@@ -30,4 +30,7 @@ export default (axios) => ({
   // get Teacher list
   listTeacher: (payload = {}) =>
     axios.get('user/teacher/', { params: payload }),
+
+  // get self info
+  me: () => axios.get('auth/me/'),
 })

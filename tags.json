@@ -101,6 +101,42 @@
     ],
     "description": ""
   },
+  "dash-course-detail-card": {
+    "attributes": [
+      "course"
+    ],
+    "description": ""
+  },
+  "DashCourseDetailCard": {
+    "attributes": [
+      "course"
+    ],
+    "description": ""
+  },
+  "dash-course-detail-uni-card": {
+    "attributes": [
+      "university"
+    ],
+    "description": ""
+  },
+  "DashCourseDetailUniCard": {
+    "attributes": [
+      "university"
+    ],
+    "description": ""
+  },
+  "dash-course-table": {
+    "attributes": [
+      "courses"
+    ],
+    "description": ""
+  },
+  "DashCourseTable": {
+    "attributes": [
+      "courses"
+    ],
+    "description": ""
+  },
   "dash-department-detail-card-1": {
     "attributes": [
       "department",
@@ -250,6 +286,22 @@
     "description": ""
   },
   "DashNav": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-profile-edit": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashProfileEdit": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-profile-view": {
+    "attributes": [],
+    "description": ""
+  },
+  "DashProfileView": {
     "attributes": [],
     "description": ""
   },
@@ -719,18 +771,6 @@
   },
   "ToTop": {
     "attributes": [],
-    "description": ""
-  },
-  "wiz-user-add": {
-    "attributes": [
-      "userRole"
-    ],
-    "description": ""
-  },
-  "WizUserAdd": {
-    "attributes": [
-      "userRole"
-    ],
     "description": ""
   }
 }
