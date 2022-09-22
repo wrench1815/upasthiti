@@ -88,6 +88,6 @@
 }
 
 ::selection {
-  background: var(--mdb-primary);
-  color: #ffffff;
+  background: var(--mdb-primary) !important;
+  color: #ffffff !important;
 }

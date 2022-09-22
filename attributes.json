@@ -209,6 +209,18 @@
   "DashInputAlt/type": {
     "type": "string"
   },
+  "dash-student-detail-u-card/student": {
+    "type": "object"
+  },
+  "DashStudentDetailUCard/student": {
+    "type": "object"
+  },
+  "dash-student-table/students": {
+    "type": "array"
+  },
+  "DashStudentTable/students": {
+    "type": "array"
+  },
   "dash-university-table/universities": {
     "type": "array"
   },

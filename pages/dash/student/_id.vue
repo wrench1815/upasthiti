@@ -2,16 +2,16 @@
   <div class="container-fluid my-4">
     <div class="card">
       <div class="card-header">
-        <h1 class="text-gradient text-primary d-inline-block">User Edit</h1>
+        <h1 class="text-gradient text-primary d-inline-block">Student Edit</h1>
         <h3 class="text-secondary text-capitalize">
           Editing:
-          <transition name="fade-x" mode="out-in">
-            <span class="text-info fw-bold" v-if="loading">
-              <lazy-LoadersText :length="2" size="xs" />
-              <lazy-LoadersText :length="1" size="xs" />
-            </span>
-            <span class="text-info fw-bold" v-else>{{ user.full_name }}</span>
-          </transition>
+          <span class="text-info fw-bold" v-if="loading.main">
+            <lazy-LoadersText :length="2" size="xs" />
+            <lazy-LoadersText :length="1" size="xs" />
+          </span>
+          <span class="text-info fw-bold" v-else>{{
+            student.university_rollno
+          }}</span>
         </h3>
       </div>
 
@@ -19,14 +19,15 @@
         <transition name="scale-in" mode="out-in">
           <Lazy-LoadersForm
             :inputCount="6"
-            :btnCenter="true"
             :btnColor="'info'"
-            v-if="loading"
+            btnCenter
+            v-if="loading.main"
           />
+
           <!-- for Valdation -->
           <ValidationObserver v-slot="{ handleSubmit }" v-else>
-            <!-- start:User Edit Form -->
-            <form @submit.prevent="handleSubmit(updateUserData)">
+            <!-- start:Student Edit Form -->
+            <form @submit.prevent="handleSubmit(editStudent)">
               <!-- start:Profile Image -->
               <div class="row mb-4">
                 <div class="col-12">
@@ -42,7 +43,7 @@
                 <div class="col-12">
                   <div
                     class="position-relative rounded-5 shadow-2-strong profile-image-size bg-size-cover bg-pos-center"
-                    :style="`background-image: url(${user.profile_image})`"
+                    :style="`background-image: url(${student.profile_image})`"
                   >
                     <!-- profile image, reset -->
                     <span
@@ -58,6 +59,7 @@
                     >
                       <i class="ri-close-line text-danger"></i>
                     </span>
+
                     <!-- profile image, select -->
                     <label
                       class="position-absolute top-100 start-100 translate-middle bg-white border avatar rounded-circle shadow-1-strong profile-image-action-size ripple"
@@ -73,6 +75,7 @@
                       <i class="ri-pencil-fill text-primary"></i>
                     </label>
                   </div>
+
                   <!-- file input, hidden -->
                   <input
                     type="file"
@@ -89,15 +92,17 @@
                 </div>
               </div>
               <!-- end:Profile Image -->
+
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-12">
                   <!-- start:First Name -->
                   <Lazy-DashInput
                     :label="'First Name'"
                     :validationRules="{ required: true, min: 3, alpha: true }"
-                    :data.sync="user.first_name"
+                    :data.sync="student.first_name"
                     :type="'text'"
                     :icon="'ri-user-fill'"
+                    isRequired
                   />
                   <!-- end:First Name -->
                 </div>
@@ -106,25 +111,56 @@
                   <Lazy-DashInput
                     :label="'Last Name'"
                     :validationRules="{ required: true, min: 3, alpha: true }"
-                    :data.sync="user.last_name"
+                    :data.sync="student.last_name"
                     :type="'text'"
                     :icon="'ri-user-fill'"
+                    isRequired
                   />
                   <!-- end:Last Name -->
                 </div>
               </div>
+
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-12">
+                  <!-- start:University Roll no -->
+                  <Lazy-DashInput
+                    :label="'University Roll no'"
+                    :validationRules="{ required: true, min: 3, numeric: true }"
+                    :data.sync="student.university_rollno"
+                    :type="'number'"
+                    :icon="'ri-user-fill'"
+                    isRequired
+                  />
+                  <!-- end:University Roll no -->
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                  <!-- start:Class Roll no -->
+                  <Lazy-DashInput
+                    :label="'Class Roll no'"
+                    :validationRules="{ required: true, min: 3, numeric: true }"
+                    :data.sync="student.class_rollno"
+                    :type="'number'"
+                    :icon="'ri-user-fill'"
+                    isRequired
+                  />
+                  <!-- end:Class Roll no -->
+                </div>
+              </div>
+
               <div class="row">
                 <!-- start:Email -->
                 <div class="col-md-6 col-12">
                   <Lazy-DashInput
                     :label="'Email'"
                     :validationRules="{ required: true, email: true }"
-                    :data.sync="user.email"
+                    :data.sync="student.email"
                     :type="'text'"
                     :icon="'ri-mail-fill'"
+                    isRequired
                   />
                 </div>
                 <!-- end:Email -->
+
                 <!-- start:mobile -->
                 <div class="col">
                   <Lazy-DashInput
@@ -135,7 +171,7 @@
                       max: 13,
                       phone: true,
                     }"
-                    :data.sync="user.mobile"
+                    :data.sync="student.mobile"
                     :type="'tel'"
                     :icon="'ri-phone-fill'"
                     isRequired
@@ -143,6 +179,7 @@
                 </div>
                 <!-- end:mobile -->
               </div>
+
               <div class="row">
                 <!-- start:Gender -->
                 <div class="col-md-6 col-12">
@@ -153,7 +190,7 @@
                     <v-select
                       placeholder="Select Gender"
                       :options="genderList"
-                      v-model="user.gender"
+                      v-model="student.gender"
                     >
                       <!-- for options -->
                       <template #option="{ label, icon }">
@@ -187,6 +224,7 @@
                   </ValidationProvider>
                 </div>
                 <!-- end:Gender -->
+
                 <!-- start:District -->
                 <div class="col">
                   <ValidationProvider
@@ -196,7 +234,7 @@
                     <v-select
                       placeholder="Select District"
                       :options="districtList"
-                      v-model="user.district"
+                      v-model="student.district"
                     >
                     </v-select>
                     <!-- Validation Errors -->
@@ -210,6 +248,7 @@
                 </div>
                 <!-- end:District-->
               </div>
+
               <!-- start:Address -->
               <ValidationProvider
                 v-slot="{ errors }"
@@ -222,7 +261,7 @@
                   <textarea
                     class="form-control"
                     rows="4"
-                    v-model="user.address"
+                    v-model="student.address"
                   ></textarea>
                   <label class="form-label required">
                     <i class="ri-map-pin-2-fill text-primary text-gradient"></i>
@@ -238,174 +277,77 @@
                 </div>
               </ValidationProvider>
               <!-- end:Address -->
-              <!-- start:Role Checkbox -->
-              <div class="row justify-content-center g-3 pb-4">
-                <div class="col-12">
-                  <label class="form-label">
-                    <div class="d-flex justify-content-center gap-1">
-                      <i
-                        class="ri-user-4-fill text-primary text-gradient d-block-inline"
-                      ></i>
-                      <span> Roles </span>
-                      <a
-                        tabindex="0"
-                        class="ripple"
-                        data-mdb-ripple-unbound="true"
-                        data-mdb-ripple-radius="40"
-                        data-mdb-ripple-color="primary"
-                        role="button"
-                        data-mdb-toggle="popover"
-                        data-mdb-html="true"
-                        data-mdb-trigger="focus"
-                        data-mdb-content="Select a role to assign to the user.<br/>Can be multiple."
-                      >
-                        <i class="ri-information-line text-danger"></i>
-                      </a>
-                    </div>
-                  </label>
-                </div>
-                <!-- start:Admin Check -->
-                <div
-                  class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
-                >
-                  <label
-                    class="form-check-label ripple"
-                    data-mdb-ripple-unbound="true"
-                    data-mdb-ripple-radius="40"
-                    data-mdb-ripple-color="primary"
-                    for="admin"
-                  >
-                    <div
-                      class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                      :class="{
-                        'border-transparent bg-gradient-danger shadow-3-strong text-white':
-                          user.is_admin,
-                        'border-danger text-danger text-gradient bg-white fw-bolder':
-                          !user.is_admin,
-                      }"
-                    >
-                      <i class="ri-shield-user-fill"></i>
-                      <span>Admin</span>
-                    </div>
-                  </label>
-                  <input
-                    class="form-check-input me-2 d-none"
-                    type="checkbox"
-                    id="admin"
-                    v-model="user.is_admin"
-                  />
-                </div>
-                <!-- end:Admin Check -->
-                <!-- start:Principal Check -->
-                <div
-                  class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
-                >
-                  <label
-                    class="form-check-label ripple"
-                    data-mdb-ripple-unbound="true"
-                    data-mdb-ripple-radius="40"
-                    data-mdb-ripple-color="primary"
-                    for="principal"
-                  >
-                    <div
-                      class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                      :class="{
-                        'border-transparent bg-gradient-info text-white shadow-3-strong':
-                          user.is_principal,
-                        'border-info text-info text-gradient bg-white fw-bolder':
-                          !user.is_principal,
-                      }"
-                    >
-                      <i class="ri-admin-fill"></i>
-                      Principal
-                    </div>
-                  </label>
-                  <input
-                    class="form-check-input me-2 d-none"
-                    type="checkbox"
-                    id="principal"
-                    v-model="user.is_principal"
-                  />
-                </div>
-                <!-- end:Principal Check -->
-                <!-- start:HOD Check -->
-                <div
-                  class="col-6 col-lg-3 col-md-3 d-flex justify-content-start justify-content-md-center align-items-center"
-                >
-                  <label
-                    class="form-check-label ripple"
-                    data-mdb-ripple-unbound="true"
-                    data-mdb-ripple-radius="40"
-                    data-mdb-ripple-color="primary"
-                    for="hod"
-                  >
-                    <div
-                      class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                      :class="{
-                        'border-transparent bg-gradient-primary text-white shadow-3-strong':
-                          user.is_hod,
-                        'border-primary text-primary text-gradient bg-white fw-bolder':
-                          !user.is_hod,
-                      }"
-                    >
-                      <i class="ri-user-star-fill"></i>
-                      HOD
-                    </div>
-                  </label>
-                  <input
-                    class="form-check-input me-2 d-none"
-                    type="checkbox"
-                    id="hod"
-                    v-model="user.is_hod"
-                  />
-                </div>
-                <!-- end:HOD Check -->
-                <!-- start:Teacher Check -->
-                <div
-                  class="col-6 col-lg-3 col-md-3 d-flex justify-content-end justify-content-md-center align-items-center"
-                >
-                  <label
-                    class="form-check-label ripple"
-                    data-mdb-ripple-unbound="true"
-                    data-mdb-ripple-radius="40"
-                    data-mdb-ripple-color="primary"
-                    for="teacher"
-                  >
-                    <div
-                      class="d-flex justify-content-center align-items-center gap-2 badge badge-fs py-2 rounded-pill border user-select-none"
-                      :class="{
-                        'border-transparent bg-gradient-warning text-white shadow-3-strong':
-                          user.is_teacher,
-                        'border-warning text-warning text-gradient bg-white fw-bolder':
-                          !user.is_teacher,
-                      }"
-                    >
-                      <i class="ri-user-2-fill"></i>
-                      Teacher
-                    </div>
-                  </label>
-                  <input
-                    class="form-check-input me-2 d-none"
-                    type="checkbox"
-                    id="teacher"
-                    v-model="user.is_teacher"
-                  />
-                </div>
-                <!-- end:Teacher Check -->
+
+              <!-- start:Password -->
+              <!-- <ValidationProvider
+              v-slot="{ errors }"
+              :rules="{
+                required: true,
+                min: 6,
+                max: 16,
+                passwordNumber: true,
+                passwordUpper: true,
+                passwordLower: true,
+                passwordSpecial: true,
+              }"
+            >
+              <div class="form-outline">
+                <input
+                  :type="showPassword ? 'text' : 'password'"
+                  id="password"
+                  name="password"
+                  class="form-control mb-0"
+                  v-model="student.password"
+                />
+                <label class="form-label" for="password">
+                  <div class="d-flex justify-content-center gap-1">
+                    <i
+                      class="ri-lock-2-fill text-primary text-gradient d-block-inline"
+                    ></i>
+                    <span class="required">Password</span>
+                  </div>
+                </label>
               </div>
-              <!-- end:Role Checkbox -->
+              Valdation Errors
+               <div
+                class="text-danger transition-all-ease-out-sine"
+                :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+              >
+                {{ errors[0] }}
+              </div>
+            </ValidationProvider> -->
+
+              <!-- start:Show Password -->
+              <!-- <div class="form-check mb-4">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="showPassword"
+                v-model="showPassword"
+              />
+              <label
+                class="form-check-label ripple"
+                data-mdb-ripple-unbound="true"
+                data-mdb-ripple-radius="40"
+                data-mdb-ripple-color="primary"
+                for="showPassword"
+                >Show Password</label
+              >
+            </div> -->
+              <!-- end:Show Password -->
+              <!-- end:Password -->
 
               <!-- Submit button -->
               <div class="d-flex justify-content-center">
                 <button
                   type="submit"
-                  class="btn bg-gradient-info text-white btn-rounded my-4"
+                  class="btn bg-gradient-primary text-white btn-rounded my-4"
                 >
-                  Update User
+                  Update Student
                 </button>
               </div>
             </form>
-            <!-- End:User Edit Form -->
+            <!-- End:Student Edit Form -->
           </ValidationObserver>
         </transition>
       </div>
@@ -417,13 +359,23 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'DashUserEdit',
+  name: 'DashStudentEdit',
   layout: 'dash',
 
   data() {
     return {
-      loading: true,
+      loading: {
+        main: true,
+        uni: true,
+        principal: true,
+        paginateUni: true,
+        paginatePrincipal: true,
+      },
       error: true,
+      imageFile: '',
+      imageUploaded: false,
+      college: {},
+
       genderList: [
         {
           label: 'Male',
@@ -438,31 +390,24 @@ export default {
           icon: 'ri-genderless-fill',
         },
       ],
-      imageFile: '',
-      imageUploaded: false,
-      user: {
-        profile_image: '',
-        profile_image_public_id: '',
-        first_name: '',
-        last_name: '',
-        email: '',
-        gender: '',
-        mobile: '',
-        district: '',
-        address: '',
-        is_admin: false,
-        is_principal: false,
-        is_hod: false,
-        is_teacher: false,
-      },
+      student: {},
+      // universty related
+      disableUniBtns: true,
+      universityList: [],
+      uniPayload: {},
+
+      // principal related
+      principalList: [],
+      disablePrincipalBtns: true,
+      principalPayload: {},
     }
   },
 
   created() {
     this.$store.commit('breadCrumbs/addBreadCrumb', [
       {
-        name: 'User',
-        url: '/dash/user',
+        name: 'Student',
+        url: '/dash/Student',
       },
       {
         name: 'Edit',
@@ -477,6 +422,7 @@ export default {
   },
 
   methods: {
+    // upload Student Profile Image to cloudinary
     async uploadProfile() {
       return new Promise((resolve, reject) => {
         this.$swal({
@@ -489,13 +435,14 @@ export default {
 
             const formData = new FormData()
             formData.append('image', this.imageFile)
-            formData.append('folder', 'profile_image')
-            formData.append('public_id', this.user.profile_image_public_id)
+            formData.append('folder', 'student_profile_image')
+            formData.append('public_id', this.student.profile_image_public_id)
+
             this.$api.image
               .upload(formData)
               .then((response) => {
-                this.user.profile_image = response.data.image_url
-                this.user.profile_image_public_id = response.data.public_id
+                this.student.profile_image = response.data.image_url
+                this.student.profile_image_public_id = response.data.public_id
                 this.imageUploaded = true
 
                 this.$swal.hideLoading()
@@ -512,7 +459,7 @@ export default {
                   title: 'Error',
                   type: 'error',
                   icon: 'error',
-                  text: 'Something went wrong while uploading your Profile Image.',
+                  text: 'Something went wrong while uploading the Profile Image.',
                 })
 
                 reject()
@@ -522,107 +469,56 @@ export default {
       })
     },
 
-    async fetchUser() {
-      this.loading = true
-
-      await this.$api.user
-        .retrieve(this.$route.params.id)
-        .then((response) => {
-          this.user = response.data
-
-          // find gender in genderList and assign it to user.gender
-          this.genderList.forEach((ele) => {
-            if (ele.label == this.user.gender) {
-              this.user.gender = ele
-            }
-          })
-
-          this.error = false
-        })
-        .catch((error) => {
-          if (error.response.status == 404) {
-            this.error = true
-
-            this.$nuxt.error({
-              statusCode: 404,
-              message: 'User not Found',
-            })
-          } else {
-            this.$nuxt.error({
-              statusCode: 400,
-              message: 'Something went Wrong',
-            })
-          }
-        })
-    },
-
-    // update user Data
-    // first check if image is uploaded or not
-    // if not then first upload it then update the user data
-    // if image is uploaded then update the user data
-    // else run fallback case
-    async updateUserData() {
+    // upload Profile Image
+    // Edit Student
+    async editStudent() {
       if (this.imageFile) {
         if (this.imageUploaded) {
-          this.updateUser()
+          this.updateStudent()
         } else {
           this.uploadProfile().then(() => {
-            this.updateUser()
+            this.updateStudent()
           })
         }
       } else {
-        this.updateUser()
+        this.updateStudent()
       }
     },
 
-    // update user
-    async updateUser() {
+    // send Student data to server to Edit the Student
+    async updateStudent() {
       try {
-        const user = {
-          profile_image: this.user.profile_image,
-          profile_image_public_id: this.user.profile_image_public_id,
-          first_name: this.user.first_name,
-          last_name: this.user.last_name,
-          email: this.user.email,
-          gender: this.user.gender.label,
-          district: this.user.district,
-          address: this.user.address,
-          mobile: this.user.mobile,
-          is_active: this.user.is_active,
-          is_admin: this.user.is_admin,
-          is_principal: this.user.is_principal,
-          is_hod: this.user.is_hod,
-          is_teacher: this.user.is_teacher,
-        }
+        let student = this.student
+        student.gender = this.student.gender.label
+        // college.university = college.university.id
+        // college.principal = college.principal.id
 
         this.$swal({
-          title: 'Updating User',
+          title: 'Updating Student',
           icon: 'info',
           type: 'info',
-          text: 'Please wait while we are updating the User',
+          text: 'Please wait while we are Updating the Student',
           didOpen: () => {
             this.$swal.showLoading()
 
-            this.$api.user
-              .update(this.$route.params.id, user)
+            this.$api.student
+              .update(student.id, student)
               .then(() => {
                 this.$swal.hideLoading()
                 this.$swal.close()
 
-                let timerInterval
-
                 this.$swal({
-                  title: 'Update Successful',
+                  title: 'Success',
                   icon: 'success',
                   type: 'success',
-                  text: 'User has been updated Successfully',
+                  text: 'Student has been updated Successfully',
                   timer: 2000,
                   timerProgressBar: true,
 
                   didOpen: () => {
                     this.$swal.showLoading()
                   },
-                }).then(() => this.$router.push('/dash/user'))
+                }).then(() => this.$router.push('/dash/student'))
               })
               .catch((err) => {
                 this.$swal.hideLoading()
@@ -632,32 +528,32 @@ export default {
                   title: 'Error',
                   icon: 'error',
                   type: 'error',
-                  html: `Failed to Update User.`,
+                  html: `Failed to Update Student.`,
                 })
               })
           },
         })
-      } catch (error) {
+      } catch (e) {
         this.$swal({
           title: 'Error',
           icon: 'error',
           type: 'error',
-          html: `Failed to update User.<br/>Try Again`,
+          html: `Failed to Update Student.<br/>Try Again`,
         })
       }
     },
 
-    // reset user.profile_image to default image
+    // reset student.profile_image to default image
     async removeProfileImage() {
       return new Promise((resolve, reject) => {
-        this.user.profile_image = this.$config.defaultUserImage
+        this.student.profile_image = this.$config.defaultStudentImage
         this.imageFile = ''
         this.imageUploaded = false
         resolve()
       })
     },
 
-    // load Profile Image and assign it to user.profile_image
+    // load Profile Image and assign it to student.profile_image
     async handleProfileImage(e) {
       let imageFile = await e.target.files[0]
 
@@ -714,15 +610,50 @@ export default {
 
       this.imageFile = await imageFile
       const imageData = await readData(imageFile)
-      this.user.profile_image = await imageData
+      this.student.profile_image = await imageData
       e.target.value = ''
+    },
+
+    // retrieve Student
+    async retrieveStudent() {
+      this.loading.main = true
+
+      return this.$api.student
+        .retrieve(this.$route.params.id)
+        .then((response) => {
+          this.student = response.data
+
+          this.error = false
+        })
+        .catch((err) => {
+          if (err.response.status == 404) {
+            this.error = true
+            this.student = {}
+
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'No Student Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong',
+            })
+          }
+        })
     },
   },
 
   mounted() {
-    this.fetchUser().then(() => {
-      if (!this.error) {
-        this.loading = false
+    // fetch Student
+    this.retrieveStudent().then(() => {
+      if (this.error) {
+        this.$nuxt.error({
+          statusCode: 400,
+          message: 'Something went Wrong',
+        })
+      } else {
+        this.loading.main = false
 
         // initialize form elements
         document.querySelectorAll('.form-outline').forEach((formOutline) => {
@@ -760,10 +691,6 @@ export default {
 }
 
 .profile-help-text {
-  font-size: 0.9rem !important;
-}
-
-.badge-fs {
   font-size: 0.9rem !important;
 }
 

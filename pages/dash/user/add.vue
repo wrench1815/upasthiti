@@ -17,7 +17,7 @@
 
         <!-- for Valdation -->
         <ValidationObserver v-slot="{ handleSubmit }" v-else>
-          <!-- start:User Edit Form -->
+          <!-- start:User Add Form -->
           <form @submit.prevent="handleSubmit(addUser)">
             <!-- start:Profile Image -->
             <div class="row mb-4">
@@ -576,7 +576,7 @@ export default {
                   title: 'Error',
                   type: 'error',
                   icon: 'error',
-                  text: 'Something went wrong while uploading your Profile Image.',
+                  text: 'Something went wrong while uploading the Profile Image.',
                 })
 
                 reject()

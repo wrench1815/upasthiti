@@ -88,7 +88,7 @@ export default {
         appendClass: 'lazyLoad',
 
         // Default image must be in the static folder
-        defaultImage: '/white.png',
+        defaultImage: '/cover.png',
       },
     ],
 
@@ -208,6 +208,8 @@ export default {
     defaultUniversityImage: process.env.DEFAULT_UNIVERSITY_IMAGE,
     // default College Image
     defaultCollegeImage: process.env.DEFAULT_COLLEGE_IMAGE,
+    // default Student Image
+    defaultStudentImage: process.env.DEFAULT_STUDENT_IMAGE,
   },
 
   // custom loading indicator
