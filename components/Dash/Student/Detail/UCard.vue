@@ -9,7 +9,7 @@
         :data-src="
           student.profile_image ? student.profile_image : defaultProfileImage
         "
-        :alt="`${student_full_name}'s Profile Image`"
+        :alt="`${fullName}'s Profile Image`"
         v-lazy-load
       />
     </div>
@@ -20,8 +20,7 @@
       <div class="d-flex flex-column-reverse flex-md-column">
         <!-- Full Name -->
         <div class="fw-bold fs-5 text-primary text-gradient">
-          {{ student_first_name ? student_first_name : '----' }}
-          {{ student_last_name ? student_last_name : '----' }}
+          {{ student.first_name ? fullName : '----' }}
         </div>
       </div>
 
@@ -55,12 +54,11 @@ export default {
     defaultProfileImage() {
       return this.$config.defaultStudentImage
     },
+    fullName() {
+      return `${this.student.first_name} ${this.student.last_name}`
+    },
   },
 }
 </script>
 
-<style scoped>
-.badge-fs {
-  font-size: 0.9rem !important;
-}
-</style>
+<style scoped></style>

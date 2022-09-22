@@ -1,11 +1,11 @@
 <template>
   <section class="container-fluid my-4">
     <transition name="scale-in" mode="out-in">
-      <!-- <div class="card card-body" v-if="loading">
+      <div class="card card-body" v-if="loading">
         <Lazy-LoadersDetailUserCard />
-      </div> -->
+      </div>
 
-      <section>
+      <section v-else>
         <!-- start:Student Info -->
         <div class="card">
           <div class="card-header">
@@ -17,12 +17,42 @@
             <!-- end:user Info Card -->
 
             <section>
-              <!-- start:student District -->
+              <!-- start:student University Roll no -->
               <div class="row mb-3">
                 <div class="col-12 col-md-4 mt-lg-4 mt-sm-4 d-flex">
-                  <label class="text-muted fw-bold-500">District</label>
+                  <label class="text-muted fw-bold-500"
+                    >University Roll no</label
+                  >
                 </div>
                 <div class="col d-flex mt-lg-4 mt-sm-4">
+                  <span class="fw-bold fs-6 text-primary">{{
+                    student.university_rollno
+                      ? student.university_rollno
+                      : '----'
+                  }}</span>
+                </div>
+              </div>
+              <!-- end:student University Roll no -->
+
+              <!-- start:student Class Roll no -->
+              <div class="row mb-3">
+                <div class="col-12 col-md-4 d-flex">
+                  <label class="text-muted fw-bold-500">Class Roll no</label>
+                </div>
+                <div class="col d-flex">
+                  <span class="fw-bold fs-6 text-primary">{{
+                    student.class_rollno ? student.class_rollno : '----'
+                  }}</span>
+                </div>
+              </div>
+              <!-- end:student Class Roll no -->
+
+              <!-- start:student District -->
+              <div class="row mb-3">
+                <div class="col-12 col-md-4 d-flex">
+                  <label class="text-muted fw-bold-500">District</label>
+                </div>
+                <div class="col d-flex">
                   <span class="fw-bold-600 fs-6">{{
                     student.district ? student.district : '----'
                   }}</span>
