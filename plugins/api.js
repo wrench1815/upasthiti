@@ -28,13 +28,10 @@ export default (context, inject) => {
     // contact factory
     contact: Contact(context.$axios),
 
-<<<<<<< HEAD
     // student factory
     student: Student(context.$axios),
-=======
     // course factory
     course: Course(context.$axios),
->>>>>>> dev
   }
 
   // Inject $api
