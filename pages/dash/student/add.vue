@@ -542,7 +542,7 @@ export default {
     async assignStudentValues() {
       return new Promise((resolve, reject) => {
         // get default image from config
-        this.student.profile_image = this.$config.defaultUserImage
+        this.student.profile_image = this.$config.defaultStudentImage
 
         resolve()
       })
@@ -551,7 +551,7 @@ export default {
     // reset student.profile_image to default image
     async removeProfileImage() {
       return new Promise((resolve, reject) => {
-        this.student.profile_image = this.$config.defaultUserImage
+        this.student.profile_image = this.$config.defaultStudentImage
         this.imageFile = ''
         this.imageUploaded = false
         resolve()

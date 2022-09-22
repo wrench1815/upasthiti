@@ -201,7 +201,7 @@ export default {
 
   computed: {
     defaultProfileImage() {
-      return this.$config.defaultUserImage
+      return this.$config.defaultStudentImage
     },
   },
 

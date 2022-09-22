@@ -37,7 +37,7 @@
       <div class="collapse navbar-collapse" id="mainNavbarLeftAlign">
         <!-- start:mid links -->
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0 d-none">
-          <li class="nav-item" v-for="item in menuItems">
+          <li class="nav-item" v-for="(item, index) in menuItems" :key="index">
             <nuxt-link
               class="nav-link"
               aria-current="page"

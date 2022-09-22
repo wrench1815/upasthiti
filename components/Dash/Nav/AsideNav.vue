@@ -125,7 +125,7 @@ export default {
         {
           name: 'Student',
           url: '/dash/student',
-          icon: 'ri-building-4-fill',
+          icon: 'ri-user-2-fill',
         },
         {
           name: 'University',

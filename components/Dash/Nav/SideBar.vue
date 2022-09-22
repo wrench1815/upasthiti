@@ -48,10 +48,10 @@ export default {
           url: '/dash/department',
           icon: 'ri-building-4-fill',
         },
-         {
+        {
           name: 'Student',
           url: '/dash/student',
-          icon: 'ri-building-4-fill',
+          icon: 'ri-user-2-fill',
         },
         {
           name: 'University',
