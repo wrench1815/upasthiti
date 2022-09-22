@@ -422,7 +422,7 @@ export default {
 
             const formData = new FormData()
             formData.append('image', this.imageFile)
-            formData.append('folder', 'profile_image')
+            formData.append('folder', 'student_profile_image')
             this.$api.image
               .upload(formData)
               .then((response) => {
@@ -659,10 +659,6 @@ export default {
 }
 
 .profile-help-text {
-  font-size: 0.9rem !important;
-}
-
-.badge-fs {
   font-size: 0.9rem !important;
 }
 

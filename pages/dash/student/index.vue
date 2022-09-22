@@ -163,18 +163,6 @@ export default {
     async getStudents() {
       this.loading.main = true
 
-      // if (this.payload.district) {
-      //   if (this.payload.district == 'All') {
-      //     this.payload.district = undefined
-      //   }
-      // }
-
-      // if (this.payload.university) {
-      //   if (this.payload.university == 'All') {
-      //     this.payload.university = undefined
-      //   }
-      // }
-
       return this.$api.student
         .list(this.payload)
         .then((response) => {
@@ -234,7 +222,6 @@ export default {
 
   mounted() {
     this.payload.page = this.$route.query.page
-    this.payload.size = 1
 
     this.getStudents().then(() => {
       if (!this.error) {
