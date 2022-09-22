@@ -110,7 +110,7 @@ $theme-gradient-colors: (
 
 // text gradient
 $text-gradient-bg-clip: text !default;
-$text-gradient-text-fill: transparent !default;
+$text-gradient-text-fill: unset !default;
 $text-gradient-position: relative !default;
 $text-gradient-zindex: 1 !default;
 
