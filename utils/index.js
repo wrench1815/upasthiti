@@ -2,6 +2,12 @@ export default () => ({
   // return strf time
   dateFormat: (date) => $nuxt.$moment(date).format('Do MMMM YYYY, h:mm:ss a'),
 
+  // return strf time no time
+  dateFormatNoTime: (date) => $nuxt.$moment(date).format('Do MMMM YYYY'),
+
+  // return strf time no time no day
+  dateFormatNoTimeDay: (date) => $nuxt.$moment(date).format('MMMM YYYY'),
+
   // returns Bootstrap breakpoint
   getBsBp: () => {
     var w =
