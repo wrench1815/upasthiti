@@ -115,14 +115,14 @@ export default {
           icon: 'ri-lightbulb-flash-fill',
         },
         {
+          name: 'University',
+          url: '/dash/university',
+          icon: 'ri-bank-fill',
+        },
+        {
           name: 'College',
           url: '/dash/college',
           icon: 'ri-government-fill',
-        },
-        {
-          name: 'Course',
-          url: '/dash/course',
-          icon: 'ri-book-mark-fill',
         },
         {
           name: 'Department Type',
@@ -135,14 +135,19 @@ export default {
           icon: 'ri-building-4-fill',
         },
         {
+          name: 'Course',
+          url: '/dash/course',
+          icon: 'ri-book-mark-fill',
+        },
+        {
           name: 'Student',
           url: '/dash/student',
           icon: 'ri-user-2-fill',
         },
         {
-          name: 'University',
-          url: '/dash/university',
-          icon: 'ri-bank-fill',
+          name: 'Class',
+          url: '/dash/class',
+          icon: 'ri-database-fill',
         },
         {
           name: 'User',
