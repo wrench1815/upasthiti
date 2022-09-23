@@ -263,48 +263,6 @@
   "DashUserTable/defaultProfileImage": {
     "type": "string"
   },
-  "forms-input/inputtype": {
-    "type": "string"
-  },
-  "FormsInput/inputtype": {
-    "type": "string"
-  },
-  "forms-input/idname": {
-    "type": "string"
-  },
-  "FormsInput/idname": {
-    "type": "string"
-  },
-  "forms-input/label": {
-    "type": "string"
-  },
-  "FormsInput/label": {
-    "type": "string"
-  },
-  "forms-input/icon": {
-    "type": "string"
-  },
-  "FormsInput/icon": {
-    "type": "string"
-  },
-  "forms-text-area/idname": {
-    "type": "string"
-  },
-  "FormsTextArea/idname": {
-    "type": "string"
-  },
-  "forms-text-area/label": {
-    "type": "string"
-  },
-  "FormsTextArea/label": {
-    "type": "string"
-  },
-  "forms-text-area/icon": {
-    "type": "string"
-  },
-  "FormsTextArea/icon": {
-    "type": "string"
-  },
   "home-feature-card/headingColor": {
     "type": "string"
   },

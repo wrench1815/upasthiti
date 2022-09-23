@@ -25,22 +25,6 @@
     ],
     "description": ""
   },
-  "college-fields": {
-    "attributes": [],
-    "description": ""
-  },
-  "CollegeFields": {
-    "attributes": [],
-    "description": ""
-  },
-  "course-field": {
-    "attributes": [],
-    "description": ""
-  },
-  "CourseField": {
-    "attributes": [],
-    "description": ""
-  },
   "dash-college-detail-card-1": {
     "attributes": [
       "college",
@@ -249,14 +233,6 @@
     "attributes": [],
     "description": ""
   },
-  "dash-nav-profile": {
-    "attributes": [],
-    "description": ""
-  },
-  "DashNavProfile": {
-    "attributes": [],
-    "description": ""
-  },
   "dash-nav-right-links": {
     "attributes": [],
     "description": ""
@@ -419,54 +395,12 @@
     ],
     "description": ""
   },
-  "department-field": {
-    "attributes": [],
-    "description": ""
-  },
-  "DepartmentField": {
-    "attributes": [],
-    "description": ""
-  },
   "footer": {
     "attributes": [],
     "description": ""
   },
   "Footer": {
     "attributes": [],
-    "description": ""
-  },
-  "forms-input": {
-    "attributes": [
-      "inputtype",
-      "idname",
-      "label",
-      "icon"
-    ],
-    "description": ""
-  },
-  "FormsInput": {
-    "attributes": [
-      "inputtype",
-      "idname",
-      "label",
-      "icon"
-    ],
-    "description": ""
-  },
-  "forms-text-area": {
-    "attributes": [
-      "idname",
-      "label",
-      "icon"
-    ],
-    "description": ""
-  },
-  "FormsTextArea": {
-    "attributes": [
-      "idname",
-      "label",
-      "icon"
-    ],
     "description": ""
   },
   "home-feature-card": {
@@ -661,59 +595,11 @@
     "attributes": [],
     "description": ""
   },
-  "new-nav-bar": {
-    "attributes": [],
-    "description": ""
-  },
-  "NewNavBar": {
-    "attributes": [],
-    "description": ""
-  },
-  "nuxt-logo": {
-    "attributes": [],
-    "description": ""
-  },
-  "NuxtLogo": {
-    "attributes": [],
-    "description": ""
-  },
   "nav-bar": {
     "attributes": [],
     "description": ""
   },
   "NavBar": {
-    "attributes": [],
-    "description": ""
-  },
-  "student-field": {
-    "attributes": [],
-    "description": ""
-  },
-  "StudentField": {
-    "attributes": [],
-    "description": ""
-  },
-  "teacher-field": {
-    "attributes": [],
-    "description": ""
-  },
-  "TeacherField": {
-    "attributes": [],
-    "description": ""
-  },
-  "tutorial": {
-    "attributes": [],
-    "description": ""
-  },
-  "Tutorial": {
-    "attributes": [],
-    "description": ""
-  },
-  "tutorial-second": {
-    "attributes": [],
-    "description": ""
-  },
-  "TutorialSecond": {
     "attributes": [],
     "description": ""
   },
