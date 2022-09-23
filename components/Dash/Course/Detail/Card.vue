@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="mb-3 shadow-3-strong d-flex card-header gap-3 rounded-5 align-items-center flex-column flex-md-row bg-light"
+      class="mb-3 shadow-3-strong d-flex card-header gap-3 rounded-5 flex-row bg-light"
     >
       <div>
         <!-- Course Block -->
@@ -44,7 +44,8 @@ export default {
 <style scoped>
 .course-block {
   width: 1.5rem !important;
-  height: 4rem !important;
+  min-height: 4rem !important;
   border-radius: 0.75rem 0 0 0.75rem !important;
+  height: 100% !important;
 }
 </style>
