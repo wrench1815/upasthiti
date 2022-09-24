@@ -19,9 +19,9 @@
         <!-- if not loading -->
         <!-- for Valdation -->
         <ValidationObserver v-slot="{ handleSubmit }" v-else>
-          <!-- start:Class Add Form -->
+          <!-- Start:Class Add Form -->
           <form @submit.prevent="handleSubmit(addClass)">
-            <!-- start:Class name -->
+            <!-- Start:Class name -->
             <Lazy-DashInput
               :label="'Name'"
               :validationRules="{
@@ -30,18 +30,53 @@
               }"
               :data.sync="classs.name"
               :type="'text'"
-              :icon="'ri-phone-fill'"
+              :icon="'ri-font-size'"
               isRequired
             />
-            <!-- End:Class name -->
 
             <div class="row">
-              <!-- start:Class College -->
+              <!-- Start:Class Session Start -->
               <div class="col-md-6 col-12">
-                <label class="form-label required"
-                  ><i class="ri-admin-fill text-primary text-gradient"></i>
-                  College</label
-                >
+                <label class="form-label"
+                  ><div class="d-flex justify-content-center gap-1">
+                    <i class="ri-calendar-line text-primary text-gradient"></i>
+                    <span class="required">Session Start</span>
+                  </div>
+                </label>
+                <div class="col">
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    :rules="{ required: true }"
+                  >
+                    <DatePicker
+                      v-model="classs.session_start"
+                      type="month"
+                      placeholder="Select Month"
+                      valueType="format"
+                      prefix-class="up"
+                      format="MMMM YYYY"
+                    ></DatePicker>
+                    <div
+                      class="text-danger transition-all-ease-out-sine"
+                      :class="{ 'mb-3': !errors[0], 'mb-1': errors[0] }"
+                    >
+                      {{ errors[0] }}
+                    </div>
+                  </ValidationProvider>
+                </div>
+              </div>
+              <!--End:Class Session Start  -->
+
+              <!-- Start:Class College -->
+              <div class="col-md-6 col-12">
+                <label class="form-label"
+                  ><div class="d-flex justify-content-center gap-1">
+                    <i
+                      class="ri-government-fill text-primary text-gradient"
+                    ></i>
+                    <span class="required">College</span>
+                  </div>
+                </label>
                 <div class="col">
                   <ValidationProvider
                     v-slot="{ errors }"
@@ -134,11 +169,15 @@
               <!--End:Class College  -->
 
               <!-- Start:Department -->
-              <div class="col-lg-6 col-md-6 col-12">
-                <label class="form-label required"
-                  ><i class="ri-government-fill text-primary text-gradient"></i>
-                  Department</label
-                >
+              <div class="col-md-6 col-12">
+                <label class="form-label"
+                  ><div class="d-flex justify-content-center gap-1">
+                    <i
+                      class="ri-building-4-fill text-primary text-gradient"
+                    ></i>
+                    <span class="required">Department</span>
+                  </div>
+                </label>
                 <div class="col">
                   <ValidationProvider
                     v-slot="{ errors }"
@@ -238,11 +277,13 @@
               <!-- End:Department -->
 
               <!-- Start:Course -->
-              <div class="col-lg-6 col-md-6 col-12">
-                <label class="form-label required"
-                  ><i class="ri-government-fill text-primary text-gradient"></i>
-                  Course</label
-                >
+              <div class="col-md-6 col-12">
+                <label class="form-label"
+                  ><div class="d-flex justify-content-center gap-1">
+                    <i class="ri-book-mark-fill text-primary text-gradient"></i>
+                    <span class="required">Course</span>
+                  </div>
+                </label>
                 <div class="col">
                   <ValidationProvider
                     v-slot="{ errors }"
@@ -341,11 +382,13 @@
               <!-- End:Course -->
 
               <!-- Start:Teacher -->
-              <div class="col-lg-6 col-md-6 col-12">
-                <label class="form-label required"
-                  ><i class="ri-government-fill text-primary text-gradient"></i>
-                  Teacher</label
-                >
+              <div class="col-md- col-12">
+                <label class="form-label"
+                  ><div class="d-flex justify-content-center gap-1">
+                    <i class="ri-user-2-fill text-primary text-gradient"></i>
+                    <span class="required">Teacher</span>
+                  </div>
+                </label>
                 <div class="col">
                   <ValidationProvider
                     v-slot="{ errors }"
@@ -373,23 +416,23 @@
                       </template>
 
                       <!-- options -->
-                      <!-- <template #option="{ name, logo }">
+                      <template #option="{ full_name, profile_image }">
                         <div
                           class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
                         >
                           <span class="d-flex align-items-center gap-2">
                             <span>
                               <img
-                                class="avatar avatar-sm border rounded-circle bg-white"
-                                :data-src="logo"
-                                :alt="`${alias}'s logo`"
+                                class="avatar avatar-sm border rounded-circle bg-white obj-fit-cover"
+                                :data-src="profile_image"
+                                :alt="`${full_name}'s profile image`"
                                 v-lazy-load
                               />
                             </span>
-                            <span>{{ alias }}</span>
+                            <span>{{ full_name }}</span>
                           </span>
                         </div>
-                      </template> -->
+                      </template>
 
                       <!-- footer for pagination -->
                       <li
@@ -462,9 +505,15 @@
 </template>
 
 <script>
+import DatePicker from 'vue2-datepicker'
+
 export default {
   name: 'DashClassAdd',
   layout: 'dash',
+
+  components: {
+    DatePicker,
+  },
 
   data() {
     return {
@@ -541,9 +590,14 @@ export default {
     // send Class data to server to create a new Class
     async addClass() {
       try {
-        let classs = this.classs
+        let classs = { ...this.classs }
         classs.college = classs.college.id
         classs.department = classs.department.id
+        classs.course = classs.course.id
+        classs.teacher = classs.teacher.id
+        classs.session_start = this.$moment(classs.session_start).format(
+          'YYYY-MM-DD'
+        )
 
         this.$swal({
           title: 'Adding Class',
@@ -599,7 +653,7 @@ export default {
     // college
     //////////////////////////////////////////////////////////////////////
 
-    // fetch colleges for select
+    // get list of College
     async getColleges() {
       this.disableCollegeBtns = true
       this.loading.paginateCollege = true
@@ -634,7 +688,7 @@ export default {
     // department
     //////////////////////////////////////////////////////////////////////
 
-    // fetch Departments for select
+    // get list of Departments
     async getDepartments() {
       this.disableDeptBtns = true
       this.loading.paginateDept = true
@@ -670,6 +724,7 @@ export default {
     // course
     //////////////////////////////////////////////////////////////////////
 
+    // get list of Courses
     getCourses() {
       this.disableCourseBtns = true
       this.loading.paginateCourse = true
@@ -705,6 +760,7 @@ export default {
     // teacher
     //////////////////////////////////////////////////////////////////////
 
+    // get list of Teachers
     getTeachers() {
       this.disableTeacherBtns = true
       this.loading.paginateTeacher = true
@@ -740,6 +796,7 @@ export default {
     // selected
     //////////////////////////////////////////////////////////////////////
 
+    // on selecting a college from collegeList
     collegeSelected() {
       this.loading.collegeSelected = false
       this.loading.deptSelected = false
@@ -753,6 +810,7 @@ export default {
       })
     },
 
+    // on selecting a department from departmentList
     deptSelected() {
       this.loading.deptSelected = false
       this.loading.courseSelected = false
@@ -764,6 +822,7 @@ export default {
       })
     },
 
+    // on selecting a course from courseList
     courseSelected() {
       this.loading.courseSelected = false
       this.classs.teacher = ''
@@ -779,7 +838,9 @@ export default {
     this.collegePayload.page = 1
     this.coursePayload.page = 1
     this.teacherPayload.page = 1
+    this.classs.session_start = this.$moment().format('MMMM YYYY')
 
+    // console.log(this.$moment().format('MMMM YYYY'))
     this.getColleges().then(() => {
       this.loading.main = false
 
