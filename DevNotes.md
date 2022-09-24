@@ -209,6 +209,12 @@ This file is no keep note of various things that devs would need help while work
 <i class="ri-genderless-fill"></i>
 ```
 
+-Course
+
+```html
+<i class="ri-book-mark-fill"></i>
+```
+
 ## Additional icons
 
 -Info:
