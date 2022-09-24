@@ -6,6 +6,7 @@
           :inputCount="6"
           :btnCenter="true"
           :btnColor="'info'"
+          showImage
           v-if="loading"
         />
         <!-- for Valdation -->
