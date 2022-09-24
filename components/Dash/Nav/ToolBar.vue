@@ -1,6 +1,6 @@
 <template>
-  <div class="container-fluid">
-    <div class="card card-body pb-0 pt-3">
+  <div class="container-fluid crumb-sticky">
+    <div class="card card-body pb-0 pt-3 shadow">
       <h5>{{ lastElement.name }}</h5>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -37,4 +37,12 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+@media (min-width: 992px) {
+  .crumb-sticky {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 5 !important;
+  }
+}
+</style>
