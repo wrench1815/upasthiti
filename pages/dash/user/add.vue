@@ -555,12 +555,15 @@
             </transition>
 
             <!-- Submit button -->
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center mt-4">
               <button
                 type="submit"
-                class="btn bg-gradient-primary text-white btn-rounded my-4"
+                class="btn bg-gradient-primary text-white btn-rounded"
               >
-                Add a new User
+                <span class="d-flex align-items-center gap-1">
+                  <i class="ri-add-line ri-lg mt-n1"></i>
+                  <span>Add User</span>
+                </span>
               </button>
             </div>
           </form>

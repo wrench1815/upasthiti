@@ -845,10 +845,6 @@ export default {
     // console.log(this.$moment().format('MMMM YYYY'))
     this.getColleges().then(() => {
       this.loading.main = false
-
-      document.querySelectorAll('.form-outline').forEach((formOutline) => {
-        new this.$mdb.Input(formOutline).init()
-      })
     })
   },
 }

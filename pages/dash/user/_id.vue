@@ -492,20 +492,26 @@
               </transition>
 
               <!-- Submit button -->
-              <div class="d-flex justify-content-center gap-3">
+              <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
                 <button
                   type="submit"
-                  class="btn bg-gradient-info text-white btn-rounded my-4"
+                  class="btn bg-gradient-info text-white btn-rounded"
                 >
-                  Update User
+                  <span class="d-flex align-items-center gap-1">
+                    <i class="ri-edit-2-fill ri-lg mt-n1"></i>
+                    <span>Update User</span>
+                  </span>
                 </button>
 
                 <button
                   type="button"
                   @click="resetData"
-                  class="btn bg-gradient-warning text-white btn-rounded my-4"
+                  class="btn bg-gradient-warning text-white btn-rounded"
                 >
-                  Reset User
+                  <span class="d-flex align-items-center gap-1">
+                    <i class="ri-restart-line ri-lg mt-n1"></i>
+                    <span>Reset</span>
+                  </span>
                 </button>
               </div>
             </form>
