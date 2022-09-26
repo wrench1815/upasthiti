@@ -477,7 +477,6 @@
                         v-model="user.college"
                         label="alias_name"
                         :loading="loading.college"
-                        multiple
                       >
                         <!-- spinner -->
                         <template #spinner="{ loading }">
@@ -715,7 +714,14 @@ export default {
     async addNewUser() {
       try {
         let user = { ...this.user }
-        let collegeList = user.college.map((college) => college.id)
+        // let collegeList = user.college.map((college) => college.id)
+
+        let collegeList = []
+        if (this.user.college && this.user.college.length != 0) {
+          console.log('in if')
+          console.log(user.college)
+          collegeList = [user.college.id]
+        }
 
         user.gender = this.user.gender.label
         user.college = collegeList
