@@ -12,7 +12,7 @@
           :inputCount="6"
           :btnEnd="true"
           :btnColor="'primary'"
-          v-if="loading"
+          v-if="loading.main"
         />
 
         <!-- for Valdation -->
@@ -243,7 +243,7 @@
             <ValidationProvider
               v-slot="{ errors }"
               :rules="{
-                required: true,
+                required: false,
                 min: 6,
                 max: 16,
                 passwordNumber: true,
@@ -459,6 +459,101 @@
             </div>
             <!-- end:Role Checkbox -->
 
+            <transition name="fade-y" mode="out-in">
+              <!-- start:College -->
+              <div class="">
+                <div
+                  class="row py-2 bg-gradient-light rounded-5 border shadow-4"
+                  v-if="user.is_teacher"
+                >
+                  <div class="col-12">
+                    <label class="form-label" for="college">College</label>
+                  </div>
+                  <div class="col">
+                    <ValidationProvider v-slot="{ errors }" :rules="{}">
+                      <v-select
+                        placeholder="Select College"
+                        :options="collegeList.results"
+                        v-model="user.college"
+                        label="alias_name"
+                        :loading="loading.college"
+                      >
+                        <!-- spinner -->
+                        <template #spinner="{ loading }">
+                          <div
+                            v-if="loading"
+                            class="vs__spinner"
+                            style="border-left-color: var(--mdb-primary)"
+                          >
+                            loading...
+                          </div>
+                        </template>
+
+                        <!-- options -->
+                        <template #option="{ alias_name, logo }">
+                          <div
+                            class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                          >
+                            <span class="d-flex align-items-center gap-2">
+                              <span>
+                                <img
+                                  class="avatar avatar-sm rounded-circle bg-white obj-fit-cover shadow"
+                                  :data-src="logo"
+                                  :alt="`${alias_name}'s logo`"
+                                  v-lazy-load
+                                />
+                              </span>
+                            </span>
+                            <span>{{ alias_name }}</span>
+                          </div>
+                        </template>
+
+                        <!-- footer for pagination -->
+                        <li
+                          slot="list-footer"
+                          class="d-flex gap-2 justify-content-center align-items-center my-2"
+                          v-if="collegeList.pagination.count > 1"
+                        >
+                          <!-- previous button -->
+                          <button
+                            class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                            :disabled="
+                              disableCollegeBtns ||
+                              !collegeList.pagination.previous
+                            "
+                            @click.prevent="collegePaginatePrev"
+                            data-mdb-ripple-color="primary"
+                          >
+                            <i class="ri-arrow-left-s-line"></i>
+                          </button>
+
+                          <!-- next button -->
+                          <button
+                            class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                            :disabled="
+                              disableCollegeBtns || !collegeList.pagination.next
+                            "
+                            @click.prevent="collegePaginateNext"
+                            data-mdb-ripple-color="primary"
+                          >
+                            <i class="ri-arrow-right-s-line"></i>
+                          </button>
+                        </li>
+                      </v-select>
+                      <!-- Validation Errors -->
+                      <div
+                        class="text-danger transition-all-ease-out-sine"
+                        :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                      >
+                        {{ errors[0] }}
+                      </div>
+                    </ValidationProvider>
+                  </div>
+                </div>
+              </div>
+              <!-- end:College -->
+            </transition>
+
             <!-- Submit button -->
             <div class="d-flex justify-content-center">
               <button
@@ -485,8 +580,12 @@ export default {
 
   data() {
     return {
-      loading: true,
+      loading: {
+        main: true,
+        college: true,
+      },
       error: true,
+
       genderList: [
         {
           label: 'Male',
@@ -501,6 +600,7 @@ export default {
           icon: 'ri-genderless-fill',
         },
       ],
+
       showPassword: false,
       imageFile: '',
       imageUploaded: false,
@@ -519,7 +619,17 @@ export default {
         is_hod: false,
         is_teacher: false,
         password: '',
+        college: [],
       },
+
+      // for college
+      disableCollegeBtns: false,
+      collegeList: {
+        pagination: {
+          count: 0,
+        },
+      },
+      collegePayload: {},
     }
   },
 
@@ -603,24 +713,18 @@ export default {
 
     async addNewUser() {
       try {
-        const user = {
-          profile_image: this.user.profile_image,
-          profile_image_public_id: this.user.profile_image_public_id,
-          first_name: this.user.first_name,
-          last_name: this.user.last_name,
-          email: this.user.email,
-          gender: this.user.gender.label,
-          district: this.user.district,
-          address: this.user.address,
-          mobile: this.user.mobile,
-          password: this.user.password,
-          confirm_password: this.user.password,
-          is_active: this.user.is_active,
-          is_admin: this.user.is_admin,
-          is_principal: this.user.is_principal,
-          is_hod: this.user.is_hod,
-          is_teacher: this.user.is_teacher,
+        let user = { ...this.user }
+        // let collegeList = user.college.map((college) => college.id)
+
+        let collegeList = []
+        if (this.user.college && this.user.college.length != 0) {
+          console.log('in if')
+          console.log(user.college)
+          collegeList = [user.college.id]
         }
+
+        user.gender = this.user.gender.label
+        user.college = collegeList
 
         this.$swal({
           title: 'Adding User',
@@ -687,7 +791,7 @@ export default {
     // unset loading
     async unsetLoading() {
       return new Promise((resolve, reject) => {
-        this.loading = false
+        this.loading.main = false
         resolve()
       })
     },
@@ -762,12 +866,67 @@ export default {
       this.user.profile_image = await imageData
       e.target.value = ''
     },
+
+    // get list of colleges
+    async getCollegeList() {
+      this.loading.college = true
+      this.disableCollegeBtns = true
+
+      return this.$api.college
+        .list(this.collegePayload)
+        .then((response) => {
+          this.collegeList = response.data
+
+          this.loading.college = false
+          this.disableCollegeBtns = false
+          this.error = false
+        })
+        .catch((err) => {
+          this.error = true
+
+          this.loading.college = true
+          this.collegeList = {
+            pagination: {
+              count: 0,
+            },
+          }
+          if (err.response.status == 404) {
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'Page not Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong. Unable to fetch College List.',
+            })
+          }
+        })
+    },
+
+    // on College filter previous
+    collegePaginatePrev() {
+      if (this.collegeList.pagination.previous) {
+        this.collegePayload.page = this.collegePayload.page - 1
+        this.getCollegeList()
+      }
+    },
+
+    // on College filter next
+    collegePaginateNext() {
+      if (this.collegeList.pagination.next) {
+        this.collegePayload.page = this.collegePayload.page + 1
+        this.getCollegeList()
+      }
+    },
   },
 
   mounted() {
+    this.collegePayload.page = 1
+
     this.assignUserValues()
       .then(() => {
-        this.unsetLoading()
+        return this.unsetLoading()
       })
       .then(() => {
         // initialize form elements
@@ -789,6 +948,8 @@ export default {
             new this.$mdb.Tooltip(tooltip)
           })
       })
+
+    this.getCollegeList()
   },
 }
 </script>
