@@ -767,13 +767,15 @@ export default {
       this.loading.teacher = true
       this.teacherPayload.college = this.classs.college.id
 
-      return this.$api.user.list(this.teacherPayload).then((response) => {
-        this.teacherList = response.data
+      return this.$api.user
+        .listTeacher(this.teacherPayload)
+        .then((response) => {
+          this.teacherList = response.data
 
-        this.disableTeacherBtns = false
-        this.loading.paginateTeacher = false
-        this.loading.teacher = false
-      })
+          this.disableTeacherBtns = false
+          this.loading.paginateTeacher = false
+          this.loading.teacher = false
+        })
     },
 
     // on Teacher select next

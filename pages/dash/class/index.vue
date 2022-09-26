@@ -220,7 +220,6 @@ export default {
 
   mounted() {
     this.payload.page = this.$route.query.page
-    this.payload.size = 1
 
     this.getClasses().then(() => {
       if (!this.error) {
