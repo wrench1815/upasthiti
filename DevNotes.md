@@ -67,6 +67,12 @@ This file is no keep note of various things that devs would need help while work
   <i class="ri-user-voice-fill"></i>
   ```
 
+- Class:
+
+  ```html
+  <i class="ri-database-fill"></i>
+  ```
+
 ## Icons for Links
 
 - Internal Link:
@@ -281,4 +287,10 @@ This file is no keep note of various things that devs would need help while work
 
 ```html
 <i class="ri-logout-circle-line"></i>
+```
+
+-Attendance:
+
+```html
+<i class="ri-calendar-check-fill"></i>
 ```
