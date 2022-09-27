@@ -209,7 +209,7 @@ export default {
     // when Student is deleted
     deletedStudent() {
       if (this.students.results.length == 0) {
-        if (this.payload.page != 1) {
+        if (this.payload.page && this.payload.page != 1) {
           this.onPaginated(this.payload.page - 1)
         } else {
           this.onPaginated(1)

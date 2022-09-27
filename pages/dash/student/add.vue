@@ -13,7 +13,7 @@
             :inputCount="6"
             :btnColor="'primary'"
             btnCenter
-            v-if="loading"
+            v-if="loading.main"
           />
 
           <!-- for Valdation -->
@@ -117,8 +117,13 @@
                   <!-- start:University Roll no -->
                   <Lazy-DashInput
                     :label="'University Roll no'"
-                    :validationRules="{ required: true, min: 3, numeric: true }"
-                    :data.sync="student.university_rollno"
+                    :validationRules="{
+                      required: true,
+                      min: 3,
+                      max: 15,
+                      numeric: true,
+                    }"
+                    :data.sync="student.university_roll_no"
                     :type="'number'"
                     :icon="'ri-user-fill'"
                     isRequired
@@ -129,8 +134,13 @@
                   <!-- start:Class Roll no -->
                   <Lazy-DashInput
                     :label="'Class Roll no'"
-                    :validationRules="{ required: true, min: 3, numeric: true }"
-                    :data.sync="student.class_rollno"
+                    :validationRules="{
+                      required: true,
+                      min: 3,
+                      max: 15,
+                      numeric: true,
+                    }"
+                    :data.sync="student.class_roll_no"
                     :type="'number'"
                     :icon="'ri-user-fill'"
                     isRequired
@@ -138,6 +148,99 @@
                   <!-- end:Class Roll no -->
                 </div>
               </div>
+
+              <!-- Start:College -->
+              <div class="row">
+                <div class="col-12">
+                  <label class="form-label" for="college">
+                    <span class="d-flex align-items-center gap-1">
+                      <i class="ri-government-fill text-primary"></i>
+                      <span> College </span>
+                    </span>
+                  </label>
+                </div>
+                <div class="col">
+                  <ValidationProvider v-slot="{ errors }" :rules="{}">
+                    <v-select
+                      placeholder="Select College"
+                      :options="collegeList.results"
+                      label="alias_name"
+                      v-model="student.college"
+                      :loading="loading.college"
+                    >
+                      <!-- spinner -->
+                      <template #spinner="{ loading }">
+                        <div
+                          v-if="loading"
+                          class="vs__spinner"
+                          style="border-left-color: var(--mdb-primary)"
+                        >
+                          loading...
+                        </div>
+                      </template>
+
+                      <!-- options -->
+                      <template #option="{ alias_name, logo }">
+                        <div
+                          class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                        >
+                          <span class="d-flex align-items-center gap-2">
+                            <span>
+                              <img
+                                class="avatar avatar-sm rounded-circle bg-white obj-fit-cover shadow"
+                                :data-src="logo"
+                                :alt="`${alias_name}'s logo`"
+                                v-lazy-load
+                              />
+                            </span>
+                          </span>
+                          <span>{{ alias_name }}</span>
+                        </div>
+                      </template>
+
+                      <!-- footer for pagination -->
+                      <li
+                        slot="list-footer"
+                        class="d-flex gap-2 justify-content-center align-items-center my-2"
+                        v-if="collegeList.pagination.count > 1"
+                      >
+                        <!-- previous button -->
+                        <button
+                          class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                          :disabled="
+                            disableCollegeBtns ||
+                            !collegeList.pagination.previous
+                          "
+                          @click.prevent="collegePaginatePrev"
+                          data-mdb-ripple-color="primary"
+                        >
+                          <i class="ri-arrow-left-s-line"></i>
+                        </button>
+
+                        <!-- next button -->
+                        <button
+                          class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                          :disabled="
+                            disableCollegeBtns || !collegeList.pagination.next
+                          "
+                          @click.prevent="collegePaginateNext"
+                          data-mdb-ripple-color="primary"
+                        >
+                          <i class="ri-arrow-right-s-line"></i>
+                        </button>
+                      </li>
+                    </v-select>
+                    <!-- Validation Errors -->
+                    <div
+                      class="text-danger transition-all-ease-out-sine"
+                      :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                    >
+                      {{ errors[0] }}
+                    </div>
+                  </ValidationProvider>
+                </div>
+              </div>
+              <!-- End:College -->
 
               <div class="row">
                 <!-- start:Email -->
@@ -356,7 +459,10 @@ export default {
 
   data() {
     return {
-      loading: true,
+      loading: {
+        main: true,
+        college: true,
+      },
       error: true,
       genderList: [
         {
@@ -378,8 +484,9 @@ export default {
       student: {
         first_name: '',
         last_name: '',
-        class_rollno: '',
-        university_rollno: '',
+        class_roll_no: '',
+        university_roll_no: '',
+        college: '',
         email: '',
         mobile: '',
         address: '',
@@ -388,6 +495,15 @@ export default {
         profile_image_public_id: '',
         gender: '',
       },
+
+      // for college
+      disableCollegeBtns: false,
+      collegeList: {
+        pagination: {
+          count: 0,
+        },
+      },
+      collegePayload: {},
     }
   },
 
@@ -471,21 +587,11 @@ export default {
 
     async addNewStudent() {
       try {
-        const student = {
-          first_name: this.student.first_name,
-          last_name: this.student.last_name,
-          class_rollno: this.student.class_rollno,
-          university_rollno: this.student.university_rollno,
-          email: this.student.email,
-          mobile: this.student.mobile,
-          address: this.student.address,
-          district: this.student.district,
-          profile_image: this.student.profile_image,
-          profile_image_public_id: this.student.profile_image_public_id,
-          gender: this.student.gender.label,
+        let student = { ...this.student }
 
-          // password: this.user.password,
-          // confirm_password: this.user.password,
+        student.gender = student.gender.label
+        if (student.college) {
+          student.college = student.college.id
         }
 
         this.$swal({
@@ -618,31 +724,94 @@ export default {
       this.student.profile_image = await imageData
       e.target.value = ''
     },
+
+    ///////////////////////////////////////
+    // College
+    ///////////////////////////////////////
+
+    // get list of colleges
+    async getCollegeList() {
+      this.loading.college = true
+      this.disableCollegeBtns = true
+
+      return this.$api.college
+        .list(this.collegePayload)
+        .then((response) => {
+          this.collegeList = response.data
+
+          this.loading.college = false
+          this.disableCollegeBtns = false
+          this.error = false
+        })
+        .catch((err) => {
+          this.error = true
+
+          this.loading.college = true
+          this.collegeList = {
+            pagination: {
+              count: 0,
+            },
+          }
+          if (err.response.status == 404) {
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'Page not Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong. Unable to fetch College List.',
+            })
+          }
+        })
+    },
+
+    // on College filter previous
+    collegePaginatePrev() {
+      if (this.collegeList.pagination.previous) {
+        this.collegePayload.page = this.collegePayload.page - 1
+        this.getCollegeList()
+      }
+    },
+
+    // on College filter next
+    collegePaginateNext() {
+      if (this.collegeList.pagination.next) {
+        this.collegePayload.page = this.collegePayload.page + 1
+        this.getCollegeList()
+      }
+    },
   },
 
   mounted() {
-    this.assignStudentValues().then(() => {
-      this.loading = false
+    this.collegePayload.page = 1
 
-      // initialize form elements
-      document.querySelectorAll('.form-outline').forEach((formOutline) => {
-        new this.$mdb.Input(formOutline).init()
+    this.getCollegeList()
+      .then(() => {
+        return this.assignStudentValues()
       })
+      .then(() => {
+        this.loading.main = false
 
-      // initialize popover elements
-      document
-        .querySelectorAll('[data-mdb-toggle="popover"]')
-        .forEach((popover) => {
-          new this.$mdb.Popover(popover)
+        // initialize form elements
+        document.querySelectorAll('.form-outline').forEach((formOutline) => {
+          new this.$mdb.Input(formOutline).init()
         })
 
-      // initialize tooltip elements
-      document
-        .querySelectorAll('[data-mdb-toggle="tooltip"]')
-        .forEach((tooltip) => {
-          new this.$mdb.Tooltip(tooltip)
-        })
-    })
+        // initialize popover elements
+        document
+          .querySelectorAll('[data-mdb-toggle="popover"]')
+          .forEach((popover) => {
+            new this.$mdb.Popover(popover)
+          })
+
+        // initialize tooltip elements
+        document
+          .querySelectorAll('[data-mdb-toggle="tooltip"]')
+          .forEach((tooltip) => {
+            new this.$mdb.Tooltip(tooltip)
+          })
+      })
   },
 }
 </script>

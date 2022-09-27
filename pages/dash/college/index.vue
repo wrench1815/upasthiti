@@ -242,7 +242,7 @@ export default {
     // when College is deleted
     deletedCollege() {
       if (this.college.results.length == 1) {
-        if (this.payload.page != 1) {
+        if (this.payload.page && this.payload.page != 1) {
           this.onPaginated(this.payload.page - 1)
         } else {
           this.onPaginated(1)
