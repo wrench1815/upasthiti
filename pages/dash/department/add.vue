@@ -511,6 +511,8 @@ export default {
     async collegeSelected() {
       this.loading.collegeSelected = true
       this.loading.searching = true
+      this.department.name = ''
+      this.department.hod = ''
 
       return this.getDepartmentNameList()
         .then(() => {

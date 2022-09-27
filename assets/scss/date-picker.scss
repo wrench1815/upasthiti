@@ -1,0 +1,80 @@
+$namespace: 'up';
+
+$default-color: #4f4f4f;
+$primary-color: #5e72e4;
+$border-color: #5e72e4;
+$input-color: #333333;
+// $popup-z-index: 4;
+
+@import '~vue2-datepicker/scss/index.scss';
+
+.#{$namespace}-datepicker {
+  width: 100%;
+}
+
+.#{$namespace}-datepicker-range {
+  width: 100%;
+}
+
+.#{$namespace}-input {
+  width: 100%;
+  height: 36.37px;
+  font-size: 1rem;
+  transition: all 0.1s linear;
+
+  &:focus {
+    border-color: var(--mdb-primary);
+    transition: all 0.1s linear;
+    box-shadow: inset 0px 0px 0px 1px var(--mdb-primary);
+  }
+  &:hover {
+    border-color: #bdbdbd;
+  }
+  &:focus:hover {
+    border-color: var(--mdb-primary);
+  }
+}
+
+.#{$namespace}-calendar {
+  border: 2px solid var(--mdb-primary);
+  border-radius: 0.5rem;
+  background-color: var(--mdb-white);
+  box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+  & + & {
+    border-left: 2px solid var(--mdb-primary);
+  }
+}
+
+.#{$namespace}-datepicker-main {
+  background-color: transparent;
+  border: unset;
+}
+
+.#{$namespace}-datepicker-popup {
+  box-shadow: unset;
+}
+
+.#{$namespace}-range-wrapper {
+  gap: 0.25rem;
+}
+
+.#{$namespace}-time {
+  border: 2px solid var(--mdb-primary);
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+  & + & {
+    border-left: 2px solid $border-color;
+  }
+}
+
+.#{$namespace}-calendar-header {
+  border-bottom: 2px solid var(--mdb-primary);
+}
+
+.#{$namespace}-time-column {
+  border-left: 2px solid $border-color;
+}
+
+.#{$namespace}-time-content {
+  height: 236px;
+}

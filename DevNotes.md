@@ -92,7 +92,7 @@ This file is no keep note of various things that devs would need help while work
 - Edit:
 
   ```html
-  <i class="ri-pencil-fill"></i>
+  <i class="ri-edit-2-fill"></i>
   ```
 
 - Cross-image:
@@ -105,6 +105,12 @@ This file is no keep note of various things that devs would need help while work
 
   ```html
   <i class="ri-delete-bin-fill"></i>
+  ```
+
+- Reset Button Icon for form:
+
+  ```html
+  <i class="ri-restart-line"></i>
   ```
 
 ## Icons for buildings
@@ -207,6 +213,12 @@ This file is no keep note of various things that devs would need help while work
 
 ```html
 <i class="ri-genderless-fill"></i>
+```
+
+-Course
+
+```html
+<i class="ri-book-mark-fill"></i>
 ```
 
 ## Additional icons

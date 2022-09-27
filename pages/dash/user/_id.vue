@@ -6,7 +6,7 @@
         <h3 class="text-secondary text-capitalize">
           Editing:
           <transition name="fade-x" mode="out-in">
-            <span class="text-info fw-bold" v-if="loading">
+            <span class="text-info fw-bold" v-if="loading.main">
               <lazy-LoadersText :length="2" size="xs" />
               <lazy-LoadersText :length="1" size="xs" />
             </span>
@@ -21,7 +21,7 @@
             :inputCount="6"
             :btnCenter="true"
             :btnColor="'info'"
-            v-if="loading"
+            v-if="loading.main"
           />
           <!-- for Valdation -->
           <ValidationObserver v-slot="{ handleSubmit }" v-else>
@@ -395,13 +395,123 @@
               </div>
               <!-- end:Role Checkbox -->
 
+              <transition name="fade-y" mode="out-in">
+                <!-- start:College -->
+                <div class="">
+                  <div
+                    class="row py-2 bg-gradient-light rounded-5 border shadow-4"
+                    v-if="user.is_teacher"
+                  >
+                    <div class="col-12">
+                      <label class="form-label" for="college">College</label>
+                    </div>
+                    <div class="col">
+                      <ValidationProvider v-slot="{ errors }" :rules="{}">
+                        <v-select
+                          placeholder="Select College"
+                          :options="collegeList.results"
+                          v-model="user.college"
+                          label="alias_name"
+                          :loading="loading.college"
+                        >
+                          <!-- spinner -->
+                          <template #spinner="{ loading }">
+                            <div
+                              v-if="loading"
+                              class="vs__spinner"
+                              style="border-left-color: var(--mdb-primary)"
+                            >
+                              loading...
+                            </div>
+                          </template>
+
+                          <!-- options -->
+                          <template #option="{ alias_name, logo }">
+                            <div
+                              class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                            >
+                              <span class="d-flex align-items-center gap-2">
+                                <span>
+                                  <img
+                                    class="avatar avatar-sm rounded-circle bg-white obj-fit-cover shadow"
+                                    :data-src="logo"
+                                    :alt="`${alias_name}'s logo`"
+                                    v-lazy-load
+                                  />
+                                </span>
+                              </span>
+                              <span>{{ alias_name }}</span>
+                            </div>
+                          </template>
+
+                          <!-- footer for pagination -->
+                          <li
+                            slot="list-footer"
+                            class="d-flex gap-2 justify-content-center align-items-center my-2"
+                            v-if="collegeList.pagination.count > 1"
+                          >
+                            <!-- previous button -->
+                            <button
+                              class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                              :disabled="
+                                disableCollegeBtns ||
+                                !collegeList.pagination.previous
+                              "
+                              @click.prevent="collegePaginatePrev"
+                              data-mdb-ripple-color="primary"
+                            >
+                              <i class="ri-arrow-left-s-line"></i>
+                            </button>
+
+                            <!-- next button -->
+                            <button
+                              class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                              :disabled="
+                                disableCollegeBtns ||
+                                !collegeList.pagination.next
+                              "
+                              @click.prevent="collegePaginateNext"
+                              data-mdb-ripple-color="primary"
+                            >
+                              <i class="ri-arrow-right-s-line"></i>
+                            </button>
+                          </li>
+                        </v-select>
+                        <!-- Validation Errors -->
+                        <div
+                          class="text-danger transition-all-ease-out-sine"
+                          :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                        >
+                          {{ errors[0] }}
+                        </div>
+                      </ValidationProvider>
+                    </div>
+                  </div>
+                </div>
+                <!-- end:College -->
+              </transition>
+
               <!-- Submit button -->
-              <div class="d-flex justify-content-center">
+              <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
                 <button
                   type="submit"
-                  class="btn bg-gradient-info text-white btn-rounded my-4"
+                  class="btn bg-gradient-info text-white btn-rounded"
                 >
-                  Update User
+                  <span class="d-flex align-items-center gap-1">
+                    <i class="ri-edit-2-fill ri-lg mt-n1"></i>
+                    <span>Update User</span>
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  @click="resetData"
+                  class="btn bg-gradient-warning text-white btn-rounded"
+                >
+                  <span class="d-flex align-items-center gap-1">
+                    <i class="ri-restart-line ri-lg mt-n1"></i>
+                    <span>Reset</span>
+                  </span>
                 </button>
               </div>
             </form>
@@ -422,8 +532,12 @@ export default {
 
   data() {
     return {
-      loading: true,
+      loading: {
+        main: true,
+        college: true,
+      },
       error: true,
+
       genderList: [
         {
           label: 'Male',
@@ -438,23 +552,20 @@ export default {
           icon: 'ri-genderless-fill',
         },
       ],
+
       imageFile: '',
       imageUploaded: false,
-      user: {
-        profile_image: '',
-        profile_image_public_id: '',
-        first_name: '',
-        last_name: '',
-        email: '',
-        gender: '',
-        mobile: '',
-        district: '',
-        address: '',
-        is_admin: false,
-        is_principal: false,
-        is_hod: false,
-        is_teacher: false,
+      user: {},
+      oldUser: {},
+
+      // for college
+      disableCollegeBtns: false,
+      collegeList: {
+        pagination: {
+          count: 0,
+        },
       },
+      collegePayload: {},
     }
   },
 
@@ -523,12 +634,17 @@ export default {
     },
 
     async fetchUser() {
-      this.loading = true
+      this.loading.main = true
 
       await this.$api.user
         .retrieve(this.$route.params.id)
         .then((response) => {
           this.user = response.data
+          this.user.college = [...this.user.college_teacher]
+
+          // take baackup of fetched data
+          this.oldUser = { ...this.user }
+          // this.uaer.college_teacher = []
 
           // find gender in genderList and assign it to user.gender
           this.genderList.forEach((ele) => {
@@ -578,22 +694,18 @@ export default {
     // update user
     async updateUser() {
       try {
-        const user = {
-          profile_image: this.user.profile_image,
-          profile_image_public_id: this.user.profile_image_public_id,
-          first_name: this.user.first_name,
-          last_name: this.user.last_name,
-          email: this.user.email,
-          gender: this.user.gender.label,
-          district: this.user.district,
-          address: this.user.address,
-          mobile: this.user.mobile,
-          is_active: this.user.is_active,
-          is_admin: this.user.is_admin,
-          is_principal: this.user.is_principal,
-          is_hod: this.user.is_hod,
-          is_teacher: this.user.is_teacher,
+        let user = { ...this.user }
+        // let collegeList = user.college.map((college) => college.id)
+
+        let collegeList = []
+        if (this.user.college && this.user.college.length != 0) {
+          console.log('in if')
+          console.log(user.college)
+          collegeList = [user.college.id]
         }
+
+        user.gender = this.user.gender.label
+        user.college = collegeList
 
         this.$swal({
           title: 'Updating User',
@@ -608,8 +720,6 @@ export default {
               .then(() => {
                 this.$swal.hideLoading()
                 this.$swal.close()
-
-                let timerInterval
 
                 this.$swal({
                   title: 'Update Successful',
@@ -628,11 +738,19 @@ export default {
                 this.$swal.hideLoading()
                 this.$swal.close()
 
+                let errMsg = 'Failed to Update User'
+
+                if (err.response.status == 404) {
+                  errMsg = err.response.data.college
+                    ? err.response.data.college
+                    : errMsg
+                }
+
                 this.$swal({
                   title: 'Error',
                   icon: 'error',
                   type: 'error',
-                  html: `Failed to Update User.`,
+                  html: `${errMsg}`,
                 })
               })
           },
@@ -717,33 +835,106 @@ export default {
       this.user.profile_image = await imageData
       e.target.value = ''
     },
+
+    // get list of colleges
+    async getCollegeList() {
+      this.loading.college = true
+      this.disableCollegeBtns = true
+
+      return this.$api.college
+        .list(this.collegePayload)
+        .then((response) => {
+          this.collegeList = response.data
+
+          this.loading.college = false
+          this.disableCollegeBtns = false
+          this.error = false
+        })
+        .catch((err) => {
+          this.error = true
+
+          this.loading.college = true
+          this.collegeList = {
+            pagination: {
+              count: 0,
+            },
+          }
+          if (err.response.status == 404) {
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'Page not Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong. Unable to fetch College List.',
+            })
+          }
+        })
+    },
+
+    // on College filter previous
+    collegePaginatePrev() {
+      if (this.collegeList.pagination.previous) {
+        this.collegePayload.page = this.collegePayload.page - 1
+        this.getCollegeList()
+      }
+    },
+
+    // on College filter next
+    collegePaginateNext() {
+      if (this.collegeList.pagination.next) {
+        this.collegePayload.page = this.collegePayload.page + 1
+        this.getCollegeList()
+      }
+    },
+
+    resetData() {
+      this.resetUserData().then(() => (this.loading.main = false))
+    },
+
+    async resetUserData() {
+      this.loading.main = true
+
+      return new Promise((resolve, reject) => {
+        this.user = { ...this.oldUser }
+
+        resolve()
+      })
+    },
   },
 
   mounted() {
-    this.fetchUser().then(() => {
-      if (!this.error) {
-        this.loading = false
+    this.collegePayload.page = 1
 
-        // initialize form elements
-        document.querySelectorAll('.form-outline').forEach((formOutline) => {
-          new this.$mdb.Input(formOutline).init()
-        })
+    this.fetchUser()
+      .then(() => {
+        return this.getCollegeList()
+      })
+      .then(() => {
+        if (!this.error) {
+          this.loading.main = false
 
-        // initialize popover elements
-        document
-          .querySelectorAll('[data-mdb-toggle="popover"]')
-          .forEach((popover) => {
-            new this.$mdb.Popover(popover)
+          // initialize form elements
+          document.querySelectorAll('.form-outline').forEach((formOutline) => {
+            new this.$mdb.Input(formOutline).init()
           })
 
-        // initialize tooltip elements
-        document
-          .querySelectorAll('[data-mdb-toggle="tooltip"]')
-          .forEach((tooltip) => {
-            new this.$mdb.Tooltip(tooltip)
-          })
-      }
-    })
+          // initialize popover elements
+          document
+            .querySelectorAll('[data-mdb-toggle="popover"]')
+            .forEach((popover) => {
+              new this.$mdb.Popover(popover)
+            })
+
+          // initialize tooltip elements
+          document
+            .querySelectorAll('[data-mdb-toggle="tooltip"]')
+            .forEach((tooltip) => {
+              new this.$mdb.Tooltip(tooltip)
+            })
+        }
+      })
   },
 }
 </script>
