@@ -28,7 +28,7 @@ export default {
 
   // Router: https://go.nuxtjs.dev/config-router
   router: {
-    middleware: 'isDash',
+    middleware: ['isDash', 'isPanel'],
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -150,9 +150,9 @@ export default {
         },
       },
     },
-    redirect: {
-      home: '/dash',
-    },
+    // redirect: {
+    //   home: '/dash',
+    // },
   },
 
   sweetalert: {

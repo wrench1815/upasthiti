@@ -233,7 +233,15 @@
 export default {
   props: ['error'],
 
-  layout: () => ($nuxt.$store.state.isDash ? 'dash' : 'default'),
+  layout: () => {
+    if ($nuxt.$store.state.isDash) {
+      return 'dash'
+    } else if ($nuxt.$store.state.isPanel) {
+      return 'panel'
+    } else {
+      return 'default'
+    }
+  },
 
   computed: {
     message() {

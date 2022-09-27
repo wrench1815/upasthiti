@@ -1,12 +1,12 @@
 <template>
   <div>
-    <Lazy-DashNavAsideNav class="d-none d-lg-block" />
+    <Lazy-PanelNavAsideNav class="d-none d-lg-block" />
 
     <main class="main-content position-relative h-100 border-radius-lg">
-      <Lazy-DashNav />
-      <Lazy-DashNavToolBar class="mt-lg-3" />
-      <Lazy-DashNavSideBar />
-      <Lazy-DashNavProfile :key="isAuthenticated" />
+      <Lazy-PanelNav />
+      <Lazy-PanelNavToolBar class="mt-lg-3" />
+      <Lazy-PanelNavSideBar />
+      <Lazy-PanelNavProfile :key="isAuthenticated" />
 
       <nuxt />
       <Lazy-DashFooter />
@@ -24,8 +24,9 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'DashLayout',
+  name: 'PanelLayout',
   middleware: ['auth'],
+  //TODO: 'isTeacher' add later
 
   computed: {
     ...mapGetters({

@@ -7,7 +7,7 @@
     <Lazy-NavBarSideBar />
 
     <!-- profile modals -->
-    <Lazy-NavBarProfile />
+    <Lazy-NavBarProfile :key="isAuthenticated" />
 
     <nuxt />
 
@@ -23,8 +23,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'DefaultLayout',
+
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'isAuthenticated',
+    }),
+  },
 
   mounted() {
     window.addEventListener('storage', (event) => {

@@ -8,7 +8,7 @@
     <div class="offcanvas-body m-1 p-2 d-flex hide-scrollbar">
       <div class=""></div>
       <div
-        class="bg-white rounded-5 shadow mt-auto mt-lg-0 mb-lg-auto position-relative ms-lg-auto content-width"
+        class="bg-white rounded-5 shadow mt-auto mt-lg- mb-lg-aut position-relative ms-lg-aut content-width"
       >
         <!-- start:Profile Close Button -->
         <div class="position-absolute end-0 m-2">
@@ -83,18 +83,13 @@
                 </div>
               </li>
 
-              <!-- to dash -->
+              <!-- to home -->
               <li class="nav-item">
                 <div
                   class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
-                  @click="toDash"
+                  @click="toHome"
                 >
-                  <span v-if="role == 'teacher'" class="d-flex gap-1">
-                    <i class="ri-collage-fill"></i>Panel
-                  </span>
-                  <span v-else class="d-flex gap-1">
-                    <i class="ri-dashboard-fill"></i>Dash
-                  </span>
+                  <i class="ri-home-2-fill"></i>Home
                 </div>
               </li>
 
@@ -162,20 +157,12 @@ export default {
 
     async toEditProfile() {
       this.profileOffCanvas().then(() => {
-        if (this.role == 'teacher') {
-          this.$router.push('/panel/profile')
-        } else {
-          this.$router.push('/dash/profile')
-        }
+        this.$router.push('/panel/profile')
       })
     },
-    async toDash() {
+    async toHome() {
       this.profileOffCanvas().then(() => {
-        if (this.role == 'teacher') {
-          this.$router.push('/panel')
-        } else {
-          this.$router.push('/dash')
-        }
+        this.$router.push('/')
       })
     },
 
@@ -261,17 +248,6 @@ export default {
 
 .offcanvas-anim {
   transform: translateY(100%);
-}
-
-@media (min-width: 992px) {
-  .offcanvas-pos {
-    right: 0;
-    left: unset;
-  }
-
-  .offcanvas-anim {
-    transform: translateY(-100%);
-  }
 }
 
 /* .offcanvas-width {
