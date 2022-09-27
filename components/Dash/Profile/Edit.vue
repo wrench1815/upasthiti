@@ -397,22 +397,8 @@ export default {
     // update user
     async updateUser() {
       try {
-        const user = {
-          profile_image: this.user.profile_image,
-          profile_image_public_id: this.user.profile_image_public_id,
-          first_name: this.user.first_name,
-          last_name: this.user.last_name,
-          email: this.user.email,
-          gender: this.user.gender.label,
-          district: this.user.district,
-          address: this.user.address,
-          mobile: this.user.mobile,
-          is_active: this.user.is_active,
-          is_admin: this.user.is_admin,
-          is_principal: this.user.is_principal,
-          is_hod: this.user.is_hod,
-          is_teacher: this.user.is_teacher,
-        }
+        let user = { ...this.user }
+        user.gender = user.gender.label
 
         this.$swal({
           title: 'Updating Profile',

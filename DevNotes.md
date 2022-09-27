@@ -241,6 +241,12 @@ This file is no keep note of various things that devs would need help while work
 <i class="ri-dashboard-fill"></i>
 ```
 
+-Panel:
+
+```html
+<i class="ri-collage-fill"></i>
+```
+
 -Settings:
 
 ```html

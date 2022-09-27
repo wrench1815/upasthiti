@@ -6,7 +6,7 @@
       <Lazy-PanelNav />
       <Lazy-PanelNavToolBar class="mt-lg-3" />
       <Lazy-PanelNavSideBar />
-      <Lazy-PanelNavProfile />
+      <Lazy-PanelNavProfile :key="isAuthenticated" />
 
       <nuxt />
       <Lazy-DashFooter />
@@ -21,10 +21,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'PanelLayout',
   middleware: ['auth'],
   //TODO: 'isTeacher' add later
+
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'isAuthenticated',
+    }),
+  },
 
   methods: {
     // check if changes in local storage, if so, logout

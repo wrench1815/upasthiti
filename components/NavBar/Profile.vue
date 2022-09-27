@@ -89,7 +89,12 @@
                   class="nav-link rounded-4 text-dark pointer-pointer d-flex align-items-center gap-1"
                   @click="toDash"
                 >
-                  <i class="ri-dashboard-fill"></i>Dash
+                  <span v-if="role == 'teacher'" class="d-flex gap-1">
+                    <i class="ri-collage-fill"></i>Panel
+                  </span>
+                  <span v-else class="d-flex gap-1">
+                    <i class="ri-dashboard-fill"></i>Dash
+                  </span>
                 </div>
               </li>
 
@@ -157,12 +162,20 @@ export default {
 
     async toEditProfile() {
       this.profileOffCanvas().then(() => {
-        this.$router.push('/dash/profile')
+        if (this.role == 'teacher') {
+          this.$router.push('/panel/profile')
+        } else {
+          this.$router.push('/dash/profile')
+        }
       })
     },
     async toDash() {
       this.profileOffCanvas().then(() => {
-        this.$router.push('/dash')
+        if (this.role == 'teacher') {
+          this.$router.push('/panel')
+        } else {
+          this.$router.push('/dash')
+        }
       })
     },
 

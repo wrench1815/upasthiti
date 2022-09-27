@@ -239,7 +239,7 @@ export default {
     } else if ($nuxt.$store.state.isPanel) {
       return 'panel'
     } else {
-      return 'panel'
+      return 'default'
     }
   },
 

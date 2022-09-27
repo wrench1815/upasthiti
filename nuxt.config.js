@@ -150,9 +150,9 @@ export default {
         },
       },
     },
-    redirect: {
-      home: '/dash',
-    },
+    // redirect: {
+    //   home: '/dash',
+    // },
   },
 
   sweetalert: {

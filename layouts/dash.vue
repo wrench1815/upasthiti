@@ -6,7 +6,7 @@
       <Lazy-DashNav />
       <Lazy-DashNavToolBar class="mt-lg-3" />
       <Lazy-DashNavSideBar />
-      <Lazy-DashNavProfile />
+      <Lazy-DashNavProfile :key="isAuthenticated" />
 
       <nuxt />
       <Lazy-DashFooter />
@@ -21,9 +21,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'DashLayout',
   middleware: ['auth'],
+
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'isAuthenticated',
+    }),
+  },
 
   methods: {
     // check if changes in local storage, if so, logout
