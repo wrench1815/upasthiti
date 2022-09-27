@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Lazy-DashAttendanceTakeAttendance />
+  <div class="container-fluid my-4">
+    <Lazy-PanelAttendanceMark />
   </div>
 </template>
 

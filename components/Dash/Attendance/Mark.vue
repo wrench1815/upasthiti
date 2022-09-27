@@ -7,7 +7,7 @@
         <h5 class="text-secondary text-gradient">Date</h5>
       </div>
       <div class="card-body">
-        <div class="row my-3 gx-4 gy-4 ">
+        <div class="row my-3 gx-4 gy-4">
           <div class="col-lg-3 col-md-4 col-sm-12">
             <Lazy-DashAttendanceCardAttendance />
           </div>
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'DashCardAttendance',
+  name: 'PanelAttendanceMark',
 }
 </script>
 
