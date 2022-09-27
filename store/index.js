@@ -23,6 +23,7 @@ export const state = () => ({
     'Udhampur',
   ],
   isDash: false,
+  isPanel: false,
   privacyAccepted: false,
 })
 
@@ -68,6 +69,10 @@ export const getters = {
 export const mutations = {
   setDash(state, isDash) {
     state.isDash = isDash
+  },
+
+  setPanel(state, isPanel) {
+    state.isPanel = isPanel
   },
 
   acceptPrivacy(state) {

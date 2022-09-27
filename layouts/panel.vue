@@ -24,6 +24,7 @@
 export default {
   name: 'PanelLayout',
   middleware: ['auth'],
+  //TODO: 'isTeacher' add later
 
   methods: {
     // check if changes in local storage, if so, logout
