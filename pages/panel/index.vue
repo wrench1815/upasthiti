@@ -1,11 +1,10 @@
 <template>
-   <section class="container-fluid my-4">
-  </section>
+  <section class="container-fluid my-4"></section>
 </template>
 
 <script>
 export default {
-name: 'PanelIndex',
+  name: 'PanelIndex',
   layout: 'panel',
 
   created() {
@@ -19,6 +18,4 @@ name: 'PanelIndex',
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
