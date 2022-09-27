@@ -172,7 +172,7 @@ export default {
     // when University is deleted
     deletedUni() {
       if (this.university.results.length == 1) {
-        if (this.payload.page != 1) {
+        if (this.payload.page && this.payload.page != 1) {
           this.onPaginated(this.payload.page - 1)
         } else {
           this.onPaginated(1)

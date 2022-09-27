@@ -45,8 +45,8 @@
                 >
                   <span>
                     <span class="better-underline d-inline">{{
-                      student.university_rollno
-                        ? student.university_rollno
+                      student.university_roll_no
+                        ? student.university_roll_no
                         : '----'
                     }}</span>
                     <span class="link"></span>
@@ -60,7 +60,7 @@
             <td>
               <div class="d-flex align-items-center">
                 <p class="fw-bold mb-0 text-dark text-nowrap">
-                  {{ student.class_rollno ? student.class_rollno : '----' }}
+                  {{ student.class_roll_no ? student.class_roll_no : '----' }}
                 </p>
               </div>
             </td>

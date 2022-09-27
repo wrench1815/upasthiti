@@ -10,7 +10,7 @@
             <lazy-LoadersText :length="1" size="xs" />
           </span>
           <span class="text-info fw-bold" v-else>{{
-            student.university_rollno
+            student.university_roll_no
           }}</span>
         </h3>
       </div>
@@ -125,8 +125,13 @@
                   <!-- start:University Roll no -->
                   <Lazy-DashInput
                     :label="'University Roll no'"
-                    :validationRules="{ required: true, min: 3, numeric: true }"
-                    :data.sync="student.university_rollno"
+                    :validationRules="{
+                      required: true,
+                      min: 3,
+                      max: 15,
+                      numeric: true,
+                    }"
+                    :data.sync="student.university_roll_no"
                     :type="'number'"
                     :icon="'ri-user-fill'"
                     isRequired
@@ -137,8 +142,13 @@
                   <!-- start:Class Roll no -->
                   <Lazy-DashInput
                     :label="'Class Roll no'"
-                    :validationRules="{ required: true, min: 3, numeric: true }"
-                    :data.sync="student.class_rollno"
+                    :validationRules="{
+                      required: true,
+                      min: 3,
+                      max: 15,
+                      numeric: true,
+                    }"
+                    :data.sync="student.class_roll_no"
                     :type="'number'"
                     :icon="'ri-user-fill'"
                     isRequired
@@ -146,6 +156,99 @@
                   <!-- end:Class Roll no -->
                 </div>
               </div>
+
+              <!-- Start:College -->
+              <div class="row">
+                <div class="col-12">
+                  <label class="form-label" for="college">
+                    <span class="d-flex align-items-center gap-1">
+                      <i class="ri-government-fill text-primary"></i>
+                      <span> College </span>
+                    </span>
+                  </label>
+                </div>
+                <div class="col">
+                  <ValidationProvider v-slot="{ errors }" :rules="{}">
+                    <v-select
+                      placeholder="Select College"
+                      :options="collegeList.results"
+                      label="alias_name"
+                      v-model="student.college"
+                      :loading="loading.college"
+                    >
+                      <!-- spinner -->
+                      <template #spinner="{ loading }">
+                        <div
+                          v-if="loading"
+                          class="vs__spinner"
+                          style="border-left-color: var(--mdb-primary)"
+                        >
+                          loading...
+                        </div>
+                      </template>
+
+                      <!-- options -->
+                      <template #option="{ alias_name, logo }">
+                        <div
+                          class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                        >
+                          <span class="d-flex align-items-center gap-2">
+                            <span>
+                              <img
+                                class="avatar avatar-sm rounded-circle bg-white obj-fit-cover shadow"
+                                :data-src="logo"
+                                :alt="`${alias_name}'s logo`"
+                                v-lazy-load
+                              />
+                            </span>
+                          </span>
+                          <span>{{ alias_name }}</span>
+                        </div>
+                      </template>
+
+                      <!-- footer for pagination -->
+                      <li
+                        slot="list-footer"
+                        class="d-flex gap-2 justify-content-center align-items-center my-2"
+                        v-if="collegeList.pagination.count > 1"
+                      >
+                        <!-- previous button -->
+                        <button
+                          class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                          :disabled="
+                            disableCollegeBtns ||
+                            !collegeList.pagination.previous
+                          "
+                          @click.prevent="collegePaginatePrev"
+                          data-mdb-ripple-color="primary"
+                        >
+                          <i class="ri-arrow-left-s-line"></i>
+                        </button>
+
+                        <!-- next button -->
+                        <button
+                          class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                          :disabled="
+                            disableCollegeBtns || !collegeList.pagination.next
+                          "
+                          @click.prevent="collegePaginateNext"
+                          data-mdb-ripple-color="primary"
+                        >
+                          <i class="ri-arrow-right-s-line"></i>
+                        </button>
+                      </li>
+                    </v-select>
+                    <!-- Validation Errors -->
+                    <div
+                      class="text-danger transition-all-ease-out-sine"
+                      :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                    >
+                      {{ errors[0] }}
+                    </div>
+                  </ValidationProvider>
+                </div>
+              </div>
+              <!-- End:College -->
 
               <div class="row">
                 <!-- start:Email -->
@@ -338,12 +441,26 @@
               <!-- end:Password -->
 
               <!-- Submit button -->
-              <div class="d-flex justify-content-center">
+              <div class="d-flex justify-content-center gap-3 flex-wrap mt-2">
                 <button
                   type="submit"
-                  class="btn bg-gradient-primary text-white btn-rounded my-4"
+                  class="btn bg-gradient-info text-white btn-rounded"
                 >
-                  Update Student
+                  <span class="d-flex align-items-center gap-1">
+                    <i class="ri-edit-2-fill ri-lg mt-n1"></i>
+                    <span>Update Student</span>
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  @click="resetData"
+                  class="btn bg-gradient-warning text-white btn-rounded"
+                >
+                  <span class="d-flex align-items-center gap-1">
+                    <i class="ri-restart-line ri-lg mt-n1"></i>
+                    <span>Reset</span>
+                  </span>
                 </button>
               </div>
             </form>
@@ -366,16 +483,9 @@ export default {
     return {
       loading: {
         main: true,
-        uni: true,
-        principal: true,
-        paginateUni: true,
-        paginatePrincipal: true,
+        college: true,
       },
       error: true,
-      imageFile: '',
-      imageUploaded: false,
-      college: {},
-
       genderList: [
         {
           label: 'Male',
@@ -390,16 +500,20 @@ export default {
           icon: 'ri-genderless-fill',
         },
       ],
-      student: {},
-      // universty related
-      disableUniBtns: true,
-      universityList: [],
-      uniPayload: {},
 
-      // principal related
-      principalList: [],
-      disablePrincipalBtns: true,
-      principalPayload: {},
+      imageFile: '',
+      imageUploaded: false,
+      student: {},
+      oldStudent: {},
+
+      // for college
+      disableCollegeBtns: false,
+      collegeList: {
+        pagination: {
+          count: 0,
+        },
+      },
+      collegePayload: {},
     }
   },
 
@@ -422,6 +536,22 @@ export default {
   },
 
   methods: {
+    resetData() {
+      this.resetClassData().then(() => {
+        this.loading.main = false
+      })
+    },
+
+    async resetClassData() {
+      this.loading.main = true
+
+      return new Promise((resolve, reject) => {
+        this.student = { ...this.oldStudent }
+
+        resolve()
+      })
+    },
+
     // upload Student Profile Image to cloudinary
     async uploadProfile() {
       return new Promise((resolve, reject) => {
@@ -488,10 +618,11 @@ export default {
     // send Student data to server to Edit the Student
     async updateStudent() {
       try {
-        let student = this.student
-        student.gender = this.student.gender.label
-        // college.university = college.university.id
-        // college.principal = college.principal.id
+        let student = { ...this.student }
+        student.gender = student.gender.label
+        if (student.college) {
+          student.college = student.college.id
+        }
 
         this.$swal({
           title: 'Updating Student',
@@ -622,6 +753,7 @@ export default {
         .retrieve(this.$route.params.id)
         .then((response) => {
           this.student = response.data
+          this.oldStudent = { ...this.student }
 
           this.error = false
         })
@@ -642,39 +774,97 @@ export default {
           }
         })
     },
+
+    ///////////////////////////////////////
+    // College
+    ///////////////////////////////////////
+
+    // get list of colleges
+    async getCollegeList() {
+      this.loading.college = true
+      this.disableCollegeBtns = true
+
+      return this.$api.college
+        .list(this.collegePayload)
+        .then((response) => {
+          this.collegeList = response.data
+
+          this.loading.college = false
+          this.disableCollegeBtns = false
+          this.error = false
+        })
+        .catch((err) => {
+          this.error = true
+
+          this.loading.college = true
+          this.collegeList = {
+            pagination: {
+              count: 0,
+            },
+          }
+          if (err.response.status == 404) {
+            this.$nuxt.error({
+              statusCode: 404,
+              message: 'Page not Found',
+            })
+          } else {
+            this.$nuxt.error({
+              statusCode: 400,
+              message: 'Something went Wrong. Unable to fetch College List.',
+            })
+          }
+        })
+    },
+
+    // on College filter previous
+    collegePaginatePrev() {
+      if (this.collegeList.pagination.previous) {
+        this.collegePayload.page = this.collegePayload.page - 1
+        this.getCollegeList()
+      }
+    },
+
+    // on College filter next
+    collegePaginateNext() {
+      if (this.collegeList.pagination.next) {
+        this.collegePayload.page = this.collegePayload.page + 1
+        this.getCollegeList()
+      }
+    },
   },
 
   mounted() {
+    this.collegePayload.page = 1
+
     // fetch Student
-    this.retrieveStudent().then(() => {
-      if (this.error) {
-        this.$nuxt.error({
-          statusCode: 400,
-          message: 'Something went Wrong',
-        })
-      } else {
-        this.loading.main = false
+    this.getCollegeList()
+      .then(() => {
+        return this.retrieveStudent()
+      })
+      .then(() => {
+        if (!this.error) {
+          this.loading.main = false
 
-        // initialize form elements
-        document.querySelectorAll('.form-outline').forEach((formOutline) => {
-          new this.$mdb.Input(formOutline).init()
-        })
-
-        // initialize popover elements
-        document
-          .querySelectorAll('[data-mdb-toggle="popover"]')
-          .forEach((popover) => {
-            new this.$mdb.Popover(popover)
+          // initialize form elements
+          document.querySelectorAll('.form-outline').forEach((formOutline) => {
+            new this.$mdb.Input(formOutline).init()
           })
 
-        // initialize tooltip elements
-        document
-          .querySelectorAll('[data-mdb-toggle="tooltip"]')
-          .forEach((tooltip) => {
-            new this.$mdb.Tooltip(tooltip)
-          })
-      }
-    })
+          // initialize popover elements
+          document
+            .querySelectorAll('[data-mdb-toggle="popover"]')
+            .forEach((popover) => {
+              new this.$mdb.Popover(popover)
+            })
+
+          // initialize tooltip elements
+          document
+            .querySelectorAll('[data-mdb-toggle="tooltip"]')
+            .forEach((tooltip) => {
+              new this.$mdb.Tooltip(tooltip)
+            })
+        }
+      })
   },
 }
 </script>
