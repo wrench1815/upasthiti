@@ -106,7 +106,11 @@
           <!-- end:District Filter -->
         </section>
         <Lazy-LoadersTable v-if="loading" />
-        <Lazy-DashCollegeTable v-else :colleges.sync="colleges.results" />
+        <Lazy-DashCollegeTable
+          v-else
+          :colleges.sync="colleges.results"
+          @update:colleges="deletedCollege"
+        />
 
         <Lazy-UtilsPagination
           class="mt-4"
@@ -241,7 +245,7 @@ export default {
 
     // when College is deleted
     deletedCollege() {
-      if (this.college.results.length == 1) {
+      if (this.college.results.length == 0) {
         if (this.payload.page && this.payload.page != 1) {
           this.onPaginated(this.payload.page - 1)
         } else {

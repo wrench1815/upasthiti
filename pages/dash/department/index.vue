@@ -99,7 +99,11 @@
         </section>
 
         <LoadersTable v-if="loading.main" />
-        <DashDepartmentTable v-else :departments.sync="departments.results" />
+        <DashDepartmentTable
+          v-else
+          :departments.sync="departments.results"
+          @update:departments="deletedDepartment"
+        />
 
         <Lazy-UtilsPagination
           class="mt-4"
@@ -157,6 +161,18 @@ export default {
   },
 
   methods: {
+    // when Department is deleted
+    deletedDepartment() {
+      if (this.departments.results.length == 0) {
+        if (this.payload.page != 1) {
+          this.onPaginated(this.payload.page - 1)
+        } else {
+          this.onPaginated(1)
+        }
+      }
+      this.refreshDepartment()
+    },
+
     // fetch list of departments
     async getDepartments() {
       this.loading.main = true
