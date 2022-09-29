@@ -640,11 +640,10 @@ export default {
         .retrieve(this.$route.params.id)
         .then((response) => {
           this.user = response.data
-          this.user.college = [...this.user.college_teacher]
 
-          // take baackup of fetched data
-          this.oldUser = { ...this.user }
-          // this.uaer.college_teacher = []
+          if (this.user.college_teacher.length != 0) {
+            this.user.college = this.user.college_teacher[0]
+          }
 
           // find gender in genderList and assign it to user.gender
           this.genderList.forEach((ele) => {
@@ -652,6 +651,9 @@ export default {
               this.user.gender = ele
             }
           })
+
+          // take baackup of fetched data
+          this.oldUser = { ...this.user }
 
           this.error = false
         })
@@ -695,13 +697,12 @@ export default {
     async updateUser() {
       try {
         let user = { ...this.user }
-        // let collegeList = user.college.map((college) => college.id)
 
         let collegeList = []
-        if (this.user.college && this.user.college.length != 0) {
-          console.log('in if')
-          console.log(user.college)
+        if (user.college && user.college.length != 0) {
           collegeList = [user.college.id]
+        } else {
+          user.college = []
         }
 
         user.gender = this.user.gender.label

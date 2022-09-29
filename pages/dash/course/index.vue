@@ -83,8 +83,11 @@
         </section>
 
         <LoadersTable v-if="loading.main" />
-        <!-- <DashCourseTable  :courses.sync="courses.results" /> -->
-        <Lazy-DashCourseTable :courses.sync="course.results" v-else />
+        <Lazy-DashCourseTable
+          :courses.sync="course.results"
+          @update:courses="deletedCourse"
+          v-else
+        />
 
         <Lazy-UtilsPagination
           class="mt-4"
@@ -201,7 +204,7 @@ export default {
 
     // when Course is deleted
     deletedCourse() {
-      if (this.course.results.length == 1) {
+      if (this.course.results.length == 0) {
         if (this.payload.page && this.payload.page != 1) {
           this.onPaginated(this.payload.page - 1)
         } else {

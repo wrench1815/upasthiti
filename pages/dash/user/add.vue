@@ -622,6 +622,7 @@ export default {
         is_hod: false,
         is_teacher: false,
         password: '',
+        confirm_password: '',
         college: [],
       },
 
@@ -717,13 +718,14 @@ export default {
     async addNewUser() {
       try {
         let user = { ...this.user }
-        // let collegeList = user.college.map((college) => college.id)
 
         let collegeList = []
-        if (this.user.college && this.user.college.length != 0) {
-          console.log('in if')
-          console.log(user.college)
+        if (user.college && user.college.length != 0) {
           collegeList = [user.college.id]
+        }
+
+        if (user.password) {
+          user.confirm_password = user.password
         }
 
         user.gender = this.user.gender.label
