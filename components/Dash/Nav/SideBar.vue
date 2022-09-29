@@ -150,6 +150,11 @@ export default {
           icon: 'ri-database-fill',
         },
         {
+          name: 'Attendance',
+          url: '/dash/attendance',
+          icon: 'ri-calendar-check-fill',
+        },
+        {
           name: 'User',
           url: '/dash/user',
           icon: 'ri-user-3-fill',

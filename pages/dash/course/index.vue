@@ -202,7 +202,7 @@ export default {
     // when Course is deleted
     deletedCourse() {
       if (this.course.results.length == 1) {
-        if (this.payload.page != 1) {
+        if (this.payload.page && this.payload.page != 1) {
           this.onPaginated(this.payload.page - 1)
         } else {
           this.onPaginated(1)

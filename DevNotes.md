@@ -300,3 +300,21 @@ This file is no keep note of various things that devs would need help while work
 ```html
 <i class="ri-calendar-check-fill"></i>
 ```
+
+-Present:
+
+```html
+<i class="ri-check-double-fill"></i>
+```
+
+-Late:
+
+```html
+<i class="ri-check-fill"></i>
+```
+
+-Absent:
+
+```html
+<i class="ri-close-fill"></i>
+```

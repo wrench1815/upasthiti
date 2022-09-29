@@ -7,6 +7,7 @@ import Contact from '~/api/contact'
 import Course from '~/api/course'
 import Student from '~/api/student'
 import Class from '~/api/class'
+import Attendance from '~/api/attendance'
 
 export default (context, inject) => {
   // Initialize API factories
@@ -37,6 +38,9 @@ export default (context, inject) => {
 
     // class factory
     class: Class(context.$axios),
+
+    // attendance factory
+    attendance: Attendance(context.$axios),
   }
 
   // Inject $api

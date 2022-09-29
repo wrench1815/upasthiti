@@ -26,8 +26,8 @@
                 </div>
                 <div class="col d-flex mt-lg-4 mt-sm-4">
                   <span class="fw-bold fs-6 text-primary">{{
-                    student.university_rollno
-                      ? student.university_rollno
+                    student.university_roll_no
+                      ? student.university_roll_no
                       : '----'
                   }}</span>
                 </div>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col d-flex">
                   <span class="fw-bold fs-6 text-primary">{{
-                    student.class_rollno ? student.class_rollno : '----'
+                    student.class_roll_no ? student.class_roll_no : '----'
                   }}</span>
                 </div>
               </div>
@@ -86,6 +86,21 @@
                     ></i>
                     {{ student.gender }}</span
                   >
+                </div>
+              </div>
+              <!-- end:student Gender -->
+
+              <!-- start:student Gender -->
+              <div class="row mb-3">
+                <div class="col-12 d-flex mb-1">
+                  <label class="text-muted fw-bold-500">College</label>
+                </div>
+                <div class="col-12">
+                  <Lazy-DashClassDetailCollegeCard
+                    :college="student.college"
+                    v-if="student.college"
+                  />
+                  <div class="text-primary h5" v-else>Not Assigned</div>
                 </div>
               </div>
               <!-- end:student Gender -->

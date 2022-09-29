@@ -207,7 +207,7 @@ export default {
     // when Class is deleted
     deletedClass() {
       if (this.classes.results.length == 0) {
-        if (this.payload.page != 1) {
+        if (this.payload.page && this.payload.page != 1) {
           this.onPaginated(this.payload.page - 1)
         } else {
           this.onPaginated(1)
