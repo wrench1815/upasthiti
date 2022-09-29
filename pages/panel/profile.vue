@@ -78,8 +78,8 @@
 
 <script>
 export default {
-  name: 'DashProfile',
-  layout: 'dash',
+  name: 'PanelProfile',
+  layout: 'panel',
 
   data() {
     return {
@@ -91,7 +91,7 @@ export default {
     this.$store.commit('breadCrumbs/addBreadCrumb', [
       {
         name: 'Profile',
-        url: '/dash/profile',
+        url: '/panel/profile',
       },
     ])
   },
