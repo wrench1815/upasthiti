@@ -1,14 +1,14 @@
 <template>
   <nav
     id="nav"
-    class="navbar navbar-expand-lg navbar-light z-index-5 px-lg-2 d-lg-none"
+    class="navbar navbar-expand-lg navbar-light z-index-5 px-lg-2 px-0 d-lg-none"
     :class="[scrollClasses, navClass]"
   >
     <!-- Container wrapper -->
     <div class="container-fluid">
       <nuxt-link
         id="brand"
-        class="nav-link fs-5 d-lg-none"
+        class="nav-link fs-5 d-lg-none fw-bold"
         :class="linkClass"
         aria-current="page"
         to="/dash"
@@ -27,7 +27,7 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <i class="ri-menu-fill link-primary ri-lg"></i>
+        <i class="ri-menu-2-fill link-primary ri-lg"></i>
       </button>
 
       <!-- Collapsible wrapper -->
@@ -58,7 +58,7 @@ export default {
 
   data() {
     return {
-      navButton: 'ri-menu-fill',
+      navButton: 'ri-menu-2-fill',
       scrollClasses: 'shadow-0 bg-white mb-3',
       navClass: '',
       linkClass: 'text-primary',
@@ -92,7 +92,7 @@ export default {
     toggleNav() {
       this.navButton = document.querySelector('.show')
         ? 'ri-close-line'
-        : 'ri-menu-fill'
+        : 'ri-menu-2-fill'
     },
 
     setNavClasses() {

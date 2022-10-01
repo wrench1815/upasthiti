@@ -6,7 +6,7 @@
     data-mdb-backdrop="true"
   >
     <!-- start:sidebar close -->
-    <div class="position-absolute end-0 m-1 me-0 mt-0 d-sm-none">
+    <div class="position-absolute end-0 m-1 d-sm-none">
       <button
         type="button"
         class="btn-close"
@@ -16,7 +16,23 @@
     </div>
     <!-- end:sidebar close -->
 
-    <div class="offcanvas-body">
+    <div class="offcanvas-header">
+      <div
+        class="d-flex justify-content-center align-items-center mx-auto gap-2"
+      >
+        <img
+          class="avatar obj-fit-cover rounded-circle shadow-3-strong"
+          data-src="/favicon.png"
+          alt="Site Logo"
+          v-lazy-load
+        />
+        <h4 class="align-self-end">Upasthiti</h4>
+      </div>
+    </div>
+
+    <hr class="text-dark mt-0 mb-0" />
+
+    <div class="offcanvas-body pt-">
       <ul class="nav flex-column">
         <li class="nav-item" v-for="(items, index) in menuItems" :key="index">
           <NuxtLink

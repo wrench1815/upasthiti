@@ -48,7 +48,7 @@
         data-mdb-target="#mainSiteNavOffCanvas"
         aria-controls="mainSiteNavOffCanvas"
       >
-        <i class="ri-menu-fill link-primary ri-lg"></i>
+        <i class="ri-menu-2-fill link-primary ri-lg"></i>
       </button>
       <!-- end:OffCanvas Toggle button -->
 
