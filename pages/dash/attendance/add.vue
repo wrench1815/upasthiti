@@ -13,7 +13,6 @@
         <Lazy-LoadersForm
           :inputCount="6"
           :btnColor="'primary'"
-          showImage
           btnCenter
           v-if="loading.main"
         />
@@ -42,6 +41,7 @@
                       v-model="attendance.class"
                       label="name"
                       :loading="loading.paginateClass"
+                      @option:selected="classSelected"
                     >
                       <!-- spinner -->
                       <template #spinner="{ loading }">
@@ -109,9 +109,9 @@
                   </ValidationProvider>
                 </div>
               </div>
-              <!-- end:Class-->
+              <!-- end:Class -->
 
-              <!--Start:Class -->
+              <!--Start:Student -->
               <div class="col-lg-6 col-md-6 col-12">
                 <label class="form-label required"
                   ><i class="ri-government-fill text-primary text-gradient"></i>
@@ -121,6 +121,7 @@
                   <ValidationProvider
                     v-slot="{ errors }"
                     :rules="{ required: true }"
+                    v-if="loading.classSelected"
                   >
                     <v-select
                       id="classes"
@@ -202,10 +203,62 @@
                       {{ errors[0] }}
                     </div>
                   </ValidationProvider>
+
+                  <div v-else class="mt-n2 mb-3">
+                    <LoadersText size="xs" :length="7" />
+                    <LoadersText size="xs" :length="3" />
+                    <LoadersText size="xs" :length="1" />
+                    <LoadersText size="xs" :length="2" />
+                    <LoadersText size="xs" :length="7" />
+                  </div>
                 </div>
               </div>
-              <!-- end:Class-->
+              <!-- end:Student -->
             </div>
+
+            <!-- Start:Date -->
+            <div class="d-flex flex-column align-items-center">
+              <label class="form-label"
+                ><div class="d-flex justify-content-center gap-1">
+                  <i class="ri-calendar-line text-primary text-gradient"></i>
+                  <span class="required">Date</span>
+                </div>
+              </label>
+              <div class="">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :rules="{ required: true }"
+                >
+                  <DatePicker
+                    v-model="attendance.date"
+                    type="date"
+                    placeholder="Select Date"
+                    valueType="format"
+                    prefix-class="up"
+                    format="YYYY-MM-DD"
+                    inline
+                  >
+                    <template v-slot:footer="{ emit }">
+                      <div class="text-start">
+                        <button
+                          class="up-btn up-btn-text hover-underline-animation"
+                          @click.prevent="emit(new Date())"
+                        >
+                          Today
+                        </button>
+                      </div>
+                    </template>
+                  </DatePicker>
+                  <div
+                    class="text-danger transition-all-ease-out-sine"
+                    :class="{ 'mb-3': !errors[0], 'mb-1': errors[0] }"
+                  >
+                    {{ errors[0] }}
+                  </div>
+                </ValidationProvider>
+              </div>
+            </div>
+            <!-- End:Date -->
 
             <div class="row justify-content-center g-3 pb-4">
               <div class="col-12 d-flex justify-content-center">
@@ -317,7 +370,10 @@
                 type="submit"
                 class="btn btn-rounded bg-gradient-primary text-white mb-4"
               >
-                Add Attendance
+                <span class="d-flex align-items-center gap-1">
+                  <i class="ri-add-line ri-lg mt-n1"></i>
+                  <span>Add Attendance</span>
+                </span>
               </button>
             </div>
           </form>
@@ -329,9 +385,15 @@
 </template>
 
 <script>
+import DatePicker from 'vue2-datepicker'
+
 export default {
   name: 'DashCollegeAdd',
   layout: 'dash',
+
+  components: {
+    DatePicker,
+  },
 
   watch: {
     'attendance.is_late'() {
@@ -359,6 +421,7 @@ export default {
         main: true,
         paginateClass: true,
         paginateStudent: true,
+        classSelected: false,
       },
       error: true,
 
@@ -380,6 +443,25 @@ export default {
       studentList: [],
       disableStudentBtns: true,
       studentPayload: {},
+
+      shortcuts: [
+        {
+          text: 'Today',
+          onClick() {
+            const date = new Date()
+            // return a Date
+            return date
+          },
+        },
+        {
+          text: 'Yesterday',
+          onClick() {
+            const date = new Date()
+            date.setTime(date.getTime() - 3600 * 1000 * 24)
+            return date
+          },
+        },
+      ],
     }
   },
 
@@ -400,7 +482,7 @@ export default {
     async addAttendance() {
       try {
         let attendance = this.attendance
-        attendance.college = attendance.college.id
+        attendance.class = attendance.class.id
         attendance.student = attendance.student.id
 
         this.$swal({
@@ -457,6 +539,7 @@ export default {
     async getStudents() {
       this.disableStudentBtns = true
       this.loading.paginateStudent = true
+      this.studentPayload.class = this.attendance.class.id
 
       return this.$api.student.list(this.studentPayload).then((response) => {
         this.studentList = response.data
@@ -512,23 +595,31 @@ export default {
         this.getClasses()
       }
     },
+
+    // on selecting a class from classList
+    classSelected() {
+      this.loading.classSelected = false
+      this.attendance.student = ''
+
+      return this.getStudents().then(() => {
+        this.loading.classSelected = true
+      })
+    },
   },
 
   mounted() {
     this.classPayload.page = 1
     this.studentPayload.page = 1
 
-    this.getClasses()
-      .then(() => {
-        return this.getStudents()
-      })
-      .then(() => {
-        this.loading.main = false
+    this.attendance.date = this.$moment().format('YYYY-MM-DD')
 
-        document.querySelectorAll('.form-outline').forEach((formOutline) => {
-          new this.$mdb.Input(formOutline).init()
-        })
+    this.getClasses().then(() => {
+      this.loading.main = false
+
+      document.querySelectorAll('.form-outline').forEach((formOutline) => {
+        new this.$mdb.Input(formOutline).init()
       })
+    })
   },
 }
 </script>
