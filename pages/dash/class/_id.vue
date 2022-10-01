@@ -393,7 +393,7 @@
                 <!-- End:Course -->
 
                 <!-- Start:Teacher -->
-                <div class="col-md- col-12">
+                <div class="col-md-6 col-12">
                   <label class="form-label"
                     ><div class="d-flex justify-content-center gap-1">
                       <i class="ri-user-2-fill text-primary text-gradient"></i>
@@ -414,6 +414,7 @@
                         label="full_name"
                         :loading="loading.teacher"
                         :clearable="false"
+                        @option:selected="teacherSelected"
                       >
                         <!-- spinner -->
                         <template #spinner="{ loading }">
@@ -496,6 +497,114 @@
                   </div>
                 </div>
                 <!-- End:Teacher -->
+
+                <!-- Start:Student -->
+                <div class="col-md-6 col-12">
+                  <label class="form-label"
+                    ><div class="d-flex justify-content-center gap-1">
+                      <i class="ri-user-2-fill text-primary text-gradient"></i>
+                      <span>Student</span>
+                    </div>
+                  </label>
+                  <div class="col">
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      :rules="{}"
+                      v-if="loading.teacherSelected"
+                    >
+                      <v-select
+                        id="students"
+                        placeholder="Select Students"
+                        :options="studentList.results"
+                        v-model="classs.student"
+                        label="first_name"
+                        :loading="loading.student"
+                        :closeOnSelect="false"
+                        multiple
+                      >
+                        <!-- spinner -->
+                        <template #spinner="{ loading }">
+                          <div
+                            v-if="loading"
+                            class="vs__spinner"
+                            style="border-left-color: var(--mdb-primary)"
+                          >
+                            loading...
+                          </div>
+                        </template>
+
+                        <!-- options -->
+                        <template
+                          #option="{ first_name, last_name, profile_image }"
+                        >
+                          <div
+                            class="d-flex justify-content-start align-items-center gap-1 fw-5 hover-select"
+                          >
+                            <span class="d-flex align-items-center gap-2">
+                              <span>
+                                <img
+                                  class="avatar avatar-sm border rounded-circle bg-white obj-fit-cover"
+                                  :data-src="profile_image"
+                                  :alt="`${first_name}'s profile image`"
+                                  v-lazy-load
+                                />
+                              </span>
+                              <span>{{ first_name }} {{ last_name }}</span>
+                            </span>
+                          </div>
+                        </template>
+
+                        <!-- footer for pagination -->
+                        <li
+                          slot="list-footer"
+                          class="d-flex gap-2 justify-content-center align-items-center my-2"
+                          v-if="studentList.pagination.count > 1"
+                        >
+                          <!-- previous button -->
+                          <button
+                            class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                            :disabled="
+                              disableStudentBtns ||
+                              !studentList.pagination.previous
+                            "
+                            @click.prevent="studentPaginatePrev"
+                            data-mdb-ripple-color="primary"
+                          >
+                            <i class="ri-arrow-left-s-line"></i>
+                          </button>
+
+                          <!-- next button -->
+                          <button
+                            class="btn btn-sm btn-floating border border-primary btn-rounded text-primary ripple d-flex justify-content-center align-items-center"
+                            :disabled="
+                              disableStudentBtns || !studentList.pagination.next
+                            "
+                            @click.prevent="studentPaginateNext"
+                            data-mdb-ripple-color="primary"
+                          >
+                            <i class="ri-arrow-right-s-line"></i>
+                          </button>
+                        </li>
+                      </v-select>
+                      <!-- Validation Errors -->
+                      <div
+                        class="text-danger transition-all-ease-out-sine"
+                        :class="{ 'mb-4': !errors[0], 'mb-2': errors[0] }"
+                      >
+                        {{ errors[0] }}
+                      </div>
+                    </ValidationProvider>
+
+                    <div v-else class="mt-n2 mb-3">
+                      <LoadersText size="xs" :length="7" />
+                      <LoadersText size="xs" :length="3" />
+                      <LoadersText size="xs" :length="1" />
+                      <LoadersText size="xs" :length="2" />
+                      <LoadersText size="xs" :length="7" />
+                    </div>
+                  </div>
+                </div>
+                <!-- End:Student -->
               </div>
 
               <!-- Submit button -->
@@ -551,18 +660,21 @@ export default {
         paginateDept: true,
         paginateCourse: true,
         paginateTeacher: true,
+        paginateStudent: true,
 
         // data
         college: true,
         dept: true,
         course: true,
         teacher: true,
+        student: true,
 
         // selected
         collegeSelected: false,
         deptSelected: false,
         courseSelected: false,
         teacherSelected: false,
+        studentSelected: false,
       },
       error: true,
 
@@ -588,6 +700,11 @@ export default {
       teacherList: [],
       disableTeacherBtns: true,
       teacherPayload: {},
+
+      // Student related
+      studentList: [],
+      disableStudentBtns: true,
+      studentPayload: {},
     }
   },
 
@@ -670,6 +787,15 @@ export default {
           'YYYY-MM-DD'
         )
 
+        let studentList = []
+        if (classs.student && classs.student.length != 0) {
+          classs.student.forEach((stud) => {
+            studentList.push(stud.id)
+          })
+
+          classs.student = studentList
+        }
+
         this.$swal({
           title: 'Updating Class',
           icon: 'info',
@@ -679,7 +805,7 @@ export default {
             this.$swal.showLoading()
 
             this.$api.class
-              .create(classs)
+              .update(classs.id, classs)
               .then(() => {
                 this.$swal.hideLoading()
                 this.$swal.close()
@@ -866,6 +992,41 @@ export default {
     },
 
     //////////////////////////////////////////////////////////////////////
+    // student
+    //////////////////////////////////////////////////////////////////////
+
+    // get list of Students
+    getStudents() {
+      this.disableStudentBtns = true
+      this.loading.paginateStudent = true
+      this.loading.student = true
+      this.studentPayload.college = this.classs.college.id
+
+      return this.$api.student.list(this.studentPayload).then((response) => {
+        this.studentList = response.data
+
+        this.disableStudentBtns = false
+        this.loading.paginateStudent = false
+        this.loading.student = false
+      })
+    },
+
+    // on student select next
+    studentPaginateNext() {
+      if (this.studentList.pagination.next) {
+        this.studentPayload.page = this.studentPayload.page + 1
+        this.getStudents()
+      }
+    },
+
+    // on student select previous
+    studentPaginatePrev() {
+      if (this.studentList.pagination.previous) {
+        this.studentPayload.page = this.studentPayload.page - 1
+        this.getStudents()
+      }
+    },
+    //////////////////////////////////////////////////////////////////////
     // selected
     //////////////////////////////////////////////////////////////////////
 
@@ -874,9 +1035,11 @@ export default {
       this.loading.collegeSelected = false
       this.loading.deptSelected = false
       this.loading.courseSelected = false
+      this.loading.teacherSelected = false
       this.classs.department = ''
       this.classs.course = ''
       this.classs.teacher = ''
+      this.classs.student = []
 
       return this.getDepartments().then(() => {
         this.loading.collegeSelected = true
@@ -904,6 +1067,15 @@ export default {
         this.loading.courseSelected = true
       })
     },
+
+    // on selecting a teacher from teacherList
+    teacherSelected() {
+      this.loading.teacherSelected = false
+
+      return this.getStudents().then(() => {
+        this.loading.teacherSelected = true
+      })
+    },
   },
 
   mounted() {
@@ -911,6 +1083,7 @@ export default {
     this.collegePayload.page = 1
     this.coursePayload.page = 1
     this.teacherPayload.page = 1
+    this.studentPayload.page = 1
 
     // fetch college
     this.retrieveClass()
@@ -927,6 +1100,9 @@ export default {
         return this.getTeachers()
       })
       .then(() => {
+        return this.getStudents()
+      })
+      .then(() => {
         if (this.error) {
           this.$nuxt.error({
             statusCode: 400,
@@ -936,6 +1112,7 @@ export default {
           this.loading.collegeSelected = true
           this.loading.deptSelected = true
           this.loading.courseSelected = true
+          this.loading.teacherSelected = true
 
           this.loading.main = false
 

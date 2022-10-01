@@ -63,13 +63,19 @@ export default {
       type: Object,
       required: true,
     },
+    scroll: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   methods: {
     scrollToTop() {
-      setTimeout(() => {
-        window.scroll({ top: 0, behavior: 'smooth' })
-      }, 100)
+      if (this.scroll) {
+        setTimeout(() => {
+          window.scroll({ top: 0, behavior: 'smooth' })
+        }, 100)
+      }
     },
 
     // previous page

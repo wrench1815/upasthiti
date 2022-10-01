@@ -637,6 +637,20 @@ export default {
     }
   },
 
+  watch: {
+    'user.is_hod'() {
+      if (this.user.is_hod) {
+        this.user.is_teacher = true
+      }
+    },
+
+    'user.is_teacher'() {
+      if (this.user.is_hod) {
+        this.user.is_teacher = true
+      }
+    },
+  },
+
   created() {
     this.$store.commit('breadCrumbs/addBreadCrumb', [
       {
