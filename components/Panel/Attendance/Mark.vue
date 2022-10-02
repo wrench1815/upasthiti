@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid my-4">
+  <div>
     <div class="card pt-3">
       <div class="card-header text-center">
         <h2 class="text-primary text-gradient">Mark Attendance</h2>

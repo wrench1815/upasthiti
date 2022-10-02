@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="card border">
+    <div class="card border hover-shadow">
       <div class="card-body p-3">
         <div class="d-flex justify-content-center">
           <!-- profile image -->
