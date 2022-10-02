@@ -569,6 +569,20 @@ export default {
     }
   },
 
+  watch: {
+    'user.is_hod'() {
+      if (this.user.is_hod) {
+        this.user.is_teacher = true
+      }
+    },
+
+    'user.is_teacher'() {
+      if (this.user.is_hod) {
+        this.user.is_teacher = true
+      }
+    },
+  },
+
   created() {
     this.$store.commit('breadCrumbs/addBreadCrumb', [
       {
@@ -704,9 +718,12 @@ export default {
         } else {
           user.college = []
         }
-
-        user.gender = this.user.gender.label
         user.college = collegeList
+
+        if (!user.is_teacher) {
+          user.college = []
+        }
+        user.gender = this.user.gender.label
 
         this.$swal({
           title: 'Updating User',
