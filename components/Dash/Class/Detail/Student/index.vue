@@ -44,6 +44,14 @@ export default {
       type: String,
       required: true,
     },
+    elementId: {
+      type: String,
+      required: false,
+    },
+    scrollToTop: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -85,12 +93,18 @@ export default {
     // on paginated
     onPaginated(pageNum) {
       this.payload.page = pageNum
-      this.refreshStudents()
+      this.refreshStudents().then(() => {
+        if (this.scrollToTop) {
+          const ele = document.getElementById('studentList')
+
+          ele.scrollIntoView({ behavior: 'smooth' })
+        }
+      })
     },
 
     // refresh Students
     refreshStudents() {
-      this.getStudents().then(() => {
+      return this.getStudents().then(() => {
         this.loading = false
       })
     },
