@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'AttendanceMark',
-  layout: 'dash',
+  layout: 'panel',
 }
 </script>
 
