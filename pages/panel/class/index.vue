@@ -13,8 +13,12 @@
 
     <transition name="scale-in" mode="out-in" appear>
       <div class="card card-body" v-if="loading.main">
-        <div v-for="item in 1" :key="item">
-          <LoadersText size="xs" para />
+        <div class="row g-3">
+          <div class="col-12 col-md-6 col-lg-4" v-for="item in 6" :key="item">
+            <div class="card card-body shadow-0 border">
+              <LoadersText size="xs" para />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -148,7 +152,6 @@ export default {
 
   mounted() {
     this.payload.page = this.$route.query.page
-    this.payload.size = 1
 
     this.getClasses().then(() => {
       if (!this.error) {
