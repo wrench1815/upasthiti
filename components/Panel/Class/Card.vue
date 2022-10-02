@@ -3,10 +3,15 @@
     <div class="card-body pb-3">
       <h5 class="card-title text-primary border-bottom pb-1">
         <NuxtLink
-          class="hover-underline-animation"
+          class="text-wrap d-inline-block"
           :to="`/panel/class/detail/${classs.id}`"
         >
-          {{ classs.name }}
+          <span class="d-inline">
+            <span class="better-underline">
+              {{ classs.name }}
+            </span>
+            <span class="link"></span>
+          </span>
         </NuxtLink>
       </h5>
       <p class="card-text">
@@ -18,8 +23,15 @@
       <p class="card-text">
         <span class="fw-bold"> Course Code: </span> {{ classs.course.code }}
       </p>
-      <div class="hover-underline-animation link-primary">Mark Attendance</div>
-      <!-- <button class="btn btn-primary btn-rounded">Mark</button> -->
+      <NuxtLink
+        class="text-wrap d-inline-block"
+        :to="`/panel/attendance/mark/${classs.id}`"
+      >
+        <span class="d-inline">
+          <span class="better-underline">Mark Attendance</span>
+          <span class="link"></span>
+        </span>
+      </NuxtLink>
     </div>
     <div class="card-footer">
       <div class="text-muted">
