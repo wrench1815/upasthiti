@@ -4,14 +4,14 @@
     <div class="text-primary fs-4">Name</div>
     <div class="text-secondary fs-5">Roll no</div>
     <div class="row mt-3">
-      <div class="col-lg-6 ">
+      <div class="col-lg-6">
         <div
           class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-success badge-fs shadow-3-strong py-2 rounded-pill"
         >
           <div class="">Present</div>
         </div>
       </div>
-      <div class="col-lg-6 ">
+      <div class="col-lg-6">
         <div
           class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-secondary badge-fs shadow-3-strong py-2 rounded-pill"
         >
