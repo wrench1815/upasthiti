@@ -1,5 +1,24 @@
 <template>
   <div class="container-fluid my-4">
+    <div
+      class="card card-body bg-transparent d-flex justify-content-end pt-0 align-items-end"
+    >
+      <transition name="fade-x" mode="out-in" appear>
+        <Lazy-LoadersButton btnColor="btn-primary" rounded v-if="loading" />
+
+        <NuxtLink
+          class="btn btn-rounded bg-gradient-info text-white"
+          :to="`/panel/class/edit/${classs.id}`"
+          v-else
+        >
+          <span class="d-flex align-items-center gap-1">
+            <i class="ri-edit-2-fill ri-lg mt-n1"></i>
+            <span>Edit Class</span>
+          </span>
+        </NuxtLink>
+      </transition>
+    </div>
+
     <transition name="scale-in" mode="out-in">
       <!-- Start:Loading -->
       <div class="card card-body" v-if="loading">

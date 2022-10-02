@@ -3,15 +3,24 @@
     <div
       class="card card-body bg-transparent d-flex justify-content-end pt-0 align-items-end"
     >
-      <NuxtLink
-        class="btn btn-rounded bg-gradient-primary text-white"
-        to="/panel/class/add"
-      >
-        <span class="d-flex align-items-center gap-1">
-          <i class="ri-add-line ri-lg mt-n1"></i>
-          <span>Add Class</span>
-        </span>
-      </NuxtLink>
+      <transition name="fade-x" mode="out-in" appear>
+        <Lazy-LoadersButton
+          btnColor="btn-primary"
+          rounded
+          v-if="loading.main"
+        />
+
+        <NuxtLink
+          class="btn btn-rounded bg-gradient-primary text-white"
+          to="/panel/class/add"
+          v-else
+        >
+          <span class="d-flex align-items-center gap-1">
+            <i class="ri-add-line ri-lg mt-n1"></i>
+            <span>Add Class</span>
+          </span>
+        </NuxtLink>
+      </transition>
     </div>
 
     <transition name="scale-in" mode="out-in" appear>
