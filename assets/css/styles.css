@@ -10,6 +10,9 @@ auto: auto,
 .vh-25 {
   height: 25vh !important;
 }
+.vh-45 {
+  height: 45vh !important;
+}
 
 .vh-50 {
   height: 50vh !important;
