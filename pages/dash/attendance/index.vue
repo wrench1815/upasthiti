@@ -25,21 +25,25 @@
           <!-- end:Filter -->
         </section>
 
-        <LoadersTable v-if="loading.main" />
-        <!-- <DashCourseTable  :courses.sync="courses.results" /> -->
-        <Lazy-DashAttendanceTable
-          :attendances.sync="attendance.results"
-          @update:attendances="deletedAttendance"
-          v-else
-        />
+        <transition name="scale-in" mode="out-in">
+          <LoadersTable v-if="loading.main" />
+          <!-- <DashCourseTable  :courses.sync="courses.results" /> -->
+          <Lazy-DashAttendanceTable
+            :attendances.sync="attendance.results"
+            @update:attendances="deletedAttendance"
+            v-else
+          />
+        </transition>
 
-        <Lazy-UtilsPagination
-          class="mt-4"
-          v-if="!loading.main && attendance.pagination.items != 0"
-          :pagination.sync="attendance.pagination"
-          @prevPage="onPaginated"
-          @nextPage="onPaginated"
-        />
+        <transition name="fade-x" mode="out-in">
+          <Lazy-UtilsPagination
+            class="mt-4"
+            v-if="!loading.main && attendance.pagination.items != 0"
+            :pagination.sync="attendance.pagination"
+            @prevPage="onPaginated"
+            @nextPage="onPaginated"
+          />
+        </transition>
 
         <div class="d-flex justify-content-end mt-3">
           <LoadersButton v-if="loading.main" :rounded="true" />
@@ -162,7 +166,6 @@ export default {
 
   mounted() {
     this.payload.page = this.$route.query.page
-    this.payload.size = 2
 
     this.getAttendance().then(() => {
       if (!this.error) {
