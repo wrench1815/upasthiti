@@ -3,12 +3,15 @@
     <div
       class="card card-body bg-transparent d-flex justify-content-end pt-0 align-items-end"
     >
-      <button class="btn btn-rounded bg-gradient-primary text-white">
+      <NuxtLink
+        class="btn btn-rounded bg-gradient-primary text-white"
+        to="/panel/class/add"
+      >
         <span class="d-flex align-items-center gap-1">
           <i class="ri-add-line ri-lg mt-n1"></i>
           <span>Add Class</span>
         </span>
-      </button>
+      </NuxtLink>
     </div>
 
     <transition name="scale-in" mode="out-in" appear>
@@ -55,6 +58,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'PanelClassIndex',
   layout: 'panel',
@@ -76,6 +81,10 @@ export default {
       classes: {},
       payload: {},
     }
+  },
+
+  computed: {
+    ...mapGetters(['loggedInUser']),
   },
 
   created() {
@@ -152,6 +161,7 @@ export default {
 
   mounted() {
     this.payload.page = this.$route.query.page
+    this.payload.teacher = this.loggedInUser.id
 
     this.getClasses().then(() => {
       if (!this.error) {

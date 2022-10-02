@@ -17,12 +17,20 @@
       <p class="card-text">
         <span class="fw-bold"> Code: </span> {{ classs.code }}
       </p>
+
       <p class="card-text">
         <span class="fw-bold"> Department: </span> {{ classs.department.name }}
       </p>
+
       <p class="card-text">
         <span class="fw-bold"> Course Code: </span> {{ classs.course.code }}
       </p>
+
+      <p class="card-text fw-bold text-warning">
+        {{ $nuxt.$utils.dateFormatNoTimeDay(classs.session_start) }} -
+        {{ $nuxt.$utils.dateFormatNoTimeDay(classs.session_end) }}
+      </p>
+
       <NuxtLink
         class="text-wrap d-inline-block"
         :to="`/panel/attendance/mark/${classs.id}`"
