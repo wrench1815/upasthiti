@@ -139,7 +139,7 @@
 
 <script>
 export default {
-  name: 'DashAttendanceTable',
+  name: 'ConsoleTable',
 
   methods: {
     deleteAttendance(id) {
