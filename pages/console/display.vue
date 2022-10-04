@@ -7,7 +7,8 @@
         </h2>
       </div>
       <div class="card-body">
-        <LoadersTable />
+        <!-- <LoadersTable v-if="loading.main" /> -->
+        <Lazy-ConsoleTable/>
       </div>
     </div>
   </section>

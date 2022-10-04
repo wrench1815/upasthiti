@@ -72,42 +72,28 @@
                 Date</label
               >
             </div>
-
-            <!-- <div class="">
-                  <ValidationProvider
-                    v-slot="{ errors }"
-                    :rules="{ required: true }"
-                  >
-                    <DatePicker
-                      v-model="attendance.date"
-                      type="date"
-                      placeholder="Select Date"
-                      valueType="format"
-                      prefix-class="up"
-                      format="YYYY-MM-DD"
-                      inline
-                    >
-                      <template v-slot:footer="{ emit }">
-                        <div class="text-start">
-                          <button
-                            class="up-btn up-btn-text hover-underline-animation"
-                            @click.prevent="emit(new Date())"
-                          >
-                            Today
-                          </button>
-                        </div>
-                      </template>
-                    </DatePicker>
-                    <div
-                      class="text-danger transition-all-ease-out-sine"
-                      :class="{ 'mb-3': !errors[0], 'mb-1': errors[0] }"
-                    >
-                      {{ errors[0] }}
-                    </div>
-                  </ValidationProvider>
-                </div> -->
+            <DatePicker
+              v-model="attendance.date"
+              type="month"
+              placeholder="Select Month"
+              valueType="format"
+              prefix-class="up"
+              format="MMMM YYYY"
+            ></DatePicker>
 
             <!-- End:Date -->
+
+            <!-- Start:Button -->
+            <div class="d-flex justify-content-center">
+              <button
+                type="submit"
+                class="btn bg-gradient-primary text-white btn-rounded col-md- col-"
+              >
+                Check Attendance
+              </button>
+            </div>
+
+            <!-- End:Button -->
           </div>
         </form>
       </div>
@@ -116,9 +102,21 @@
 </template>
 
 <script>
+import DatePicker from 'vue2-datepicker'
 // import { mapGetters } from 'vuex'
 export default {
   name: 'ConsoleSearch',
+  components: {
+    DatePicker,
+  },
+
+  data() {
+    return { attendance: { date: '' } }
+  },
+
+  mounted() {
+    this.attendance.date = this.$moment().format('MMMM YYYY')
+  },
 }
 </script>
 
