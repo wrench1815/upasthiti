@@ -22,7 +22,7 @@
       <tbody>
         <!-- start:no Attendances -->
         <tr>
-          <td colspan="8" class="bg-white">
+          <td colspan="6" class="bg-white">
             <UtilsNoData class="mx-auto" message="No Attendance found" />
           </td>
         </tr>
@@ -30,7 +30,7 @@
 
         <!-- start:has Attendances -->
         <template>
-          <tr v-for="item in six" :key="item.id">
+          <tr v-for="item in display" :key="item.id">
             <!-- start:Student -->
             <td>
               <div class="d-flex align-items-center">
@@ -171,10 +171,10 @@ export default {
                     icon: 'success',
                     type: 'success',
                   }).then(() => {
-                    let attendancesList = this.attendances.filter(
+                    let displayList = this.display.filter(
                       (item) => item.id !== id
                     )
-                    this.$emit('update:attendances', attendancesList)
+                    this.$emit('update:display', displayList)
                   })
                 })
                 .catch((err) => {
