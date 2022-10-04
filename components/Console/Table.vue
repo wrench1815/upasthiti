@@ -30,7 +30,7 @@
 
         <!-- start:has Attendances -->
         <template>
-          <tr v-for="item in five" :key="item.id">
+          <tr v-for="item in six" :key="item.id">
             <!-- start:Student -->
             <td>
               <div class="d-flex align-items-center">
