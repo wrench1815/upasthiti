@@ -47,6 +47,54 @@
   "AboutDevCard/linkedinName": {
     "type": "string"
   },
+  "dash-attendance-table/attendances": {
+    "type": "array"
+  },
+  "DashAttendanceTable/attendances": {
+    "type": "array"
+  },
+  "dash-class-detail-card/classs": {
+    "type": "object"
+  },
+  "DashClassDetailCard/classs": {
+    "type": "object"
+  },
+  "dash-class-detail-college-card/college": {
+    "type": "object"
+  },
+  "DashClassDetailCollegeCard/college": {
+    "type": "object"
+  },
+  "dash-class-detail-student-card/student": {
+    "type": "object"
+  },
+  "DashClassDetailStudentCard/student": {
+    "type": "object"
+  },
+  "dash-class-detail-student-index/classId": {
+    "type": "string"
+  },
+  "DashClassDetailStudentIndex/classId": {
+    "type": "string"
+  },
+  "dash-class-detail-student-index/elementId": {
+    "type": "string"
+  },
+  "DashClassDetailStudentIndex/elementId": {
+    "type": "string"
+  },
+  "dash-class-detail-student-index/scrollToTop": {
+    "type": "boolean"
+  },
+  "DashClassDetailStudentIndex/scrollToTop": {
+    "type": "boolean"
+  },
+  "dash-class-table/classes": {
+    "type": "array"
+  },
+  "DashClassTable/classes": {
+    "type": "array"
+  },
   "dash-college-detail-card-1/college": {
     "type": "object"
   },
@@ -353,6 +401,24 @@
   "LoadersText/size": {
     "type": "string"
   },
+  "dash-attendance-card/student": {
+    "type": "object"
+  },
+  "DashAttendanceCard/student": {
+    "type": "object"
+  },
+  "dash-attendance-card/classs": {
+    "type": "object"
+  },
+  "DashAttendanceCard/classs": {
+    "type": "object"
+  },
+  "panel-classcard/classs": {
+    "type": "object"
+  },
+  "PanelClasscard/classs": {
+    "type": "object"
+  },
   "link-button/link": {
     "type": "string"
   },
@@ -382,5 +448,11 @@
   },
   "UtilsPagination/pagination": {
     "type": "object"
+  },
+  "utils-pagination/scroll": {
+    "type": "boolean"
+  },
+  "UtilsPagination/scroll": {
+    "type": "boolean"
   }
 }

@@ -25,6 +25,82 @@
     ],
     "description": ""
   },
+  "dash-attendance-table": {
+    "attributes": [
+      "attendances"
+    ],
+    "description": ""
+  },
+  "DashAttendanceTable": {
+    "attributes": [
+      "attendances"
+    ],
+    "description": ""
+  },
+  "dash-class-detail-card": {
+    "attributes": [
+      "classs"
+    ],
+    "description": ""
+  },
+  "DashClassDetailCard": {
+    "attributes": [
+      "classs"
+    ],
+    "description": ""
+  },
+  "dash-class-detail-college-card": {
+    "attributes": [
+      "college"
+    ],
+    "description": ""
+  },
+  "DashClassDetailCollegeCard": {
+    "attributes": [
+      "college"
+    ],
+    "description": ""
+  },
+  "dash-class-detail-student-card": {
+    "attributes": [
+      "student"
+    ],
+    "description": ""
+  },
+  "DashClassDetailStudentCard": {
+    "attributes": [
+      "student"
+    ],
+    "description": ""
+  },
+  "dash-class-detail-student-index": {
+    "attributes": [
+      "classId",
+      "elementId",
+      "scrollToTop"
+    ],
+    "description": ""
+  },
+  "DashClassDetailStudentIndex": {
+    "attributes": [
+      "classId",
+      "elementId",
+      "scrollToTop"
+    ],
+    "description": ""
+  },
+  "dash-class-table": {
+    "attributes": [
+      "classes"
+    ],
+    "description": ""
+  },
+  "DashClassTable": {
+    "attributes": [
+      "classes"
+    ],
+    "description": ""
+  },
   "dash-college-detail-card-1": {
     "attributes": [
       "college",
@@ -473,11 +549,51 @@
     ],
     "description": ""
   },
+  "loaders-detail-card": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersDetailCard": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-detail-class-student-card": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersDetailClassStudentCard": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-detail-course-card": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersDetailCourseCard": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-detail-course-index": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersDetailCourseIndex": {
+    "attributes": [],
+    "description": ""
+  },
   "loaders-detail-department-card": {
     "attributes": [],
     "description": ""
   },
   "LoadersDetailDepartmentCard": {
+    "attributes": [],
+    "description": ""
+  },
+  "loaders-detail-university-card": {
+    "attributes": [],
+    "description": ""
+  },
+  "LoadersDetailUniversityCard": {
     "attributes": [],
     "description": ""
   },
@@ -579,14 +695,6 @@
     "attributes": [],
     "description": ""
   },
-  "nav-bar-profile": {
-    "attributes": [],
-    "description": ""
-  },
-  "NavBarProfile": {
-    "attributes": [],
-    "description": ""
-  },
   "nav-bar-side-bar": {
     "attributes": [],
     "description": ""
@@ -600,6 +708,88 @@
     "description": ""
   },
   "NavBar": {
+    "attributes": [],
+    "description": ""
+  },
+  "dash-attendance-card": {
+    "attributes": [
+      "student",
+      "classs"
+    ],
+    "description": ""
+  },
+  "DashAttendanceCard": {
+    "attributes": [
+      "student",
+      "classs"
+    ],
+    "description": ""
+  },
+  "panel-attendance-mark": {
+    "attributes": [],
+    "description": ""
+  },
+  "PanelAttendanceMark": {
+    "attributes": [],
+    "description": ""
+  },
+  "panel-classcard": {
+    "attributes": [
+      "classs"
+    ],
+    "description": ""
+  },
+  "PanelClasscard": {
+    "attributes": [
+      "classs"
+    ],
+    "description": ""
+  },
+  "panel-aside-nav": {
+    "attributes": [],
+    "description": ""
+  },
+  "PanelAsideNav": {
+    "attributes": [],
+    "description": ""
+  },
+  "nav-bar-profile": {
+    "attributes": [],
+    "description": ""
+  },
+  "NavBarProfile": {
+    "attributes": [],
+    "description": ""
+  },
+  "panel-nav-right-links": {
+    "attributes": [],
+    "description": ""
+  },
+  "PanelNavRightLinks": {
+    "attributes": [],
+    "description": ""
+  },
+  "panel-nav-side-bar": {
+    "attributes": [],
+    "description": ""
+  },
+  "PanelNavSideBar": {
+    "attributes": [],
+    "description": ""
+  },
+  "panel-nav-tool-bar": {
+    "attributes": [],
+    "description": ""
+  },
+  "PanelNavToolBar": {
+    "attributes": [],
+    "description": ""
+  },
+  "panel-nav": {
+    "attributes": [],
+    "description": ""
+  },
+  "PanelNav": {
     "attributes": [],
     "description": ""
   },
@@ -633,13 +823,15 @@
   },
   "utils-pagination": {
     "attributes": [
-      "pagination"
+      "pagination",
+      "scroll"
     ],
     "description": ""
   },
   "UtilsPagination": {
     "attributes": [
-      "pagination"
+      "pagination",
+      "scroll"
     ],
     "description": ""
   },
