@@ -25,7 +25,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'DashLayout',
-  middleware: ['auth'],
+  middleware: ['auth', 'isAdmin'],
 
   computed: {
     ...mapGetters({

@@ -25,18 +25,6 @@
     ],
     "description": ""
   },
-  "dash-attendance-table": {
-    "attributes": [
-      "attendances"
-    ],
-    "description": ""
-  },
-  "DashAttendanceTable": {
-    "attributes": [
-      "attendances"
-    ],
-    "description": ""
-  },
   "dash-class-detail-card": {
     "attributes": [
       "classs"
@@ -267,7 +255,9 @@
       "type",
       "icon",
       "iconClasses",
-      "isRequired"
+      "isRequired",
+      "isTrail",
+      "placeholder"
     ],
     "description": ""
   },
@@ -279,7 +269,9 @@
       "type",
       "icon",
       "iconClasses",
-      "isRequired"
+      "isRequired",
+      "isTrail",
+      "placeholder"
     ],
     "description": ""
   },
@@ -731,6 +723,18 @@
   },
   "PanelAttendanceMark": {
     "attributes": [],
+    "description": ""
+  },
+  "dash-attendance-table": {
+    "attributes": [
+      "attendances"
+    ],
+    "description": ""
+  },
+  "DashAttendanceTable": {
+    "attributes": [
+      "attendances"
+    ],
     "description": ""
   },
   "panel-classcard": {

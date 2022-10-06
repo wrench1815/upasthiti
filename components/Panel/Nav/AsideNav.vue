@@ -106,26 +106,31 @@ export default {
     return {
       loading: true,
       menuItems: [
-        {
-          name: 'Panel',
-          url: '/panel',
-          icon: 'ri-dashboard-fill',
-        },
-        {
-          name: 'Attendance',
-          url: '/panel/attendance',
-          icon: 'ri-calendar-check-fill',
-        },
+        // {
+        //   name: 'Panel',
+        //   url: '/panel',
+        //   icon: 'ri-dashboard-fill',
+        // },
+        // {
+        //   name: 'Attendance',
+        //   url: '/panel/attendance',
+        //   icon: 'ri-calendar-check-fill',
+        // },
         {
           name: 'Class',
           url: '/panel/class',
           icon: 'ri-database-fill',
         },
         {
-          name: 'Student',
-          url: '/panel/student',
-          icon: 'ri-user-2-fill',
+          name: 'Profile',
+          url: '/panel/profile',
+          icon: 'ri-profile-line',
         },
+        // {
+        //   name: 'Student',
+        //   url: '/panel/student',
+        //   icon: 'ri-user-2-fill',
+        // },
       ],
     }
   },

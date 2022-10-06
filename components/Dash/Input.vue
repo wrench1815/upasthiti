@@ -7,13 +7,18 @@
           :type="type"
           :id="randomUUID"
           class="form-control mb-0"
+          :class="{ 'form-icon-trailing': isTrail }"
           v-model="inputData"
+          :placeholder="placeholder"
           @keyup="$emit('update:data', inputData)"
         />
-        <label class="form-label" :for="randomUUID">
+        <!-- trailing Icon -->
+        <i class="trailing" :class="[icon, iconClasses]" v-if="isTrail"></i>
+        <!-- label -->
+        <label class="form-label" :for="randomUUID" v-if="label">
           <div class="d-flex justify-content-center gap-1">
             <i
-              v-if="icon"
+              v-if="icon && !isTrail"
               class="text-primary text-gradient d-block-inline"
               :class="[icon, iconClasses]"
             ></i>
@@ -47,7 +52,6 @@ export default {
   props: {
     label: {
       type: String,
-      required: true,
     },
     validationRules: {
       type: Object,
@@ -71,6 +75,14 @@ export default {
     isRequired: {
       type: Boolean,
       default: false,
+    },
+    isTrail: {
+      type: Boolean,
+      default: false,
+    },
+    placeholder: {
+      type: String,
+      default: '',
     },
   },
 

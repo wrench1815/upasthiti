@@ -47,12 +47,6 @@
   "AboutDevCard/linkedinName": {
     "type": "string"
   },
-  "dash-attendance-table/attendances": {
-    "type": "array"
-  },
-  "DashAttendanceTable/attendances": {
-    "type": "array"
-  },
   "dash-class-detail-card/classs": {
     "type": "object"
   },
@@ -233,6 +227,18 @@
   "DashInput/isRequired": {
     "type": "boolean"
   },
+  "dash-input/isTrail": {
+    "type": "boolean"
+  },
+  "DashInput/isTrail": {
+    "type": "boolean"
+  },
+  "dash-input/placeholder": {
+    "type": "string"
+  },
+  "DashInput/placeholder": {
+    "type": "string"
+  },
   "dash-input-alt/label": {
     "type": "string"
   },
@@ -412,6 +418,12 @@
   },
   "DashAttendanceCard/classs": {
     "type": "object"
+  },
+  "dash-attendance-table/attendances": {
+    "type": "array"
+  },
+  "DashAttendanceTable/attendances": {
+    "type": "array"
   },
   "panel-classcard/classs": {
     "type": "object"
