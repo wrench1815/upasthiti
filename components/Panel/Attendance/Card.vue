@@ -1,19 +1,29 @@
 <template>
   <section>
-    <div class="card border hover-shadow">
+    <div class="card border hover-shadow hover-card">
       <div class="card-body p-3">
         <div class="d-flex justify-content-center">
           <!-- profile image -->
           <img
-            class="avatar avatar-xxl rounded-circle obj-fit-cover shadow-2-strong img-fluid border"
+            class="avatar avatar-xxl rounded-circle obj-fit-cover img-fluid border hover-card-shadow"
+            :class="borderClass"
+            :data-src="student.profile_image"
+            v-lazy-load
           />
         </div>
 
         <div class="mt-3">
           <!-- name -->
-          <h3 class="text-primary">Name</h3>
+          <h3 class="text-primary text-center">{{ full_name }}</h3>
           <!-- roll no -->
-          <div class="text-secondary fs-5">Roll no</div>
+          <div class="text-secondary fs-6">
+            Class Roll no:
+            <span class="text-muted">{{ student.class_roll_no }}</span>
+          </div>
+          <div class="text-secondary fs-6">
+            University Roll No:
+            <span class="text-muted">{{ student.university_roll_no }}</span>
+          </div>
         </div>
 
         <div class="position-relative mt-2 badge-holder-height">
@@ -31,9 +41,9 @@
                   class="d-flex justify-content-center align-items-center gap-1 badge badge-fs py-2 rounded-pill border user-select-none badge-style"
                   :class="{
                     'border-transparent bg-gradient-success shadow-3-strong text-white':
-                      user.present,
+                      attendance.is_present,
                     'border-success text-success text-gradient bg-white fw-bolder':
-                      !user.present,
+                      !attendance.is_present,
                   }"
                 >
                   <i class="ri-check-double-fill no-transition"></i>
@@ -44,7 +54,7 @@
                 class="form-check-input me-2 d-none"
                 type="checkbox"
                 :id="presentId"
-                v-model="user.present"
+                v-model="attendance.is_present"
               />
             </div>
 
@@ -61,9 +71,9 @@
                   class="d-flex justify-content-center align-items-center gap-1 badge badge-fs py-2 rounded-pill border user-select-none badge-style"
                   :class="{
                     'border-transparent bg-gradient-warning shadow-3-strong text-white':
-                      user.late,
+                      attendance.is_late,
                     'border-warning text-warning text-gradient bg-white fw-bolder':
-                      !user.late,
+                      !attendance.is_late,
                   }"
                 >
                   <i class="ri-check-fill no-transition"></i>
@@ -74,7 +84,7 @@
                 class="form-check-input me-2 d-none"
                 type="checkbox"
                 :id="lateId"
-                v-model="user.late"
+                v-model="attendance.is_late"
               />
             </div>
           </div>
@@ -83,44 +93,81 @@
       </div>
     </div>
   </section>
-  <!-- <div class="card shadow-3-strong text-center p-3">
-    <img class="avatar-xl rounded-circle obj-fit-cover shadow-2-strong" />
-    <div class="text-primary fs-4">Name</div>
-    <div class="text-secondary fs-5">Roll no</div>
-    <div class="row mt-3">
-      <div class="col-lg-6 ">
-        <div
-          class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-success badge-fs shadow-3-strong py-2 rounded-pill"
-        >
-          <div class="">Present</div>
-        </div>
-      </div>
-      <div class="col-lg-6 ">
-        <div
-          class="d-flex justify-content-center align-items-center gap-2 badge bg-gradient-secondary badge-fs shadow-3-strong py-2 rounded-pill"
-        >
-          <div class="">Late</div>
-        </div>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
 export default {
   name: 'DashAttendanceCard',
 
+  props: {
+    student: {
+      type: Object,
+      required: true,
+    },
+    classs: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  watch: {
+    'attendance.is_present'() {
+      if (this.attendance.is_present) {
+        this.attendance.is_absent = false
+        if (this.attendance.is_present && !this.attendance.is_late) {
+          this.borderClass = 'border-success'
+        }
+      } else if (!this.attendance.is_present && this.attendance.is_late) {
+        this.attendance.is_absent = true
+        this.attendance.is_late = false
+        this.borderClass = 'border-danger'
+      } else if (!this.attendance.is_present && !this.attendance.is_late) {
+        this.attendance.is_absent = true
+        this.borderClass = 'border-danger'
+      }
+    },
+    'attendance.is_late'() {
+      if (this.attendance.is_late) {
+        this.attendance.is_absent = false
+        this.attendance.is_present = true
+        this.borderClass = 'border-warning'
+      }
+
+      if (this.attendance.is_present && !this.attendance.is_late) {
+        this.borderClass = 'border-success'
+      }
+    },
+  },
+
   data() {
     return {
-      user: {
-        present: false,
-        late: false,
-        absent: true,
+      attendance: {
+        is_present: false,
+        is_late: false,
+        is_absent: true,
+        student: '',
+        for_class: '',
+        date: '',
       },
+      responseAttendance: {},
 
       lateId: this.uuidGenerator(),
       presentId: this.uuidGenerator(),
+
+      borderClass: 'border-danger',
     }
+  },
+
+  computed: {
+    full_name() {
+      return `${this.student.first_name} ${this.student.last_name}`
+    },
+
+    setAttendanceData() {
+      this.attendance.student = this.student.id
+      this.attendance.for_class = this.classs.id
+      this.attendance.date = this.$moment.format('YYYY-MM-DD')
+    },
   },
 
   methods: {
@@ -134,6 +181,17 @@ export default {
           return v.toString(16)
         }
       )
+    },
+
+    addAttendance() {
+      let attendance = { ...this.attendance }
+      attendance.date = this.$moment.format('YYYY-MM-DD')
+      // attendance.for_class = this.classs.id
+      // attendance.student = this.student.id
+
+      this.$api.attendance.create(attendance).then((resp) => {
+        this.responseAttendance = resp.data
+      })
     },
   },
 }
@@ -150,5 +208,12 @@ export default {
 }
 .badge-holder-height {
   height: 4rem;
+}
+
+.hover-card:hover .hover-card-shadow {
+  box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.16),
+    0 10px 20px -2px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  /* border-color: transparent !important; */
 }
 </style>
