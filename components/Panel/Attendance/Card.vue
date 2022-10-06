@@ -96,9 +96,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import attendance from '~/api/attendance'
-
 export default {
   name: 'DashAttendanceCard',
 
@@ -156,7 +153,6 @@ export default {
         for_class: '',
         date: '',
       },
-      responseAttendance: {},
 
       lateId: this.uuidGenerator(),
       presentId: this.uuidGenerator(),
@@ -184,17 +180,6 @@ export default {
       )
     },
 
-    addAttendance() {
-      let attendance = { ...this.attendance }
-      attendance.date = this.$moment.format('YYYY-MM-DD')
-      // attendance.for_class = this.classs.id
-      // attendance.student = this.student.id
-
-      this.$api.attendance.create(attendance).then((resp) => {
-        this.responseAttendance = resp.data
-      })
-    },
-
     setAttendanceData() {
       this.attendance.student = this.student.id
       this.attendance.for_class = this.classs.id
@@ -213,12 +198,8 @@ export default {
 <style scoped>
 .badge-fs {
   font-size: 0.9rem !important;
-  /* font-size: 1.7rem !important; */
 }
-.badge-style {
-  /* height: 3rem; */
-  /* width: 3rem; */
-}
+
 .badge-holder-height {
   height: 4rem;
 }
@@ -227,6 +208,5 @@ export default {
   box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.16),
     0 10px 20px -2px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
-  /* border-color: transparent !important; */
 }
 </style>

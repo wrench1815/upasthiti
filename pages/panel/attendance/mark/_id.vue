@@ -140,10 +140,6 @@ export default {
         })
     },
 
-    showData() {
-      console.log(this.$store.state.attendance.attendanceList)
-    },
-
     // add Attendance
     async markAttendances() {
       try {
@@ -174,7 +170,10 @@ export default {
                   didOpen: () => {
                     this.$swal.showLoading()
                   },
-                }).then(() => this.$router.push('/panel/class'))
+                }).then(() => {
+                  this.$store.commit('attendance/clearAttendance')
+                  this.$router.push('/panel/class')
+                })
               })
               .catch((err) => {
                 this.$swal.hideLoading()
