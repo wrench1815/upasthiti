@@ -1,7 +1,4 @@
 // state: used to store the data
-
-import attendance from '~/api/attendance'
-
 // helper pointer: use with state
 export const state = () => ({
   attendanceList: new Set(),

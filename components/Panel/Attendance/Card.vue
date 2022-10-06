@@ -96,6 +96,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import attendance from '~/api/attendance'
+
 export default {
   name: 'DashAttendanceCard',
 
@@ -125,6 +128,8 @@ export default {
         this.attendance.is_absent = true
         this.borderClass = 'border-danger'
       }
+
+      this.$store.commit('attendance/addAttendance', this.attendance)
     },
     'attendance.is_late'() {
       if (this.attendance.is_late) {
@@ -136,6 +141,8 @@ export default {
       if (this.attendance.is_present && !this.attendance.is_late) {
         this.borderClass = 'border-success'
       }
+
+      this.$store.commit('attendance/addAttendance', this.attendance)
     },
   },
 
@@ -162,12 +169,6 @@ export default {
     full_name() {
       return `${this.student.first_name} ${this.student.last_name}`
     },
-
-    setAttendanceData() {
-      this.attendance.student = this.student.id
-      this.attendance.for_class = this.classs.id
-      this.attendance.date = this.$moment.format('YYYY-MM-DD')
-    },
   },
 
   methods: {
@@ -193,6 +194,18 @@ export default {
         this.responseAttendance = resp.data
       })
     },
+
+    setAttendanceData() {
+      this.attendance.student = this.student.id
+      this.attendance.for_class = this.classs.id
+      this.attendance.date = this.$moment().format('YYYY-MM-DD')
+    },
+  },
+
+  mounted() {
+    this.setAttendanceData()
+
+    this.$store.commit('attendance/addAttendance', this.attendance)
   },
 }
 </script>

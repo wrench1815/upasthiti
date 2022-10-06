@@ -1,6 +1,9 @@
 <template>
   <section class="container-fluid my-4">
-    <div class="card" v-if="!loading">
+    <div class="card" v-if="loading">
+      <h1>Loading</h1>
+    </div>
+    <div class="card" v-else>
       <div class="card-header text-center">
         <h2 class="text-primary text-gradient">Mark Attendance</h2>
       </div>
@@ -41,14 +44,14 @@
             v-for="stud in students.results"
             :key="stud.id"
           >
-            <Lazy-PanelAttendanceCard :student="stud" />
+            <Lazy-PanelAttendanceCard :student="stud" :classs="classs" />
           </div>
         </div>
 
         <div class="d-flex justify-content-center mt-4">
           <button
             class="btn bg-gradient-primary text-white fw-bold btn-rounded"
-            @click="showdata"
+            @click="markAttendances"
           >
             Mark
           </button>
@@ -126,7 +129,7 @@ export default {
           if (err.response.status == 404) {
             this.$nuxt.error({
               statusCode: 404,
-              message: 'No Students found',
+              message: 'No Student found',
             })
           } else {
             this.$nuxt.error({
@@ -136,9 +139,71 @@ export default {
           }
         })
     },
+
+    showData() {
+      console.log(this.$store.state.attendance.attendanceList)
+    },
+
+    // add Attendance
+    async markAttendances() {
+      try {
+        let attendances = [...this.$store.state.attendance.attendanceList]
+
+        this.$swal({
+          title: 'Marking Attendance',
+          icon: 'info',
+          type: 'info',
+          text: 'Please wait while we are marking Attendance',
+          didOpen: () => {
+            this.$swal.showLoading()
+
+            this.$api.attendance
+              .bulk(attendances)
+              .then(() => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                this.$swal({
+                  title: 'Success',
+                  icon: 'success',
+                  type: 'success',
+                  text: 'Attendance has been marked Successfully',
+                  timer: 2000,
+                  timerProgressBar: true,
+
+                  didOpen: () => {
+                    this.$swal.showLoading()
+                  },
+                }).then(() => this.$router.push('/panel/class'))
+              })
+              .catch((err) => {
+                this.$swal.hideLoading()
+                this.$swal.close()
+
+                this.$swal({
+                  title: 'Error',
+                  icon: 'error',
+                  type: 'error',
+                  html: `Failed to mark Attendance.`,
+                })
+              })
+          },
+        })
+      } catch (e) {
+        this.$swal({
+          title: 'Error',
+          icon: 'error',
+          type: 'error',
+          html: `Failed to mark Attendance.<br/>Try Again`,
+        })
+      }
+    },
   },
 
   mounted() {
+    // clear attendanceList from state on page load, just in case
+    this.$store.commit('attendance/clearAttendance')
+
     this.getClass()
       .then(() => {
         return this.getStudents()
