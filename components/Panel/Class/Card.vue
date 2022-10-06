@@ -32,12 +32,28 @@
       </p>
 
       <NuxtLink
-        class="text-wrap d-inline-block"
+        class="text-wrap d-inline-block text-primary text-gradient"
         :to="`/panel/attendance/mark/${classs.id}`"
       >
-        <span class="d-inline">
-          <span class="better-underline">Mark Attendance</span>
-          <span class="link"></span>
+        <span class="d-inline hover-arrow">
+          <span class="d-flex">
+            <span class="better-underline">Mark Attendance</span>
+            <i class="ri-arrow-right-line arrow"></i>
+          </span>
+        </span>
+      </NuxtLink>
+
+      <NuxtLink
+        class="text-wrap d-inline-block text-danger text-gradient"
+        :to="`/panel/attendance/list/${classs.id}`"
+      >
+        <span class="d-inline hover-arrow">
+          <span class="d-flex">
+            <span class="better-underline underline-danger"
+              >List Attendance</span
+            >
+            <i class="ri-arrow-right-line arrow"></i>
+          </span>
         </span>
       </NuxtLink>
     </div>
@@ -63,4 +79,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.hover-arrow:hover .arrow {
+  padding-left: 0.25rem !important;
+}
+</style>

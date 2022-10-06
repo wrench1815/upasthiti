@@ -753,6 +753,42 @@ auto: auto,
   background-size: 0 2px, 100% 2px;
 }
 
+/* danger */
+.underline-danger {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--mdb-danger), var(--mdb-danger)) !important;
+}
+
+/* secondary */
+.underline-secondary {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--mdb-secondary), var(--mdb-secondary)) !important;
+}
+
+/* info */
+.underline-info {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--mdb-info), var(--mdb-info)) !important;
+}
+
+/* success */
+.underline-success {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--mdb-success), var(--mdb-success)) !important;
+}
+
+/* warning */
+.underline-warning {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--mdb-warning), var(--mdb-warning)) !important;
+}
+
+/* dark */
+.underline-dark {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--mdb-dark), var(--mdb-dark)) !important;
+}
+
 /* disable transitions */
 .no-transition {
   transition: all 0s !important;
