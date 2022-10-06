@@ -119,6 +119,7 @@ export default {
     async getStudents() {
       let payload = {}
       payload.classs = this.$route.params.id
+      payload.size = 100
 
       return this.$api.student
         .list(payload)
