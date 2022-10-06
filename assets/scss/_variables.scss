@@ -7,6 +7,8 @@ $warning: #fb6340;
 $danger: #f5365c;
 $light: #e9ecef;
 $dark: #344767;
+$white: #fff;
+$black: #000;
 
 // Gradient colors
 $primary-gradient: #5e72e4 !default;
@@ -107,6 +109,106 @@ $theme-gradient-colors: (
     $dark-gradient-state,
   ),
 ) !default;
+
+// buttons
+$buttons: ();
+$buttons: map-merge(
+  (
+    'primary': (
+      'background-color': $primary,
+      'text-color': $white,
+      'shadow-color': $primary,
+    ),
+    'secondary': (
+      'background-color': $secondary,
+      'text-color': $white,
+      'shadow-color': $secondary,
+    ),
+    'success': (
+      'background-color': $success,
+      'text-color': $white,
+      'shadow-color': $success,
+    ),
+    'danger': (
+      'background-color': $danger,
+      'text-color': $white,
+      'shadow-color': $danger,
+    ),
+    'warning': (
+      'background-color': $warning,
+      'text-color': $white,
+      'shadow-color': $warning,
+    ),
+    'info': (
+      'background-color': $info,
+      'text-color': $white,
+      'shadow-color': $info,
+    ),
+    'light': (
+      'background-color': $light,
+      'text-color': #4f4f4f,
+      'shadow-color': $light,
+    ),
+    'dark': (
+      'background-color': $dark,
+      'text-color': $white,
+      'shadow-color': $dark,
+    ),
+  ),
+  $buttons
+);
+
+// scss-docs-start buttons-outline-colors-map
+$buttons-outline: ();
+$buttons-outline: map-merge(
+  (
+    'primary': (
+      'text-color': $primary,
+      'border-color': $primary,
+      'background-color': $primary,
+    ),
+    'secondary': (
+      'text-color': $secondary,
+      'border-color': $white,
+      'background-color': $secondary,
+    ),
+    'success': (
+      'text-color': $success,
+      'border-color': $success,
+      'background-color': $success,
+    ),
+    'danger': (
+      'text-color': $danger,
+      'border-color': $danger,
+      'background-color': $danger,
+    ),
+    'warning': (
+      'text-color': $warning,
+      'border-color': $warning,
+      'background-color': $warning,
+    ),
+    'info': (
+      'text-color': $info,
+      'border-color': $info,
+      'background-color': $info,
+    ),
+    'light': (
+      'text-color': $light,
+      'border-color': $light,
+      'background-color': $light,
+    ),
+    'dark': (
+      'text-color': $dark,
+      'border-color': $dark,
+      'background-color': $dark,
+    ),
+  ),
+  $buttons-outline
+);
+// scss-docs-end buttons-outline-colors-map
+
+$btn-secondary-hover-focus-bgc: shade-color($secondary, 3%) !default;
+$btn-secondary-active-bgc: shade-color($secondary, 6%) !default;
 
 // text gradient
 $text-gradient-bg-clip: text !default;

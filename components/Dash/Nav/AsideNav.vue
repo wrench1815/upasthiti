@@ -111,11 +111,11 @@ export default {
           url: '/dash',
           icon: 'ri-dashboard-fill',
         },
-        {
-          name: 'Forge',
-          url: '/dash/forge',
-          icon: 'ri-lightbulb-flash-fill',
-        },
+        // {
+        //   name: 'Forge',
+        //   url: '/dash/forge',
+        //   icon: 'ri-lightbulb-flash-fill',
+        // },
         {
           name: 'University',
           url: '/dash/university',

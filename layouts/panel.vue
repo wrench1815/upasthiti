@@ -25,8 +25,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'PanelLayout',
-  middleware: ['auth'],
-  //TODO: 'isTeacher' add later
+  middleware: ['auth', 'isTeacher'],
 
   computed: {
     ...mapGetters({

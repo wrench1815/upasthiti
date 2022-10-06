@@ -11,7 +11,7 @@
         class="nav-link fs-5 d-lg-none"
         :class="linkClass"
         aria-current="page"
-        to="/panel"
+        to="/panel/class"
         >Upasthiti Panel</nuxt-link
       >
 

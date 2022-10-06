@@ -172,7 +172,7 @@ export default {
     async toDash() {
       this.profileOffCanvas().then(() => {
         if (this.role == 'teacher') {
-          this.$router.push('/panel')
+          this.$router.push('/panel/class')
         } else {
           this.$router.push('/dash')
         }
