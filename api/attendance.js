@@ -14,4 +14,7 @@ export default (axios) => ({
 
   // delete attendance
   destroy: (id) => axios.delete(`/attendance/${id}/`),
+
+  // create attendnaces in bulk
+  bulk: (attendanceList) => axios.post('/attendance/bulk/', attendanceList),
 })
