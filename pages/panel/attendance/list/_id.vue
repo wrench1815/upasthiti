@@ -279,7 +279,7 @@ export default {
     async getAttendances() {
       this.loading = true
 
-      this.payload.classs = this.$route.params.id
+      this.payload.for_class = this.$route.params.id
       this.payload.size = 20
 
       return this.$api.attendance
