@@ -6862,10 +6862,10 @@ md5.js@^1.3.4:
     inherits "^2.0.1"
     safe-buffer "^5.1.2"
 
-mdb-ui-kit@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/mdb-ui-kit/-/mdb-ui-kit-6.0.0.tgz#6ea433545fe7df4dd19c128f73902b547d941b5d"
-  integrity sha512-m6pj1VPnNlz7NPJtDzrDyzi+na2mYg/z/THHzUeqdGoOOtnSAcpOgdQBGuRzOyPO5QWeg7uDuf3RdIOZL3PnFw==
+mdb-ui-kit@5:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/mdb-ui-kit/-/mdb-ui-kit-5.0.0.tgz#1811be3bfbcf8969e6d121adc0412092caa5f83b"
+  integrity sha512-zRq6aDxjhIXHmpcHjnlXZ+rs9/e9oAf5EsbVKsf3sEf2S3ov4uecgJj3ZqxAgKJb9bnKcBTsOdDu+SdLotFa9g==
 
 mdn-data@2.0.14:
   version "2.0.14"
